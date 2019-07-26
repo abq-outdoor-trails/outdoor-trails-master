@@ -7,6 +7,24 @@
 	</head>
 	<body>
 		<h1>
+			Site Purpose
+		</h1>
+		<p>
+			We are creating an urban bike trail app and website for tourists and locals to explore destinations
+			and commute routes in Albuquerque. Albuquerque features 280 sunny days a year and 400 miles of bike trails.
+			This resource will be used to boost awareness of bike commuting, and help bolster Albuquerque as a top bike year
+			round tourist destination in the southwest.
+		</p>
+		<p>
+			We will include a way for users to save their favorite trails and also include a list and
+			routes of local favorite trails- like best bike trails to commute to Sandia National Labs
+			and best tourist routes in old town and along the bosque.
+		</p>
+		<h1>Logo</h1>
+		<img src="bike%20abq.png">
+
+
+		<h1>
 			Personas
 		</h1>
 
@@ -26,7 +44,7 @@
 			Occupation: Engineer and Sandia National Labs.
 			He recently moved here for work and is currently renting a house near the base of the
 			Sandia Mountains. He has a laptop at home but usually uses his phone for finding information
-			on the internet. He owns an iPhone 10s.
+			on the internet. He owns an iPhone Xs.
 		</p>
 		<p>
 			Goal: He wants to locate  places to hike and bike on the weekends,
