@@ -44,7 +44,8 @@
 			Occupation: Engineer and Sandia National Labs.
 			He recently moved here for work and is currently renting a house near the base of the
 			Sandia Mountains. He has a laptop at home but usually uses his phone for finding information
-			on the internet. He owns an iPhone Xs.
+			on the internet. He uses a computer so much at work, that for the weekends he usually just uses his
+			phone to navigate to internet. He owns an iPhone Xs.
 		</p>
 		<p>
 			Goal: He wants to locate  places to hike and bike on the weekends,
@@ -83,7 +84,7 @@
 			bike. She would like to use our app when she is in Albuquerque to explore the
 			trails and other bike destinations while they are in town for their visit. They are an
 			active family and enjoy doing things outdoors together. Abby does most of her vacation
-			research on her laptop, but will be using her phone to navigate destinations once they
+			research on her laptop - MacBook air, but will be using her iPhone 7 to navigate destinations once they
 			arrive in Albuquerque.
 		</p>
 
