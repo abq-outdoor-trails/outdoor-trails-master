@@ -80,10 +80,8 @@
 			Goal: Family vacation is planned for the balloon fiesta in Albuquerque.
 			The vacation rental she booked has bikes available for the family to use and
 			according to Trip Advisor, the best way to get to the balloon fiesta park is on
-			bike. She would like to map a route out for her family of 4 to get to the balloon
-			fiesta and avoid the traffic she has heard so much about regarding the balloon fiesta.
-			The family will be staying near Old Town Albuquerque and would also like to explore the
-			bosque and other bike trails while they are in town for their visit. They are an
+			bike. She would like to use our app when she is in Albuquerque to explore the
+			trails and other bike destinations while they are in town for their visit. They are an
 			active family and enjoy doing things outdoors together. Abby does most of her vacation
 			research on her laptop, but will be using her phone to navigate destinations once they
 			arrive in Albuquerque.
