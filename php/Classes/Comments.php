@@ -204,4 +204,29 @@ class Comments {
 	public function getCommentDate() : \DateTime {
 		return($this->commentDate);
 	}
+
+	/**
+	 * setter method for comment date
+	 *
+	 * @param \DateTime $newCommentDate
+	 * @throws \InvalidArgumentException if date is not valid`
+	 * @throws \RangeException if date is out of valid range
+	 * @throws Exception if any other exception occurs
+	 **/
+	public function setCommentDate($newCommentDate) : void {
+		// if the date is null, use the current date and time
+		if($newCommentDate === NULL) {
+			$this->commentDate = new \DateTime();
+			return;
+		}
+		// store the date using the ValidateDate trait
+		try {
+			$newCommentDate = self::validateDateTime($newCommentDate);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// store date on the object
+		$this->commentDate = $newCommentDate;
+	}
 }
