@@ -6,4 +6,7 @@ For bike trails we will use a CSV file (BikePaths.csv) which has details about p
 
 ## Actual Route Creation
 One option looks like using Google Maps and Google Routes, but I think we will have to pay to use Routes.
-Looking into open source options.
+LeafletJS has <Path /> and <Polyline /> components that look like they will allow us to pass in coordinates and connect a line.
+John was also able to display route lines using the kml file from cabq and gpsvisualizer.com
+
+Either of these two tools should allow us to construct maps with our routes. 
