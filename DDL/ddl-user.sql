@@ -1,12 +1,14 @@
 
 
-DROP TABLE IF EXISTS 'USER'
+DROP TABLE IF EXISTS USER;
+
 
 -- create table function
 
 CREATE TABLE user (
 	-- this creates the attribute for the primary key
  	-- not null menas the attribute is required
+ 	-- this is a strong entity
 	userId BINARY(16) NOT NULL,
 	userName VARCHAR(32) NOT NULL,
 	userEmail VARCHAR(128) NOT NULL,
