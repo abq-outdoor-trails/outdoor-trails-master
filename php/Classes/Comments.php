@@ -48,6 +48,15 @@ class Comments {
 	/**
 	 * constructor method for the Comments class
 	 *
+	 * @param Uuid $commentId id of this comment
+	 * @param Uuid $commentsRouteId id of the route associated with this comment
+	 * @param Uuid $commentsUserId id of the user associated with this comment
+	 * @param string $commentContent string value of comment content
+	 * @param \DateTime DateTime value of the comment's date
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of range (greater than specified range)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other error occurs
 	 **/
 	public function __construct($commentId, $commentsRouteId, $commentsUserId, $commentContent, $commentDate) {
 		try {
