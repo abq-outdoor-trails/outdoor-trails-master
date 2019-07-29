@@ -167,6 +167,7 @@ class Comments {
 
 	/**
 	 * getter method for comment content
+	 *
 	 * @return string value of comment's content
 	 **/
 	public function getCommentContent() : string {
@@ -196,6 +197,11 @@ class Comments {
 	}
 
 	/**
+	 * getter method for comment date
 	 *
+	 * @return \DateTime PHP DateTime object for date comment was posted
 	 **/
+	public function getCommentDate() : \DateTime {
+		return($this->commentDate);
+	}
 }
