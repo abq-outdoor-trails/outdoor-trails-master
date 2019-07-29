@@ -164,4 +164,12 @@ class Comments {
 		// store the comment's associated route id
 		$this->commentUserId = $uuid;
 	}
+
+	/**
+	 * getter method for comment content
+	 * @return string value of comment's content
+	 **/
+	public function getCommentContent() : string {
+		return($this->commentContent);
+	}
 }
