@@ -14,7 +14,6 @@ use Ramsey\Uuid\Uuid;
  * @author JDunn
  **/
 class User implements \JsonSerializable {
-
 	use ValidateUuid;
 	/**
 	 *
