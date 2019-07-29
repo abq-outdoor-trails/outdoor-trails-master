@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS favoriteRoutes;
 CREATE TABLE routes (
    routeId BINARY(16) NOT NULL,
    routeName VARCHAR(32),
+   routeFile VARCHAR(256) NOT NULL,
    routeType VARCHAR(32),
    routeSpeedLimit BINARY(2),
    routeDescription VARCHAR(140),
