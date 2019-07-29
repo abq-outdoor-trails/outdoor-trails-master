@@ -15,6 +15,7 @@ use Ramsey\Uuid\Uuid;
  * @author wharris21
  **/
 class Comments {
+	// traits being used in this class
 	use ValidateUuid;
 	use ValidateDate;
 
@@ -43,4 +44,18 @@ class Comments {
 	 * @var \DateTime $commentDate
 	 **/
 	private $commentDate;
+
+	/**
+	 * constructor method for the Comments class
+	 *
+	 **/
+	public function __construct($commentId, $commentsRouteId, $commentsUserId, $commentContent, $commentDate) {
+		try {
+			$this->setCommentId($commentId);
+			$this->setCommentsRouteId($commentsRouteId);
+			$this->setCommentsUserId($commentsUserId);
+			$this->setCommentContent($commentContent);
+			$this->setCommentDate($commentDate);
+		}
+	}
 }
