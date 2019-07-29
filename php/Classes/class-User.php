@@ -63,5 +63,5 @@ private $userId;
 	public function setUserId($newUserId): void {
 				try{
 							$uuid = self:validateUuid($newUserId);
-				}
+				} catch(\InvalidArgumentException |\RangeException |\Exception |\TypeError $exception)
 }
