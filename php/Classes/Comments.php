@@ -48,17 +48,18 @@ class Comments {
 	/**
 	 * constructor method for the Comments class
 	 *
-	 * @param Uuid $newCommentId id of this comment
-	 * @param Uuid $newCommentRouteId id of the route associated with this comment
-	 * @param Uuid $newCommentUserId id of the user associated with this comment
+	 * @param Uuid/string $newCommentId id of this comment
+	 * @param Uuid/string $newCommentRouteId id of the route associated with this comment
+	 * @param Uuid/string $newCommentUserId id of the user associated with this comment
 	 * @param string $newCommentContent string value of comment content
-	 * @param \DateTime DateTime value of the comment's date
+	 * @param \DateTime|string|null DateTime value of the comment's date
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of range (greater than specified range)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other error occurs
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, $newCommentContent, $newCommentDate) {
+	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentsRouteId($newCommentRouteId);
@@ -87,6 +88,8 @@ class Comments {
 	 *
 	 **/
 	public function setCommentId($commentId) {
+		try {
 
+		}
 	}
 }
