@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS `user`;
 
 
 -- create table function
 
-CREATE TABLE User (
+CREATE TABLE `user` (
 	-- this creates the attribute for the primary key
 	-- not null menas the attribute is required
 	-- this is a strong entity
