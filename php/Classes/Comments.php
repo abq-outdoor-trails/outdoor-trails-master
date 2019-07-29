@@ -54,9 +54,9 @@ class Comments {
 	 * @param string $newCommentContent string value of comment content
 	 * @param \DateTime|string|null DateTime value of the comment's date
 	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException if data values are out of range (greater than specified range)
+	 * @throws \RangeException if data values are out of range (greater or less than than specified range)
 	 * @throws \TypeError if data types violate type hints
-	 * @throws \Exception if some other error occurs
+	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
@@ -85,7 +85,10 @@ class Comments {
 	 * setter method for comment id
 	 *
 	 * @param Uuid $newCommentId new value of comment id
-	 *
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of range (greater or less than specified range)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
 	 **/
 	public function setCommentId($newCommentId) : void {
 		try {
@@ -101,11 +104,17 @@ class Comments {
 	}
 
 	/**
-	 * getter method for route id associated with comment
+	 * getter method for comment's associated route id
 	 *
 	 * @return Uuid value of commentRouteId
 	 **/
 	public function getCommentRouteId() : Uuid {
 		return($this->commentRouteId);
 	}
+
+	/**
+	 * setter method for comment's associated route id
+	 *
+	 * @param Uuid
+	 **/
 }
