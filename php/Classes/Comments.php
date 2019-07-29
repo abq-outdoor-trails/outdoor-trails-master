@@ -70,4 +70,13 @@ class Comments {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
+
+	/**
+	 * getter method for comment id
+	 *
+	 * @return Uuid value of comment id
+	 **/
+	public function getCommentId() {
+		return($this->commentId);
+	}
 }
