@@ -56,6 +56,9 @@ class Comments {
 			$this->setCommentsUserId($commentsUserId);
 			$this->setCommentContent($commentContent);
 			$this->setCommentDate($commentDate);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
 }
