@@ -1,3 +1,5 @@
+ALTER DATABASE (add database name here) CHARACTER SET utf8 COLLATE utf_unicode_ci;
+
 -- Drop tables if they exist
 DROP TABLE IF EXISTS comments;
 
