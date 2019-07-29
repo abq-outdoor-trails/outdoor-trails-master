@@ -62,8 +62,8 @@ class Comments {
 	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
-			$this->setCommentsRouteId($newCommentRouteId);
-			$this->setCommentsUserId($newCommentUserId);
+			$this->setCommentRouteId($newCommentRouteId);
+			$this->setCommentUserId($newCommentUserId);
 			$this->setCommentContent($newCommentContent);
 			$this->setCommentDate($newCommentDate);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -75,7 +75,7 @@ class Comments {
 	/**
 	 * getter method for comment id
 	 *
-	 * @return Uuid value of comment id
+	 * @return Uuid value of commentId
 	 **/
 	public function getCommentId() : Uuid {
 		return($this->commentId);
@@ -132,5 +132,14 @@ class Comments {
 		}
 		// store the comment's associated route id
 		$this->commentRouteId = $uuid;
+	}
+
+	/**
+	 * getter method for comment's associated user id
+	 *
+	 * @return Uuid value of commentUserId
+	 **/
+	public function getCommentUserId() : Uuid {
+		return($this->commentUserId);
 	}
 }
