@@ -28,12 +28,12 @@ class Comments {
 	 * route id for this comment; this is a foreign key
 	 * @var Uuid $commentsRouteId
 	 **/
-	private $commentsRouteId;
+	private $commentRouteId;
 	/**
 	 * user id for this comment; this is a foreign key
 	 * @var Uuid $commentsUserId
 	 **/
-	private $commentsUserId;
+	private $commentUserId;
 	/**
 	 * string content of this comment
 	 * @var string $commentContent
@@ -48,23 +48,23 @@ class Comments {
 	/**
 	 * constructor method for the Comments class
 	 *
-	 * @param Uuid $commentId id of this comment
-	 * @param Uuid $commentsRouteId id of the route associated with this comment
-	 * @param Uuid $commentsUserId id of the user associated with this comment
-	 * @param string $commentContent string value of comment content
+	 * @param Uuid $newCommentId id of this comment
+	 * @param Uuid $newCommentRouteId id of the route associated with this comment
+	 * @param Uuid $newCommentUserId id of the user associated with this comment
+	 * @param string $newCommentContent string value of comment content
 	 * @param \DateTime DateTime value of the comment's date
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of range (greater than specified range)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other error occurs
 	 **/
-	public function __construct($commentId, $commentsRouteId, $commentsUserId, $commentContent, $commentDate) {
+	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, $newCommentContent, $newCommentDate) {
 		try {
-			$this->setCommentId($commentId);
-			$this->setCommentsRouteId($commentsRouteId);
-			$this->setCommentsUserId($commentsUserId);
-			$this->setCommentContent($commentContent);
-			$this->setCommentDate($commentDate);
+			$this->setCommentId($newCommentId);
+			$this->setCommentsRouteId($newCommentRouteId);
+			$this->setCommentsUserId($newCommentUserId);
+			$this->setCommentContent($newCommentContent);
+			$this->setCommentDate($newCommentDate);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -78,5 +78,15 @@ class Comments {
 	 **/
 	public function getCommentId() {
 		return($this->commentId);
+	}
+
+	/**
+	 * setter method for comment id
+	 *
+	 * @param Uuid $commentId new value of comment id
+	 *
+	 **/
+	public function setCommentId($commentId) {
+
 	}
 }
