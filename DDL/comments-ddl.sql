@@ -8,7 +8,7 @@ CREATE TABLE comments (
    commentId BINARY(16) NOT NULL,
    commentsRouteId BINARY(16) NOT NULL,
    commentsUserId BINARY(16) NOT NULL,
-   commentContent TEXT NOT NULL,
+   commentContent VARCHAR(256) NOT NULL,
    commentDate DATE NOT NULL,
    -- foreign keys for comments entity
    FOREIGN KEY(commentsRouteId) REFERENCES routes(routeId),
