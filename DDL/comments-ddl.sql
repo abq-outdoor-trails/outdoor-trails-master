@@ -9,4 +9,8 @@ CREATE TABLE comments (
    commentContent TEXT NOT NULL,
    commentDate DATE NOT NULL,
    -- foreign keys for comments entity
+   FOREIGN KEY(commentsRouteId) REFERENCES routes(routeId),
+   FOREIGN KEY(commentsUserId) REFERENCES user(userId),
+   -- primary key for comments entity
+   PRIMARY KEY(commentId)
 );
