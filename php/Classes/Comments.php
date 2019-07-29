@@ -99,4 +99,13 @@ class Comments {
 		// store the comment id
 		$this->commentId = $uuid;
 	}
+
+	/**
+	 * getter method for route id associated with comment
+	 *
+	 * @return Uuid value of commentRouteId
+	 **/
+	public function getCommentRouteId() : Uuid {
+		return($this->commentRouteId);
+	}
 }
