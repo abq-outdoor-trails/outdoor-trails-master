@@ -15,7 +15,11 @@ spl_autoload_register(function($class) {
 	 * prefix: the prefix for all the classes (i.e., the namespace)
 	 * baseDir: the base directory for all classes (default = current directory)
 	 **/
+<<<<<<< HEAD
 	$prefix = "AbqOutdoorTrails\\AbqBike";
+=======
+	$prefix = "Wharris21\\ObjectOriented"; // TODO CHANGE NAMESPACE!!!
+>>>>>>> add composer.json and autoload.php files
 	$baseDir = __DIR__;
 
 	// does the class use the namespace prefix?
