@@ -92,7 +92,7 @@ class Comments {
 	 **/
 	public function setCommentId($newCommentId) : void {
 		try {
-			// validate the uuid
+			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
 			// throw error if invalid uuid
@@ -115,6 +115,18 @@ class Comments {
 	/**
 	 * setter method for comment's associated route id
 	 *
-	 * @param Uuid
+	 * @param Uuid $newCommentRouteId value of new comment's associated route id
 	 **/
+	public function setCommentRouteId($newCommentRouteId) : void {
+		try {
+			// try to validate the uuid
+			$uuid = self::validateUuid($newCommentRouteId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			// throw error if invalid uuid
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// store the comment's associated route id
+		$this->commentRouteId = $uuid;
+	}
 }
