@@ -77,19 +77,26 @@ class Comments {
 	 *
 	 * @return Uuid value of comment id
 	 **/
-	public function getCommentId() {
+	public function getCommentId() : Uuid {
 		return($this->commentId);
 	}
 
 	/**
 	 * setter method for comment id
 	 *
-	 * @param Uuid $commentId new value of comment id
+	 * @param Uuid $newCommentId new value of comment id
 	 *
 	 **/
-	public function setCommentId($commentId) {
+	public function setCommentId($newCommentId) : void {
 		try {
-
+			// validate the uuid
+			$uuid = self::validateUuid($newCommentId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
+			// throw error if invalid uuid
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+		// store the comment id
+		$this->commentId = $uuid;
 	}
 }
