@@ -177,6 +177,8 @@ class Comments {
 	 * setter method for comment content
 	 *
 	 * @param string $newCommentContent
+	 * @throws \InvalidArgumentException if comment content is empty or insecure
+	 * @throws \RangeException if comment content is too large or negative
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
@@ -192,4 +194,8 @@ class Comments {
 		// store the comment content
 		$this->commentContent = $newCommentContent;
 	}
+
+	/**
+	 *
+	 **/
 }
