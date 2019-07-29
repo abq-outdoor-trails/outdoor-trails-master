@@ -1,11 +1,20 @@
 <?php
-namespace Jdunn\abqBike
 
+namespace AbqOutdoorTrails;
+
+require_once(dirname(__DIR__) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
-class User implements \JsonSerializable
-		use function Sodium\crypto_box_keypair_from_secretkey_and_publickey;use ValidateDate;
-		use ValidateUuid;
+/**
+ * Class User
+ * @package AbqOutdoorTrails
+ * This is a class for a user of ABQ trails application
+ * This represents all data contained in a user id
+ * @author JDunn
+ **/
+class User implements \JsonSerializable {
+
+	use ValidateUuid;
 /**
  *
  * id for this user is th Primary Key
@@ -13,6 +22,31 @@ class User implements \JsonSerializable
  *
  **/
 private $userId;
+
+	/**
+	 * User Name of user this is unique
+	 * @var string userName
+	 **/
+	private $userName;
+
+	/**
+	 * Email address for user this is unique
+	 * @var string userEmail
+	 *
+	 **/
+	private $userEmail;
+
+	/**
+	 * Hash or password for the user
+	 * @var string profileHash
+	 **/
+	private $userHash;
+
+	/**
+	 * Activation Token for the user
+	 * @var string userActivationToken
+	 **/
+	private $userActivationToken;
 
 /** constructor for user Classes
  *
@@ -36,21 +70,24 @@ private $userId;
 						$this->setUserEmail($newUserEmail);
 						$this->setUserHash($newUserHash);
 						$this->setUserActivationToken($newUserActivationToken);
-					} catch(\InvalidArgumentException |\RangeException |\TypeError|\Exception $exception) {
-						//determine what exception type was thrown//
-						$exceptionType = get_class($exception);
-						throw(new $exceptionType($exception->getMessage(), 0, $exception));
 					}
+
+catch
+(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
+	//determine what exception type was thrown//
+	$exceptionType = get_class($exception);
+	throw(new $exceptionType($exception->getMessage(), 0, $exception));
+}
 }
 
 /**
  *accessor method for user id
  *
  * @return Uuid value of user id (or null if new user)
-**/
+ **/
 
 	public function getUserId(): Uuid {
-			return ($this->userId);
+	return ($this->userId);
 }
 
 /**
@@ -59,9 +96,11 @@ private $userId;
  * #param Uuid | string $newUserId value of new user id
  * @throws \RangeException if $newUserId is not positive
  * @throws \TypeError if the profile id is not valid
-**/
+ **/
 	public function setUserId($newUserId): void {
-				try{
-							$uuid = self:validateUuid($newUserId);
+	try {
+		$uuid = self:validateUuid($newUserId);
 				} catch(\InvalidArgumentException |\RangeException |\Exception |\TypeError $exception)
+}
+
 }
