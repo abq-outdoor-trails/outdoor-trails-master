@@ -1,4 +1,5 @@
 <?php
+
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
