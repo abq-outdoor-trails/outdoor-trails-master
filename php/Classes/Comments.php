@@ -40,7 +40,7 @@ class Comments {
 	 **/
 	private $commentContent;
 	/**
-	 * DateTime object containing the validated date
+	 * PHP DateTime object containing the validated date the comment was submitted
 	 * @var \DateTime $commentDate
 	 **/
 	private $commentDate;
@@ -141,5 +141,27 @@ class Comments {
 	 **/
 	public function getCommentUserId() : Uuid {
 		return($this->commentUserId);
+	}
+
+	/**
+	 * setter method for comment's associated user id
+	 *
+	 * @param Uuid $newCommentUserId value of new comment's associated user id
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of range (greater or less than specified range)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	 **/
+	public function setCommentUserId($newCommentUserId) : void {
+		try {
+			// try to validate the uuid
+			$uuid = self::validateUuid($newCommentUserId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			// throw error if invalid uuid
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// store the comment's associated route id
+		$this->commentUserId = $uuid;
 	}
 }
