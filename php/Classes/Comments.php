@@ -116,6 +116,10 @@ class Comments {
 	 * setter method for comment's associated route id
 	 *
 	 * @param Uuid $newCommentRouteId value of new comment's associated route id
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of range (greater or less than specified range)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
 	 **/
 	public function setCommentRouteId($newCommentRouteId) : void {
 		try {
