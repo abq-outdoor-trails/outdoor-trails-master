@@ -172,4 +172,24 @@ class Comments {
 	public function getCommentContent() : string {
 		return($this->commentContent);
 	}
+
+	/**
+	 * setter method for comment content
+	 *
+	 * @param string $newCommentContent
+	 **/
+	public function setCommentContent(string $newCommentContent) : void {
+		// trim, sanitize, and verify comment content is secure
+		$newCommentContent = trim($newCommentContent);
+		$newCommentContent = filter_var($newCommentContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newCommentContent)) {
+			throw(new \InvalidArgumentException('Comment content is empty or insecure'));
+		}
+		// verify the comment will fit in the database
+		if(strlen($newCommentContent) > 256) {
+			throw(new \RangeException('Comment content too large (must be 256 characters or less)'));
+		}
+		// store the comment content
+		$this->commentContent = $newCommentContent;
+	}
 }
