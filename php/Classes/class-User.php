@@ -401,8 +401,8 @@ class User implements \JsonSerializable {
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$user = new user($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-					$user[$user->key()] = $user;
-					$user->next();
+				$user[$user->key()] = $user;
+				$user->next();
 			} catch(\Exception $exception) {
 				//if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
@@ -489,7 +489,7 @@ class User implements \JsonSerializable {
 			$row = $statement->fetch();
 			if($row !== false) {
 				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-			  }
+			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
@@ -509,5 +509,4 @@ class User implements \JsonSerializable {
 		unset($fields["profileHash"]);
 		return ($fields);
 	}
-
 }
