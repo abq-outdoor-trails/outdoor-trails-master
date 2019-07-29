@@ -1,5 +1,5 @@
 <?php
-namespace Wharris21\ObjectOriented;
+namespace // TODO CHANGE NAMESPACE!!!
 
 require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;

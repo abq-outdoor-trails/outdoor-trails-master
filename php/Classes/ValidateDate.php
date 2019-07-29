@@ -1,5 +1,5 @@
 <?php
-namespace Wharris21\ObjectOriented;
+namespace // TODO CHANGE NAMESPACE!!!
 
 /**
  * Trait to Validate a mySQL Date
