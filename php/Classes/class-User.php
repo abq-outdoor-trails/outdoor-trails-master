@@ -1,6 +1,6 @@
 <?php
 
-namespace AbqOutdoorTrails;
+namespace AbqOutdoorTrails\AbqBike;
 
 require_once(dirname(__DIR__) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
@@ -262,5 +262,45 @@ use Ramsey\Uuid\Uuid;
 
 				}
 				$this->userActivationToken = $newUserActivationToken;
+	}
+
+		/**
+		 * inserts this user into mySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL related errors occur
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 *
+		 *
+		 **/
+	public function insert(\PDO $pdo): void {
+
+		//create query template//
+		$query = "INSERT INTO user(userId, userName, userEmail, userHash, userActivationToken) VALUES (:userId, :userName, :userEmail, :userHash, :userActivationToken)";
+		$statement = $pdo->prepareI($query);
+
+		$parameters = ["userId" => $this->userId-getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
+		$statement->execute($parameters);
+
+	}
+
+		/**
+		 * deletes this user from mySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL related errors occur
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 *
+		 *
+		 **/
+	public function delete(\PDO $pdo): void {
+
+					//create query template//
+					$query = "DELETE FROM user WHERE userId = :userId";
+					$statement = $pdo->prepare($query);
+
+					//bind the member variables to the place holders in the template//
+					$parameters = ["userId" => $this->userId->getBytes()];
+					$statement->execute($parameters);
 	}
 }
