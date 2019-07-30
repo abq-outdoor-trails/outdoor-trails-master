@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -14,7 +14,7 @@ use Ramsey\Uuid\Uuid;
  * @package AbqOutdoorTrails\AbqBike;
  * @author wharris21
  **/
-class Comments {
+class Comments implements \JsonSerializable {
 	// traits being used in this class
 	use ValidateUuid;
 	use ValidateDate;
@@ -263,5 +263,24 @@ class Comments {
 		// bind the member variables to the placeholder in the query template
 		$parameters = ["commentId" => $this->commentId->getBytes()];
 		$statement->execute($parameters);
+	}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 */
+	public function jsonSerialize() : array {
+		// get the state variables
+		$fields = get_object_vars($this);
+
+		// convert id values to strings
+		$fields["commentId"] = $this->commentId->toString();
+		$fields["commentRouteId"] = $this->commentRouteId->toString();
+		$fields["commentUserId"] = $this->commentUserId->toString();
+
+		// format the date so the front end can use it
+		$fields["commentDate"] = round(floatval($this->commentDate->format("U.u")) * 1000);
+		return($fields);
 	}
 }
