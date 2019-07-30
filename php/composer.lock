@@ -204,8 +204,12 @@
     "prefer-lowest": false,
     "platform": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "ext-pdo": "*",
         "ext-json": "*"
+=======
+        "ext-pdo": "*"
+>>>>>>> ran composer install
 =======
         "ext-pdo": "*"
 >>>>>>> ran composer install
