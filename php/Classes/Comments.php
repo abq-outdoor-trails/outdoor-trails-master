@@ -211,7 +211,7 @@ class Comments {
 	 * @param \DateTime $newCommentDate
 	 * @throws \InvalidArgumentException if date is not valid`
 	 * @throws \RangeException if date is out of valid range
-	 * @throws Exception if any other exception occurs
+	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate) : void {
 		// if the date is null, use the current date and time
