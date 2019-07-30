@@ -229,4 +229,21 @@ class Comments {
 		// store date on the object
 		$this->commentDate = $newCommentDate;
 	}
+
+	/**
+	 * deletes this comment from MySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when MySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+		// create delete query template
+		$query = "DELETE FROM comments WHERE commentId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the placeholder in the query template
+		$parameters = ["commentId" => $this->commentId->getBytes()];
+		$statement->execute($parameters);
+	}
 }
