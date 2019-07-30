@@ -231,6 +231,24 @@ class Comments {
 	}
 
 	/**
+	 * inserts this comment into MySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when MySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+		// create insert query template
+		$query ="INSERT INTO comments(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the placeholders in the insert query template
+		$formattedDate = $this->commentDate->format(/*TODO FIGURE OUT WHAT DATE FORMAT WE SHOULD USE*/);
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentRouteId" => $this->commentRouteId->getBytes(), "commentUserId" => $this->commentUserId->getBytes(), "commentContent" => $this->commentContent, "commentDate" => $formattedDate];
+		$statement->execute($parameters);
+	}
+
+	/**
 	 * deletes this comment from MySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -249,4 +267,5 @@ class Comments {
 
 	// TODO MAKE SURE I DON'T NEED TO INCLUDE AN UPDATE METHOD FOR COMMENTS
 
+	public function
 }
