@@ -548,4 +548,18 @@ class User implements \JsonSerializable {
 					$parameters = ["userId" => $this->userId->getBytes()];
 					$statement->execute($parameters);
 	}
+
+		/**
+		 * updates this user from mySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+		 *
+		 *
+		 **/
+	public function update(\PDO $pdo): void {
+					//create query template//
+					$query = "UPDATE user SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
+					$statement-execute($parameters);
+	}
 }
