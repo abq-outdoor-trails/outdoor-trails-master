@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "6be8a57f58f0b19f1a589264e44a2c24",
+
     "packages": [
         {
             "name": "paragonie/random_compat",
@@ -201,8 +203,12 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+<<<<<<< HEAD
         "ext-pdo": "*",
         "ext-json": "*"
+=======
+        "ext-pdo": "*"
+>>>>>>> ran composer install
     },
     "platform-dev": []
 }
