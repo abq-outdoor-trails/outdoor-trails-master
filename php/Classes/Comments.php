@@ -1,6 +1,6 @@
 <?php
 
-namespace ; //TODO CHANGE NAMESPACE!!!
+namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__) . "/vendor/autoload.php");
@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  * Class declaration for the Comments class
  *
  * This class will contain all the state variables and methods for any instance of Comments
- * @package //TODO PUT NAMESPACE HERE
+ * @package AbqOutdoorTrails\AbqBike;
  * @author wharris21
  **/
 class Comments {
@@ -266,6 +266,4 @@ class Comments {
 	}
 
 	// TODO MAKE SURE I DON'T NEED TO INCLUDE AN UPDATE METHOD FOR COMMENTS
-
-	public function
 }

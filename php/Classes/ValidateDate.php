@@ -1,5 +1,5 @@
 <?php
-namespace // TODO CHANGE NAMESPACE!!!
+namespace AbqOutdoorTrails\AbqBike;
 
 /**
  * Trait to Validate a mySQL Date
