@@ -213,7 +213,7 @@ class Comments {
 	 * @throws \RangeException if date is out of valid range
 	 * @throws \Exception if any other exception occurs
 	 **/
-	public function setCommentDate($newCommentDate) : void {
+	public function setCommentDate($newCommentDate = NULL) : void {
 		// if the date is null, use the current date and time
 		if($newCommentDate === NULL) {
 			$this->commentDate = new \DateTime();
@@ -243,7 +243,7 @@ class Comments {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholders in the insert query template
-		$formattedDate = $this->commentDate->format(/*TODO FIGURE OUT WHAT DATE FORMAT WE SHOULD USE*/);
+		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
 		$parameters = ["commentId" => $this->commentId->getBytes(), "commentRouteId" => $this->commentRouteId->getBytes(), "commentUserId" => $this->commentUserId->getBytes(), "commentContent" => $this->commentContent, "commentDate" => $formattedDate];
 		$statement->execute($parameters);
 	}
