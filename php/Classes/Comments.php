@@ -246,4 +246,7 @@ class Comments {
 		$parameters = ["commentId" => $this->commentId->getBytes()];
 		$statement->execute($parameters);
 	}
+
+	// TODO MAKE SURE I DON'T NEED TO INCLUDE AN UPDATE METHOD FOR COMMENTS
+
 }
