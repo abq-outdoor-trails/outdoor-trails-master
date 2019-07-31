@@ -339,37 +339,6 @@ class Comment implements \JsonSerializable {
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($comments);
-	}
-
-	/**
-	 * get comments by comment date, for display by most recent on the individual route view
-	 *
-	 *
-	 **/
-	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
-		// validate date, throw error if invalid value
-		try {
-				$commentDate = self::validateDateTime($commentDate);
-			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			}
-
-		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
-		$statement = $pdo->prepare($query);
-		// bind comment date to the placeholder in query template
-		$parameters = ["commentDate" => $commentDate];
-		$statement->execute($parameters);
-		// build array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($row = $statement->fetch()) {
-			try {
-
-			}
-		}
 	}
 
 	/**
