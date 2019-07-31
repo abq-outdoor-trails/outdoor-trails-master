@@ -58,7 +58,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
+	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -209,7 +209,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param \DateTime $newCommentDate
 	 * @throws \InvalidArgumentException if date is not valid
-	 * @throws \RangeException if date is out of valid range (Dev. 99th)
+	 * @throws \RangeException if date is out of valid range (Dec 99)
 	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate = NULL) : void {
@@ -275,7 +275,6 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
-		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -286,7 +285,7 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
@@ -339,7 +338,6 @@ class Comment implements \JsonSerializable {
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($comments);
 	}
 
 	/**
