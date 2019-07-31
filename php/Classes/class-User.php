@@ -18,7 +18,7 @@ class User implements \JsonSerializable {
 	use ValidateUuid;
 	/**
 	 *
-	 * id for this user is th Primary Key
+	 * id for this user is the Primary Key
 	 * @var Uuid\ $userId
 	 *
 	 **/
@@ -78,7 +78,7 @@ class User implements \JsonSerializable {
 	}
 
 	/**
-	 *accessor method for user id
+	 * accessor method for user id
 	 *
 	 * @return \Uuid value of user id (or null if new user)
 	 **/
@@ -92,7 +92,7 @@ class User implements \JsonSerializable {
 	 *
 	 * @param Uuid | string $newUserId value of new user id
 	 * @throws \RangeException if $newUserId is not positive
-	 * @throws \TypeError if the profile id is not valid
+	 * @throws \TypeError if the user id is not valid
 	 **/
 	public function setUserId($newUserId): void {
 		try {
@@ -121,7 +121,7 @@ class User implements \JsonSerializable {
 	 * mutator method for account user name
 	 *
 	 * @param string $newUserName
-	 * @throws \InvalidArgumentException if string is too long or is insecure
+	 * @throws \InvalidArgumentException if user name is insecure
 	 * @throws \RangeException if the userName is too long
 	 * @throws \TypeError if the userName is not a string
 	 *
@@ -133,7 +133,6 @@ class User implements \JsonSerializable {
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserName) === true) {
 			throw(new \InvalidArgumentException("User Name is insecure"));
-			throw(new \RangeException("user name cannot be greater than 32"));
 
 		}
 
@@ -158,7 +157,7 @@ class User implements \JsonSerializable {
 	 * @param string $newUserEmail new value of email
 	 * @throws \InvalidArgumentException if $newUserEmail is not a valid email of insecure
 	 * @throws \RangeException if $newUserEmail is > 128 characters
-	 * @throws \TypeError if $newUserEmail is not a strin
+	 * @throws \TypeError if $newUserEmail is not a string
 	 *
 	 **/
 	public function setUserEmail(string $newUserEmail): void {
@@ -242,7 +241,7 @@ class User implements \JsonSerializable {
 	 *
 	 * @param string $newUserActivationToken
 	 * @throws \InvalidArgumentException if the token is not a string or insecure
-	 * @throws \RangeException if the tokn is not exactly 32 characters
+	 * @throws \RangeException if the token is not exactly 32 characters
 	 * @throws \TypeError if the activation token is not a string
 	 *
 	 **/
@@ -260,7 +259,7 @@ class User implements \JsonSerializable {
 
 		//make sure user activation token is only 32 characters//
 		if(strlen($newUserActivationToken) !== 32) {
-			throw(new\RangeException("user activation token has to be 32"));
+			throw(new\RangeException("user activation token has to be 32 characters"));
 
 		}
 		$this->userActivationToken = $newUserActivationToken;
@@ -315,9 +314,9 @@ class User implements \JsonSerializable {
 	 *
 	 **/
 	public function update(\PDO $pdo): void {
-		//create query template//
+		// create query template
 		$query = "UPDATE `user` SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
-		$statement->execute($parameters);
+		$statement->execute($query);
 	}
 
 	/**
@@ -342,4 +341,16 @@ class User implements \JsonSerializable {
 		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 	}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields["profileId"] = $this->profileId->toString();
+		unset($fields["profileActivationToken"]);
+		unset($fields["profileHash"]);
+		return ($fields);
 }
