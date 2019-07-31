@@ -90,7 +90,7 @@ class User implements \JsonSerializable {
 	/**
 	 * mutator method for user id
 	 *
-	 * #param Uuid | string $newUserId value of new user id
+	 * @param Uuid | string $newUserId value of new user id
 	 * @throws \RangeException if $newUserId is not positive
 	 * @throws \TypeError if the profile id is not valid
 	 **/
@@ -281,7 +281,7 @@ class User implements \JsonSerializable {
 		$query = "INSERT INTO user(userId, userName, userEmail, userHash, userActivationToken) VALUES (:userId, :userName, :userEmail, :userHash, :userActivationToken)";
 		$statement = $pdo->prepare($query);
 
-		$parameters = ["userId" => $this->userId -> getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
 		$statement->execute($parameters);
 
 	}
@@ -317,6 +317,6 @@ class User implements \JsonSerializable {
 	public function update(\PDO $pdo): void {
 		//create query template//
 		$query = "UPDATE user SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
-		$statement -> execute($parameters);
+		$statement->execute($parameters);
 	}
 }
