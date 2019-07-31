@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -275,7 +275,6 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
-		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -286,22 +285,16 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
+				$comment = new Comment
 			}
 		}
-		return($comments);
 	}
 
 	/**
