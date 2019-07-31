@@ -275,6 +275,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
+		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -347,12 +348,15 @@ class Comment implements \JsonSerializable {
 	 *
 	 **/
 	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
+		// validate date, throw error if invalid value
 		try {
 				$commentDate = self::validateDateTime($commentDate);
 			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
 				$exceptionType = get_class($exception);
 				throw(new $exceptionType($exception->getMessage(), 0, $exception));
 			}
+
+			// create query template
 		}
 	}
 
