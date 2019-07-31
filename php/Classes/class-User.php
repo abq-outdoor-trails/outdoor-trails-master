@@ -316,7 +316,12 @@ class User implements \JsonSerializable {
 	public function update(\PDO $pdo): void {
 		// create query template
 		$query = "UPDATE `user` SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
-		$statement->execute($query);
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+
+		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
+		$statement->execute($parameters);
 	}
 
 	/**
@@ -340,6 +345,26 @@ class User implements \JsonSerializable {
 		//create query template//
 		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
+
+		//bind the user id to the placeholder in the template
+		$parameters = ["userId" => $userId->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the user from mySQL
+		try {
+			$user = null;
+			$statement-> $statement->fetch();
+			$row = $statement->fetch();
+			if($row !== false) {
+
+				$user = new `user`($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+}
 	}
 
 	/**
