@@ -275,6 +275,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
+		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
