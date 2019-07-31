@@ -266,6 +266,25 @@ class Comments implements \JsonSerializable {
 	}
 
 	/**
+	 * gets comments by route id, for display on the individual route page
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid | string $routeId route id to search by
+	 * @return \SplFixedArray SplFixedArray of Routes found
+	 * @throws \PDOException when MySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
+		try {
+			$routeId = self::validateUuid($routeId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create query template
+	}
+
+	/**
 	 * formats the state variables for JSON serialization
 	 *
 	 * @return array resulting state variables to serialize
