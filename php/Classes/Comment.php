@@ -59,7 +59,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
+	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -94,7 +94,7 @@ class Comment implements \JsonSerializable {
 		try {
 			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
