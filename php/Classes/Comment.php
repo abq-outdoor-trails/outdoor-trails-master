@@ -342,6 +342,21 @@ class Comment implements \JsonSerializable {
 	}
 
 	/**
+	 * get comments by comment date, for display by most recent on the individual route view
+	 *
+	 *
+	 **/
+	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
+		try {
+				$commentDate = self::validateDateTime($commentDate);
+			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+				$exceptionType = get_class($exception);
+				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+			}
+		}
+	}
+
+	/**
 	 * formats the state variables for JSON serialization
 	 *
 	 * @return array resulting state variables to serialize
