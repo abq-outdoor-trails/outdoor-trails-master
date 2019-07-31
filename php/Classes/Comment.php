@@ -328,8 +328,11 @@ class Comment implements \JsonSerializable {
 		// build array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($)
-	}
+		while($row = $statement->fetch()) {
+			try {
+
+			}
+		}
 	}
 
 	/**
