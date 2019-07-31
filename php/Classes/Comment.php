@@ -292,7 +292,9 @@ class Comment implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment
+				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
+				$comments[$comments->key()] = $comment;
+				$comments->next();
 			}
 		}
 	}
