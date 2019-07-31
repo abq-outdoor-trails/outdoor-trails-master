@@ -93,7 +93,7 @@ class Comment implements \JsonSerializable {
 		try {
 			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -178,7 +178,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent
 	 * @throws \InvalidArgumentException if comment content is empty or insecure
-	 * @throws \RangeException if comment content is too large
+	 * @throws \RangeException if comment content is too large or negative
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
@@ -275,7 +275,6 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
-		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -286,7 +285,7 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
