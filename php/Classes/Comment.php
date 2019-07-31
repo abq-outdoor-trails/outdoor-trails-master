@@ -57,8 +57,9 @@ class Comment implements \JsonSerializable {
 	 * @throws \RangeException if data values are out of range (greater or less than than specified range)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
+	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -93,7 +94,7 @@ class Comment implements \JsonSerializable {
 		try {
 			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -178,7 +179,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent
 	 * @throws \InvalidArgumentException if comment content is empty or insecure
-	 * @throws \RangeException if comment content is too large
+	 * @throws \RangeException if comment content is too large or negative
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
@@ -208,8 +209,8 @@ class Comment implements \JsonSerializable {
 	 * setter method for comment date
 	 *
 	 * @param \DateTime $newCommentDate
-	 * @throws \InvalidArgumentException if date is not valid
-	 * @throws \RangeException if date is out of valid range (Dev. 99th)
+	 * @throws \InvalidArgumentException if date is not valid`
+	 * @throws \RangeException if date is out of valid range
 	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate = NULL) : void {
@@ -275,7 +276,6 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
-		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -286,60 +286,16 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
+				$comment = new Comment
 			}
 		}
-		return($comments);
-	}
-
-	/**
-	 * get comments by comment date, for display ranked by date on individual route's view
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $commentDate date value for comment
-	 * @return \SplFixedArray $comments array of comments returned by date
-	 */
-	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
-		// validate date, throw error if invalid value
-		try {
-				$commentDate = self::validateDateTime($commentDate);
-			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			}
-
-		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
-		$statement = $pdo->prepare($query);
-		// bind comment date to the placeholder in query template
-		$parameters = ["commentDate" => $commentDate];
-		$statement->execute($parameters);
-		// build array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($row = $statement->fetch()) {
-			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return($comments);
 	}
 
 	/**
