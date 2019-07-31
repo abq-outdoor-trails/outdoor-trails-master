@@ -352,26 +352,22 @@ class User implements \JsonSerializable {
 		//grab the user from mySQL
 		try {
 			$user = null;
-<<<<<<< HEAD
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
 
 				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-=======
 			$statement-> $statement->fetch();
 			$row = $statement->fetch();
 			if($row !== false) {
 
 				$user = new `user`($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
->>>>>>> added get user from my sql
 
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-<<<<<<< HEAD
 		return ($user);
 	}
 
@@ -503,9 +499,8 @@ class User implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($user);
-=======
 }
->>>>>>> added get user from my sql
+
 	}
 
 	/**
