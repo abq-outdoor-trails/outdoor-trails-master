@@ -286,7 +286,7 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
+		$parameters = ["commentRouteId" => $routeId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
@@ -359,7 +359,14 @@ class Comment implements \JsonSerializable {
 		// create query template
 		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
 		$statement = $pdo->prepare($query);
-		}
+		// bind comment date to the placeholder in query template
+		$parameters = ["commentDate" => $commentDate];
+		$statement->execute($parameters);
+		// build array of comments
+		$comments = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while($)
+	}
 	}
 
 	/**
