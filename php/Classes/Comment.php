@@ -57,7 +57,6 @@ class Comment implements \JsonSerializable {
 	 * @throws \RangeException if data values are out of range (greater or less than than specified range)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
-	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
 		try {
@@ -179,7 +178,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent
 	 * @throws \InvalidArgumentException if comment content is empty or insecure
-	 * @throws \RangeException if comment content is too large or negative
+	 * @throws \RangeException if comment content is too large
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
@@ -209,8 +208,8 @@ class Comment implements \JsonSerializable {
 	 * setter method for comment date
 	 *
 	 * @param \DateTime $newCommentDate
-	 * @throws \InvalidArgumentException if date is not valid`
-	 * @throws \RangeException if date is out of valid range
+	 * @throws \InvalidArgumentException if date is not valid
+	 * @throws \RangeException if date is not a valid date (Dec. 99th)
 	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate = NULL) : void {
