@@ -14,7 +14,7 @@ use Ramsey\Uuid\Uuid;
  * @package AbqOutdoorTrails\AbqBike;
  * @author wharris21
  **/
-class Comments implements \JsonSerializable {
+class Comment implements \JsonSerializable {
 	// traits being used in this class
 	use ValidateUuid;
 	use ValidateDate;
@@ -273,6 +273,7 @@ class Comments implements \JsonSerializable {
 	 * @return \SplFixedArray SplFixedArray of Routes found
 	 * @throws \PDOException when MySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
+	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
 		try {
@@ -287,6 +288,14 @@ class Comments implements \JsonSerializable {
 		// bind the route id to the placeholder in the query template
 		$parameters = ["commentRouteId" => $commentRouteId->getBytes()];
 		$statement->execute($parameters);
+		// build an array of comments
+		$comments = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while($row = $statement->fetch()) {
+			try {
+				$comment = new Comment
+			}
+		}
 	}
 
 	/**
