@@ -56,7 +56,6 @@ class User implements \JsonSerializable {
 	 * @param string $newUserEmail string containing email value
 	 * @param string $newUserHash string containing password hash
 	 * @param string $newUserActivationToken user token to safeguard against malicious attacks
-	 * @param \DateTime|string|null $newUserActivationToken
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g. strings too long or negative integers)
 	 * @throws \TypeError if data types violate type hints
@@ -81,7 +80,7 @@ class User implements \JsonSerializable {
 	/**
 	 *accessor method for user id
 	 *
-	 * @return Uuid value of user id (or null if new user)
+	 * @return \Uuid value of user id (or null if new user)
 	 **/
 
 	public function getUserId(): Uuid {
@@ -114,8 +113,8 @@ class User implements \JsonSerializable {
 	 *
 	 **/
 
-	public function getUserName(): ?string {
-		return ($this->userName)
+	public function getUserName(): string {
+		return ($this->userName);
 	}
 
 	/**
@@ -134,6 +133,7 @@ class User implements \JsonSerializable {
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserName) === true) {
 			throw(new \InvalidArgumentException("User Name is insecure"));
+			throw(new \RangeException("user name cannot be greater than 32"));
 
 		}
 
@@ -211,8 +211,8 @@ class User implements \JsonSerializable {
 		}
 
 		//enforce the hash is really an Argon hash//
-		$userHashInfo = password_get_info("$newUserHash");
-		if(userHashInfo["algoName"] !== "argon2i") {
+		$userHashInfo = password_get_info($newUserHash);
+		if($userHashInfo["algoName"] !== "argon2i") {
 			throw(new \InvalidArgumentException("user hash is not a valid hash"));
 
 		}
@@ -298,7 +298,7 @@ class User implements \JsonSerializable {
 	public function delete(\PDO $pdo): void {
 
 		//create query template//
-		$query = "DELETE FROM user WHERE userId = :userId";
+		$query = "DELETE FROM `user` WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template//
@@ -317,6 +317,6 @@ class User implements \JsonSerializable {
 	public function update(\PDO $pdo): void {
 		//create query template//
 		$query = "UPDATE user SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
-		$statement - execute($parameters);
+		$statement -> execute($parameters);
 	}
 }
