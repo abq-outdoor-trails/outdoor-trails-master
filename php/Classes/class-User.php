@@ -400,13 +400,16 @@ class User implements \JsonSerializable {
 
 		while (($row = $statement->fetch()) !== false) {
 			try {
-					$user = new `user`($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"])
+					$user = new `user`($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+					$users[$users->key()] = $user;
+					$users->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
+		return ($users);
 	}
-
-
-
 
 	/**
 	 * gets the user by email
@@ -419,7 +422,51 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public s
+	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?user {
+		//sanitize the email before searching
+		$userEmail = trim($userEmail);
+		$userEmail = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
+
+		if(empty($userEmail) === true) {
+			throw(new \PDOException("not a valid email"));
+		}
+
+		//create query template
+		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userEmail = :userEmail";
+		$statement = $pdo->prepare($query);
+
+		//bind the user email to the profile holder in the template
+		$parameters = ["userEmail" => $userEmail];
+		$statement->execute($parameters);
+
+		//grab the user from mySQL
+		try {
+			$user = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+					$user = new user($row["userId"], $row[$userName], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($user);
+	}
+
+	/**
+	 * get the user by the user activation token
+	 *
+	 * @param string $userActivationToken
+	 * @param \PDO object $pdo
+	 * @return user | null user or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 *
+	 *
+	 **/
+	public static function getUserByUserActivationToken()
 
 	/**
 	 * formats the state variables for JSON serialization
