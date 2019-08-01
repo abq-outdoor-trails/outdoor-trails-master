@@ -2,7 +2,7 @@ ALTER DATABASE abqbiketrails CHARACTER SET utf8 COLLATE utf_unicode_ci;
 
 DROP TABLE IF EXISTS favoriteRoutes;
 DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS routes;
 
 -- CREATE TABLE statement for routes table
@@ -18,7 +18,7 @@ CREATE TABLE routes (
 );
 
 -- CREATE TABLE statement for user table
-CREATE TABLE user (
+CREATE TABLE `user` (
 	-- this creates the attribute for the primary key
 	-- not null means the attribute is required
 	-- this is a strong entity
