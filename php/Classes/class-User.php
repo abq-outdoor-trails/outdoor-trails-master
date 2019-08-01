@@ -334,12 +334,12 @@ class User implements \JsonSerializable {
 	 * @throws \TypeError when a variable are not the correct data type
 	 *
 	 **/
-	public static function getUserByUserId(\PDO $pdo, $userId):?userId {
+	public static function getUserByUserId(\PDO $pdo, $userId): ?userId {
 		//sanitize the user id before searching//
 		try {
-				$userId = self::validateUuid(userId);
+			$userId = self::validateUuid(userId);
 		} catch(\InvalidArgumentException|\RangeException|\Exception|\TypeError $exception) {
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 
 		//create query template//
@@ -353,7 +353,7 @@ class User implements \JsonSerializable {
 		//grab the user from mySQL
 		try {
 			$user = null;
-			$statement-> $statement->fetch();
+			$statement->$setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
 
@@ -364,8 +364,62 @@ class User implements \JsonSerializable {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
- 		return ($user);
+		return ($user);
 	}
+
+	/**
+	 * gets the user by user name
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userName user name to search for
+	 * @return \SplFixedArray of all users found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 *
+	 *
+	 **/
+	public static function getUserByUserName(\PDO $pdo, string $newUserName) : \SPLFixedArray {
+		//sanitize the user name before searching
+		$userName = trim($userName);
+		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($userName) === true) {
+				throw(new \PDOException("not a valid user name"));
+		}
+
+		//create query template
+		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userId= :userID";
+		$statement = $pdo->prepare($query);
+
+		//bind the user name to the place holder in the template
+		$parameters = ["userName" => $userName];
+		$statement->execute($parameters);
+
+
+		$user = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+
+		while (($row = $statement->fetch()) !== false) {
+			try {
+					$user = new `user`($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"])
+			}
+		}
+	}
+
+
+
+
+	/**
+	 * gets the user by email
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userEmail email to search for
+	 * @return user|null user or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 *
+	 *
+	 **/
+	public s
 
 	/**
 	 * formats the state variables for JSON serialization
@@ -378,4 +432,6 @@ class User implements \JsonSerializable {
 		unset($fields["profileActivationToken"]);
 		unset($fields["profileHash"]);
 		return ($fields);
+	}
+
 }
