@@ -1,5 +1,5 @@
 <?php
-namespace UssHopper\DataDesign\Test;
+namespace AbqOutdoorTrails\AbqBike\Test;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
