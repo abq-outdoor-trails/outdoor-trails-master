@@ -305,11 +305,13 @@ class Comment implements \JsonSerializable {
 	}
 
 	/**
-	 * get comments by comment date, for display by most recent on the individual route view
+	 * get comments by comment date, for display ranked by date on individual route's view
 	 *
-	 *
-	 **/
-	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
+	 * @param \PDO $pdo PDO connection object
+	 * @param \DateTime $commentDate date value for comment
+	 * @return \SplFixedArray $comments array of comments returned by date
+	 */
+	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
 		// validate date, throw error if invalid value
 		try {
 				$commentDate = self::validateDateTime($commentDate);
