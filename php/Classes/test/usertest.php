@@ -1,4 +1,5 @@
 <?php
+
 namespace AbqOutdoorTrails\AbqBike;
 
 use Edu\Cnm\DataDesign\{User};
@@ -19,4 +20,54 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid/php");
  * @author JDunn <jdunn33@cnm.edu>
  *
  **/
+class UserTest extends DataDesignTest {
+	/**
+	 * User that created this profile; this is for the foreign key relations
+	 * @var User user
+	 *
+	 **/
+	protected $user = null;
+
+	/**
+	 * valid user id to create the user object to own the test
+	 *
+	 * @var $VALID_USER_ID
+	 *
+	 **/
+	protected $VALID_USER_ID;
+
+	/**
+	 * valid user name to create user object to test?
+	 *
+	 * @var $VALID_USER_NAME
+	 *
+	 **/
+	protected $VALID_USER_NAME;
+
+	/**
+	 * valid user email to create the object to test
+	 *
+	 * @var $VALID_USER_EMAIL
+	 *
+	 **/
+	protected $VALID_USER_EMAIL;
+
+	/**
+	 * valid user hash to create the object to test
+	 *
+	 * @var $VALID_USER_HASH
+	 *
+	 **/
+	protected $VALID_USER_HASH;
+
+	/**
+	 * valid user activation token to create the object for test
+	 *
+	 * @var $VALID_USER_ACTIVATION_TOKEN
+	 *
+	 **/
+	protected $VALID_USER_ACTIVATION_TOKEN;
+
+	
+}
 
