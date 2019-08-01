@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -299,7 +299,7 @@ class Comment implements \JsonSerializable {
 				$comments->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception);
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
 		return($comments);
@@ -310,30 +310,30 @@ class Comment implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
-		// validate date, throw error if invalid value
-		try {
-				$commentDate = self::validateDateTime($commentDate);
-			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			}
-
-		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
-		$statement = $pdo->prepare($query);
-		// bind comment date to the placeholder in query template
-		$parameters = ["commentDate" => $commentDate];
-		$statement->execute($parameters);
-		// build array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($row = $statement->fetch()) {
-			try {
-
-			}
-		}
-	}
+//	public static function getCommentsByCommentDate(\PDO $pdo, $commentDate) : \SplFixedArray {
+//		// validate date, throw error if invalid value
+//		try {
+//				$commentDate = self::validateDateTime($commentDate);
+//			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+//				$exceptionType = get_class($exception);
+//				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+//			}
+//
+//		// create query template
+//		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
+//		$statement = $pdo->prepare($query);
+//		// bind comment date to the placeholder in query template
+//		$parameters = ["commentDate" => $commentDate];
+//		$statement->execute($parameters);
+//		// build array of comments
+//		$comments = new \SplFixedArray($statement->rowCount());
+//		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+//		while($row = $statement->fetch()) {
+//			try {
+//
+//			}
+//		}
+//	}
 
 	/**
 	 * formats the state variables for JSON serialization
