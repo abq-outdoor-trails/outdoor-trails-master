@@ -205,6 +205,7 @@
     "platform": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "ext-pdo": "*",
         "ext-json": "*"
 =======
@@ -213,6 +214,9 @@
 =======
         "ext-pdo": "*"
 >>>>>>> ran composer install
+=======
+        "ext-pdo": "*"
+>>>>>>> ddl-merge
     },
     "platform-dev": []
 }
