@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -93,7 +93,7 @@ class Comment implements \JsonSerializable {
 		try {
 			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -178,7 +178,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent
 	 * @throws \InvalidArgumentException if comment content is empty or insecure
-	 * @throws \RangeException if comment content is too large or negative
+	 * @throws \RangeException if comment content is too large
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
