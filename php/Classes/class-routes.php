@@ -55,17 +55,6 @@ class route implements \JsonSerializable {
 
 	private $routeDescription;
 
-	/**
-	* favorite routes by route ID; this is a foreign key
-	* @ var favoriteRoutesRouteID
-	*/
-	private $favoriteRoutesRouteID;
-
-	/**
-	 * favorite routes by User ID; this is a foreign key
-	 * favoriteRoutesUserId
-	 */
-	private $favoriteRoutesUserId;
 
 	/**
 	 * constructor for this route
@@ -83,8 +72,7 @@ class route implements \JsonSerializable {
 	 */
 
 	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
-										 int $newRouteSpeedLimit, string $newRouteDescription, string $newFavoriteRoutesRouteId,
-										 string $newFavoriteRoutesUserId) {
+										 int $newRouteSpeedLimit, string $newRouteDescription) {
 		try {
 			$this->setRouteId($newRouteId);
 			$this->setRouteDescription($newRouteDescription);
@@ -92,10 +80,6 @@ class route implements \JsonSerializable {
 			$this->setRouteName($newRouteName);
 			$this->setRouteSpeedLimit($newRouteSpeedLimit);
 			$this->setRouteType($newRouteType);
-			$this->setFavoriteRoutesRouteId($newFavoriteRoutesRouteId);
-			$this->setFavoriteRoutesUserId($newFavoriteRoutesUserId);
-
-
 
 
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
@@ -281,61 +265,6 @@ class route implements \JsonSerializable {
 	}
 
 	/**
-	 * accessor method for favoriteRoutesRouteId
-	 * setFavoriteRoutesRouteId
-	 **/
-	public function getFavoriteRoutesRouteId(): string {
-		return ($this->favoriteRoutesRouteId);
-	}
-
-	/**
-	 * mutator method for favoriteRoutesRouteId
-	 * @param
-	 * @throws
-	 *
-	 * favoriteRoutesRouteID
-	 */
-	public function setFavoriteRoutesRouteID($favoriteRoutesRouteID): void {
-		$this->favoriteRoutesRouteID = $favoriteRoutesRouteID;
-		try {
-			$uuid = self::validateUuid(newFavoriteRoutesRouteId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
-	}
-
-
-
-	/**
-	 * accessor method for favoriteRoutesUserId
-	 *
-	 */
-	public function getfavoriteRoutesUserId():string {
-		return ($this->favoriteRoutesUserId);
-	}
-
-	/**
-	 * mutator method for favoriteRoutesUserId
-	 *
-	 */
-	/**
-	 * @param
-	 * @throws
-	 */
-	public function setFavoriteRoutesUserId($favoriteRoutesUserId): void {
-		$this->favoriteRoutesUserId = $favoriteRoutesUserId;
-		try {
-			$uuid = self::validateUuid(newFavoriteRoutesUserId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
-	}
-
-
-
-	/**
 	 * Specify data which should be serialized to JSON
 	 * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
 	 * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -343,11 +272,10 @@ class route implements \JsonSerializable {
 	 * @since 5.4.0
 	 */
 
-	public function jsonSerialize() : array {
+	public function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 
 		$fields["routeId"] = $this->tweetId->toString();
-		return($fields);
+		return ($fields);
 	}
-
 }
