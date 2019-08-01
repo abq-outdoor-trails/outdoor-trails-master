@@ -68,6 +68,12 @@ class UserTest extends DataDesignTest {
 	 **/
 	protected $VALID_USER_ACTIVATION_TOKEN;
 
-	
+	/**
+	 * create dependent objects before running each test
+	 *
+	 **/
+	public final function setUp() : void {
+		//run 
+	}
 }
 
