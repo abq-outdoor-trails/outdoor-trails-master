@@ -470,11 +470,11 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getUserByUserActivationToken(\PDO $pdo, string $userActivationToken): ?user {
+	public static function getUserByUserActivationToken(\PDO $pdo, string $userActivationToken) : ?user {
 		//make sure activation token is in the right format ahd that it is a string representation of a hexadecimal
 		$userActivationToken = trim($userActivationToken);
 		if(ctype_xdigit($userActivationToken) === false) {
-			throw(new \InvalidArgumentException("user activation token is empty or in the wrong format"));
+				throw(new \InvalidArgumentException("user activation token is empty or in the wrong format"));
 
 		}
 
