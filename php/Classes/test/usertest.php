@@ -73,7 +73,7 @@ class UserTest extends DataDesignTest {
 	 *
 	 **/
 	public final function setUp() : void {
-		//run 
+		//run
 	}
 }
 

@@ -357,7 +357,7 @@ class User implements \JsonSerializable {
 			$row = $statement->fetch();
 			if($row !== false) {
 
-				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
 			}
 		} catch(\Exception $exception) {
@@ -378,7 +378,7 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getUserByUserName(\PDO $pdo, string $userName): \SPLFixedArray {
+	public static function getUserByUserName(\PDO $pdo, string $userName): ?User {
 		//sanitize the user name before searching
 		$userName = trim($userName);
 		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -395,10 +395,10 @@ class User implements \JsonSerializable {
 		$statement->execute($parameters);
 
 
-		$user = new \SplFixedArray($statement->rowCount());
+		$user = new \SplFixedArray($statement->rowCount());TODO
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 
-		while(($row = $statement->fetch()) !== false) {
+		while(($row = $statement->fetch()) !== false) {TODO try/catch
 			try {
 				$user = new user($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 					$user[$user->key()] = $user;
@@ -422,7 +422,7 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?user {
+	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?User {
 		//sanitize the email before searching
 		$userEmail = trim($userEmail);
 		$userEmail = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
@@ -505,8 +505,6 @@ class User implements \JsonSerializable {
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		$fields["userId"] = $this->userId->toString();
-		unset($fields["userActivationToken"]);
-		unset($fields["userHash"]);
 		return ($fields);
 	}
 
