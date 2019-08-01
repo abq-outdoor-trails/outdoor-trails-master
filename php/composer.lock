@@ -206,6 +206,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "ext-pdo": "*",
         "ext-json": "*"
 =======
@@ -217,6 +218,10 @@
 =======
         "ext-pdo": "*"
 >>>>>>> ddl-merge
+=======
+        "ext-pdo": "*",
+        "ext-json": "*"
+>>>>>>> ran composer update
     },
     "platform-dev": []
 }
