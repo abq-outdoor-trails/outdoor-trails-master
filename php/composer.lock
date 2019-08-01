@@ -203,25 +203,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         "ext-pdo": "*",
         "ext-json": "*"
-=======
-        "ext-pdo": "*"
->>>>>>> ran composer install
-=======
-        "ext-pdo": "*"
->>>>>>> ran composer install
-=======
-        "ext-pdo": "*"
->>>>>>> ddl-merge
-=======
-        "ext-pdo": "*",
-        "ext-json": "*"
->>>>>>> ran composer update
     },
     "platform-dev": []
 }
