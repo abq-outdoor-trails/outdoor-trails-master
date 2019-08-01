@@ -27,8 +27,7 @@ CREATE TABLE user (
 	userEmail VARCHAR(128) NOT NULL,
 	userHash CHAR(97) NOT NULL,
 	userActivationToken CHAR(32),
-		-- to make sure duplicate data cannot exist, create a unique index
-		UNIQUE (userName),
+	UNIQUE (userName),
 	UNIQUE (userEmail),
 	PRIMARY KEY(userId)
 );
