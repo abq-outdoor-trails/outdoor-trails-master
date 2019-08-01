@@ -1,5 +1,10 @@
 ALTER DATABASE abqbiketrails CHARACTER SET utf8 COLLATE utf_unicode_ci;
 
+DROP TABLE IF EXISTS favoriteRoutes;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS routes;
+
 -- CREATE TABLE statement for routes table
 CREATE TABLE routes (
 	routeId BINARY(16) NOT NULL,
@@ -21,9 +26,9 @@ CREATE TABLE user (
 	userName VARCHAR(32) NOT NULL,
 	userEmail VARCHAR(128) NOT NULL,
 	userHash CHAR(97) NOT NULL,
-	userActivationToken CHAR(32)
+	userActivationToken CHAR(32),
 		-- to make sure duplicate data cannot exist, create a unique index
-		UNIQUE(userName),
+		UNIQUE (userName),
 	UNIQUE (userEmail),
 	PRIMARY KEY(userId)
 );
