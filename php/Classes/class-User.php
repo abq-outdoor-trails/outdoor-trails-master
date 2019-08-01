@@ -277,7 +277,7 @@ class User implements \JsonSerializable {
 	public function insert(\PDO $pdo): void {
 
 		//create query template//
-		$query = "INSERT INTO `user`(userId, userName, userEmail, userHash, userActivationToken) VALUES (:userId, :userName, :userEmail, :userHash, :userActivationToken)";
+		$query = "INSERT INTO User(userId, userName, userEmail, userHash, userActivationToken) VALUES (:userId, :userName, :userEmail, :userHash, :userActivationToken)";
 		$statement = $pdo->prepare($query);
 
 		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
@@ -297,7 +297,7 @@ class User implements \JsonSerializable {
 	public function delete(\PDO $pdo): void {
 
 		//create query template//
-		$query = "DELETE FROM `user` WHERE userId = :userId";
+		$query = "DELETE FROM User WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template//
@@ -315,7 +315,7 @@ class User implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 		// create query template
-		$query = "UPDATE `user` SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
+		$query = "UPDATE User SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -334,10 +334,10 @@ class User implements \JsonSerializable {
 	 * @throws \TypeError when a variable are not the correct data type
 	 *
 	 **/
-	public static function getUserByUserId(\PDO $pdo, $userId): ?userId {
+	public static function getUserByUserId(\PDO $pdo, $userId): ?User {
 		//sanitize the user id before searching//
 		try {
-			$userId = self::validateUuid(userId);
+			$userId = self::validateUuid($userId);
 		} catch(\InvalidArgumentException|\RangeException|\Exception|\TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -352,19 +352,19 @@ class User implements \JsonSerializable {
 
 		//grab the user from mySQL
 		try {
-			$user = null;
-			$statement->$setFetchMode(\PDO::FETCH_ASSOC);
+			$User = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
 
-				$user = new `user`($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$User = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($user);
+		return ($User);
 	}
 
 	/**
@@ -378,7 +378,7 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getUserByUserName(\PDO $pdo, string $newUserName): \SPLFixedArray {
+	public static function getUserByUserName(\PDO $pdo, string $userName): \SPLFixedArray {
 		//sanitize the user name before searching
 		$userName = trim($userName);
 		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -387,7 +387,7 @@ class User implements \JsonSerializable {
 		}
 
 		//create query template
-		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userId= :userID";
+		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userName= :userName";
 		$statement = $pdo->prepare($query);
 
 		//bind the user name to the place holder in the template
@@ -395,20 +395,20 @@ class User implements \JsonSerializable {
 		$statement->execute($parameters);
 
 
-		$user = new \SplFixedArray($statement->rowCount());
+		$User = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$user = new `user`($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-					$users[$users->key()] = $user;
-					$users->next();
+				$User = new User($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+					$Users[$users->key()] = $user;
+					$Users->next();
 			} catch(\Exception $exception) {
 				//if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return ($users);
+		return ($Users);
 	}
 
 	/**
@@ -441,18 +441,18 @@ class User implements \JsonSerializable {
 
 		//grab the user from mySQL
 		try {
-			$user = null;
+			$User = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$User = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($user);
+		return ($User);
 	}
 
 	/**
@@ -484,17 +484,17 @@ class User implements \JsonSerializable {
 
 		//grab the user from mySQL
 		try {
-			$user = null;
+			$User = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new `user`($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$User = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 			  }
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($user);
+		return ($User);
 	}
 
 	/**
