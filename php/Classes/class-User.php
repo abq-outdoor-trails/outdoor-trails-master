@@ -504,9 +504,9 @@ class User implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["profileId"] = $this->profileId->toString();
-		unset($fields["profileActivationToken"]);
-		unset($fields["profileHash"]);
+		$fields["userId"] = $this->userId->toString();
+		unset($fields["userActivationToken"]);
+		unset($fields["userHash"]);
 		return ($fields);
 	}
 
