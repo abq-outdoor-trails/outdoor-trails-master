@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -57,9 +57,8 @@ class Comment implements \JsonSerializable {
 	 * @throws \RangeException if data values are out of range (greater or less than than specified range)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
-	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
+	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -94,7 +93,7 @@ class Comment implements \JsonSerializable {
 		try {
 			// try to validate the uuid
 			$uuid = self::validateUuid($newCommentId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -179,7 +178,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent
 	 * @throws \InvalidArgumentException if comment content is empty or insecure
-	 * @throws \RangeException if comment content is too large or negative
+	 * @throws \RangeException if comment content is too large
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
 		// trim, sanitize, and verify comment content is secure
@@ -209,8 +208,8 @@ class Comment implements \JsonSerializable {
 	 * setter method for comment date
 	 *
 	 * @param \DateTime $newCommentDate
-	 * @throws \InvalidArgumentException if date is not valid`
-	 * @throws \RangeException if date is out of valid range
+	 * @throws \InvalidArgumentException if date is not valid
+	 * @throws \RangeException if date is out of valid range (Dev. 99th)
 	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate = NULL) : void {
