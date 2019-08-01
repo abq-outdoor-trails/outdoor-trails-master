@@ -43,11 +43,19 @@ abstract class DataDesignTest extends TestCase {
 		$dataset = new QueryDataSet($this->getConnection());
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
+<<<<<<< HEAD
 		$dataset->addTable("routes");
 		$dataset->addTable("user", "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user`");
 		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
 		$dataset->addTable("comments");
 		$dataset->addTable("favoriteRoutes");
+=======
+		$dataset->addTable("profile");
+		$dataset->addTable("tweet");
+		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
+		$dataset->addTable("like", "SELECT likeProfileId, likeTweetId, likeDate FROM `like`");
+		$dataset->addTable("image");
+>>>>>>> add Test directory and abstract class AbqBikeTest.php for unit testing
 		return($dataset);
 	}
 	/**
