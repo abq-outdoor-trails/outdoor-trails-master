@@ -501,7 +501,6 @@ class User implements \JsonSerializable {
 		return ($user);
 }
 
-	}
 
 	/**
 	 * formats the state variables for JSON serialization
