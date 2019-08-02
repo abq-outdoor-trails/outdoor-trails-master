@@ -59,11 +59,8 @@ class FavoriteRoutes implements \JsonSerializable {
 	}
 
 	/**
-	 * mutator method for favoriteRoutesRouteId
-	 * @param
-	 * @throws
+	 * @param Uuid $newFavoriteRoutesRouteId
 	 *
-	 * favoriteRoutesRouteID
 	 */
 	public function setFavoriteRoutesRouteId(Uuid $newFavoriteRoutesRouteId): void {
 		$this->favoriteRoutesRouteId = $newFavoriteRoutesRouteId;
@@ -90,8 +87,8 @@ class FavoriteRoutes implements \JsonSerializable {
 	 *
 	 */
 	/**
-	 * @param
-	 * @throws
+	 * @param Uuid $newFavoriteRoutesUserId
+	 *
 	 */
 	public function setFavoriteRoutesUserId(Uuid $newFavoriteRoutesUserId): void {
 		$this->favoriteRoutesUserId = $newFavoriteRoutesUserId;

@@ -2,7 +2,7 @@
 
 namespace AbqOutdoorTrails\AbqBike;
 
-require_once("autoload.php");
+require_once("./autoload.php");
 require_once(dirname(__DIR__) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
@@ -59,11 +59,11 @@ class route implements \JsonSerializable {
 	/**
 	 * constructor for this route
 	 *
-	 * @param $newRouteId id of this route or Null if new route NOT NULL
+	 * @param $newRouteId Uuid of this route or Null if new route NOT NULL
 	 * @param $newRouteName string containing new route name
 	 * @param $newRouteFile string containing route file data NOT NULL
 	 * @param $newRouteType string containing route type
-	 * @param $newRouteSpeedLimit string containing route speed limit
+	 * @param $newRouteSpeedLimit int containing route speed limit
 	 * @param $newRouteDescription string containing route description
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
@@ -71,7 +71,7 @@ class route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
+	public function __construct(Uuid $newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
 										 int $newRouteSpeedLimit, string $newRouteDescription) {
 		try {
 			$this->setRouteId($newRouteId);
