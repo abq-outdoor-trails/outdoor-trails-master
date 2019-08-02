@@ -238,7 +238,7 @@ class Comment implements \JsonSerializable {
 	 **/
 	public function insert(\PDO $pdo) : void {
 		// create insert query template
-		$query ="INSERT INTO comments(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
+		$query ="INSERT INTO comment(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholders in the insert query template
@@ -256,7 +256,7 @@ class Comment implements \JsonSerializable {
 	 **/
 	public function delete(\PDO $pdo) : void {
 		// create delete query template
-		$query = "DELETE FROM comments WHERE commentId = :commentId";
+		$query = "DELETE FROM comment WHERE commentId = :commentId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholder in the query template
@@ -283,7 +283,7 @@ class Comment implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentRouteId = :commentRouteId";
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
 		$parameters = ["commentRouteId" => $routeId->getBytes()];
@@ -321,7 +321,7 @@ class Comment implements \JsonSerializable {
 			}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
 		$statement = $pdo->prepare($query);
 		// bind comment date to the placeholder in query template
 		$parameters = ["commentDate" => $commentDate];
