@@ -50,7 +50,7 @@ class UserTest extends DataDesignTest {
 	 * @var $VALID_USER_EMAIL
 	 *
 	 **/
-	protected $VALID_USER_EMAIL;
+	protected $VALID_EMAIL;
 
 	/**
 	 * valid user hash to create the object to test
@@ -58,7 +58,7 @@ class UserTest extends DataDesignTest {
 	 * @var $VALID_USER_HASH
 	 *
 	 **/
-	protected $VALID_USER_HASH;
+	protected $VALID_HASH;
 
 	/**
 	 * valid user activation token to create the object for test
@@ -66,14 +66,24 @@ class UserTest extends DataDesignTest {
 	 * @var $VALID_USER_ACTIVATION_TOKEN
 	 *
 	 **/
-	protected $VALID_USER_ACTIVATION_TOKEN;
+	protected $VALID_ACTIVATION;
 
 	/**
-	 * create dependent objects before running each test
+	 * run the default setup operation to create salt and hash
 	 *
 	 **/
 	public final function setUp() : void {
-		//run
+		parent::setUp();
+
+		//
+		$password = "abc123";
+		$this->VALID_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 	}
+
+	/**
+	 *
+	 *
+	 **/
 }
 
