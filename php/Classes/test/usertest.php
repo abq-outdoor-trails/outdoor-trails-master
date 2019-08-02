@@ -82,8 +82,21 @@ class UserTest extends DataDesignTest {
 	}
 
 	/**
-	 *
+	 * test inserting a valid User and verify that the actual mySQL data matches
 	 *
 	 **/
+	public function testInsertValidUser() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("user");
+
+		$userId = generateUuidV4();
+
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
+		
+	}
 }
 
