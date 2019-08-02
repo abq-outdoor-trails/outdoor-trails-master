@@ -111,7 +111,7 @@ class UserTest extends DataDesignTest {
 	 * test creating a User and deleting it
 	 *
 	 **/
-	public function testDeleteValidUser() : void {
+	public function testDeleteValidUser(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
@@ -127,7 +127,7 @@ class UserTest extends DataDesignTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
 
-		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("user"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
@@ -136,6 +136,27 @@ class UserTest extends DataDesignTest {
 
 	}
 
-		
+	/**
+	 *test creating a profile and then deleting it
+	 *
+	 **/
+	public function testDeleteValidUser() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("user");
+
+		$userId = generateUuidV4();
+		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH $this->VALID_ACTIVATION);
+		$user->insert($this->getPDO());
+
+		//delete the User from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"))
+			$user->delete($this->getPDO());
+
+		//grab the data from mySQL and enforce the User does not exist
+		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
+		$this->assertNull($pdoUser);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("user"));
+
+	}
 }
 
