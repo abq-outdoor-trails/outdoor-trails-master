@@ -74,7 +74,7 @@ class UserTest extends DataDesignTest {
 	 * run the default setup operation to create salt and hash
 	 *
 	 **/
-	public final function setUp() : void {
+	public final function setUp(): void {
 		parent::setUp();
 
 		//
@@ -87,7 +87,7 @@ class UserTest extends DataDesignTest {
 	 * test inserting a valid User and verify that the actual mySQL data matches
 	 *
 	 **/
-	public function testInsertValidUser() : void {
+	public function testInsertValidUser(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
@@ -98,10 +98,10 @@ class UserTest extends DataDesignTest {
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
-		$this->assertEquals($numRows +1, $this->getConnection()->$user->getUserId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->$user->getUserId());
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoUser-getUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser - getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 
