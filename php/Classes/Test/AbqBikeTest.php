@@ -10,7 +10,7 @@ use PHPUnit\DbUnit\Operation\{Composite, Factory, Operation};
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+require_once(dirname(__DIR__) . "../vendor/autoload.php");
 /**
  * Abstract class containing universal and project specific mySQL parameters
  *
@@ -43,11 +43,11 @@ abstract class DataDesignTest extends TestCase {
 		$dataset = new QueryDataSet($this->getConnection());
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-		$dataset->addTable("routes");
+		$dataset->addTable("route");
 		$dataset->addTable("user", "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user`");
 		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
-		$dataset->addTable("comments");
-		$dataset->addTable("favoriteRoutes");
+		$dataset->addTable("comment");
+		$dataset->addTable("favoriteRoute");
 		return($dataset);
 	}
 	/**
