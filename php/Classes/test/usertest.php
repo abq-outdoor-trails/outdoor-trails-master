@@ -2,7 +2,9 @@
 
 namespace AbqOutdoorTrails\AbqBike;
 
-use Edu\Cnm\DataDesign\{User};
+use UssHopper\DataDesign\{
+	User, UserId, UserName, UserEmail, UserActivationToken
+};
 
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php";
