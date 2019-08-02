@@ -1,4 +1,4 @@
-ALTER DATABASE abqbiketrails CHARACTER SET utf8 COLLATE utf_unicode_ci;
+ALTER DATABASE abqbiketrails CHARACTER SET utf8;
 
 DROP TABLE IF EXISTS favoriteRoutes;
 DROP TABLE IF EXISTS comments;
@@ -40,8 +40,8 @@ CREATE TABLE comments (
 	commentContent VARCHAR(256) NOT NULL,
 	commentDate DATE NOT NULL,
 	-- foreign keys for comments entity
-	FOREIGN KEY(commentsRouteId) REFERENCES routes(routeId),
-	FOREIGN KEY(commentsUserId) REFERENCES user(userId),
+	FOREIGN KEY(commentRouteId) REFERENCES routes(routeId),
+	FOREIGN KEY(commentUserId) REFERENCES user(userId),
 	-- primary key for comments entity
 	PRIMARY KEY(commentId)
 );
