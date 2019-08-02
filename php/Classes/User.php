@@ -372,7 +372,7 @@ class User implements \JsonSerializable {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $userName user name to search for
-	 * @return \SplFixedArray of all users found
+	 * @return UserName | null username or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 *
@@ -380,10 +380,10 @@ class User implements \JsonSerializable {
 	 **/
 	public static function getUserByUserName(\PDO $pdo, string $userName): ?User {
 		//sanitize the user name before searching
-		$userName = trim($userName);
-		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($userName) === true) {
-			throw(new \PDOException("not a valid user name"));
+		try {
+			$userName = self::validateUuid($userName);
+		}catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 
 		//create query template
@@ -394,19 +394,18 @@ class User implements \JsonSerializable {
 		$parameters = ["userName" => $userName];
 		$statement->execute($parameters);
 
+		//grab the username from mySQL
+		try {
+			$user = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
-		$user = new \SplFixedArray($statement->rowCount());TODO
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-
-		while(($row = $statement->fetch()) !== false) {TODO try/catch
-			try {
-				$user = new user($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-					$user[$user->key()] = $user;
-					$user->next();
-			} catch(\Exception $exception) {
-				//if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
+		}catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+					throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($user);
 	}
