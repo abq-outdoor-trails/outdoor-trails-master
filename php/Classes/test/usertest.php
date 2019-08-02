@@ -101,10 +101,19 @@ class UserTest extends DataDesignTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->$user->getUserId());
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoUser - getUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 
+	}
+
+	/**
+	 * test creating a User and deleting it
+	 *
+	 **/
+	public function testDeleteValidUser() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->
 	}
 }
 
