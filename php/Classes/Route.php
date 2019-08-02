@@ -3,7 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("./autoload.php");
-require_once(dirname(__DIR__) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
  * @author Chrystal Copeland
  *
  */
-class route implements \JsonSerializable {
+class Route implements \JsonSerializable {
 	use ValidateUuid;
 
 	/**
@@ -71,7 +71,7 @@ class route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct(Uuid $newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
+	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
 										 int $newRouteSpeedLimit, string $newRouteDescription) {
 		try {
 			$this->setRouteId($newRouteId);
@@ -93,21 +93,24 @@ class route implements \JsonSerializable {
 	/**
 	 * accessor method for route ID
 	 *
-	 * @return Uuid value of route ID
+	 * @return string
 	 */
-	public function getRouteID(): Uuid {
+	public function getRouteId(): string {
 		return ($this->routeId);
 	}
 
 	/**
 	 * mutator method for route ID
+	 * @param $newRouteId route
+	 * @throws \TypeError
+	 *
 	 */
-	public function setRouteId($newRouteID): void {
+	public function setRouteId($newRouteId): void {
 		try {
-			$uuid = self::validateUuid($newRouteID);
+			$uuid = self::validateUuid($newRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception - getMessage(), 0, $exception));
+			throw(new $exceptionType($exception ->getMessage(), 0, $exception));
 		}
 		// convert and store route Id
 		$this->routeId = $uuid;
@@ -125,7 +128,7 @@ class route implements \JsonSerializable {
 
 	/**
 	 *mutator method for route description
-	 * @param string $$newRouteDescription
+	 * @param string $newRouteDescription
 	 * @throws \InvalidArgumentException if $newRouteDescription is not a string or insecure
 	 * @throws \RangeException if $newRouteDescription is > 140 characters
 	 * @throws \TypeError if $newRouteName is not a string
@@ -139,7 +142,7 @@ class route implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Route description is empty or insecure"));
 		}
 		// verify the route Description will fit in the database
-		if(strl($newRouteDescription) > 140) {
+		if(strlen($newRouteDescription) > 140) {
 			throw(new \RangeException("route description too large"));
 		}
 	}
@@ -156,7 +159,7 @@ class route implements \JsonSerializable {
 	/**
 	 * mutator method for route file
 	 *
-	 * @Param string $newRouteFile - new value of route file
+	 * @param string $newRouteFile - new value of route file
 	 * @throws \InvalidArgumentException if $newRouteFile is not a string
 	 * @throws \RangeException of $newRouteFile is > 256 characters
 	 * @throws \TypeError if $newRouteFile is not a string
@@ -167,7 +170,7 @@ class route implements \JsonSerializable {
 		$newRouteFile = filter_var($newRouteFile, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		// verify the route ID will fit in the database
-		if(strl($newRouteFile) > 256) {
+		if(strlen($newRouteFile) > 256) {
 			throw(new \RangeException("route file content too large"));
 		}
 		// store the route file content
@@ -222,14 +225,13 @@ class route implements \JsonSerializable {
 
 	public function setRouteSpeedLimit(int $newRouteSpeedLimit): void {
 		//verify route speed limit is an integer
-		$newRouteSpeedLimit = int($newRouteSpeedLimit);
 		if(is_int($newRouteSpeedLimit) === FALSE) {
 			throw (new \TypeError("speed limit not valid"));
 		}
 
 		//verify speed limit is valid range
-		if(is_int($newRouteSpeedLimit) > 99) {
-			throw (new \TypeError("speed limit not valid"));
+		if ($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
+			throw (new \RangeException("speed limit below zero or greater than 99"));
 		}
 	}
 
@@ -266,7 +268,7 @@ class route implements \JsonSerializable {
 
 	/**
 	 * Specify data which should be serialized to JSON
-	 * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+	 *
 	 * @return mixed data which can be serialized by <b>json_encode</b>,
 	 * which is a value of any type other than a resource.
 	 * @since 5.4.0
@@ -275,7 +277,7 @@ class route implements \JsonSerializable {
 	public function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 
-		$fields["routeId"] = $this->tweetId->toString();
+		$fields["routeId"] = $this->routeId->toString();
 		return ($fields);
 	}
 }

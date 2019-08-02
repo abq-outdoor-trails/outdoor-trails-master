@@ -8,40 +8,40 @@ require_once(dirname(__DIR__) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 /**
- *Bike Routes for ABQ Bike Trails
+ *Bike Route for ABQ Bike Trails
  *
  * @author Chrystal Copeland
  *
  */
-class FavoriteRoutes implements \JsonSerializable {
+class FavoriteRoute implements \JsonSerializable {
 	use ValidateUuid;
 
 	/**
-	 * favorite routes by route ID; this is a foreign key
-	 * @ var favoriteRoutesRouteID
+	 * favorite route by route ID; this is a foreign key
+	 * @ var favoriteRouteRouteID
 	 */
 
-	private $favoriteRoutesRouteId;
+	private $favoriteRouteRouteId;
 
 	/**
-	 * favorite routes by User ID; this is a foreign key
-	 * favoriteRoutesUserId
+	 * favorite route by User ID; this is a foreign key
+	 * favoriteRouteUserId
 	 */
-	private $favoriteRoutesUserId;
+	private $favoriteRouteUserId;
 
 
 	/**
-	 * FavoriteRoutes constructor.
-	 * @param string $newFavoriteRoutesRouteId
-	 * @param string $newFavoriteRoutesUserId
+	 * FavoriteRoute constructor.
+	 * @param Uuid $newFavoriteRouteRouteId
+	 * @param Uuid $newFavoriteRouteUserId
 	 */
 
 
 
-	public function __construct(string $newFavoriteRoutesRouteId, string $newFavoriteRoutesUserId) {
+	public function __construct(Uuid $newFavoriteRouteRouteId, Uuid $newFavoriteRouteUserId) {
 		try {
-			$this->setFavoriteRoutesRouteId($newFavoriteRoutesRouteId);
-			$this->setFavoriteRoutesUserId($newFavoriteRoutesUserId);
+			$this->setFavoriteRouteRouteId($newFavoriteRouteRouteId);
+			$this->setFavoriteRouteUserId($newFavoriteRouteUserId);
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
 			//determine what exception type was thrown
 			$exceptionType = get_class($exception);
@@ -51,54 +51,54 @@ class FavoriteRoutes implements \JsonSerializable {
 
 
 	/**
-	 * accessor method for favoriteRoutesRouteId
-	 * setFavoriteRoutesRouteId
+	 * accessor method for favoriteRouteRouteId
+	 * setFavoriteRouteRouteId
 	 **/
-	public function getFavoriteRoutesRouteId(): Uuid {
-		return ($this->favoriteRoutesRouteId);
+	public function getFavoriteRouteRouteId(): Uuid {
+		return ($this->favoriteRouteRouteId);
 	}
 
 	/**
-	 * @param Uuid $newFavoriteRoutesRouteId
+	 * @param Uuid $newFavoriteRouteRouteId
 	 *
 	 */
-	public function setFavoriteRoutesRouteId(Uuid $newFavoriteRoutesRouteId): void {
-		$this->favoriteRoutesRouteId = $newFavoriteRoutesRouteId;
+	public function setFavoriteRouteRouteId(Uuid $newFavoriteRouteRouteId): void {
+		$this->favoriteRouteRouteId = $newFavoriteRouteRouteId;
 		try {
-			$uuid = self::validateUuid($newFavoriteRoutesRouteId);
+			$uuid = self::validateUuid($newFavoriteRouteRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		$this->favoriteRoutesRouteId = $uuid;
+		$this->favoriteRouteRouteId = $uuid;
 	}
 
 
 	/**
-	 * accessor method for favoriteRoutesUserId
+	 * accessor method for favoriteRouteUserId
 	 *
 	 */
-	public function getFavoriteRoutesUserId(): Uuid {
-		return ($this->favoriteRoutesUserId);
+	public function getFavoriteRouteUserId(): Uuid {
+		return ($this->favoriteRouteUserId);
 	}
 
 	/**
-	 * mutator method for favoriteRoutesUserId
+	 * mutator method for favoriteRouteUserId
 	 *
 	 */
 	/**
-	 * @param Uuid $newFavoriteRoutesUserId
+	 * @param Uuid $newFavoriteRouteUserId
 	 *
 	 */
-	public function setFavoriteRoutesUserId(Uuid $newFavoriteRoutesUserId): void {
-		$this->favoriteRoutesUserId = $newFavoriteRoutesUserId;
+	public function setFavoriteRouteUserId(Uuid $newFavoriteRouteUserId): void {
+		$this->favoriteRouteUserId = $newFavoriteRouteUserId;
 		try {
-			$uuid = self::validateUuid($newFavoriteRoutesUserId);
+			$uuid = self::validateUuid($newFavoriteRouteUserId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		$this->favoriteRoutesUserId = $uuid;
+		$this->favoriteRouteUserId = $uuid;
 	}
 	/**
 	 * Inserts favorite route into mySql
@@ -111,18 +111,18 @@ class FavoriteRoutes implements \JsonSerializable {
 	public function insert(\PDO $pdo): void {
 
 		//create query template
-		$query = "INSERT INTO favoriteRoutes(favoriteRoutesUserId, favoriteRoutesRouteId) VALUES(:favoriteRoutesUserId, :favoriteRoutesRouteId)";
+		$query = "INSERT INTO favoriteRoute(favoriteRouteUserId, favoriteRouteRouteId) VALUES(:favoriteRouteUserId, :favoriteRouteRouteId)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["favoriteRoutesUserId" => $this->favoriteRoutesUserId->getBytes(), "favoriteRoutesRouteId" => $this->favoriteRoutesRouteId->getBytes ()];
+		$parameters = ["favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes(), "favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes ()];
 		$statement->execute($parameters);
 	}
 
 
 	/**
 	 * Specify data which should be serialized to JSON
-	 * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+	 *
 	 * @return mixed data which can be serialized by <b>json_encode</b>,
 	 * which is a value of any type other than a resource.
 	 * @since 5.4.0
@@ -131,7 +131,8 @@ class FavoriteRoutes implements \JsonSerializable {
 	public function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 
-		$fields["routeId"] = $this->tweetId->toString();
+		$fields["favoriteRouteRouteId"] = $this->favoriteRouteRouteId->toString();
+		$fields["favoriteRouteUserId"] = $this->favoriteRouteUserId->toString();
 		return ($fields);
 	}
 
