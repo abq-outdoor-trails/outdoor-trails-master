@@ -368,49 +368,6 @@ class User implements \JsonSerializable {
 	}
 
 	/**
-	 * gets the user by user name
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param string $userName user name to search for
-	 * @return userName | null username or null if not found
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 *
-	 *
-	 **/
-	public static function getUserByUserName(\PDO $pdo, string $userName): ?User {
-		//sanitize the user name before searching
-		try {
-			$userName = TODO athandlevalidate
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-
-		//create query template
-		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userName= :userName";
-		$statement = $pdo->prepare($query);
-
-		//bind the user name to the place holder in the template
-		$parameters = ["userName" => $userName];
-		$statement->execute($parameters);
-
-		//grab the username from mySQL
-		try {
-			$user = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-
-			}
-		} catch(\Exception $exception) {
-			//if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-		return ($user);
-	}
-
-	/**
 	 * gets the user by email
 	 *
 	 * @param \PDO $pdo PDO connection object
