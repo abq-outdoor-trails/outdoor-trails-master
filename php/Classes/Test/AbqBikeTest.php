@@ -48,6 +48,7 @@ abstract class DataDesignTest extends TestCase {
 		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
 		$dataset->addTable("comments");
 		$dataset->addTable("favoriteRoutes");
+
 		return($dataset);
 	}
 	/**
