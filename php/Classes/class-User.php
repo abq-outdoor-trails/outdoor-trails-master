@@ -14,7 +14,6 @@ use Ramsey\Uuid\Uuid;
  * @author JDunn
  **/
 class User implements \JsonSerializable {
-
 	use ValidateUuid;
 	/**
 	 *
@@ -358,6 +357,11 @@ class User implements \JsonSerializable {
 			if($row !== false) {
 
 				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+			$statement-> $statement->fetch();
+			$row = $statement->fetch();
+			if($row !== false) {
+
+				$User = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
 			}
 		} catch(\Exception $exception) {
@@ -489,13 +493,14 @@ class User implements \JsonSerializable {
 			$row = $statement->fetch();
 			if($row !== false) {
 				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-			  }
+			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($user);
-	}
+}
+
 
 	/**
 	 * formats the state variables for JSON serialization
@@ -510,4 +515,26 @@ class User implements \JsonSerializable {
 		return ($fields);
 	}
 
+	/**
+	 * gets the user by the userId
+	 *
+	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param $userId Id to search for the (data type should be mixed/not specific)
+	 * @return user|null user or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 *
+	 **/
+	public static function getUserByUserId(\PDO $pdo, $userId):?userId {
+		//sanitize the user id before searching//
+		try {
+				$userId = self::validateUuid(userId);
+		} catch(\InvalidArgumentException|\RangeException|\Exception|\TypeError $exception) {
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		//create query template//
+		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
+	}
 }

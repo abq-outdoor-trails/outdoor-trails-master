@@ -58,7 +58,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, \DateTime $newCommentDate = null) {
+	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -209,7 +209,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param \DateTime $newCommentDate
 	 * @throws \InvalidArgumentException if date is not valid
-	 * @throws \RangeException if date is out of valid range (Dev. 99th)
+	 * @throws \RangeException if date is out of valid range (Dec 99)
 	 * @throws \Exception if any other exception occurs
 	 **/
 	public function setCommentDate($newCommentDate = NULL) : void {
@@ -238,7 +238,7 @@ class Comment implements \JsonSerializable {
 	 **/
 	public function insert(\PDO $pdo) : void {
 		// create insert query template
-		$query ="INSERT INTO comments(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
+		$query ="INSERT INTO comment(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholders in the insert query template
@@ -256,7 +256,7 @@ class Comment implements \JsonSerializable {
 	 **/
 	public function delete(\PDO $pdo) : void {
 		// create delete query template
-		$query = "DELETE FROM comments WHERE commentId = :commentId";
+		$query = "DELETE FROM comment WHERE commentId = :commentId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholder in the query template
@@ -283,7 +283,7 @@ class Comment implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentRouteId = :commentRouteId";
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
 		$parameters = ["commentRouteId" => $routeId->getBytes()];
@@ -321,7 +321,7 @@ class Comment implements \JsonSerializable {
 			}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comments WHERE commentDate = :commentDate";
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
 		$statement = $pdo->prepare($query);
 		// bind comment date to the placeholder in query template
 		$parameters = ["commentDate" => $commentDate];
@@ -339,7 +339,6 @@ class Comment implements \JsonSerializable {
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($comments);
 	}
 
 	/**
