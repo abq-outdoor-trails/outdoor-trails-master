@@ -62,5 +62,6 @@ class CommentTest extends AbqBikeTest {
 
 		// create and insert a User to own the test Comment
 		$this->user = new User(generateUuidV4(), "deepdivecode", "bob@abc.com", $this->VALID_USER_HASH, null);
+		$this->user->insert($this->getPDO());
 	}
 }
