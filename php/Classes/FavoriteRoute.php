@@ -125,9 +125,14 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid $userId user id to be used to retrieve requested Route
 	 * @return Route|null Route object to be returned
+	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
 	public function getFavoriteRouteByUserId(\PDO $pdo, Uuid $userId) : ?Route {
-
+		try {
+			$userId = self::validateUuid($userId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
 	}
 
 
