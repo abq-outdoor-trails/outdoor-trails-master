@@ -136,7 +136,10 @@ class FavoriteRoute implements \JsonSerializable {
 		}
 
 		// create MySQL query template
-		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE "
+		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteUserId = :userId";
+		$statement = $pdo->prepare($query);
+
+
 	}
 
 
