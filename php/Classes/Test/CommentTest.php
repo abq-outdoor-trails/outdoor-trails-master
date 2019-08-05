@@ -106,5 +106,10 @@ class CommentTest extends AbqBikeTest {
 		// delete the Comment from MySQL
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$comment->delete($this->getPDO());
+
+		// grab the data from MySQL and enforce the Comment does not exist
+		$pdoComment = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentRouteId());
+		$this->assertNull($pdoComment);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("comment"));
 	}
 }
