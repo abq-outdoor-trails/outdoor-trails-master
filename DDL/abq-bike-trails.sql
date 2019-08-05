@@ -1,22 +1,13 @@
 ALTER DATABASE abqbiketrails CHARACTER SET utf8;
 
-<<<<<<< HEAD
 DROP TABLE IF EXISTS favoriteRoute;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS route;
 
--- CREATE TABLE statement for routes table
-CREATE TABLE route (
-=======
-DROP TABLE IF EXISTS favoriteRoutes;
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS routes;
 
 -- CREATE TABLE statement for routes table
-CREATE TABLE routes (
->>>>>>> class-Comments
+CREATE TABLE route (
 	routeId BINARY(16) NOT NULL,
 	routeName VARCHAR(32),
 	routeFile VARCHAR(256) NOT NULL,
