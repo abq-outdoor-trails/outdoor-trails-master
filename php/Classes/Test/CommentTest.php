@@ -75,5 +75,11 @@ class CommentTest extends AbqBikeTest {
 		// create a new Comment and insert into MySQL
 		$commentId = generateUuidV4();
 		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+		// grab the comment data from MySQL and enforce the fields match our expectations
+		$pdoComment = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentId());
+
+		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
 	}
 }
