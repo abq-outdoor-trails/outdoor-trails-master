@@ -127,7 +127,11 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @return Route|null return the Route if found, null if not
 	 */
 	public function getFavoriteRouteByRouteId(\PDO $pdo, Uuid $routeId) : ?Route {
-
+		try {
+			$routeId = self::validateUuid($routeId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
 	}
 
 
