@@ -1,7 +1,7 @@
 <?php
 namespace AbqOutdoorTrails\AbqBike\Test;
 
-use AbqOutdoorTrails\AbqBike\{User, Route};
+use AbqOutdoorTrails\AbqBike\{Comment, User, Route};
 
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
@@ -66,5 +66,14 @@ class CommentTest extends AbqBikeTest {
 
 		// calculate the date, using the time the unit test was setup
 		$this->VALID_COMMENTDATE = new \DateTime();
+	}
+
+	/**
+	 * test inserting a valid Comment and verify that the MySQL data matches
+	 **/
+	public function testInsertValidComment() : void {
+		// create a new Comment and insert into MySQL
+		$commentId = generateUuidV4();
+		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 	}
 }
