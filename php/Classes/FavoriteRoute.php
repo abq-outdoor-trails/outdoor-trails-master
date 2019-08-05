@@ -140,6 +140,20 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the route id to the placeholder in the query template
 		$parameters = ["routeId" => $routeId->getBytes()];
 		$statement->execute($parameters);
+
+		// grab the route from MySQL
+		try {
+			$route = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row) {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($route);
 	}
 	/**
 	 * Specify data which should be serialized to JSON
