@@ -128,6 +128,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
 	public function getFavoriteRouteByUserId(\PDO $pdo, Uuid $userId) : ?Route {
+		// verify that userId is actually a Uuid
 		try {
 			$userId = self::validateUuid($userId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
