@@ -31,20 +31,20 @@ class UserTest extends DataDesignTest {
 	protected $user = null;
 
 	/**
-	 * valid user id to create the user object to own the test
-	 *
-	 * @var $VALID_USER_ID
-	 *
-	 **/
-	protected $VALID_USER_ID;
-
-	/**
 	 * valid user name to create user object to test?
 	 *
 	 * @var $VALID_USER_NAME
 	 *
 	 **/
-	protected $VALID_USER_NAME;
+	protected $VALID_USER_NAME = "AbqTrails";
+
+	/**
+	 * valid user name to test update method
+	 *
+	 * @var $VALID_USER_NAME2
+	 *
+	 **/
+	protected $VALID_USER_NAME2 = "AbqTrails2";
 
 	/**
 	 * valid user email to create the object to test
@@ -52,7 +52,7 @@ class UserTest extends DataDesignTest {
 	 * @var $VALID_USER_EMAIL
 	 *
 	 **/
-	protected $VALID_EMAIL;
+	protected $VALID_EMAIL = "dylan@deepdive.com";
 
 	/**
 	 * valid user hash to create the object to test
@@ -92,19 +92,17 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-
-
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->$user->getUserId());
 		$this->assertEquals($pdoUser->getUserId(), $userId);
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -112,28 +110,27 @@ class UserTest extends DataDesignTest {
 	 * test inserting a user, editing it, and then updating it
 	 *
 	 **/
-	public function testDeleteValidUser(): void {
+	public function testUpdateValidUser(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		//create a new profile and insert it into mySQL
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
 		//edit the User and update it in mySQL
-		$user->setUserName($this->VALID_USER_NAME);
+		$user->setUserName($this->VALID_USER_NAME2);
 		$user->update($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
-
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME2);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -146,12 +143,12 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
 		//delete the User from mySQL
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
-			$user->delete($this->getPDO());
+		$user->delete($this->getPDO());
 
 		//grab the data from mySQL and enforce the User does not exist
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
@@ -169,17 +166,17 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
-		$this->assertEquals($pdoUser->getUserId(, $userId));
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+		$this->assertEquals($pdoUser->getUserId($userId), $userId);
 		$this->assertEquals($pdoUser->getUserByUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -199,24 +196,24 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
 		//grab the data from mySQL
-		$results = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
-		$this->asserEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
+		//$results = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
+		//$this->asserEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 
 		//enforce no other objects are bleeding into profile
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\AbqBike\User", $results);
 
 		//enforce the results meet expectations
-		$pdoUser = $results[0];
+		$pdoUser = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -239,17 +236,17 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$userId->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserEmail($this->getPDO(), $user->getUserEmail());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -261,7 +258,6 @@ class UserTest extends DataDesignTest {
 		//grab and email that does not exist
 		$user = User::getUserByUserEmail($this->getPDO(), "does@not.exist");
 		$this->assetNull($user);
-
 	}
 
 	/**
@@ -273,17 +269,17 @@ class UserTest extends DataDesignTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
-		$user - insert($this->getPDO());
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
-		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
 
@@ -295,7 +291,6 @@ class UserTest extends DataDesignTest {
 		//grab and email that does not exist
 		$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
 		$this->assertNull($user);
-
 	}
 }
 
