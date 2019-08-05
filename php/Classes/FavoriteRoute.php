@@ -142,6 +142,8 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the user id to the placeholder in the query template
 		$parameters = ["userId" => $userId->getBytes()];
 		$statement->execute($parameters);
+
+		// grab the favorite route from MySQL
 	}
 
 
