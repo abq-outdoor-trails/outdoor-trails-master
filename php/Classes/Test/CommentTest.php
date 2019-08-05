@@ -112,6 +112,7 @@ class CommentTest extends AbqBikeTest {
 		$this->assertNull($pdoComment);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("comment"));
 	}
+
 	/**
 	 * test grabbing a Comment that does not exist
 	 **/
@@ -119,5 +120,23 @@ class CommentTest extends AbqBikeTest {
 		// grab a comment id that exceeds the maximum allowable comment id
 		$comment = Comment::getCommentId($this->getPDO(), generateUuidV4());
 		$this->assertNull($comment);
+	}
+
+	/**
+	 * test inserting a Comment and re-grabbing it from MySQL
+	 **/
+	public function testGetValidCommentByCommentUserId() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
+		// create a new Comment and insert it into MySQL
+		$commentId = generateUuidV4();
+		$commentRouteId = generateUuidV4();
+		$commentUserId = generateUuidV4();
+
+		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+
 	}
 }
