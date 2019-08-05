@@ -143,7 +143,7 @@ class FavoriteRoute implements \JsonSerializable {
 		$parameters = ["routeId" => $routeId->getBytes()];
 		$statement->execute($parameters);
 
-		// grab the route from MySQL
+		// grab the favorite route from MySQL
 		try {
 			$favoriteRoute = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
