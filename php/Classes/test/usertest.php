@@ -1,13 +1,13 @@
 <?php
 
-namespace AbqOutdoorTrails\AbqBike;
+namespace AbqOutdoorTrails\AbqBike\Test;
 
-use UssHopper\DataDesign\{
-	User, UserId, UserName, UserEmail, UserActivationToken
+use AbqOutdoorTrails\AbqBike\ {
+	User
 };
 
 //grab the class under scrutiny
-require_once(dirname(__DIR__) . "/autoload.php";
+require_once(dirname(__DIR__) . "/autoload.php");
 
 //grab the uuid generator
 require_once(dirname(__DIR__, 2) . "/lib/uuid/php");
@@ -93,6 +93,7 @@ class UserTest extends DataDesignTest {
 
 		$userId = generateUuidV4();
 
+
 		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$user->insert($this->getPDO());
 
@@ -108,7 +109,7 @@ class UserTest extends DataDesignTest {
 	}
 
 	/**
-	 * test creating a User and deleting it
+	 * test inserting a user, editing it, and then updating it
 	 *
 	 **/
 	public function testDeleteValidUser(): void {
@@ -140,7 +141,7 @@ class UserTest extends DataDesignTest {
 	 *test creating a profile and then deleting it
 	 *
 	 **/
-	public function testDeleteValidUser() : void {
+	public function testDeleteValidUser(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
@@ -158,5 +159,52 @@ class UserTest extends DataDesignTest {
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("user"));
 
 	}
+
+	/**
+	 * test inserting a User and regrabbing it from mySQL
+	 *
+	 **/
+	public function testGetValidUserByUserId() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("user");
+
+		$userId = generateUuidV4();
+		$user = new User($userId, $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
+		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("user"));
+		$this->assertEquals($pdoUser->getUserId(, $userId));
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+		$this->assertEquals($pdoUser->getUserByUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+
+	}
+
+		/**
+	 	* test grabbing a User that does not exist
+		 *
+	 	**/
+		public function testGetInvalidUserByUserId() : void {
+			//grab a profile id that exceeds the maximum allowable user id
+			$fakeUserId = generateUuidV4();
+			#user = User::getUserByUserId($this->getPDO(), $fakeUserId );
+			$this->assertNull($user);
+		}
+
+		public function testGetValidUserByUserName() {
+			//count the number of rows and save it for later
+			$numRows = $this->getConnection()->getRowCount("user");
+
+			$userId = generateUuidV4();
+			#user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+			$user->insert($this->getPDO());
+
+			//grab the data from mySQL
+			$results = User::
+
+		}
 }
 
