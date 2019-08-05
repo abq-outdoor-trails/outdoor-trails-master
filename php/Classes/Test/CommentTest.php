@@ -102,5 +102,9 @@ class CommentTest extends AbqBikeTest {
 		$commentRouteId = generateUuidV4();
 		$commentUserId = generateUuidV4();
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+
+		// delete the Comment from MySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$comment->delete($this->getPDO());
 	}
 }
