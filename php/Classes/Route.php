@@ -110,7 +110,7 @@ class Route implements \JsonSerializable {
 			$uuid = self::validateUuid($newRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception ->getMessage(), 0, $exception));
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// convert and store route Id
 		$this->routeId = $uuid;
@@ -230,7 +230,7 @@ class Route implements \JsonSerializable {
 		}
 
 		//verify speed limit is valid range
-		if ($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
+		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
 			throw (new \RangeException("speed limit below zero or greater than 99"));
 		}
 	}
@@ -267,6 +267,47 @@ class Route implements \JsonSerializable {
 	}
 
 	/**
+	 * gets the getrouteByRouteId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $routeId route id to search for
+	 * @return Route|null route found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getRouteByRouteId(\PDO $pdo, $routeId): ?Route {
+		// santitze the routeID before searching
+		try {
+			$routeId = self::validateUuid($routeId);
+		} catch(\InvalidArgumentException | \RangeException| \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeId = :routeId";
+		$statement = $pdo->prepare($query);
+
+		//bind the route id to the place holder in the template
+		$parameters = ["routeId" => $routeId->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the route from mySQL
+		try {
+			$route = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$route = new Route($row["routeId"], ["routeName"], ["routeFile"], ["routeType"], ["routeSpeedLimit"], ["routeDescription"]);
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($route);
+	}
+
+
+	/**
 	 * Specify data which should be serialized to JSON
 	 *
 	 * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -274,7 +315,8 @@ class Route implements \JsonSerializable {
 	 * @since 5.4.0
 	 */
 
-	public function jsonSerialize(): array {
+	public
+	function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 
 		$fields["routeId"] = $this->routeId->toString();
