@@ -89,4 +89,18 @@ class CommentTest extends AbqBikeTest {
 		// format the date to seconds since the beginning of time to avoid round off error
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 	}
+
+	/**
+	 * test creating a Comment and then deleting it
+	 **/
+	public function testDeleteValidComment() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
+		// create a new Comment and insert it into MySQL
+		$commentId = generateUuidV4();
+		$commentRouteId = generateUuidV4();
+		$commentUserId = generateUuidV4();
+		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+	}
 }
