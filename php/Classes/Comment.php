@@ -147,7 +147,7 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @param Uuid $newCommentUserId value of new comment's associated user id
 	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException if data values are out of range (greater or less than specified range)
+	 * @throws \RangeException if data values are out of range
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
