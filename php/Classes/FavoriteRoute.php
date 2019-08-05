@@ -139,7 +139,9 @@ class FavoriteRoute implements \JsonSerializable {
 		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteUserId = :userId";
 		$statement = $pdo->prepare($query);
 
-
+		// bind the user id to the placeholder in the query template
+		$parameters = ["userId" => $userId->getBytes()];
+		$statement->execute($parameters);
 	}
 
 
