@@ -272,11 +272,30 @@ class UserTest extends DataDesignTest {
 			//count the number of rows and save it for later
 			$numRows = $this->getConnection()->getRowCount("user");
 
-			$pdoUserId = generateUuidV4();
+			$userId = generateUuidV4();
 			$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 			$user-insert($this->getPDO());
 
-			//
+			//grab the data from mySQL and enforce the fields match our expectations
+			$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
+			$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
+			$this->assertEquals($pdoUser->getUserId(), $userId);
+			$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+			$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
+			$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
+			$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+
+		}
+
+		/**
+		 * test grabbing a User by and email that does not exist
+		 *
+		 **/
+		public function testGetInvalidUserActivation() : void {
+			//grab and email that does not exist
+			$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
+			$this->assertNull($user);
+			
 		}
 }
 
