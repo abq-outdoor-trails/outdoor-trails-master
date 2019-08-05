@@ -190,7 +190,7 @@ class UserTest extends DataDesignTest {
 		public function testGetInvalidUserByUserId() : void {
 			//grab a profile id that exceeds the maximum allowable user id
 			$fakeUserId = generateUuidV4();
-			#user = User::getUserByUserId($this->getPDO(), $fakeUserId );
+		$user = User::getUserByUserId($this->getPDO(), $fakeUserId );
 			$this->assertNull($user);
 		}
 
@@ -199,11 +199,43 @@ class UserTest extends DataDesignTest {
 			$numRows = $this->getConnection()->getRowCount("user");
 
 			$userId = generateUuidV4();
-			#user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+			$user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
 			$user->insert($this->getPDO());
 
 			//grab the data from mySQL
-			$results = User::
+			$results = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
+			$this->asserEquals($numRows +1, $this->getConnection()->getRowCount("user"));
+
+			//enforce no other objects are bleeding into profile
+			$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\AbqBike\User", $results);
+
+			//enforce the results meet expectations
+			$pdoUser = $results[0];
+			$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("user"));
+			$this->assertEquals($pdoUser->getUserId(), $userId);
+			$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+			$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
+			$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
+			$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+
+		}
+
+		/**
+		 * test grabbing a User by user name that does not exist
+		 *
+		 **/
+		public function testGetInvalidUserByUserName() : void {
+			//grab a user name that does not exist
+			$user = User::getUserByUserName($this->getPDO(), "@doesnotexist");
+			$this->assertCount(0, $user);
+		}
+
+		/**
+		 * test grabbing a User by email
+		 *
+		 **/
+		public function testGetValidUserByUserEmail() : void {
+			//count the number of rows and save it for later
 
 		}
 }
