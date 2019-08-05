@@ -50,4 +50,14 @@ class CommentTest extends AbqBikeTest {
 	 * @var \DateTime VALID_COMMENTDATE
 	 **/
 	protected $VALID_COMMENTDATE = null;
+
+	/**
+	 * create dependent objects before running each test
+	 **/
+	public final function setUp() : void {
+		// run the default setUp() method first
+		parent::setUp();
+		$password = "abc123";
+		$this->VALID_USER_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+	}
 }
