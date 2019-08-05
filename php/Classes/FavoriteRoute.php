@@ -144,6 +144,18 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		// grab the favorite route from MySQL
+		try {
+			$favoriteRoute = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row) {
+				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($favoriteRoute);
 	}
 
 
