@@ -63,5 +63,8 @@ class CommentTest extends AbqBikeTest {
 		// create and insert a User to own the test Comment
 		$this->user = new User(generateUuidV4(), "deepdivecode", "bob@abc.com", $this->VALID_USER_HASH, null);
 		$this->user->insert($this->getPDO());
+
+		// calculate the date, using the time the unit test was setup
+		$this->VALID_COMMENTDATE = new \DateTime();
 	}
 }
