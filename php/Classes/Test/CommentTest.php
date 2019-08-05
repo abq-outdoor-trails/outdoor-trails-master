@@ -59,5 +59,8 @@ class CommentTest extends AbqBikeTest {
 		parent::setUp();
 		$password = "abc123";
 		$this->VALID_USER_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+
+		// create and insert a User to own the test Comment
+		$this->user = new User(generateUuidV4(), "deepdivecode", "bob@abc.com", $this->VALID_USER_HASH, null);
 	}
 }
