@@ -164,7 +164,7 @@ class UserTest extends DataDesignTest {
 	 * test inserting a User and regrabbing it from mySQL
 	 *
 	 **/
-	public function testGetValidUserByUserId() : void {
+	public function testGetValidUserByUserId(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
@@ -174,7 +174,7 @@ class UserTest extends DataDesignTest {
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
-		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("user"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(, $userId));
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserByUserName(), $this->VALID_USER_NAME);
@@ -183,59 +183,59 @@ class UserTest extends DataDesignTest {
 
 	}
 
-		/**
-	 	* test grabbing a User that does not exist
-		 *
-	 	**/
-		public function testGetInvalidUserByUserId() : void {
-			//grab a profile id that exceeds the maximum allowable user id
-			$fakeUserId = generateUuidV4();
-		$user = User::getUserByUserId($this->getPDO(), $fakeUserId );
-			$this->assertNull($user);
-		}
+	/**
+	 * test grabbing a User that does not exist
+	 *
+	 **/
+	public function testGetInvalidUserByUserId(): void {
+		//grab a profile id that exceeds the maximum allowable user id
+		$fakeUserId = generateUuidV4();
+		$user = User::getUserByUserId($this->getPDO(), $fakeUserId);
+		$this->assertNull($user);
+	}
 
-		public function testGetValidUserByUserName() {
-			//count the number of rows and save it for later
-			$numRows = $this->getConnection()->getRowCount("user");
+	public function testGetValidUserByUserName() {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("user");
 
-			$userId = generateUuidV4();
-			$user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
-			$user->insert($this->getPDO());
+		$userId = generateUuidV4();
+		$user = new User($userId, , $this->VALID_USER_ID, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user->insert($this->getPDO());
 
-			//grab the data from mySQL
-			$results = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
-			$this->asserEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
+		//grab the data from mySQL
+		$results = User::getUserByUserName($this->getPDO(), $this->VALID_USER_NAME);
+		$this->asserEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 
-			//enforce no other objects are bleeding into profile
-			$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\AbqBike\User", $results);
+		//enforce no other objects are bleeding into profile
+		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\AbqBike\User", $results);
 
-			//enforce the results meet expectations
-			$pdoUser = $results[0];
-			$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("user"));
-			$this->assertEquals($pdoUser->getUserId(), $userId);
-			$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
-			$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
-			$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
-			$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		//enforce the results meet expectations
+		$pdoUser = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
+		$this->assertEquals($pdoUser->getUserId(), $userId);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 
-		}
+	}
 
-		/**
-		 * test grabbing a User by user name that does not exist
-		 *
-		 **/
-		public function testGetInvalidUserByUserName() : void {
-			//grab a user name that does not exist
-			$user = User::getUserByUserName($this->getPDO(), "@doesnotexist");
-			$this->assertCount(0, $user);
-		}
+	/**
+	 * test grabbing a User by user name that does not exist
+	 *
+	 **/
+	public function testGetInvalidUserByUserName(): void {
+		//grab a user name that does not exist
+		$user = User::getUserByUserName($this->getPDO(), "@doesnotexist");
+		$this->assertCount(0, $user);
+	}
 
-		/**
-		 * test grabbing a User by email
-		 *
-		 **/
-		public function testGetValidUserByUserEmail() : void {
-			//count the number of rows and save it for later
+	/**
+	 * test grabbing a User by email
+	 *
+	 **/
+	public function testGetValidUserByUserEmail(): void {
+		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
@@ -251,51 +251,51 @@ class UserTest extends DataDesignTest {
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 
-		}
+	}
 
-		/**
-		 * test grabbing a User by an email that does not exist
-		 *
-		 **/
-		public function testGetInvalidUserByEmail() : void {
-			//grab and email that does not exist
-			$user = User::getUserByUserEmail($this->getPDO(), "does@not.exist");
-			$this->assetNull($user);
+	/**
+	 * test grabbing a User by an email that does not exist
+	 *
+	 **/
+	public function testGetInvalidUserByEmail(): void {
+		//grab and email that does not exist
+		$user = User::getUserByUserEmail($this->getPDO(), "does@not.exist");
+		$this->assetNull($user);
 
-		}
+	}
 
-		/**
-		 * test grabbing a User by its activation
-		 *
-		 **/
-		public function testGetValidUserByActivationToken() : void {
-			//count the number of rows and save it for later
-			$numRows = $this->getConnection()->getRowCount("user");
+	/**
+	 * test grabbing a User by its activation
+	 *
+	 **/
+	public function testGetValidUserByActivationToken(): void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("user");
 
-			$userId = generateUuidV4();
-			$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
-			$user-insert($this->getPDO());
+		$userId = generateUuidV4();
+		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user - insert($this->getPDO());
 
-			//grab the data from mySQL and enforce the fields match our expectations
-			$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
-			$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
-			$this->assertEquals($pdoUser->getUserId(), $userId);
-			$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
-			$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
-			$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
-			$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
+		$this->assertEquals($pdoUser->getUserId(), $userId);
+		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
+		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 
-		}
+	}
 
-		/**
-		 * test grabbing a User by and email that does not exist
-		 *
-		 **/
-		public function testGetInvalidUserActivation() : void {
-			//grab and email that does not exist
-			$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
-			$this->assertNull($user);
+	/**
+	 * test grabbing a User by and email that does not exist
+	 *
+	 **/
+	public function testGetInvalidUserActivation(): void {
+		//grab and email that does not exist
+		$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
+		$this->assertNull($user);
 
-		}
+	}
 }
 
