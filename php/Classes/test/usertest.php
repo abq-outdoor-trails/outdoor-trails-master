@@ -295,7 +295,7 @@ class UserTest extends DataDesignTest {
 			//grab and email that does not exist
 			$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
 			$this->assertNull($user);
-			
+
 		}
 }
 
