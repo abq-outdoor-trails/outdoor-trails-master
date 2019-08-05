@@ -119,6 +119,10 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	public function getFavoriteRouteByUserId() {
+
+	}
+
 
 	/**
 	 * Specify data which should be serialized to JSON
