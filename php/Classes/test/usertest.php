@@ -150,7 +150,7 @@ class UserTest extends DataDesignTest {
 		$user->insert($this->getPDO());
 
 		//delete the User from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"))
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 			$user->delete($this->getPDO());
 
 		//grab the data from mySQL and enforce the User does not exist
