@@ -17,7 +17,6 @@ spl_autoload_register(function($class) {
 	 **/
 
 	$prefix = "AbqOutdoorTrails\\AbqBike";
-
 	$baseDir = __DIR__;
 
 	// does the class use the namespace prefix?
