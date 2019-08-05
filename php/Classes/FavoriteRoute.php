@@ -119,6 +119,17 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * method to return a user's favorite Route by the route's ID
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid $routeId ID of the route being returned
+	 * @return Route|null return the Route if found, null if not
+	 */
+	public function getFavoriteRouteByRouteId(\PDO $pdo, Uuid $routeId) : ?Route {
+
+	}
+
 
 	/**
 	 * Specify data which should be serialized to JSON
