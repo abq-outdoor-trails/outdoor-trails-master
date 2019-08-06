@@ -27,7 +27,7 @@ require_once(dirname(__DIR__) . "../vendor/autoload.php");
  *
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  **/
-abstract class DataDesignTest extends TestCase {
+abstract class AbqBikeTest extends TestCase {
 	use TestCaseTrait;
 	/**
 	 * PHPUnit database connection interface
