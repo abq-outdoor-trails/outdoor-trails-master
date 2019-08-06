@@ -110,7 +110,7 @@ class Route implements \JsonSerializable {
 			$uuid = self::validateUuid($newRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception ->getMessage(), 0, $exception));
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// convert and store route Id
 		$this->routeId = $uuid;
@@ -212,7 +212,7 @@ class Route implements \JsonSerializable {
 	/**
 	 * accessor method for route speed limit
 	 */
-	public function getRouteSpeedLimit(): void {
+	public function getRouteSpeedLimit(): string {
 		return ($this->routeSpeedLimit);
 	}
 
@@ -230,7 +230,7 @@ class Route implements \JsonSerializable {
 		}
 
 		//verify speed limit is valid range
-		if ($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
+		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
 			throw (new \RangeException("speed limit below zero or greater than 99"));
 		}
 	}
@@ -267,6 +267,130 @@ class Route implements \JsonSerializable {
 	}
 
 	/**
+	 * gets the getrouteByRouteId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $routeId route id to search for
+	 * @return Route|null route found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getRouteByRouteId(\PDO $pdo, $routeId): ?Route {
+		// sanitize the routeID before searching
+		try {
+			$routeId = self::validateUuid($routeId);
+		} catch(\InvalidArgumentException | \RangeException| \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeId = :routeId";
+		$statement = $pdo->prepare($query);
+
+		//bind the route id to the place holder in the template
+		$parameters = ["routeId" => $routeId->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the route from mySQL
+		try {
+			$route = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($route);
+	}
+
+
+	/**
+	 * gets the Route by Route Type
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $routeType content to search for
+	 * @return \SplFixedArray SplFixedArray of routes found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 * follow get tweet by tweet content example
+	 **/
+	public static function getRouteByRouteType(\PDO $pdo, string $routeType) : \SplFixedArray {
+		// sanitize the description before searching
+		$routeType = trim($routeType);
+		$routeType = filter_var($routeType, FILTER_SANATIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($routeType) === true) {
+			throw(new\PDOException("route content is invalid"));
+		}
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeType = :routeType";
+		$statement = $pdo->prepare($query);
+
+		// bind the route type to the place holder in the template
+		$routeType = "%$routeType%";
+		$parameters = ["routeType" => $routeType];
+		$statement->execute($parameters);
+
+		// build an array of route types
+		$routes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$routes[$routes->key()] = $route;
+				$routes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($routes);
+	}
+
+	/**
+	 * gets the Route File by routeFile
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $routeFile routeFile to search for
+	 * @return Tweet|null Tweet found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getRouteByRouteFile(\PDO $pdo, string $routeFile) : ?Route {
+		// trim and sanitize string and validate file path
+		$routeFile = trim($routeFile);
+		$routeFile = filter_var($routeFile, FILTER_VALIDATE_URL);
+		if(empty($routeFile) === true) {
+			throw(new \PDOException("not a valid URL"));
+		}
+
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeFile = :routeFile";
+		$statement = $pdo->prepare($query);
+
+		//bind the route id to the place holder in the template
+		$parameters = ["routeFile" => $routeFile->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the route from mySQL
+		try {
+			$route = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($route);
+	}
+
+
+	/**
 	 * Specify data which should be serialized to JSON
 	 *
 	 * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -274,10 +398,12 @@ class Route implements \JsonSerializable {
 	 * @since 5.4.0
 	 */
 
-	public function jsonSerialize(): array {
+	public
+	function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 
 		$fields["routeId"] = $this->routeId->toString();
 		return ($fields);
 	}
 }
+
