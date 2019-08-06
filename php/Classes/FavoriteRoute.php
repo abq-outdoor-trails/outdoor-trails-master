@@ -123,11 +123,11 @@ class FavoriteRoute implements \JsonSerializable {
 	 * method to return a user's favorite Route by the route's ID
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid $routeId ID of the route to be accessed
+	 * @param Uuid $favoriteRouteRouteId ID of the route to be accessed
 	 * @return FavoriteRoute|null return the FavoriteRoute if found, null if not
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 */
-	public function getFavoriteRouteByRouteId(\PDO $pdo, Uuid $routeId) : ?FavoriteRoute {
+	public function getFavoriteRouteByRouteId(\PDO $pdo, Uuid $favoriteRouteRouteId) : ?FavoriteRoute {
 		// verify that route id is actually a Uuid
 		try {
 			$routeId = self::validateUuid($routeId);
@@ -136,11 +136,11 @@ class FavoriteRoute implements \JsonSerializable {
 		}
 
 		// create MySQL query template
-		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteRouteID = :routeId";
+		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteRouteId = :favoriteRouteRouteId";
 		$statement = $pdo->prepare($query);
 
 		// bind the route id to the placeholder in the query template
-		$parameters = ["routeId" => $routeId->getBytes()];
+		$parameters = ["favoriteRouteRouteId" => $favoriteRouteRouteId->getBytes()];
 		$statement->execute($parameters);
 
 		// grab the favorite route from MySQL
