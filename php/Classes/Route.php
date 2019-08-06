@@ -212,7 +212,7 @@ class Route implements \JsonSerializable {
 	/**
 	 * accessor method for route speed limit
 	 */
-	public function getRouteSpeedLimit(): void {
+	public function getRouteSpeedLimit(): string {
 		return ($this->routeSpeedLimit);
 	}
 
