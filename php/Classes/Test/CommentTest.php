@@ -118,7 +118,7 @@ class CommentTest extends AbqBikeTest {
 	 **/
 	public function testGetInvalidCommentByCommentId() : void {
 		// grab a comment id that exceeds the maximum allowable comment id
-		$comment = Comment::getCommentId($this->getPDO(), generateUuidV4());
+		$comment = Comment::getCommentId();
 		$this->assertNull($comment);
 	}
 
@@ -133,10 +133,10 @@ class CommentTest extends AbqBikeTest {
 		$commentId = generateUuidV4();
 		$commentRouteId = generateUuidV4();
 		$commentUserId = generateUuidV4();
-
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
-
+		// grab the data from MySQL and enforce the fields match expectations
+		$results = Comment::
 	}
 }
