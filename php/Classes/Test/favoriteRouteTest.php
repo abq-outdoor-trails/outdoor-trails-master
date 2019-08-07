@@ -50,7 +50,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 * @var string $VALID_ACTIVATION
 	 *
 	 **/
-	protected $VALID_ACTIVATION
+	protected $VALID_ACTIVATION;
 
 	/**
 	 * create dependent objects before running each test
@@ -58,7 +58,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 **/
 	public final function setUp() : void {
 		//run the default seUp() method first
-		parent::setUp():
+		parent::setUp();
 
 		//create a salt and hash for the mocked user
 		$password = "abc123";
