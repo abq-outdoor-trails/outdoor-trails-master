@@ -128,7 +128,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("FavoriteRoute");
 
 		//create a new FavoriteRoute and insert to mySQL
-		$route = new FavoriteRoute($this->getPDO(), $this->favoriteRoute-$this->getfavoriteRouteByIdAndUserId(), $this->VALID_ROUTE());
+		$route = new FavoriteRoute($this->getPDO(), $this->favoriteRoute-$this->getFavoriteRouteByIdAndUserId(), $this->VALID_ROUTE());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteById(), $this->user-getUserId());
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteById(), $this->FavoriteRoute->getFavoriteRouteById);
@@ -136,21 +136,36 @@ class FavoriteRouteTest extends AbqBikeTest {
 
 	}
 
-
-
-
-
 	/**
-	 * favorite route by route ID; this is a foreign key
-	 * @ var favoriteRouteRouteID
-	 */
+	 * test grabbing a Favorite Route by Favorite Route User Id
+	 *
+	 **/
+	public function testGetValidFavoriteRouteByIdAndUserId() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
 
-	protected $VALID_ROUTE;
+		//create a new favorite route and insert into mySQL
+		$favoriteRoute = new FavoriteRoute($this->favoriteRoute->getFavoriteRouteByIdAndUserId(), $this->VALID_ROUTE());
+		$favoriteRoute->insert($this->getPDO());
 
-	/**
-	 * favorite route by User ID; this is a foreign key
-	 * favoriteRouteUserId
-	 */
-	protected $VALID_FAVORITE_ROUTE_BY_USERID;
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = FavoriteRoute::getFavoriteRouteByIdAndUserId($this->getPDO(), $this->user->getUserId(), $this->VALID_ROUTE());
+		$this->assertEquals(numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
+		$this->assertCount(1, $results);
+
+		//grab the result from the array and validate it
+		$pdoFavoriteRoute = $results[0];
+		$this-assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user->getUserId());
+		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteByRouteId(), $this->favoriteRoute->getFavoriteRouteByRouteId());
+
+
+	}
+
+	
+
+
+
+
+
 }
 
