@@ -100,7 +100,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 * test creating a FavoriteRouteByUserId and then deleting it
 	 *
 	 **/
-	public function testDeleteValidFavoriteRouteId() : void {
+	public function testDeleteValidFavoriteRouteIdAndUserId() : void {
 		//count number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("FavoriteRoute");
 
@@ -113,9 +113,9 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$favoriteRoute->delete($this->getPDO());
 
 		//grab the data from mySQL and enforce the Route does not exist
-		$podRoute = FavoriteRoute::getRouteByIdAndRouteUserId($this->getPDO(), $this->user->getUserId(), $this->route->getRouteId());
+		$podRoute = FavoriteRoute::getFavoriteRouteById($this->getPDO(), $this->user->getUserId(), $this->route->getRouteId());
 		$this->assertNull($pdoRoute);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("route"));
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("FavoriteRoute"));
 
 	}
 
@@ -123,7 +123,18 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 * test inserting a route and regrabbing it from mySQL
 	 *
 	 **/
+	public function testGetValidFavoriteRouteByIdAndUserId() : void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("FavoriteRoute");
 
+		//create a new FavoriteRoute and insert to mySQL
+		$route = new FavoriteRoute($this->getPDO(), $this->favoriteRoute-$this->getfavoriteRouteByIdAndUserId(), $this->VALID_ROUTE());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
+		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteById(), $this->user-getUserId());
+		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteById(), $this->FavoriteRoute->getFavoriteRouteById);
+
+
+	}
 
 
 
