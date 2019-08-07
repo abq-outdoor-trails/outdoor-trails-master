@@ -149,7 +149,8 @@ class CommentTest extends AbqBikeTest {
 		$this->assertEquals($pdoComment->getCommentRouteId(), $commentRouteId);
 		$this->assertEquals($pdoComment->getCommentUserId(), $commentUserId);
 		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
-		$this->assertEquals($pdoComment->getCommentDate(), $this->VALID_COMMENTDATE);
+		// format the date as seconds since the beginning of time to prevent round off errors
+		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 	}
 
 	/**
