@@ -135,6 +135,12 @@ class CommentTest extends AbqBikeTest {
 		$commentUserId = generateUuidV4();
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
+
+		// grab the data from MySQL and enforce the fields match expected values
+		$results = Comment::getCommentsByRouteId($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount()"comment");
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
 	}
 
 	/**
