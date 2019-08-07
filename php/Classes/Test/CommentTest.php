@@ -173,5 +173,14 @@ class CommentTest extends AbqBikeTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
+
+		// grab the result from the created array and validate it
+		$pdoComment = $results[0];
+		$this->assertEquals($pdoComment->getCommentId(), $commentId);
+		$this->assertEquals($pdoComment->getCommentRouteId(), $commentRouteId);
+		$this->assertEquals($pdoComment->getCommentUserId(), $commentUserId);
+		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
+		// format the date as seconds since the beginning of time to prevent round off errors
+		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 	}
 }
