@@ -1,6 +1,6 @@
 <?php
 
-namespace namespace AbqOutdoorTrails\AbqBike;
+namespace AbqOutdoorTrails\AbqBike;
 
 use AbqOutdoorTrails\AbqBike\Test\AbqBikeTest;
 use UssHopper\AbqBike\{
