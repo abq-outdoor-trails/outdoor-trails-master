@@ -161,7 +161,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 
 	}
 
-	
+
 
 
 
