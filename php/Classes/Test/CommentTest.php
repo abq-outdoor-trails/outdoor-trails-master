@@ -133,6 +133,7 @@ class CommentTest extends AbqBikeTest {
 		$commentId = generateUuidV4();
 		$commentRouteId = generateUuidV4();
 		$commentUserId = generateUuidV4();
+
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
@@ -141,6 +142,14 @@ class CommentTest extends AbqBikeTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
+
+		// grab the result from the created array and validate it
+		$pdoComment = $results[0];
+		$this->assertEquals($pdoComment->getCommentId(), $commentId);
+		$this->assertEquals($pdoComment->getCommentRouteId(), $commentRouteId);
+		$this->assertEquals($pdoComment->getCommentUserId(), $commentUserId);
+		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
+		$this->assertEquals($pdoComment->getCommentDate(), $this->VALID_COMMENTDATE);
 	}
 
 	/**
