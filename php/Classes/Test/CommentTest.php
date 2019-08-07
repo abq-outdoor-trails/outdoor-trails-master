@@ -169,5 +169,9 @@ class CommentTest extends AbqBikeTest {
 		$comment->insert($this->getPDO());
 
 		// grab the data from MySQL using getCommentsByCommentDate() and enforce the fields match expected values
+		$results = Comment::getCommentsByCommentDate($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
 	}
 }
