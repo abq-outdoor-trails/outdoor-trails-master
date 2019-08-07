@@ -123,20 +123,24 @@ class CommentTest extends AbqBikeTest {
 //	}
 
 	/**
-	 * test inserting a Comment and re-grabbing it from MySQL
+	 * test get comment array by route id
 	 **/
-	public function testGetValidCommentByCommentUserId() {
-		// count the number of rows and save it for later
+	public function testGetValidCommentsByCommentRouteId() : void {
+		// count the number of rows and save for later
 		$numRows = $this->getConnection()->getRowCount("comment");
 
-		// create a new Comment and insert it into MySQL
+		// create a new Comment and insert into MySQL
 		$commentId = generateUuidV4();
 		$commentRouteId = generateUuidV4();
 		$commentUserId = generateUuidV4();
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
+	}
 
-		// grab the data from MySQL and enforce the fields match expectations
-		$results = Comment::
+	/**
+	 * test get comment array by comment date
+	 **/
+	public function testGetValidCommentsByCommentDate() : void {
+
 	}
 }
