@@ -137,7 +137,7 @@ class CommentTest extends AbqBikeTest {
 		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
-		// grab the data from MySQL and enforce the fields match expected values
+		// grab the data from MySQL using getCommentsByRouteId() and enforce the fields match expected values
 		$results = Comment::getCommentsByRouteId($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
@@ -157,6 +157,17 @@ class CommentTest extends AbqBikeTest {
 	 * test get comment array by comment date
 	 **/
 	public function testGetValidCommentsByCommentDate() : void {
+		// count the number of rows and save for later
+		$numRows = $this->getConnection()->getRowCount("comment");
 
+		// create a new Comment and insert into MySQL
+		$commentId = generateUuidV4();
+		$commentRouteId = generateUuidV4();
+		$commentUserId = generateUuidV4();
+
+		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+		// grab the data from MySQL using getCommentsByCommentDate() and enforce the fields match expected values
 	}
 }
