@@ -127,7 +127,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @return FavoriteRoute|null FavoriteRoute object to be returned, null if not found
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
-	public function getFavoriteRouteByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?FavoriteRoute {
+	public function getFavoriteRoutesByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?\SplFixedArray {
 		// verify that userId is actually a Uuid
 		try {
 			$favoriteRouteUserId = self::validateUuid($favoriteRouteUserId);
@@ -140,19 +140,8 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the user id to the placeholder in the query template
 		$parameters = ["favoriteRouteUserId" => $favoriteRouteUserId->getBytes()];
 		$statement->execute($parameters);
-		// grab the favorite route from MySQL
-		try {
-			$favoriteRoute = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row) {
-				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
-			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-		return($favoriteRoute);
+
+
 	}
 
 	/**
