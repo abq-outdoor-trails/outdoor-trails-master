@@ -140,8 +140,20 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the user id to the placeholder in the query template
 		$parameters = ["favoriteRouteUserId" => $favoriteRouteUserId->getBytes()];
 		$statement->execute($parameters);
-
-
+		// build an array of favorite routes
+		$favoriteRoutes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while($row=$statement->fetch()) {
+			try {
+				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
+				$favoriteRoutes[$favoriteRoutes->key()] = $favoriteRoute;
+				$favoriteRoutes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($favoriteRoutes);
 	}
 
 	/**
