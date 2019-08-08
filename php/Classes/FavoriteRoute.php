@@ -123,8 +123,8 @@ class FavoriteRoute implements \JsonSerializable {
 	 * method to return a Route using given user ID
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid $favoriteRouteUserId user id to be used to retrieve requested Route
-	 * @return FavoriteRoute|null FavoriteRoute object to be returned, null if not found
+	 * @param Uuid $favoriteRouteUserId user id to be used to retrieve requested favorite routes
+	 * @return \SplFixedArray|null array of favorite routes to be returned
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
 	public function getFavoriteRoutesByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?\SplFixedArray {
