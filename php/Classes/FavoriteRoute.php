@@ -127,7 +127,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @return \SplFixedArray|null array of favorite routes to be returned
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
-	public function getFavoriteRoutesByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?\SplFixedArray {
+	public static function getFavoriteRoutesByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?\SplFixedArray {
 		// verify that userId is actually a Uuid
 		try {
 			$favoriteRouteUserId = self::validateUuid($favoriteRouteUserId);
@@ -164,7 +164,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @return FavoriteRoute|null return the FavoriteRoute if found, null if not
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 */
-	public function getFavoriteRoutesByRouteId(\PDO $pdo, Uuid $favoriteRouteRouteId) : ?\SplFixedArray {
+	public static function getFavoriteRoutesByRouteId(\PDO $pdo, Uuid $favoriteRouteRouteId) : ?\SplFixedArray {
 		// verify that route id is actually a Uuid
 		try {
 			$favoriteRouteRouteId = self::validateUuid($favoriteRouteRouteId);
