@@ -3,9 +3,7 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 use AbqOutdoorTrails\AbqBike\Test\AbqBikeTest;
-use UssHopper\AbqBike\{
-	User, Route, FavoriteRoute
-};
+use AbqOutdoorTrails\AbqBike\ { User, Route };
 
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
@@ -17,7 +15,7 @@ require_once(dirname(__DIR__, 2) . "lib/uuid.php");
  *Full PHPUnit test for FavoriteRoute class
  *
  * This is a complete PHPUnit test of the FavoriteRoute class.
- * It is complete because *ALL* mySQL/PDO enabled methods are tested* *for both valid and invalid inputs.
+ * It is complete because *ALL* mySQL/PDO enabled methods are tested for both valid and invalid inputs.
  *
  * @see FavoriteRoute
  **/
@@ -31,7 +29,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	protected $user;
 
 	/**
-	 * Route that was Favorited; this is for foreign key relations
+	 * Route that was favorited; this is for foreign key relations
 	 *
 	 * @var Route $route
 	 *
@@ -55,7 +53,9 @@ class FavoriteRouteTest extends AbqBikeTest {
 	/**
 	 * create dependent objects before running each test
 	 *
-	 **/
+	 *
+	 * @throws \Exception
+	 */
 	public final function setUp() : void {
 		//run the default seUp() method first
 		parent::setUp();
