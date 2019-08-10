@@ -155,11 +155,35 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$results = FavoriteRoute::getFavoriteRoutesByUserId($this->getPDO(), $this->route->getRouteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertCount(1, $results);
+
+		// ensure no other objects are bleeding into the test
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\FavoriteRoute", $results);
 
 		//grab the result from the array and validate it
 		$pdoFavoriteRoute = $results[0];
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteRouteId(), $this->route->getRouteId());
+	}
+
+	public function testGetValidFavoriteRouteByRouteId() : void {
+		// count the number of rows and save for later
+		$numRows = $this->getConnection()->getRowCount('favoriteRoute');
+
+		// create a new FavoriteRoute and insert it into MySQL
+		$favoriteRoute = new FavoriteRoute($this->route->getRouteId(), $this->user->getUserId());
+		$favoriteRoute->insert($this->getPDO());
+
+		// grab data from MySQL and enforce the fields match expectations
+		$results = FavoriteRoute::getFavoriteRoutesByRouteId($this->getPDO(), $this->route->getRouteId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount('favoriteRoute'));
+		$this->assertCount(1, $results);
+
+		// ensure no other objects are bleeding into the test
+		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\FavoriteRoute", $results);
+
+		// grab the result from the array and validate it
+		$pdoFavoriteRoute = $results[0];
+		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteRouteId(), $this->route->getRouteId());
+		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user->getUserId());
 	}
 }
