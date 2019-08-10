@@ -2,7 +2,7 @@
 
 namespace AbqOutdoorTrails\AbqBike;
 
-require_once(dirname(__DIR__) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -360,57 +360,12 @@ class User implements \JsonSerializable {
 			$statement-> $statement->fetch();
 			$row = $statement->fetch();
 			if($row !== false) {
-
-				$User = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
 
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-		return ($user);
-	}
-
-	/**
-	 * gets the user by user name
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param string $userName user name to search for
-	 * @return \SplFixedArray of all users found
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 *
-	 *
-	 **/
-	public static function getUserByUserName(\PDO $pdo, string $userName): \SPLFixedArray {
-		//sanitize the user name before searching
-		$userName = trim($userName);
-		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($userName) === true) {
-			throw(new \PDOException("not a valid user name"));
-		}
-
-		//create query template
-		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userName= :userName";
-		$statement = $pdo->prepare($query);
-
-		//bind the user name to the place holder in the template
-		$parameters = ["userName" => $userName];
-		$statement->execute($parameters);
-
-
-		$user = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$user = new user($row[$userId], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-					$user[$user->key()] = $user;
-					$user->next();
-			} catch(\Exception $exception) {
-				//if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
 		}
 		return ($user);
 	}
@@ -426,7 +381,7 @@ class User implements \JsonSerializable {
 	 *
 	 *
 	 **/
-	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?user {
+	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?User {
 		//sanitize the email before searching
 		$userEmail = trim($userEmail);
 		$userEmail = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
@@ -509,9 +464,7 @@ class User implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["profileId"] = $this->profileId->toString();
-		unset($fields["profileActivationToken"]);
-		unset($fields["profileHash"]);
+		$fields["userId"] = $this->userId->toString();
 		return ($fields);
 	}
 
