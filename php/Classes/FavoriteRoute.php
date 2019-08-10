@@ -123,11 +123,11 @@ class FavoriteRoute implements \JsonSerializable {
 	 * method to return a Route using given user ID
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid $favoriteRouteUserId user id to be used to retrieve requested Route
-	 * @return FavoriteRoute|null FavoriteRoute object to be returned, null if not found
+	 * @param Uuid $favoriteRouteUserId user id to be used to retrieve requested favorite routes
+	 * @return \SplFixedArray|null array of favorite routes to be returned
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 **/
-	public function getFavoriteRouteByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?FavoriteRoute {
+	public function getFavoriteRoutesByUserId(\PDO $pdo, Uuid $favoriteRouteUserId) : ?\SplFixedArray {
 		// verify that userId is actually a Uuid
 		try {
 			$favoriteRouteUserId = self::validateUuid($favoriteRouteUserId);
@@ -140,19 +140,20 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the user id to the placeholder in the query template
 		$parameters = ["favoriteRouteUserId" => $favoriteRouteUserId->getBytes()];
 		$statement->execute($parameters);
-		// grab the favorite route from MySQL
-		try {
-			$favoriteRoute = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row) {
+		// build an array of favorite routes
+		$favoriteRoutes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while($row=$statement->fetch()) {
+			try {
 				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
+				$favoriteRoutes[$favoriteRoutes->key()] = $favoriteRoute;
+				$favoriteRoutes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($favoriteRoute);
+		return($favoriteRoutes);
 	}
 
 	/**
@@ -163,10 +164,10 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @return FavoriteRoute|null return the FavoriteRoute if found, null if not
 	 * @throws \PDOException exception to be thrown if there's an issue with PDO connection object
 	 */
-	public function getFavoriteRouteByRouteId(\PDO $pdo, Uuid $favoriteRouteRouteId) : ?FavoriteRoute {
+	public function getFavoriteRoutesByRouteId(\PDO $pdo, Uuid $favoriteRouteRouteId) : ?\SplFixedArray {
 		// verify that route id is actually a Uuid
 		try {
-			$routeId = self::validateUuid($routeId);
+			$favoriteRouteRouteId = self::validateUuid($favoriteRouteRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -176,19 +177,20 @@ class FavoriteRoute implements \JsonSerializable {
 		// bind the route id to the placeholder in the query template
 		$parameters = ["favoriteRouteRouteId" => $favoriteRouteRouteId->getBytes()];
 		$statement->execute($parameters);
-		// grab the favorite route from MySQL
-		try {
-			$favoriteRoute = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row) {
+		// build an array of favorite routes
+		$favoriteRoutes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while($row=$statement->fetch()) {
+			try {
 				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
+				$favoriteRoutes[$favoriteRoutes->key()] = $favoriteRoute;
+				$favoriteRoutes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($favoriteRoute);
+		return($favoriteRoutes);
 	}
 	/**
 	 * Specify data which should be serialized to JSON
