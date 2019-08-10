@@ -3,13 +3,13 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 use AbqOutdoorTrails\AbqBike\Test\AbqBikeTest;
-use AbqOutdoorTrails\AbqBike\ { User, Route };
+use AbqOutdoorTrails\AbqBike\ { User, Route, FavoriteRoute };
 
 //grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
 
 //grab the uuid generator
-require_once(dirname(__DIR__, 2) . "lib/uuid.php");
+require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 
 /**
  *Full PHPUnit test for FavoriteRoute class
@@ -66,11 +66,11 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 
 		//create and insert the mocked profile
-		$this->user = new User(generateUuidV4(), 'willieharris', '@williesworld.cnm.ed', $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$this->user = new User(generateUuidV4(), 'willieharris', 'williesworld@cnm.edu', $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$this->user->insert($this->getPDO());
 
-		//create the and insert the mocked route
-		$this->route = new Route(generateUuidV4(), 'Madison Bike Blvd', '21', 'bike blvd', 'Speed limit 25mph', 'bike blvd shared user road with lowered speed limit');
+		//create and insert the mocked route
+		$this->route = new Route(generateUuidV4(), 'Madison Bike Blvd', '21', 'bike blvd', 30, 'bike blvd shared user road with lowered speed limit');
 		$this->route->insert($this->getPDO());
 
 	}
@@ -104,7 +104,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		//count number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("FavoriteRoute");
 
-		//create a new FavoriteRouteById and insert into mySQL
+		//create a new FavoriteRoute and insert into mySQL
 		$route = new FavoriteRoute($this->user->getUserId(), $this->route->getRouteId(), $this->VALID_ROUTE);
 		$route->insert($this->getPDO());
 
