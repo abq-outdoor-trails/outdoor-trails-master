@@ -12,4 +12,3 @@
     "phpunit": "./vendor/bin/phpunit -c ./Classes/Test --coverage-html coverage"
   }
 }
-

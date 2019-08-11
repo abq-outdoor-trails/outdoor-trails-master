@@ -14,13 +14,13 @@ CREATE TABLE routes (
 );
  -- creates table for Favorite Routes --
  CREATE TABLE favoriteRoutes (
-    favoriteRoutesUserId BINARY(16) NOT NULL,
-    favoriteRoutesRouteID BINARY(16) NOT NULL,
+    favoriteRouteUserId BINARY(16) NOT NULL,
+    favoriteRouteRouteID BINARY(16) NOT NULL,
     -- foreign key --
-    INDEX (favoriteRoutesUserId),
-    FOREIGN KEY (favoriteRoutesUserId) REFERENCES user(userId),
-    INDEX (favoriteRoutesRouteID),
-    FOREIGN KEY (favoriteRoutesRouteID) REFERENCES routes(routeId)
+    INDEX (favoriteRouteUserId),
+    FOREIGN KEY (favoriteRouteUserId) REFERENCES user(userId),
+    INDEX (favoriteRouteRouteID),
+    FOREIGN KEY (favoriteRouteRouteID) REFERENCES routes(routeId)
  );
 
 
