@@ -297,7 +297,7 @@ class Route implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$route = new Route($row["routeId"], ["routeName"], ["routeFile"], ["routeType"], ["routeSpeedLimit"], ["routeDescription"]);
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
@@ -306,89 +306,87 @@ class Route implements \JsonSerializable {
 		return ($route);
 	}
 
+	/**
+	 * gets the Route by Route Type
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $routeType content to search for
+	 * @return \SplFixedArray SplFixedArray of routes found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 * follow get tweet by tweet content example
+	 **/
+	public static function getRouteByRouteType(\PDO $pdo, string $routeType) : \SplFixedArray {
+		// sanitize the description before searching
+		$routeType = trim($routeType);
+		$routeType = filter_var($routeType, FILTER_SANATIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($routeType) === true) {
+			throw(new\PDOException("route content is invalid"));
+		}
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeType = :routeType";
+		$statement = $pdo->prepare($query);
 
-/**
- * gets the Route by Route Type
- *
- * @param \PDO $pdo PDO connection object
- * @param string $routeType content to search for
- * @return \SplFixedArray SplFixedArray of routes found
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError when variables are not the correct data type
- * follow get tweet by tweet content example
- **/
-public static function getRouteByRouteType(\PDO $pdo, string $routeType) : \SplFixedArray {
-	// sanitize the description before searching
-	$routeType = trim($routeType);
-	$routeType = filter_var($routeType, FILTER_SANATIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if(empty($routeType) === true) {
-		throw(new\PDOException("route content is invalid"));
+		// bind the route type to the place holder in the template
+		$routeType = "%$routeType%";
+		$parameters = ["routeType" => $routeType];
+		$statement->execute($parameters);
+
+		// build an array of route types
+		$routes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$routes[$routes->key()] = $route;
+				$routes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($routes);
 	}
-	//create query template
-	$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeType = :routeType";
-	$statement = $pdo->prepare($query);
 
-	// bind the route type to the place holder in the template
-	$routeType = "%$routeType%";
-	$parameters = ["routeType" => $routeType];
-	$statement->execute($parameters);
+	/**
+	 * gets the Route File by routeFile
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $routeFile routeFile to search for
+	 * @return Tweet|null Tweet found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getRouteByRouteFile(\PDO $pdo, string $routeFile) : ?Route {
+		// trim and sanitize string and validate file path
+		$routeFile = trim($routeFile);
+		$routeFile = filter_var($routeFile, FILTER_VALIDATE_URL);
+		if(empty($routeFile) === true) {
+			throw(new \PDOException("not a valid URL"));
+		}
 
-	// build an array of route types
-	$route = new \SplFixedArray($statement->rowCount());
-	$statement->setFetchMode(\PDO::FETCH_ASSOC);
-	while(($row = $statement->fetch()) !== false) {
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeFile = :routeFile";
+		$statement = $pdo->prepare($query);
+
+		//bind the route id to the place holder in the template
+		$parameters = ["routeFile" => $routeFile->getBytes()];
+		$statement->execute($parameters);
+
+		//grab the route from mySQL
 		try {
-			$route = new Route($row["routeId"], ["routeName"], ["routeFile"], ["routeType"], ["routeSpeedLimit"], ["routeDescription"]);
-			$route[$route->key()] = $route;
-			$route->next();
+			$route = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+			}
 		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
+			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
+		return ($route);
 	}
-	return ($route);
-}
-
-/**
- * gets the Route File by routeFile
- *
- * @param \PDO $pdo PDO connection object
- * @param Uuid|string $routeFile routeFile to search for
- * @return Tweet|null Tweet found or null if not found
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError when a variable are not the correct data type
- **/
-public static function getRouteByRouteFile(\PDO $pdo, $routeFile) : ?Route {
-	// sanitize the routeFile before searching
-	try {
-		$routeFile = self::validateUuid($routeFile);
-	} catch(\InvalidArgumentException | \RangeException | \Exception | \ TypeError $exception) {
-		throw(new \PDOException($exception->getMessage(), 0, $exception));
-	}
-
-	//create query template
-	$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeFile = :routeFile";
-	$statement = $pdo->prepare($query);
-
-	//bind the route id to the place holder in the template
-	$parameters = ["routeFile" => $routeFile->getBytes()];
-	$statement->execute($parameters);
-
-	//grab the route from mySQL
-	try {
-		$route = null;
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		$row = $statement->fetch();
-		if($row !== false) {
-			$route = new Route($row["routeId"], ["routeName"], ["routeFile"], ["routeType"], ["routeSpeedLimit"], ["routeDescription"]);
-		}
-	} catch(\Exception $exception) {
-		//if the row couldn't be converted, rethrow it
-		throw(new \PDOException($exception->getMessage(), 0, $exception));
-	}
-	return ($route);
-}
-
 
 	/**
 	 * Specify data which should be serialized to JSON
