@@ -14,40 +14,6 @@ use Ramsey\Uuid\Uuid;
  * @author JDunn
  **/
 class User implements \JsonSerializable {
-	use ValidateUuid;
-	/**
-	 *
-	 * id for this user is the Primary Key
-	 * @var Uuid $userId
-	 *
-	 **/
-	private $userId;
-
-	/**
-	 * User Name of user this is unique
-	 * @var string userName
-	 **/
-	private $userName;
-
-	/**
-	 * Email address for user this is unique
-	 * @var string userEmail
-	 *
-	 **/
-	private $userEmail;
-
-	/**
-	 * Hash or password for the user
-	 * @var string profileHash
-	 **/
-	private $userHash;
-
-	/**
-	 * Activation Token for the user
-	 * @var string userActivationToken
-	 **/
-	private $userActivationToken;
-
 	/** constructor for user Classes
 	 *
 	 * @param string | Uuid $newUserId of this user or null if a new User
@@ -62,19 +28,54 @@ class User implements \JsonSerializable {
 	 *
 	 **/
 
-	public function __construct($newUserId, string $newUserName, string $newUserEmail, string $newUserHash, ?string $newUserActivationToken) {
+	public function __construct($newUserId, ?string $newUserActivationToken, string $newUserEmail, string $newUserHash, string $newUserName ) {
 		try {
 			$this->setUserId($newUserId);
-			$this->setUserName($newUserName);
+			$this->setUserActivationToken($newUserActivationToken);
 			$this->setUserEmail($newUserEmail);
 			$this->setUserHash($newUserHash);
-			$this->setUserActivationToken($newUserActivationToken);
+			$this->setUserName($newUserName);
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
 			//determine what exception type was thrown//
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
+	use ValidateUuid;
+
+	/**
+	 *
+	 * id for this user is the Primary Key
+	 * @var Uuid $userId
+	 *
+	 **/
+	private $userId;
+
+	/**
+	 * Activation Token for the user
+	 * @var string userActivationToken
+	 **/
+	private $userActivationToken;
+
+	/**
+	 * Email address for user this is unique
+	 * @var string userEmail
+	 *
+	 **/
+	private $userEmail;
+
+	/**
+	 * Hash or password for the user
+	 * @var string profileHash
+	 **/
+	private $userHash;
+
+
+	/**
+	 * User Name of user this is unique
+	 * @var string userName
+	 **/
+	private $userName;
 
 	/**
 	 * accessor method for user id
@@ -105,38 +106,44 @@ class User implements \JsonSerializable {
 		$this->userId = $uuid;
 	}
 
+
 	/**
-	 * accessor method for account user name
+	 * accessor method for user activation token
 	 *
-	 * @return string value of the user name
+	 * @return string value of the activation token
 	 *
 	 **/
-
-	public function getUserName(): string {
-		return ($this->userName);
+	public function getUserActivationToken(): ?string {
+		return ($this->userActivationToken);
 	}
 
 	/**
-	 * mutator method for account user name
+	 * mutator method for user activation token
 	 *
-	 * @param string $newUserName
-	 * @throws \InvalidArgumentException if user name is insecure
-	 * @throws \RangeException if the userName is too long
-	 * @throws \TypeError if the userName is not a string
+	 * @param string $newUserActivationToken
+	 * @throws \InvalidArgumentException if the token is not a string or insecure
+	 * @throws \RangeException if the token is not exactly 32 characters
+	 * @throws \TypeError if the activation token is not a string
 	 *
 	 **/
 
-	public function setUserName(string $newUserName): void {
-		//verify the userName is secure//
-		$newUserName = trim($newUserName);
-		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newUserName) === true) {
-			throw(new \InvalidArgumentException("User Name is insecure"));
-
+	public function setUserActivationToken(?string $newUserActivationToken): void {
+		if($newUserActivationToken === null) {
+			$this->userActivationToken = null;
+			return;
 		}
 
-		//store the user name//
-		$this->userName = $newUserName;
+		$newUserActivationToken = strtolower(trim($newUserActivationToken));
+		if(ctype_xdigit($newUserActivationToken) === false) {
+			throw(new\RangeException("user activation is not valid"));
+		}
+
+		//make sure user activation token is only 32 characters//
+		if(strlen($newUserActivationToken) !== 32) {
+			throw(new\RangeException("user activation token has to be 32 characters"));
+
+		}
+		$this->userActivationToken = $newUserActivationToken;
 	}
 
 	/**
@@ -226,43 +233,38 @@ class User implements \JsonSerializable {
 	}
 
 	/**
-	 * accessor method for user activation token
+	 * accessor method for account user name
 	 *
-	 * @return string value of the activation token
+	 * @return string value of the user name
 	 *
 	 **/
-	public function getUserActivationToken(): ?string {
-		return ($this->userActivationToken);
+	public function getUserName(): string {
+		return ($this->userName);
 	}
 
 	/**
-	 * mutator method for user activation token
+	 * mutator method for account user name
 	 *
-	 * @param string $newUserActivationToken
-	 * @throws \InvalidArgumentException if the token is not a string or insecure
-	 * @throws \RangeException if the token is not exactly 32 characters
-	 * @throws \TypeError if the activation token is not a string
+	 * @param string $newUserName
+	 * @throws \InvalidArgumentException if user name is insecure
+	 * @throws \RangeException if the userName is too long
+	 * @throws \TypeError if the userName is not a string
 	 *
 	 **/
 
-	public function setUserActivationToken(?string $newUserActivationToken): void {
-		if($newUserActivationToken === null) {
-			$this->userActivationToken = null;
-			return;
-		}
-
-		$newUserActivationToken = strtolower(trim($newUserActivationToken));
-		if(ctype_xdigit($newUserActivationToken) === false) {
-			throw(new\RangeException("user activation is not valid"));
-		}
-
-		//make sure user activation token is only 32 characters//
-		if(strlen($newUserActivationToken) !== 32) {
-			throw(new\RangeException("user activation token has to be 32 characters"));
+	public function setUserName(string $newUserName): void {
+		//verify the userName is secure//
+		$newUserName = trim($newUserName);
+		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUserName) === true) {
+			throw(new \InvalidArgumentException("User Name is insecure"));
 
 		}
-		$this->userActivationToken = $newUserActivationToken;
+
+		//store the user name//
+		$this->userName = $newUserName;
 	}
+
 
 	/**
 	 * inserts this user into mySQL
@@ -276,7 +278,7 @@ class User implements \JsonSerializable {
 	public function insert(\PDO $pdo): void {
 
 		//create query template//
-		$query = "INSERT INTO `user`(userId, userName, userEmail, userHash, userActivationToken) VALUES (:userId, :userName, :userEmail, :userHash, :userActivationToken)";
+		$query = "INSERT INTO `user`(userId, userActivationToken, userEmail, userHash, userName) VALUES (:userId, :userActivationToken, :userEmail, :userHash, :userName)";
 		$statement = $pdo->prepare($query);
 
 		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
