@@ -36,7 +36,7 @@ class RouteTest extends AbqBikeTest {
 	 * valid route file
 	 * @var string $VALID_ROUTE_FILE
 	 */
-	protected $VALID_ROUTE_FILE = "/johnsworld/home/routeFile.json";
+	protected $VALID_ROUTE_FILE = "http://www.waynesworld.com";
 
 	/**
 	 * valid route type
@@ -151,7 +151,7 @@ class RouteTest extends AbqBikeTest {
 		$route = new Route($routeId, $this->VALID_ROUTE_NAME, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_TYPE, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_DESCRIPTION);
 		$route->insert($this->getPDO());
 
-		//grab data from mySQL and enfore the fields that match our expectations.
+		//grab data from mySQL and enforce the fields that match our expectations.
 		$pdoRoute = Route::getRouteByRouteFile($this->getPDO(), $route->getRouteFile());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("route"));
 		$this->assertEquals($pdoRoute->getRouteId(), $routeId);

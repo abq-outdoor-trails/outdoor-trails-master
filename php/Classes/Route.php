@@ -386,8 +386,8 @@ class Route implements \JsonSerializable {
 		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeFile = :routeFile";
 		$statement = $pdo->prepare($query);
 
-		//bind the route id to the place holder in the template
-		$parameters = ["routeFile" => $routeFile->getBytes()];
+		//bind the route file to the place holder in the template
+		$parameters = ["routeFile" => $routeFile];
 		$statement->execute($parameters);
 
 		//grab the route from mySQL
