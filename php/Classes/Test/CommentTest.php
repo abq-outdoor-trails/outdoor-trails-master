@@ -7,7 +7,7 @@ use AbqOutdoorTrails\AbqBike\{Comment, User, Route};
 require_once(dirname(__DIR__) . "/autoload.php");
 
 // grab the uuid generator
-require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
+require_once(dirname(__DIR__, 3) . "/lib/uuid.php");
 
 /**
  * Full PHPUnit test for the Comment class.  Tests *ALL* MySQL/PDO enabled methods for both invalid and valid inputs
