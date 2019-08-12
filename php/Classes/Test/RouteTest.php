@@ -73,18 +73,18 @@ class RouteTest extends AbqBikeTest {
 
 		//create new route and inert into mySQL
 		$routeId = generateUuidV4();
-		$route = new Route($routeId, $this->VALID_ROUTE_NAME, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_TYPE, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_DESCRIPTION);
+		$route = new Route($routeId, $this->VALID_ROUTE_DESCRIPTION, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_NAME, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_TYPE);
 		$route->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoRoute = Route::getRouteByRouteId($this->getPDO(), $route->getRouteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("route"));
 		$this->assertEquals($pdoRoute->getRouteId(), $routeId);
-		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
-		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
-		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
-		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
 		$this->assertEquals($pdoRoute->getRouteDescription(), $this->VALID_ROUTE_DESCRIPTION);
+		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
+		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
+		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
+		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
 	}
 
 
@@ -120,7 +120,7 @@ class RouteTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("route");
 
 		$routeId = generateUuidV4();
-		$route = new Route($routeId, $this->VALID_ROUTE_NAME, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_TYPE, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_DESCRIPTION);
+		$route = new Route($routeId, $this->VALID_ROUTE_DESCRIPTION, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_NAME, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_TYPE);
 		$route->insert($this->getPDO());
 
 		// grab the data from MySQL and enforce the fields match expectations
@@ -132,11 +132,11 @@ class RouteTest extends AbqBikeTest {
 		// grab result from the array and validate it
 		$pdoRoute = $results[0];
 		$this->assertEquals($pdoRoute->getRouteId(), $routeId);
-		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
-		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
-		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
-		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
 		$this->assertEquals($pdoRoute->getRouteDescription(), $this->VALID_ROUTE_DESCRIPTION);
+		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
+		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
+		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
+		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
 	}
 
 
@@ -149,17 +149,17 @@ class RouteTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("route");
 
 		$routeId = generateUuidV4();
-		$route = new Route($routeId, $this->VALID_ROUTE_NAME, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_TYPE, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_DESCRIPTION);
+		$route = new Route($routeId,  $this->VALID_ROUTE_DESCRIPTION, $this->VALID_ROUTE_FILE, $this->VALID_ROUTE_NAME, $this->VALID_SPEED_LIMIT, $this->VALID_ROUTE_TYPE,);
 		$route->insert($this->getPDO());
 
 		//grab data from mySQL and enforce the fields that match our expectations.
 		$pdoRoute = Route::getRouteByRouteFile($this->getPDO(), $route->getRouteFile());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("route"));
 		$this->assertEquals($pdoRoute->getRouteId(), $routeId);
-		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
+		$this->assertEquals($pdoRoute->getRouteDescription(), $this->VALID_ROUTE_DESCRIPTION);
 		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
+		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
 		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
 		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
-		$this->assertEquals($pdoRoute->getRouteDescription(), $this->VALID_ROUTE_DESCRIPTION);
 	}
 }
