@@ -355,9 +355,9 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-
 				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-			$statement-> $statement->fetch();
+			}
+			$statement->$statement->fetch();
 			$row = $statement->fetch();
 			if($row !== false) {
 				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
@@ -369,6 +369,7 @@ class User implements \JsonSerializable {
 		}
 		return ($user);
 	}
+
 
 	/**
 	 * gets the user by email
@@ -454,7 +455,7 @@ class User implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($user);
-}
+	}
 
 
 	/**
