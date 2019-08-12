@@ -62,7 +62,7 @@ class User implements \JsonSerializable {
 	 *
 	 **/
 
-	public function __construct(Uuid $newUserId, string $newUserName, string $newUserEmail, string $newUserHash, ?string $newUserActivationToken) {
+	public function __construct($newUserId, string $newUserName, string $newUserEmail, string $newUserHash, ?string $newUserActivationToken) {
 		try {
 			$this->setUserId($newUserId);
 			$this->setUserName($newUserName);

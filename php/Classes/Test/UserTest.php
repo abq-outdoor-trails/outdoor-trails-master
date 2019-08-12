@@ -99,7 +99,7 @@ class UserTest extends AbqBikeTest {
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->$user->getUserId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USER_NAME);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_EMAIL);
