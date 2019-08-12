@@ -78,8 +78,6 @@ class CommentTest extends AbqBikeTest {
 	public function testInsertValidComment() : void {
 		// create a new Comment and insert into MySQL
 		$commentId = generateUuidV4();
-		$commentRouteId = generateUuidV4();
-		$commentUserId = generateUuidV4();
 		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
