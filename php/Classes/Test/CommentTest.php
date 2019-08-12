@@ -110,9 +110,7 @@ class CommentTest extends AbqBikeTest {
 
 		// create a new Comment and insert it into MySQL
 		$commentId = generateUuidV4();
-		$commentRouteId = generateUuidV4();
-		$commentUserId = generateUuidV4();
-		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 
 		// delete the Comment from MySQL
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
