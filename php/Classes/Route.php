@@ -345,7 +345,7 @@ class Route implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the route type to the place holder in the template
-		$routeType = "%$routeType%";
+//		$routeType = "%$routeType%";
 		$parameters = ["routeType" => $routeType];
 		$statement->execute($parameters);
 
