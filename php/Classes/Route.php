@@ -17,36 +17,40 @@ class Route implements \JsonSerializable {
 	use ValidateUuid;
 
 	/**
+	 * constructor for this route
+	 *
+	 * @param $newRouteId Uuid of this route or Null if new route NOT NULL
+	 * @param $newRouteDescription string containing route description
+	 * @param $newRouteFile string containing route file data NOT NULL
+	 * @param $newRouteName string containing new route name
+	 * @param $newRouteSpeedLimit int containing route speed limit
+	 * @param $newRouteType string containing route type
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if a data type violates a data hint
+	 * @throws \Exception if some other exception occurs
+	 */
+
+	public function __construct($newRouteId, string $newRouteDescription, string $newRouteFile, string $newRouteName, int $newRouteSpeedLimit, string $newRouteType) {
+		try {
+			$this->setRouteId($newRouteId);
+			$this->setRouteDescription($newRouteDescription);
+			$this->setRouteFile($newRouteFile);
+			$this->setRouteName($newRouteName);
+			$this->setRouteSpeedLimit($newRouteSpeedLimit);
+			$this->setRouteType($newRouteType);
+		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
+			//determine what exception type was thrown
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
+
+	/**
 	 * id for this route; this is the primary key
 	 * @var string @routeID
 	 */
 	private $routeId;
-
-	/**
-	 *  route name for this route
-	 * @var string $routeName
-	 */
-	private $routeName;
-
-	/**
-	 * file where the individual route will be stored
-	 * @var string $routeFile
-	 */
-	private $routeFile;
-
-	/**
-	 * route types to classify different routes featured on site
-	 * @var string $routeType
-	 */
-
-	private $routeType;
-
-	/**
-	 * known speed limits for each route
-	 * @var $routeSpeedLimit
-	 */
-
-	private $routeSpeedLimit;
 
 	/**
 	 * Brief route description
@@ -55,36 +59,32 @@ class Route implements \JsonSerializable {
 
 	private $routeDescription;
 
+	/**
+	 * file where the individual route will be stored
+	 * @var string $routeFile
+	 */
+	private $routeFile;
 
 	/**
-	 * constructor for this route
-	 *
-	 * @param $newRouteId Uuid of this route or Null if new route NOT NULL
-	 * @param $newRouteName string containing new route name
-	 * @param $newRouteFile string containing route file data NOT NULL
-	 * @param $newRouteType string containing route type
-	 * @param $newRouteSpeedLimit int containing route speed limit
-	 * @param $newRouteDescription string containing route description
-	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
-	 * @throws \TypeError if a data type violates a data hint
-	 * @throws \Exception if some other exception occurs
+	 *  route name for this route
+	 * @var string $routeName
+	 */
+	private $routeName;
+
+	/**
+	 * known speed limits for each route
+	 * @var $routeSpeedLimit
 	 */
 
-	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType, int $newRouteSpeedLimit, string $newRouteDescription) {
-		try {
-			$this->setRouteId($newRouteId);
-			$this->setRouteName($newRouteName);
-			$this->setRouteFile($newRouteFile);
-			$this->setRouteType($newRouteType);
-			$this->setRouteSpeedLimit($newRouteSpeedLimit);
-			$this->setRouteDescription($newRouteDescription);
-		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
-			//determine what exception type was thrown
-			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}
-	}
+	private $routeSpeedLimit;
+
+
+	/**
+	 * route types to classify different routes featured on site
+	 * @var string $routeType
+	 */
+
+	private $routeType;
 
 	/**
 	 * accessor method for route ID
@@ -222,10 +222,6 @@ class Route implements \JsonSerializable {
 	 */
 
 	public function setRouteSpeedLimit(int $newRouteSpeedLimit): void {
-		//verify route speed limit is an integer
-		if(is_int($newRouteSpeedLimit) === FALSE) {
-			throw (new \TypeError("speed limit not valid"));
-		}
 
 		//verify speed limit is valid range
 		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
@@ -275,11 +271,11 @@ class Route implements \JsonSerializable {
 	public function insert(\PDO $pdo) : void {
 
 		//create query template
-		$query = "INSERT INTO route(routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription) VALUES (:routeId, :routeName, :routeFile, :routeType, :routeSpeedLimit, :routeDescription)";
+		$query = "INSERT INTO route(routeId, routeDescription, routeFile, routeName, routeSpeedLimit, routeType) VALUES (:routeId, :routeDescription, :routeFile, :routeName, :routeSpeedLimit, :routeType)";
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template
-		$parameters = ["routeId" => $this->routeId->getBytes(), "routeName" => $this->routeName, "routeFile" =>$this->routeFile, "routeType" => $this->routeType, "routeSpeedLimit" => $this->routeSpeedLimit, "routeDescription" => $this->routeDescription];
+		$parameters = ["routeId" => $this->routeId->getBytes(), "routeDescription" => $this->routeDescription, "routeFile" =>$this->routeFile, "routeName" => $this->routeName, "routeSpeedLimit" => $this->routeSpeedLimit, "routeType" => $this->routeType];
 		$statement->execute($parameters);
 	}
 
@@ -301,7 +297,7 @@ class Route implements \JsonSerializable {
 		}
 
 		//create query template
-		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeId = :routeId";
+		$query = "SELECT routeId, routeDescription, routeFile, routeName, routeSpeedLimit, routeType FROM route WHERE routeId = :routeId";
 		$statement = $pdo->prepare($query);
 
 		//bind the route id to the place holder in the template
@@ -314,7 +310,7 @@ class Route implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$route = new Route($row["routeId"], $row["routeDescription"], $row["routeFile"], $row["routeName"], $row["routeSpeedLimit"], $row["routeType"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
@@ -341,7 +337,7 @@ class Route implements \JsonSerializable {
 			throw(new\PDOException("route content is invalid"));
 		}
 		//create query template
-		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeType = :routeType";
+		$query = "SELECT routeId, routeDescription,  routeFile, routeName,  routeSpeedLimit, routeType FROM route WHERE routeType = :routeType";
 		$statement = $pdo->prepare($query);
 
 		// bind the route type to the place holder in the template
@@ -354,7 +350,7 @@ class Route implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$route = new Route($row["routeId"], $row["routeDescription"], $row["routeFile"], $row["routeName"], $row["routeSpeedLimit"], $row["routeType"]);
 				$routes[$routes->key()] = $route;
 				$routes->next();
 			} catch(\Exception $exception) {
@@ -383,7 +379,7 @@ class Route implements \JsonSerializable {
 		}
 
 		//create query template
-		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeFile = :routeFile";
+		$query = "SELECT routeId, routeDescription, routeFile, routeName,  routeSpeedLimit, routeType  FROM route WHERE routeFile = :routeFile";
 		$statement = $pdo->prepare($query);
 
 		//bind the route file to the place holder in the template
@@ -396,7 +392,7 @@ class Route implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$route = new Route($row["routeId"], $row["routeDescription"],  $row["routeFile"], $row["routeName"],  $row["routeSpeedLimit"], $row["routeType"],);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
