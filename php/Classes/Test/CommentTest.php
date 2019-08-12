@@ -64,6 +64,10 @@ class CommentTest extends AbqBikeTest {
 		$this->user = new User(generateUuidV4(), "deepdivecode", "bob@abc.com", $this->VALID_USER_HASH, null);
 		$this->user->insert($this->getPDO());
 
+		// create and insert a Route associated with the test Comment
+		$this->route = new Route(generateUuidV4(), "This is a route name", "http://www.waynesworld.com", "Bike Blvd.", 45, "This is a route description");
+		$this->route->insert($this->getPDO());
+
 		// calculate the date, using the time the unit test was setup
 		$this->VALID_COMMENTDATE = new \DateTime();
 	}
