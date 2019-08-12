@@ -229,7 +229,7 @@ class UserTest extends AbqBikeTest {
 
 		$userId = generateUuidV4();
 		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
-		$userId->insert($this->getPDO());
+		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserEmail($this->getPDO(), $user->getUserEmail());
@@ -240,16 +240,6 @@ class UserTest extends AbqBikeTest {
 		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
-	}
-
-	/**
-	 * test grabbing a User by an email that does not exist
-	 *
-	 **/
-	public function testGetInvalidUserByEmail(): void {
-		//grab and email that does not exist
-		$user = User::getUserByUserEmail($this->getPDO(), "does@not.exist");
-		$this->assetNull($user);
 	}
 
 	/**
