@@ -140,10 +140,8 @@ class CommentTest extends AbqBikeTest {
 
 		// create a new Comment and insert into MySQL
 		$commentId = generateUuidV4();
-		$commentRouteId = generateUuidV4();
-		$commentUserId = generateUuidV4();
 
-		$comment = new Comment($commentId, $commentRouteId, $commentUserId, $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
 		// grab the data from MySQL using getCommentsByRouteId() and enforce the fields match expected values
