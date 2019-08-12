@@ -61,7 +61,7 @@ class CommentTest extends AbqBikeTest {
 		$this->VALID_USER_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
 
 		// create and insert a User to own the test Comment
-		$this->user = new User(generateUuidV4(), "deepdivecode", "bob@abc.com", $this->VALID_USER_HASH, null);
+		$this->user = new User(generateUuidV4(), null, "bob@abc.com", $this->VALID_USER_HASH, "deepdive");
 		$this->user->insert($this->getPDO());
 
 		// create and insert a Route associated with the test Comment
@@ -94,8 +94,8 @@ class CommentTest extends AbqBikeTest {
 		$pdoComment = $results[0];
 
 		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
-		$this->assertEquals($pdoComment->getCommentRouteId()->toString(), $commentRouteId->toString());
-		$this->assertEquals($pdoComment->getCommentUserId()->toString(), $commentUserId->toString());
+		$this->assertEquals($pdoComment->getCommentRouteId()->toString(), $this->route->getRouteId()->toString());
+		$this->assertEquals($pdoComment->getCommentUserId()->toString(), $this->user->getUserId()->toString());
 		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
 		// format the date to seconds since the beginning of time to avoid round off error
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
