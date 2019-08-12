@@ -89,9 +89,9 @@ class Route implements \JsonSerializable {
 	/**
 	 * accessor method for route ID
 	 *
-	 * @return string
+	 * @return Uuid
 	 */
-	public function getRouteId(): string {
+	public function getRouteId(): Uuid {
 		return ($this->routeId);
 	}
 
