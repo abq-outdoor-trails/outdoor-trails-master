@@ -71,24 +71,20 @@ class Route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType,
-										 int $newRouteSpeedLimit, string $newRouteDescription) {
+	public function __construct($newRouteId, string $newRouteName, string $newRouteFile, string $newRouteType, int $newRouteSpeedLimit, string $newRouteDescription) {
 		try {
 			$this->setRouteId($newRouteId);
-			$this->setRouteDescription($newRouteDescription);
-			$this->setRouteFile($newRouteFile);
 			$this->setRouteName($newRouteName);
-			$this->setRouteSpeedLimit($newRouteSpeedLimit);
+			$this->setRouteFile($newRouteFile);
 			$this->setRouteType($newRouteType);
-
-
+			$this->setRouteSpeedLimit($newRouteSpeedLimit);
+			$this->setRouteDescription($newRouteDescription);
 		} catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception $exception) {
 			//determine what exception type was thrown
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
-
 
 	/**
 	 * accessor method for route ID
@@ -138,13 +134,14 @@ class Route implements \JsonSerializable {
 		//verify route name is secure
 		$newRouteDescription = trim($newRouteDescription);
 		$newRouteDescription = filter_var($newRouteDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteName) === true) {
+		if(empty($newRouteDescription) === true) {
 			throw(new \InvalidArgumentException("Route description is empty or insecure"));
 		}
 		// verify the route Description will fit in the database
 		if(strlen($newRouteDescription) > 140) {
 			throw(new \RangeException("route description too large"));
 		}
+		$this->routeDescription = $newRouteDescription;
 	}
 
 
@@ -206,6 +203,7 @@ class Route implements \JsonSerializable {
 		if(strlen($newRouteName) > 32) {
 			throw(new \RangeException("route name is too large"));
 		}
+		$this->routeName = $newRouteName;
 	}
 
 
@@ -233,6 +231,7 @@ class Route implements \JsonSerializable {
 		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
 			throw (new \RangeException("speed limit below zero or greater than 99"));
 		}
+		$this->routeSpeedLimit = $newRouteSpeedLimit;
 	}
 
 
@@ -262,8 +261,8 @@ class Route implements \JsonSerializable {
 		//verify route name is less than 32 characters
 		if(strlen($newRouteType) > 32) {
 			throw(new \RangeException("route type is too large"));
-
 		}
+		$this->routeType = $newRouteType;
 	}
 
 	/**
@@ -280,11 +279,12 @@ class Route implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template
-		$parameters = ["routeId" => $this->routeId->getBytes(), "routeName" => $this->routeName->getBytes(), "routeFile" =>$this->routeFile, "routeType" => $this->routeType, "routeSpeed Limit" => $this->routeSpeedLimit, "routeDescription" => $this->routeDescription];
+		$parameters = ["routeId" => $this->routeId->getBytes(), "routeName" => $this->routeName, "routeFile" =>$this->routeFile, "routeType" => $this->routeType, "routeSpeedLimit" => $this->routeSpeedLimit, "routeDescription" => $this->routeDescription];
+		$statement->execute($parameters);
 	}
 
 	/**
-	 * gets the getrouteByRouteId
+	 * gets the getRouteByRouteId
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid|string $routeId route id to search for
@@ -293,7 +293,7 @@ class Route implements \JsonSerializable {
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
 	public static function getRouteByRouteId(\PDO $pdo, $routeId): ?Route {
-		// santitze the routeID before searching
+		// sanitize the routeID before searching
 		try {
 			$routeId = self::validateUuid($routeId);
 		} catch(\InvalidArgumentException | \RangeException| \Exception | \TypeError $exception) {
@@ -336,7 +336,7 @@ class Route implements \JsonSerializable {
 	public static function getRouteByRouteType(\PDO $pdo, string $routeType) : \SplFixedArray {
 		// sanitize the description before searching
 		$routeType = trim($routeType);
-		$routeType = filter_var($routeType, FILTER_SANATIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$routeType = filter_var($routeType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($routeType) === true) {
 			throw(new\PDOException("route content is invalid"));
 		}

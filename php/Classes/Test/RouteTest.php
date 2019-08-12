@@ -2,6 +2,7 @@
 
 namespace AbqOutdoorTrails\AbqBike\Test;
 
+use Ramsey\Uuid\Uuid;
 use AbqOutdoorTrails\AbqBike\{ Route };
 
 // grab the class under scrutiny
@@ -20,17 +21,22 @@ require_once(dirname(__DIR__, 3) . "/lib/uuid.php");
  * @author canderson73@cnm.edu
  **/
 class RouteTest extends AbqBikeTest {
+
+	/**
+	 * @var Uuid value of route id; this is the primary key
+	 **/
+	protected $routeId = null;
 	/**
 	 * valid route Name
 	 * @var string $VALID_ROUTE_NAME
 	 */
-	protected $VALID_ROUTE_NAME = "Hahn Arroyo Multi-use Path";
+	protected $VALID_ROUTE_NAME = "This is a test name";
 
 	/**
 	 * valid route file
 	 * @var string $VALID_ROUTE_FILE
 	 */
-	protected $VALID_ROUTE_FILE;
+	protected $VALID_ROUTE_FILE = "/johnsworld/home/routeFile.json";
 
 	/**
 	 * valid route type
@@ -50,7 +56,16 @@ class RouteTest extends AbqBikeTest {
 	 */
 	protected $VALID_ROUTE_DESCRIPTION = "Descriptions may or may not exist";
 
+	/**
+	 * PHP Unit setup method
+	 **/
+	public final function setUp(): void {
+		parent::setUp();
+	}
 
+	/**
+	 * @throws \Exception for PDO exceptions
+	 */
 	public function testInsertValidRoute(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("route");
@@ -63,7 +78,7 @@ class RouteTest extends AbqBikeTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoRoute = Route::getRouteByRouteId($this->getPDO(), $route->getRouteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("route"));
-		$this->assertEquals($pdoRoute->getRouteId(), RouteId);
+		$this->assertEquals($pdoRoute->getRouteId(), $routeId);
 		$this->assertEquals($pdoRoute->getRouteName(), $this->VALID_ROUTE_NAME);
 		$this->assertEquals($pdoRoute->getRouteFile(), $this->VALID_ROUTE_FILE);
 		$this->assertEquals($pdoRoute->getRouteType(), $this->VALID_ROUTE_TYPE);
