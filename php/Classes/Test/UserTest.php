@@ -86,7 +86,9 @@ class UserTest extends AbqBikeTest {
 	/**
 	 * test inserting a valid User and verify that the actual mySQL data matches
 	 *
-	 **/
+	 *
+	 * @throws \Exception
+	 */
 	public function testInsertValidUser(): void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");

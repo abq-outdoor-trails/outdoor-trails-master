@@ -18,7 +18,7 @@ class User implements \JsonSerializable {
 	/**
 	 *
 	 * id for this user is the Primary Key
-	 * @var Uuid\ $userId
+	 * @var Uuid $userId
 	 *
 	 **/
 	private $userId;
@@ -62,7 +62,7 @@ class User implements \JsonSerializable {
 	 *
 	 **/
 
-	public function __construct($newUserId, string $newUserName, string $newUserEmail, string $newUserHash, ?string $newUserActivationToken) {
+	public function __construct(Uuid $newUserId, string $newUserName, string $newUserEmail, string $newUserHash, ?string $newUserActivationToken) {
 		try {
 			$this->setUserId($newUserId);
 			$this->setUserName($newUserName);
@@ -79,11 +79,11 @@ class User implements \JsonSerializable {
 	/**
 	 * accessor method for user id
 	 *
-	 * @return \Uuid value of user id (or null if new user)
+	 * @return Uuid value of user id (or null if new user)
 	 **/
 
-	public function getUserId(): Uuid {
-		return ($this->userId);
+	public function getUserId() : Uuid {
+		return($this->userId);
 	}
 
 	/**
@@ -327,17 +327,17 @@ class User implements \JsonSerializable {
 	 * gets the user by the userId
 	 *
 	 * @param \PDO $pdo $pdo PDO connection object
-	 * @param $userId Id to search for the (data type should be mixed/not specific)
+	 * @param Uuid $userId id to search for the (data type should be mixed/not specific)
 	 * @return user|null user or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 *
 	 **/
-	public static function getUserByUserId(\PDO $pdo, $userId): ?User {
+	public static function getUserByUserId(\PDO $pdo, Uuid $userId): ?User {
 		//sanitize the user id before searching//
 		try {
 			$userId = self::validateUuid($userId);
-		} catch(\InvalidArgumentException|\RangeException|\Exception|\TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception| \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 
@@ -355,13 +355,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-			}
-			$statement->$statement->fetch();
-			$row = $statement->fetch();
-			if($row !== false) {
 				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
-
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
