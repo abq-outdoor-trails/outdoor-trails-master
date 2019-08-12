@@ -1,0 +1,15 @@
+<phpunit>
+	<testsuites>
+		<testsuite name="ABQ Bike Test">
+			<file>UserTest.php</file>
+			<file>RouteTest.php</file>
+			<file>CommentTest.php</file>
+			<file>FavoriteRouteTest.php</file>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">..</directory>
+		</whitelist>
+	</filter>
+</phpunit>
