@@ -281,7 +281,7 @@ class User implements \JsonSerializable {
 		$query = "INSERT INTO `user`(userId, userActivationToken, userEmail, userHash, userName) VALUES (:userId, :userActivationToken, :userEmail, :userHash, :userName)";
 		$statement = $pdo->prepare($query);
 
-		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userActivationToken" => $this->userActivationToken, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userName" => $this->userName];
 		$statement->execute($parameters);
 
 	}
@@ -316,12 +316,12 @@ class User implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 		// create query template
-		$query = "UPDATE `user` SET  userName = :userName, userEmail = :userEmail, userHash = :userHash, userActivationToken = :userActivationToken WHERE userId = :userId";
+		$query = "UPDATE `user` SET  userActivationToken = :userActivationToken, userEmail = :userEmail, userHash = :userHash, userName = :userName WHERE userId = :userId,";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 
-		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userActivationToken" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userActivationToken" => $this->userActivationToken, "userEmail" => $this->userEmail, "userHash" => $this->userHash, "userName" => $this->userName];
 		$statement->execute($parameters);
 	}
 
@@ -357,7 +357,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userActivationToken", $row["userEmail"], $row["userHash"], $row["userName"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
@@ -388,7 +388,7 @@ class User implements \JsonSerializable {
 		}
 
 		//create query template
-		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userEmail = :userEmail";
+		$query = "SELECT userId, userActivationToken, userEmail, userHash, userName FROM `user` WHERE userEmail = :userEmail";
 		$statement = $pdo->prepare($query);
 
 		//bind the user email to the profile holder in the template
@@ -401,7 +401,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$user = new user($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userHash"], $row["userName"]);
 
 			}
 		} catch(\Exception $exception) {
@@ -431,7 +431,7 @@ class User implements \JsonSerializable {
 		}
 
 		//create the query template
-		$query = "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user` WHERE userActivationToken = :userActivationToken";
+		$query = "SELECT userId, userActivationToken, userEmail, userHash, userName  FROM `user` WHERE userActivationToken = :userActivationToken";
 		$statement = $pdo->prepare($query);
 
 		//bind the user activation token to the placeholder in the template
@@ -444,7 +444,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new user($row["userId"], $row["userName"], $row["userEmail"], $row["userHash"], $row["userActivationToken"]);
+				$user = new user($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userHash"], $row["userName"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
