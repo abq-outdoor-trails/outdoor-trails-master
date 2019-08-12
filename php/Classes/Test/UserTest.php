@@ -252,7 +252,7 @@ class UserTest extends AbqBikeTest {
 
 		$userId = generateUuidV4();
 		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
-		$user = insert($this->getPDO());
+		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
