@@ -145,7 +145,7 @@ class CommentTest extends AbqBikeTest {
 		$comment->insert($this->getPDO());
 
 		// grab the data from MySQL using getCommentsByRouteId() and enforce the fields match expected values
-		$results = Comment::getCommentsByRouteId($this->getPDO());
+		$results = Comment::getCommentsByRouteId($this->getPDO(), $this->route->getRouteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
@@ -153,8 +153,8 @@ class CommentTest extends AbqBikeTest {
 		// grab the result from the created array and validate it
 		$pdoComment = $results[0];
 		$this->assertEquals($pdoComment->getCommentId(), $commentId);
-		$this->assertEquals($pdoComment->getCommentRouteId(), $commentRouteId);
-		$this->assertEquals($pdoComment->getCommentUserId(), $commentUserId);
+		$this->assertEquals($pdoComment->getCommentRouteId(), $this->route->getRouteId());
+		$this->assertEquals($pdoComment->getCommentUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
 		// format the date as seconds since the beginning of time to prevent round off errors
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());

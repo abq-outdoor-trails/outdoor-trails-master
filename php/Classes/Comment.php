@@ -21,7 +21,7 @@ class Comment implements \JsonSerializable {
 
 	/**
 	 * id for this comment; this is the primary key
-	 * @var Uuid $commentId
+	 * @var Uuid|string $commentId
 	 **/
 	private $commentId;
 	/**
@@ -58,7 +58,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, Uuid $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
+	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
