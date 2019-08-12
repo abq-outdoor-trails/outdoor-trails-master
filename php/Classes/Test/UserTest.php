@@ -22,7 +22,7 @@ require_once(dirname(__DIR__, 3) . "/lib/uuid.php");
  * @author JDunn <jdunn33@cnm.edu>
  *
  **/
-class UserTest extends DataDesignTest {
+class UserTest extends AbqBikeTest {
 	/**
 	 * User that created this profile; this is for the foreign key relations
 	 * @var User user
