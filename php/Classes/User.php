@@ -316,7 +316,7 @@ class User implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 		// create query template
-		$query = "UPDATE `user` SET  userActivationToken = :userActivationToken, userEmail = :userEmail, userHash = :userHash, userName = :userName WHERE userId = :userId,";
+		$query = "UPDATE `user` SET  userActivationToken = :userActivationToken, userEmail = :userEmail, userHash = :userHash, userName = :userName WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -357,7 +357,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userActivationToken", $row["userEmail"], $row["userHash"], $row["userName"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userHash"], $row["userName"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
