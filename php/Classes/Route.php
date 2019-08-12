@@ -280,7 +280,7 @@ class Route implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template
-		$parameters = ["routeId" => $this->routeId->getBytes(), "routeName" => $this->routeName->getBytes(), "routeFile" =>$this->routeFile, "routeFile" => $this->routeFile, ""]
+		$parameters = ["routeId" => $this->routeId->getBytes(), "routeName" => $this->routeName->getBytes(), "routeFile" =>$this->routeFile, "routeType" => $this->routeType, "routeSpeed Limit" => $this->routeSpeedLimit, "routeDescription" => $this->routeDescription];
 	}
 
 	/**
