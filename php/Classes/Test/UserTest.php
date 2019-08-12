@@ -182,17 +182,6 @@ class UserTest extends AbqBikeTest {
 
 	}
 
-	/**
-	 * test grabbing a User that does not exist
-	 *
-	 **/
-	public function testGetInvalidUserByUserId(): void {
-		//grab a profile id that exceeds the maximum allowable user id
-		$fakeUserId = generateUuidV4();
-		$user = User::getUserByUserId($this->getPDO(), $fakeUserId);
-		$this->assertNull($user);
-	}
-
 //	public function testGetValidUserByUserName() {
 //		//count the number of rows and save it for later
 //		$numRows = $this->getConnection()->getRowCount("user");
@@ -228,7 +217,7 @@ class UserTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_USER_NAME,);
 		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
