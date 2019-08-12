@@ -220,16 +220,6 @@ class UserTest extends AbqBikeTest {
 //	}
 
 	/**
-	 * test grabbing a User by user name that does not exist
-	 *
-	 **/
-	public function testGetInvalidUserByUserName(): void {
-		//grab a user name that does not exist
-		$user = User::getUserByUserName($this->getPDO(), "@doesnotexist");
-		$this->assertCount(0, $user);
-	}
-
-	/**
 	 * test grabbing a User by email
 	 *
 	 **/
