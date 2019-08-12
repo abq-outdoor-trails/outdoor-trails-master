@@ -76,13 +76,22 @@ class CommentTest extends AbqBikeTest {
 	 * test inserting a valid Comment and verify that the MySQL data matches
 	 **/
 	public function testInsertValidComment() : void {
+		// count the number of rows and save for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
 		// create a new Comment and insert into MySQL
 		$commentId = generateUuidV4();
 		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
 		// grab the comment data from MySQL and enforce the fields match our expectations
-		$pdoComment = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentId());
+		$results = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
+
+		// grab the result from the array and validate it
+		$pdoComment = $results[0];
 
 		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
 		$this->assertEquals($pdoComment->getCommentRouteId()->toString(), $commentRouteId->toString());
