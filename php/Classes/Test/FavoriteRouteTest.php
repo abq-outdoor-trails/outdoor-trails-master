@@ -66,7 +66,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 
 		//create and insert the mocked profile
-		$this->user = new User(generateUuidV4(), 'willieharris', 'williesworld@cnm.edu', $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$this->user = new User(generateUuidV4(), $this->VALID_ACTIVATION, 'williesworld@cnm.edu', $this->VALID_HASH, $this->VALID_ACTIVATION);
 		$this->user->insert($this->getPDO());
 
 		//create and insert the mocked route

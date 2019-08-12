@@ -94,7 +94,7 @@ class UserTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("user");
 
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_USER_NAME);
 		$user->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -118,7 +118,7 @@ class UserTest extends AbqBikeTest {
 
 		//create a new profile and insert it into mySQL
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_USER_NAME, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_ACTIVATION);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_USER_NAME);
 		$user->insert($this->getPDO());
 
 		//edit the User and update it in mySQL
