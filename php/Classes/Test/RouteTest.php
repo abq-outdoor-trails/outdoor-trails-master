@@ -26,11 +26,12 @@ class RouteTest extends AbqBikeTest {
 	 * @var Uuid value of route id; this is the primary key
 	 **/
 	protected $routeId = null;
+
 	/**
-	 * valid route Name
-	 * @var string $VALID_ROUTE_NAME
+	 * Valid route description
+	 * @var string $VALID_ROUTE_DESCRIPTION
 	 */
-	protected $VALID_ROUTE_NAME = "This is a test name";
+	protected $VALID_ROUTE_DESCRIPTION = "Descriptions may or may not exist";
 
 	/**
 	 * valid route file
@@ -39,10 +40,10 @@ class RouteTest extends AbqBikeTest {
 	protected $VALID_ROUTE_FILE = "http://www.waynesworld.com";
 
 	/**
-	 * valid route type
-	 * @var string $VALID_ROUTE_TYPE
+	 * valid route Name
+	 * @var string $VALID_ROUTE_NAME
 	 */
-	protected $VALID_ROUTE_TYPE = "Paved Multi-use Trail";
+	protected $VALID_ROUTE_NAME = "This is a test name";
 
 	/**
 	 * valid speed limit
@@ -51,10 +52,10 @@ class RouteTest extends AbqBikeTest {
 	protected $VALID_SPEED_LIMIT = 20;
 
 	/**
-	 * Valid route description
-	 * @var string $VALID_ROUTE_DESCRIPTION
+	 * valid route type
+	 * @var string $VALID_ROUTE_TYPE
 	 */
-	protected $VALID_ROUTE_DESCRIPTION = "Descriptions may or may not exist";
+	protected $VALID_ROUTE_TYPE = "Paved Multi-use Trail";
 
 	/**
 	 * PHP Unit setup method
