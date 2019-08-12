@@ -423,4 +423,3 @@ class Route implements \JsonSerializable {
 		return ($fields);
 	}
 }
-
