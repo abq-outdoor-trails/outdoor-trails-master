@@ -264,15 +264,5 @@ class UserTest extends AbqBikeTest {
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 	}
-
-	/**
-	 * test grabbing a User by and email that does not exist
-	 *
-	 **/
-	public function testGetInvalidUserActivation(): void {
-		//grab and email that does not exist
-		$user = User::getUserByUserActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
-		$this->assertNull($user);
-	}
 }
 
