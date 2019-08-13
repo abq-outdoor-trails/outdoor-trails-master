@@ -102,7 +102,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * Inserts favorite route into mySql
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related errors occure
+	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 *
 	 */
