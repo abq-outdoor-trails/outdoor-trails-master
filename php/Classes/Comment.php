@@ -275,6 +275,16 @@ class Comment implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
+
+		// create query template
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		// bind the comment id to the template placeholder
+		$parameters = ["commentId" => $commentId->getBytes()];
+		$statement->execute($parameters);
+
+
 	}
 
 	/**
