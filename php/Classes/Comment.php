@@ -5,6 +5,7 @@ namespace AbqOutdoorTrails\AbqBike;
 require_once("autoload.php");
 require_once(dirname(__DIR__) . "/vendor/autoload.php");
 
+use phpDocumentor\Reflection\Types\Self_;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -262,6 +263,18 @@ class Comment implements \JsonSerializable {
 		// bind the member variables to the placeholder in the query template
 		$parameters = ["commentId" => $this->commentId->getBytes()];
 		$statement->execute($parameters);
+	}
+
+	/**
+	 * method to get user by comment id
+	 **/
+	public static function getCommentByCommentId(\PDO $pdo, Uuid $commentId) : ?Comment {
+		// sanitize commentId before searching
+		try {
+			$commentId = self::validateUuid();
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
 	}
 
 	/**

@@ -98,6 +98,7 @@ class FavoriteRoute implements \JsonSerializable {
 		}
 		$this->favoriteRouteUserId = $uuid;
 	}
+	
 	/**
 	 * Inserts favorite route into mySql
 	 *
