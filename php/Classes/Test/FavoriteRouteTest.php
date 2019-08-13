@@ -70,7 +70,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$this->user->insert($this->getPDO());
 
 		//create and insert the mocked route
-		$this->route = new Route(generateUuidV4(), 'Madison Bike Blvd', '21', 'bike blvd', 30, 'bike blvd shared user road with lowered speed limit');
+		$this->route = new Route(generateUuidV4(), 'Madison Bike Blvd', '21', 'bike blvd', 30, 'bike blvd');
 		$this->route->insert($this->getPDO());
 
 	}

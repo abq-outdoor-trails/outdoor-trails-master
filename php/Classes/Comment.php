@@ -304,42 +304,42 @@ class Comment implements \JsonSerializable {
 		return($comments);
 	}
 
-	/**
-	 * get comments by comment date, for display ranked by date on individual route's view
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $commentDate date value for comment
-	 * @return \SplFixedArray $comments array of comments returned by date
-	 */
-	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
-		// validate date, throw error if invalid value
-		try {
-				$commentDate = self::validateDateTime($commentDate);
-			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			}
-
-		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
-		$statement = $pdo->prepare($query);
-		// bind comment date to the placeholder in query template
-		$parameters = ["commentDate" => $commentDate];
-		$statement->execute($parameters);
-		// build array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($row = $statement->fetch()) {
-			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-	}
+//	/**
+//	 * get comments by comment date, for display ranked by date on individual route's view
+//	 *
+//	 * @param \PDO $pdo PDO connection object
+//	 * @param \DateTime $commentDate date value for comment
+//	 * @return \SplFixedArray $comments array of comments returned by date
+//	 */
+//	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
+//		// validate date, throw error if invalid value
+//		try {
+//				$commentDate = self::validateDateTime($commentDate);
+//			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+//				$exceptionType = get_class($exception);
+//				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+//			}
+//
+//		// create query template
+//		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
+//		$statement = $pdo->prepare($query);
+//		// bind comment date to the placeholder in query template
+//		$parameters = ["commentDate" => $commentDate];
+//		$statement->execute($parameters);
+//		// build array of comments
+//		$comments = new \SplFixedArray($statement->rowCount());
+//		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+//		while($row = $statement->fetch()) {
+//			try {
+//				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
+//				$comments[$comments->key()] = $comment;
+//				$comments->next();
+//			} catch(\Exception $exception) {
+//				// if the row couldn't be converted, rethrow it
+//				throw(new \PDOException($exception->getMessage(), 0, $exception));
+//			}
+//		}
+//	}
 
 	/**
 	 * formats the state variables for JSON serialization
