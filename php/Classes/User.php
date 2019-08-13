@@ -261,6 +261,11 @@ class User implements \JsonSerializable {
 
 		}
 
+		// verify user name is correct size
+		if(strlen($newUserName) > 32) {
+			throw(new \RangeException('User name cannot be greater than 32 characters'));
+		}
+
 		//store the user name//
 		$this->userName = $newUserName;
 	}
