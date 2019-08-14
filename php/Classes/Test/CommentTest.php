@@ -133,6 +133,13 @@ class CommentTest extends AbqBikeTest {
 		$comment->insert($this->getPDO());
 
 		// grab data from MySQL and enforce fields match expectations
+		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
+		$this->assertEquals($pdoComment->getCommentId(), $commentId);
+		$this->assertEquals($pdoComment->getCommentRouteId(), $this->route->getRouteId());
+		$this->assertEquals($pdoComment->getCommentUserId(), $this->user->getUserId());
+		$this->assertEquals($pdoComment->getCommentContent(), $comment->getCommentContent());
+		$this->assertEquals($pdoComment->getCommentDate(), $comment->getCommentDate());
 	}
 
 	/**
