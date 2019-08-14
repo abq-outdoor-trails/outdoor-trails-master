@@ -284,7 +284,19 @@ class Comment implements \JsonSerializable {
 		$parameters = ["commentId" => $commentId->getBytes()];
 		$statement->execute($parameters);
 
-
+		// grab the comment from MySQL
+		try {
+			$comment = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row) {
+				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($comment);
 	}
 
 	/**
