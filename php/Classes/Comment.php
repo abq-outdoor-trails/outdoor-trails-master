@@ -266,7 +266,9 @@ class Comment implements \JsonSerializable {
 	}
 
 	/**
-	 * method to get user by comment id
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid $commentId id value of a comment
+	 * @return Comment|null returned Comment
 	 **/
 	public static function getCommentByCommentId(\PDO $pdo, Uuid $commentId) : ?Comment {
 		// sanitize commentId before searching

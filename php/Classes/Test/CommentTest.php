@@ -159,6 +159,10 @@ class CommentTest extends AbqBikeTest {
 	}
 
 	/**
+	 *
+	 **/
+
+	/**
 	 * test get comment array by comment date
 	 **/
 //	public function testGetValidCommentsByCommentDate() : void {
