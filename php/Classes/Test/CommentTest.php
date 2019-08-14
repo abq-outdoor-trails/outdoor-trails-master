@@ -120,15 +120,20 @@ class CommentTest extends AbqBikeTest {
 		$this->assertNull($pdoComment);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("comment"));
 	}
-//
-//	/**
-//	 * test grabbing a Comment that does not exist
-//	 **/
-//	public function testGetInvalidCommentByCommentId() : void {
-//		// grab a comment id that exceeds the maximum allowable comment id
-//		$comment = Comment::getCommentId();
-//		$this->assertNull($comment);
-//	}
+
+	/**
+	 * test get comment by comment id
+	 **/
+	public function testGetValidCommentByCommentId() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("comment");
+
+		$commentId = generateUuidV4();
+		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
+
+		// grab data from MySQL and enforce fields match expectations
+	}
 
 	/**
 	 * test get comment array by route id
@@ -157,10 +162,6 @@ class CommentTest extends AbqBikeTest {
 		// format the date as seconds since the beginning of time to prevent round off errors
 		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 	}
-
-	/**
-	 *
-	 **/
 
 	/**
 	 * test get comment array by comment date
