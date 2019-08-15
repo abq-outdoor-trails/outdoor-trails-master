@@ -86,7 +86,7 @@ class CommentTest extends AbqBikeTest {
 
 		// grab the data from MySQL and enforce the fields match expectations
 		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
-
+		var_dump($comment->getCommentId());
 		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
 		$this->assertEquals($pdoComment->getCommentRouteId(), $comment->getCommentRouteId()->toString());
 		$this->assertEquals($pdoComment->getCommentUserId(), $comment->getCommentUserId()->toString());
@@ -105,13 +105,14 @@ class CommentTest extends AbqBikeTest {
 		// create a new Comment and insert it into MySQL
 		$commentId = generateUuidV4();
 		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
+		$comment->insert($this->getPDO());
 
 		// delete the Comment from MySQL
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$comment->delete($this->getPDO());
 
 		// grab the data from MySQL and enforce the Comment does not exist
-		$pdoComment = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentRouteId());
+		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
 		$this->assertNull($pdoComment);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("comment"));
 	}
