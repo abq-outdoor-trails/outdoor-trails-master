@@ -89,7 +89,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$favoriteRoute->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$pdoFavoriteRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($this->getPDO(), $this->route->getRouteId());
+		$pdoFavoriteRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($this->getPDO(), $this->route->getRouteId(), $this->user->getUserId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteRouteId(), $this->route->getRouteId());
