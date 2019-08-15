@@ -135,6 +135,23 @@ class FavoriteRoute implements \JsonSerializable {
 		// create a query template
 		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteRouteId = :favoriteRouteRouteId AND favoriteRouteUserId = :favoriteRouteUserId";
 		$statement = $pdo->prepare($query);
+
+		// bind the ids to the template placeholders
+		$parameters = ["favoriteRouteRouteId" => $favoriteRouteRouteId->getBytes(), "favoriteRouteUserId" => $favoriteRouteUserId->getBytes()];
+		$statement->execute($parameters);
+
+		// grab the favorite route from MySQL
+		try {
+			$favoriteRoute = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row) {
+				$favoriteRoute = new FavoriteRoute($row["favoriteRouteRouteId"], $row["favoriteRouteUserId"]);
+			}
+		} catch(\Exception $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($favoriteRoute);
 	}
 
 	/**
