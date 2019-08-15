@@ -163,3 +163,5 @@ class RouteTest extends AbqBikeTest {
 		$this->assertEquals($pdoRoute->getRouteSpeedLimit(), $this->VALID_SPEED_LIMIT);
 	}
 }
+
+
