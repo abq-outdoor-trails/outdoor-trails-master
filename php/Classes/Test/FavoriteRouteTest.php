@@ -26,7 +26,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 * @var User $user
 	 **/
 
-	protected $user;
+ 	protected $user;
 
 	/**
 	 * Route that was favorited; this is for foreign key relations
@@ -113,7 +113,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$favoriteRoute->delete($this->getPDO());
 
 		//grab the data from mySQL and enforce the Route does not exist
-		$pdoRoute = FavoriteRoute::getFavoriteRouteById($this->getPDO(), $this->user->getUserId(), $this->route->getRouteId()); //TODO don't understand which method to call from FavoriteRoute here for comparison
+		$pdoRoute = FavoriteRoute::getFavoriteRouteById($this->getPDO(), $this->user->getUserId(), $th is->route->getRouteId()); //TODO don't understand which method to call from FavoriteRoute here for comparison
 		$this->assertNull($pdoRoute);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("favoriteRoute"));
 
