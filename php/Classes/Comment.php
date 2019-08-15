@@ -273,7 +273,7 @@ class Comment implements \JsonSerializable {
 	public static function getCommentByCommentId(\PDO $pdo, Uuid $commentId) : ?Comment {
 		// sanitize commentId before searching
 		try {
-			$commentId = self::validateUuid();
+			$commentId = self::validateUuid($commentId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}

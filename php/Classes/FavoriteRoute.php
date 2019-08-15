@@ -63,7 +63,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 *
 	 */
 	public function setFavoriteRouteRouteId(Uuid $newFavoriteRouteRouteId): void {
-		$this->favoriteRouteRouteId = $newFavoriteRouteRouteId;
+//		$this->favoriteRouteRouteId = $newFavoriteRouteRouteId;
 		try {
 			$uuid = self::validateUuid($newFavoriteRouteRouteId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -89,7 +89,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 *
 	 **/
 	public function setFavoriteRouteUserId(Uuid $newFavoriteRouteUserId): void {
-		$this->favoriteRouteUserId = $newFavoriteRouteUserId;
+//		$this->favoriteRouteUserId = $newFavoriteRouteUserId;
 		try {
 			$uuid = self::validateUuid($newFavoriteRouteUserId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -114,7 +114,7 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes(), "favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes ()];
+		$parameters = ["favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes(), "favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes()];
 		$statement->execute($parameters);
 	}
 

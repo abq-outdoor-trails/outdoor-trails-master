@@ -85,7 +85,8 @@ class CommentTest extends AbqBikeTest {
 		$comment->insert($this->getPDO());
 
 		// grab the comment data from MySQL and enforce the fields match our expectations
-		$results = Comment::getCommentsByRouteId($this->getPDO(), $comment->getCommentId());
+		$results = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
+		var_dump($results);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("comment"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\Comment", $results);
