@@ -49,10 +49,10 @@ CREATE TABLE comment (
 -- CREATE TABLE statement for favoriteRoutes table
 CREATE TABLE favoriteRoute (
 	favoriteRouteUserId BINARY(16) NOT NULL,
-	favoriteRouteRouteID BINARY(16) NOT NULL,
+	favoriteRouteRouteId BINARY(16) NOT NULL,
 	-- foreign key --
 	INDEX (favoriteRouteUserId),
 	FOREIGN KEY (favoriteRouteUserId) REFERENCES user(userId),
-	INDEX (favoriteRouteRouteID),
-	FOREIGN KEY (favoriteRouteRouteID) REFERENCES route(routeId)
+	INDEX (favoriteRouteRouteId),
+	FOREIGN KEY (favoriteRouteRouteId) REFERENCES route(routeId)
 );
