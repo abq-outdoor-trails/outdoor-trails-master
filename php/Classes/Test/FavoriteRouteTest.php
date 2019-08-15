@@ -84,7 +84,6 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
 
 		//create a new FavoriteRoute and insert into mySQL
-		var_dump($this->route->getRouteId());
 		$favoriteRoute = new FavoriteRoute($this->route->getRouteId(), $this->user->getUserId());
 		$favoriteRoute->insert($this->getPDO());
 

@@ -121,7 +121,7 @@ class FavoriteRoute implements \JsonSerializable {
 	/**
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid $favoriteRouteRouteId route id associated with this favorite route
-	 * @param string $favoriteRouteUserId user id associated with this favorite route
+	 * @param Uuid $favoriteRouteUserId user id associated with this favorite route
 	 * @return FavoriteRoute|null favorite route that was returned
 	 **/
 	public static function getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId(\PDO $pdo, Uuid $favoriteRouteRouteId, Uuid $favoriteRouteUserId) {
