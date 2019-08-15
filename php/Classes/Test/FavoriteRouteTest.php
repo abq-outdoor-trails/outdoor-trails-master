@@ -153,10 +153,8 @@ class FavoriteRouteTest extends AbqBikeTest {
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$results = FavoriteRoute::getFavoriteRoutesByUserId($this->getPDO(), $favoriteRoute->getFavoriteRouteUserId()); //TODO is the second argument correct here?
-		var_dump($results);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertCount(1, $results);
-
 		// ensure no other objects are bleeding into the test
 		$this->assertContainsOnlyInstancesOf("AbqOutdoorTrails\\AbqBike\\FavoriteRoute", $results);
 
