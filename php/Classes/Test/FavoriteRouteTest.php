@@ -143,7 +143,7 @@ class FavoriteRouteTest extends AbqBikeTest {
 	 * test grabbing a FavoriteRoute by user id
 	 *
 	 **/
-	public function testGetValidFavoriteRouteByUserId() : void {
+	public function testGetValidFavoriteRoutesByUserId() : void {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
 
@@ -152,7 +152,8 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$favoriteRoute->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$results = FavoriteRoute::getFavoriteRoutesByUserId($this->getPDO(), $this->route->getRouteId());
+		$results = FavoriteRoute::getFavoriteRoutesByUserId($this->getPDO(), $favoriteRoute->getFavoriteRouteUserId()); //TODO is the second argument correct here?
+		var_dump($results);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertCount(1, $results);
 

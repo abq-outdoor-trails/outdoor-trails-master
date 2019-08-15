@@ -86,7 +86,6 @@ class CommentTest extends AbqBikeTest {
 
 		// grab the data from MySQL and enforce the fields match expectations
 		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
-		var_dump($comment->getCommentId());
 		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
 		$this->assertEquals($pdoComment->getCommentRouteId(), $comment->getCommentRouteId()->toString());
 		$this->assertEquals($pdoComment->getCommentUserId(), $comment->getCommentUserId()->toString());
