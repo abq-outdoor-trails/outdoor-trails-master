@@ -118,6 +118,25 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	public static function getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId(\PDO $pdo, string $favoriteRouteRouteId, string $favoriteRouteUserId) {
+		// validate both uuids
+		try {
+			$favoriteRouteRouteId = self::validateUuid($favoriteRouteRouteId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		try {
+			$favoriteRouteUserId = self::validateUuid($favoriteRouteUserId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create a query template
+		$query = "SELECT favoriteRouteRouteId, favoriteRouteUserId FROM favoriteRoute WHERE favoriteRouteRouteId = :favoriteRouteRouteId AND favoriteRouteUserId = :favoriteRouteUserId";
+		$statement = $pdo->prepare($query);
+	}
+
 	/**
 	 * method to return a user's favorite Route by the route's ID
 	 *
