@@ -84,7 +84,15 @@ class CommentTest extends AbqBikeTest {
 		$comment = new Comment($commentId, $this->route->getRouteId(), $this->user->getUserId(), $this->VALID_COMMENTCONTENT, $this->VALID_COMMENTDATE);
 		$comment->insert($this->getPDO());
 
+		// grab the data from MySQL and enforce the fields match expectations
+		$pdoComment = Comment::getCommentByCommentId($this->getPDO(), $comment->getCommentId());
 
+		$this->assertEquals($pdoComment->getCommentId()->toString(), $commentId->toString());
+		$this->assertEquals($pdoComment->getCommentRouteId(), $comment->getCommentRouteId()->toString());
+		$this->assertEquals($pdoComment->getCommentUserId(), $comment->getCommentUserId()->toString());
+		$this->assertEquals($pdoComment->getCommentContent(), $this->VALID_COMMENTCONTENT);
+		// format the date to seconds since the beginning of time to avoid round off errors
+		$this->assertEquals($pdoComment->getCommentDate()->getTimestamp(), $this->VALID_COMMENTDATE->getTimestamp());
 	}
 
 	/**
