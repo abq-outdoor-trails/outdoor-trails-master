@@ -127,4 +127,12 @@ try {
 	} else {
 		throw(new \InvalidArgumentException("Invalid HTTP method request", 418));
 	}
+	// update the $reply->status $reply->message
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
 }
+
+// encode and return reply to front end caller
+header("Content-type: application/json");
+echo json_encode($reply);
