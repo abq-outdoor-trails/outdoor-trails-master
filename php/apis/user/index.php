@@ -76,7 +76,7 @@ try {
 		//enforce the user is signed in and only trying to edit their own user profile
 		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id) ;
 		throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
-	}
+
 
 	validateJwtHeader();
 
@@ -109,7 +109,7 @@ try {
 
 	//update reply
 	$reply->message = "user information updated"
-	} elseif($method === "DELETE"){
+} elseif($method === "DELETE"){
 
 	//verify the XRSF token
 verifyXsrf();
@@ -134,10 +134,21 @@ validateJwtHeader();
 $user->delete($pdo);
 $reply->message = "Profile Deleted";
 
-}else {
+ } else {
 		throw(new \InvalidArgumentException("invalid http request", 400));
 	}
 	//catch any exceptions that were thrown and update the status and message state variable fields
 
 
-}
+}catch
+(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+	}
+
+	header("Content-type: application/json");
+	if($reply->data === null) {
+			unset($reply->data);
+	}
+//encode and return reply to front end caller
+echo json_encode($reply);
