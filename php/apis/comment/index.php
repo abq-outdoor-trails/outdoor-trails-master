@@ -113,13 +113,18 @@ try {
 		}
 
 		// enforce the user is signed in and only trying to delete their own comment
-		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId() !== $comment->getCommentUserId()) {
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $comment->getCommentUserId()->toString()) {
 			throw(new \InvalidArgumentException("You are not allowed to delete this comment", 403));
 		}
+
+		// enforce the user has a JWT token
+		validateJwtHeader();
 
 		// delete comment
 		$comment->delete($pdo);
 		// update reply
 		$reply->message = "Comment deleted OK";
+	} else {
+		throw(new \InvalidArgumentException("Invalid HTTP method request", 418));
 	}
 }
