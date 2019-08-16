@@ -37,4 +37,9 @@ try {
 	$commentUserId = filter_input(INPUT_GET, "commentUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentContent = filter_input(INPUT_GET, "commentContent", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentDate = filter_input(INPUT_GET, "commentDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	// make sure the id is valid for methods that require it
+	if(($method === "DELETE" || $method === "PUT") && (empty($id))) {
+		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
+	}
 }
