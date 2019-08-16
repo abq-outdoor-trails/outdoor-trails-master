@@ -92,14 +92,12 @@ class FavoriteRouteTest extends AbqBikeTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteRouteId(), $this->route->getRouteId());
-
-
 	}
 
-//	/**
-//	 * test creating a FavoriteRoute and then deleting it
-//	 *
-//	 **/
+	/**
+	 * test creating a FavoriteRoute and then deleting it
+	 *
+	 **/
 	public function testDeleteValidFavoriteRoute() : void {
 		//count number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
