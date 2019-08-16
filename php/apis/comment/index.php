@@ -57,7 +57,7 @@ try {
 		// enforce the user has a XSRF token
 		verifyXsrf();
 
-		// enforce the user is signed in
+		// enforce the user is signed in TODO do I need to check this here, or can I check it only below in the post method?
 		if(empty($_SESSION["user"]) === true) {
 			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
 		}
@@ -91,6 +91,9 @@ try {
 			if(empty($_SESSION["user"]) === true) {
 				throw(new \InvalidArgumentException("you must be logged in to post comments", 403));
 			}
+
+			// enforce end user has a JWT token
+			validateJwtHeader();
 
 			// create new Comment and insert into the database
 			$comment = new Comment(generateUuidV4(), $_SESSION["route"]->getRouteId, $_SESSION["user"]->getUserId, $requestObject->commentContent, null);
