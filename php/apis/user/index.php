@@ -5,8 +5,10 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once("etc/apache2/capstone-mysql/Secrets.php");
 
-use namespace: AbqOutdoorTrails\AbqBike {
-					User
+use namespace:
+
+use AbqOutdoorTrails\AbqBike\{
+			User
 };
 
 /**
@@ -45,18 +47,18 @@ try {
 			//make sure the id is valid for methods that require it
 	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
 		throw(new InvalidArgumentException(("id cannot be empty or negative", 405));
-	} else if($method === "PUT" || $method === "POST") {
-		//enforce the user has an XSRF token
-		verifyXSrf();
+	}
 
-		//Retrieves the JSON package that the front end sent, and stores it in $requestContent. Here we are using file_get_contents("php://input") to get the request from the front end. file_get_contents() is a PHP function that reads a file into a string. The argument for the function, here, is "php://input". This is a read only stream that allows raw data to be read from the front end request which is, in this case, a JSON package.
-		$requestContest = file_get_contents("php://input");
+	if($method === "GET") {
+		//set XSRF cookie
+		setXSrfCookie();
 
-		//This Line Then decodes the JSON package and stores that result in $requestObject
+		//get a uer by user id
+		if(empty($userId) === false) {
+			$reply->data = User::getUserByUserId($pdo, $userId);
 
-		$requestObject = json_decode($requestContest);
-
-		//make sure the user is available (require field)
-		if(empty($requestObject->))
+		}else if(empty($userActivationToken) === false) {
+			
+		}
 	}
 }
