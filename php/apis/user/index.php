@@ -8,7 +8,7 @@ require_once("etc/apache2/capstone-mysql/Secrets.php");
 use namespace:
 
 use AbqOutdoorTrails\AbqBike\{
-			User
+	User
 };
 
 /**
@@ -57,8 +57,27 @@ try {
 		if(empty($userId) === false) {
 			$reply->data = User::getUserByUserId($pdo, $userId);
 
-		}else if(empty($userActivationToken) === false) {
-			
+		} else if(empty($userActivationToken) === false) {
+			$reply->data = User::getUserByUserActivationToken($pdo, $userActivationToken);
+
+		} else if(empty($userEmail) === false) {
+			$reply->data = User::getUserByUserEmail($pdo, $userEmail);
+
 		}
+
+	} elseif($method === "PUT") {
+
+		//enforce that the XSRF token is present in the header
+		verifyXsrf();
+
+		//enforce the end user has a JWT token
+		//validateJwtHeader();
+
+		//enforce the user is signed in and only trying to edit their own user profile
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id) ;
+		throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 	}
+
+	validateJwtHeader();
+
 }
