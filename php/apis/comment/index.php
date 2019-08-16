@@ -42,4 +42,16 @@ try {
 	if(($method === "DELETE" || $method === "PUT") && (empty($id))) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
+
+	if($method === "GET") {
+		// set XSRF cookie
+		setXsrfCookie():
+
+		// get a specific comment based on arguments provided or all the comments by route id and update reply
+		if(empty($id) === false) {
+			$reply->data = Comment::getCommentByCommentId($pdo, $id);
+		} else if(empty($commentRouteId) === false) {
+			$reply->data = Comment::getCommentsByRouteId($pdo, $commentRouteId)->toArray();
+		}
+	}
 }
