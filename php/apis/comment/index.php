@@ -40,7 +40,7 @@ try {
 
 	// make sure the id is valid for methods that require it
 	if(($method === "DELETE" || $method === "PUT") && (empty($id))) {
-		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
+		throw(new \InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
 	if($method === "GET") {
@@ -52,6 +52,32 @@ try {
 			$reply->data = Comment::getCommentByCommentId($pdo, $id);
 		} else if(empty($commentRouteId) === false) {
 			$reply->data = Comment::getCommentsByRouteId($pdo, $commentRouteId)->toArray();
+		}
+	} else if($method === "POST") {
+		// enforce the user has a XSRF token
+		verifyXsrf();
+
+		// Retrieves the JSON package that the front end sent, and stores it in $requestContent. Here we are using file_get_contents("php://input") to get the request from the front end. file_get_contents() is a PHP function that reads a file into a string. This is a read only stream that allows raw data to be read from the front end request which is, in this case, a JSON package.
+		$requestContent = file_get_contents("php://input");
+
+		// This decodes the JSON package and stores that result in $requestObject
+		$requestObject = json_decode($requestContent);
+
+		// make sure comment content is available (required field)
+		if(empty($requestObject->commentContent) === true) {
+			throw(new \InvalidArgumentException("No content for Comment.", 405));
+		}
+
+		// make sure comment date is accurate (required field)
+		if(empty($requestObject->commentDate) === true) {
+			throw(new \InvalidArgumentException("No date set for Comment.", 405));
+		} else {
+			// if the date exists, milliseconds since the beginning of time must be converted
+			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
+			if($commentDate === false) {
+				throw(new RuntimeException("Invalid Comment date", 400));
+			}
+			$requestObject->commentDate = $commentDate;
 		}
 	}
 }
