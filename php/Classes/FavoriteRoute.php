@@ -132,7 +132,6 @@ class FavoriteRoute implements \JsonSerializable {
 		$parameters = ["favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes(), "favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes()];
 		$statement->execute($parameters);
 	}
-	// TODO write delete method
 
 	/**
 	 * @param \PDO $pdo PDO connection object
