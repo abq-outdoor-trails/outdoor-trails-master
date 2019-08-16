@@ -118,5 +118,21 @@ try {
 	//validateJwtHeader();
 
 	$user = User::getUserByUserId($pdo, $id);
+	if($user === null) {
+		throw(new RuntimeException("user does not exist"));
+
+	}
+
+	//enforce the user is signed in and only trying to edit their own profile
+if(empty($_SESSION["user"]) === true || $_SESSION["user"]->toString() !== $user->getUserId()->toString()) {
+	throw(new \InvalidArgumentException("you are not allowed access to this profile", 403));
+}
+
+validateJwtHeader();
+
+//delete the post from the database
+$user->delete($pdo);
+$reply->message = "Profile Deleted";
+
 
 }
