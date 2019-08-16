@@ -97,6 +97,5 @@ try {
 		// this takes the form of an associative array where the email is the key to a real name
 		$swiftMessage->setFrom(["wharris21@cnm.ed" => "wharris"]);
 
-
 	}
 }
