@@ -36,5 +36,29 @@ try {
 		// decode the json and turn it into a php object
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
+
+		// user name is a required field
+		if(empty($requestObject->userName) === true) {
+			throw(new \InvalidArgumentException("No user name provided", 405));
+		};
+
+		// user email is a required field
+		if(empty($requestObject->userEmail) === true) {
+			throw(new \InvalidArgumentException("No user email provided", 405));
+		}
+
+		// verify that user password is present
+		if(empty($requestObject->userHash) === true) {
+			throw(new \InvalidArgumentException("Must input valid password", 405));
+		}
+
+		if(empty($requestObject->userHashConfirm) === true) {
+			throw(new \InvalidArgumentException("Must input valid password", 405));
+		}
+
+		// make sure the password and confirm password match
+		if($requestObject->userHash !== $requestObject->userHashConfirm) {
+			throw(new \InvalidArgumentException("Passwords do not match"));
+		}
 	}
 }
