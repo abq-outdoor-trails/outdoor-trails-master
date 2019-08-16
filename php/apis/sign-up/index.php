@@ -60,5 +60,27 @@ try {
 		if($requestObject->userHash !== $requestObject->userHashConfirm) {
 			throw(new \InvalidArgumentException("Passwords do not match"));
 		}
+		$hash = password_hash($requestObject->userHash, PASSWORD_ARGON2I, ["time_cost" => 384]);
+
+		$userActivationToken = bin2hex(random_bytes(16));
+
+		// create the user object
+		$user = new User(generateUuidV4(), $userActivationToken, $requestObject->userEmail, "null", $requestObject->userName);
+
+		// insert the user into the database
+		$user->insert($pdo);
+
+		// compose the email message to send with the activation token
+		$messageSubject = "One step closer to Sticky Head -- Account Activation";
+
+		// building the activation link that can travel to another server and still work.  This is the link that will be clicked to confirm the account.
+		// make sure URL is /public_html/api/activation/$activation
+		$basePath = dirname($_SERVER["SCRIPT_NAME"], 3);
+
+		// create the path
+		$urlglue = $basePath . "api/activation/?activation=" . $userActivationToken;
+
+		// create the redirect link
+		$confirmLink = "https://" . $_SERVER["SERVER_NAME"] . $urlglue;
 	}
 }
