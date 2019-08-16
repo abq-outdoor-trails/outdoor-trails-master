@@ -1,8 +1,3 @@
 <?php
-
-//we determine if we have a GET request. If so, we then process the request.
-if ($method === "GET") {
-
-
-	//If it is not a GET request 
-}
+require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
+require_once dirname()
