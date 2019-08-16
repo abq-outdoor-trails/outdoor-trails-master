@@ -119,29 +119,6 @@ class FavoriteRouteTest extends AbqBikeTest {
 
 	}
 
-//	/**
-//	 * test creating a FavoriteRoute and then deleting it
-//	 *
-//	 **/
-	public function testDeleteValidFavoriteRoute() : void {
-		//count number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
-
-		//create a new FavoriteRoute and insert into mySQL
-		$favoriteRoute = new FavoriteRoute($this->route->getRouteId(), $this->user->getUserId());
-		$favoriteRoute->insert($this->getPDO());
-
-		//delete the route from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
-		$favoriteRoute->delete($this->getPDO());
-
-		//grab the data from mySQL and enforce the Route does not exist
-		$pdoRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($this->getPDO(), $this->user->getUserId(), $this->route->getRouteId());
-		$this->assertNull($pdoRoute);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("favoriteRoute"));
-
-	}
-
 	/**
 	 * test grabbing a FavoriteRoute by user id
 	 *
