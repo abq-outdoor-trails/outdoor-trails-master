@@ -38,7 +38,7 @@ class FavoriteRoute implements \JsonSerializable {
 
 
 
-	public function __construct(Uuid $newFavoriteRouteRouteId, Uuid $newFavoriteRouteUserId) {
+	public function __construct($newFavoriteRouteRouteId, $newFavoriteRouteUserId) {
 		try {
 			$this->setFavoriteRouteRouteId($newFavoriteRouteRouteId);
 			$this->setFavoriteRouteUserId($newFavoriteRouteUserId);
@@ -62,7 +62,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @param Uuid $newFavoriteRouteRouteId
 	 *
 	 */
-	public function setFavoriteRouteRouteId(Uuid $newFavoriteRouteRouteId): void {
+	public function setFavoriteRouteRouteId($newFavoriteRouteRouteId): void {
 //		$this->favoriteRouteRouteId = $newFavoriteRouteRouteId;
 		try {
 			$uuid = self::validateUuid($newFavoriteRouteRouteId);
@@ -88,7 +88,7 @@ class FavoriteRoute implements \JsonSerializable {
 	 * @param Uuid $newFavoriteRouteUserId
 	 *
 	 **/
-	public function setFavoriteRouteUserId(Uuid $newFavoriteRouteUserId): void {
+	public function setFavoriteRouteUserId($newFavoriteRouteUserId): void {
 //		$this->favoriteRouteUserId = $newFavoriteRouteUserId;
 		try {
 			$uuid = self::validateUuid($newFavoriteRouteUserId);
@@ -117,6 +117,8 @@ class FavoriteRoute implements \JsonSerializable {
 		$parameters = ["favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes(), "favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes()];
 		$statement->execute($parameters);
 	}
+
+	// TODO write delete method
 
 	/**
 	 * @param \PDO $pdo PDO connection object

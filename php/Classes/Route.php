@@ -92,7 +92,7 @@ class Route implements \JsonSerializable {
 	 * @return Uuid
 	 */
 	public function getRouteId(): Uuid {
-		return ($this->routeId);
+		return($this->routeId);
 	}
 
 	/**

@@ -9,7 +9,7 @@ use AbqOutdoorTrails\AbqBike\ { User, Route, FavoriteRoute };
 require_once(dirname(__DIR__) . "/autoload.php");
 
 //grab the uuid generator
-require_once(dirname(__DIR__, 3) . "/lib/uuid.php");
+require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 
 /**
  *Full PHPUnit test for FavoriteRoute class
@@ -120,24 +120,27 @@ class FavoriteRouteTest extends AbqBikeTest {
 	}
 
 //	/**
-//	 * test inserting a route and regrabbing it from mySQL //TODO figure out if we need to add a method that gets FavoriteRoutes by both routeId and userId
+//	 * test creating a FavoriteRoute and then deleting it
 //	 *
 //	 **/
-//	public function testGetValidFavoriteRoutesByUserId() : void {
-//		//count the number of rows and save it for later
-//		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
-//
-//		//create a new FavoriteRoute and insert to mySQL
-//		$favoriteRoute = new FavoriteRoute($this->route->getRouteId(),$this->user->getUserId());
-//		$favoriteRoute->insert($this->getPDO());
-//
-//		$pdoFavoriteRoute = FavoriteRoute::getFavoriteRoutesByUserId($this->getPDO(), $this->user->getUserId());
-//		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
-//		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteUserId(), $this->user-getUserId());
-//		$this->assertEquals($pdoFavoriteRoute->getFavoriteRouteById(), $this->FavoriteRoute->getFavoriteRouteById);
-//
-//
-//	}
+	public function testDeleteValidFavoriteRoute() : void {
+		//count number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("favoriteRoute");
+
+		//create a new FavoriteRoute and insert into mySQL
+		$favoriteRoute = new FavoriteRoute($this->route->getRouteId(), $this->user->getUserId());
+		$favoriteRoute->insert($this->getPDO());
+
+		//delete the route from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("favoriteRoute"));
+		$favoriteRoute->delete($this->getPDO());
+
+		//grab the data from mySQL and enforce the Route does not exist
+		$pdoRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($this->getPDO(), $this->user->getUserId(), $this->route->getRouteId());
+		$this->assertNull($pdoRoute);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("favoriteRoute"));
+
+	}
 
 	/**
 	 * test grabbing a FavoriteRoute by user id
