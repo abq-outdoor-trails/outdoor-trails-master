@@ -100,7 +100,7 @@ class FavoriteRoute implements \JsonSerializable {
 	}
 	
 	/**
-	 * Inserts favorite route into mySql
+	 * Inserts favorite route into MySql
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -118,7 +118,20 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
-	// TODO write delete method
+	/**
+	 * Deletes favorite route from MySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+		// create query template
+		$query = "DELETE FROM favoriteRoute WHERE favoriteRouteRouteId = :favoriteRouteRouteId AND favoriteRouteUserId = :favoriteRouteUserId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to template placeholders
+		$parameters = ["favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes(), "favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes()];
+		$statement->execute($parameters);
+	}
 
 	/**
 	 * @param \PDO $pdo PDO connection object
