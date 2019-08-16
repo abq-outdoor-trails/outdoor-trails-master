@@ -109,10 +109,10 @@ try {
 
 	//update reply
 	$reply->message = "user information updated"
-	} elseif($method === "DELETE") {
+	} elseif($method === "DELETE"){
 
 	//verify the XRSF token
-	verifyXsrf();
+verifyXsrf();
 
 	//enforce the end user has a JWT token
 	//validateJwtHeader();
@@ -133,6 +133,11 @@ validateJwtHeader();
 //delete the post from the database
 $user->delete($pdo);
 $reply->message = "Profile Deleted";
+
+}else {
+		throw(new \InvalidArgumentException("invalid http request", 400));
+	}
+	//catch any exceptions that were thrown and update the status and message state variable fields
 
 
 }
