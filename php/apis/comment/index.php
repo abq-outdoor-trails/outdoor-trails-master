@@ -79,5 +79,20 @@ try {
 			}
 			$requestObject->commentDate = $commentDate;
 		}
+
+		// perform the actual post
+		if($method === "POST") {
+			// enforce the user is signed in
+			if(empty($_SESSION["user"]) === true) {
+				throw(new \InvalidArgumentException("you must be logged in to post comments", 403));
+			}
+
+			// create new Comment and insert into the database
+			$comment = new Comment(generateUuidV4(), $_SESSION["route"]->getRouteId, $_SESSION["user"]->getUserId, $requestObject->commentContent, null);
+			$comment->insert($pdo);
+
+			// update reply
+			$reply->message = "Comment created OK";
+		}
 	}
 }
