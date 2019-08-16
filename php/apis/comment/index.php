@@ -21,7 +21,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 // prepare an empty reply
 $reply = new stdClass();
 $reply->status = 200;
-$reply->data = null;
+$reply->data = NULL;
 
 try {
 	// grab the MySQL connection
@@ -75,7 +75,7 @@ try {
 			// if the date exists, milliseconds since the beginning of time must be converted
 			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
 			if($commentDate === false) {
-				throw(new RuntimeException("Invalid Comment date", 400));
+				throw(new \RuntimeException("Invalid Comment date", 400));
 			}
 			$requestObject->commentDate = $commentDate;
 		}
@@ -94,5 +94,24 @@ try {
 			// update reply
 			$reply->message = "Comment created OK";
 		}
+	} else if($method === "DELETE") {
+		// enforce the user has a XSRF token
+		verifyXsrf();
+
+		// retrieve the Comment to be deleted
+		$comment = Comment::getCommentByCommentId($pdo, $id);
+		if($comment === NULL) {
+			throw(new \RuntimeException("Comment does not exist", 404));
+		}
+
+		// enforce the user is signed in and only trying to delete their own comment
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId() !== $comment->getCommentUserId()) {
+			throw(new \InvalidArgumentException("You are not allowed to delete this comment", 403));
+		}
+
+		// delete comment
+		$comment->delete($pdo);
+		// update reply
+		$reply->message = "Comment deleted OK";
 	}
 }
