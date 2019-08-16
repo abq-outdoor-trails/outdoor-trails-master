@@ -23,3 +23,18 @@ $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
 
+try {
+	// grab the MySQL connection
+	$secrets = new \Secrets("etc/apache2/capstone-mysql/abqbiketrails");
+	$pdo = $secrets->getPdoObject();
+
+	// determine which HTTP method was used
+	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+
+	// sanitize input
+	$commentId = filter_input(INPUT_GET, "commentId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$commentRouteId = filter_input(INPUT_GET, "commentRouteId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$commentUserId = filter_input(INPUT_GET, "commentUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$commentContent = filter_input(INPUT_GET, "commentContent", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$commentDate = filter_input(INPUT_GET, "commentDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+}
