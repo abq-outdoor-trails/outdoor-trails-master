@@ -28,5 +28,13 @@ $reply->data = null;
 
 try {
 			//grab the mySQL connection
-			$secretw
+			$secrets = new \Secrets("/etc/apache2/captstone-mysql/abqbiketrails.ini");
+			$pdo = $secrets->getPdoObject();
+
+			//determine which HTTP method was used
+			$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+
+			//sanitize input
+			$id = filter_input(INPUT_GET, "id" FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
 }
