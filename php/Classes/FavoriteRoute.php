@@ -118,6 +118,15 @@ class FavoriteRoute implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	public function delete(\PDO $pdo) : void {
+		// create query template
+		$query = "DELETE FROM favoriteRoute WHERE favoriteRouteRouteId = :favoriteRouteRouteId AND favoriteRouteUserId = :favoriteRouteUserId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to template placeholders
+		$parameters = ["favoriteRouteRouteId" => $this->favoriteRouteRouteId->getBytes(), "favoriteRouteUserId" => $this->favoriteRouteUserId->getBytes()];
+		$statement->execute($parameters);
+	}
 	// TODO write delete method
 
 	/**
