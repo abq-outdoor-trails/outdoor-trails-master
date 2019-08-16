@@ -82,5 +82,21 @@ try {
 
 		// create the redirect link
 		$confirmLink = "https://" . $_SERVER["SERVER_NAME"] . $urlglue;
+
+		// compose message to send with email
+		$message = <<< EOF
+		<h2>Welcome to AbqBike!</h2>
+		<p>In order to start finding great bike routes in your area, you must confirm your account.</p>
+		<p><a href="$confirmLink">$confirmLink</a></p>
+		EOF;
+
+		// create swift email
+		$swiftMessage = new Swift_Message();
+
+		// attach the sender to the message
+		// this takes the form of an associative array where the email is the key to a real name
+		$swiftMessage->setFrom(["wharris21@cnm.ed" => "wharris"]);
+
+
 	}
 }
