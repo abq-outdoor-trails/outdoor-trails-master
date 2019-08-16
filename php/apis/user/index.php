@@ -80,4 +80,43 @@ try {
 
 	validateJwtHeader();
 
+	//decode the response from the front end
+	$requestContent = file_get_contents("php://input");
+	$requestObject = json_decode($requestContent);
+
+	//retrieve the profile to be updated
+	$user = User::getUserByUserId($pdo, $id);
+	if($user === null) {
+		throw(new RuntimeException("User does not exist", 404));
+
+	}
+
+	//user name
+	if(empty($requestObject->userName) === true) {
+		throw(new \InvalidArgumentException("No user name", 405));
+
+	}
+
+	//profile email is a required field
+	if(empty($requestObject->UserEmail) === true) {
+		throw(new \InvalidArgumentException("No user email present", 405));
+
+	}
+
+	$user->setUserEmail($requestObject->userEmail);
+	$user->setUserName($requestObject->userName);
+	$user->update($pdo);
+
+	//update reply
+	$reply->message = "user information updated"
+	} elseif($method === "DELETE") {
+
+	//verify the XRSF token
+	verifyXsrf();
+
+	//enforce the end user has a JWT token
+	//validateJwtHeader();
+
+	$user = User::getUserByUserId($pdo, $id);
+
 }
