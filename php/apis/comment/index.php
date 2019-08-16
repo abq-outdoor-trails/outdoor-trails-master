@@ -25,7 +25,7 @@ $reply->data = NULL;
 
 try {
 	// grab the MySQL connection
-	$secrets = new \Secrets("etc/apache2/capstone-mysql/abqbiketrails");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	// determine which HTTP method was used
@@ -39,13 +39,13 @@ try {
 	$commentDate = filter_input(INPUT_GET, "commentDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($id))) {
-		throw(new \InvalidArgumentException("id cannot be empty or negative", 405));
+	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
+		throw(new \InvalidArgumentException("id cannot be empty or negative", 402));
 	}
 
 	if($method === "GET") {
 		// set XSRF cookie
-		setXsrfCookie():
+		setXsrfCookie();
 
 		// get a specific comment based on arguments provided or all the comments by route id and update reply
 		if(empty($id) === false) {
@@ -56,6 +56,11 @@ try {
 	} else if($method === "POST") {
 		// enforce the user has a XSRF token
 		verifyXsrf();
+
+		// enforce the user is signed in
+		if(empty($_SESSION["user"]) === true) {
+			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
+		}
 
 		// Retrieves the JSON package that the front end sent, and stores it in $requestContent. Here we are using file_get_contents("php://input") to get the request from the front end. file_get_contents() is a PHP function that reads a file into a string. This is a read only stream that allows raw data to be read from the front end request which is, in this case, a JSON package.
 		$requestContent = file_get_contents("php://input");
