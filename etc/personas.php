@@ -21,7 +21,7 @@
 			and best tourist routes in old town and along the bosque.
 		</p>
 		<h1>Logo</h1>
-		<img src="bike%20abq.png">
+		<img src="bike abq.png">
 
 
 		<h1>

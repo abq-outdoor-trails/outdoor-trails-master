@@ -5,8 +5,7 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS route;
 
-
--- CREATE TABLE statement for routes table
+-- CREATE TABLE statement for route table
 CREATE TABLE route (
 	routeId BINARY(16) NOT NULL,
 	routeName VARCHAR(32),
@@ -39,7 +38,7 @@ CREATE TABLE comment (
 	commentRouteId BINARY(16) NOT NULL,
 	commentUserId BINARY(16) NOT NULL,
 	commentContent VARCHAR(256) NOT NULL,
-	commentDate DATE NOT NULL,
+	commentDate DATETIME(6) NOT NULL,
 	-- foreign keys for comments entity
 	FOREIGN KEY(commentRouteId) REFERENCES route(routeId),
 	FOREIGN KEY(commentUserId) REFERENCES user(userId),
@@ -49,11 +48,11 @@ CREATE TABLE comment (
 
 -- CREATE TABLE statement for favoriteRoutes table
 CREATE TABLE favoriteRoute (
+	favoriteRouteRouteId BINARY(16) NOT NULL,
 	favoriteRouteUserId BINARY(16) NOT NULL,
-	favoriteRouteRouteID BINARY(16) NOT NULL,
 	-- foreign key --
+	INDEX (favoriteRouteRouteId),
+	FOREIGN KEY (favoriteRouteRouteId) REFERENCES route(routeId),
 	INDEX (favoriteRouteUserId),
-	FOREIGN KEY (favoriteRouteUserId) REFERENCES user(userId),
-	INDEX (favoriteRouteRouteID),
-	FOREIGN KEY (favoriteRouteRouteID) REFERENCES route(routeId)
+	FOREIGN KEY (favoriteRouteUserId) REFERENCES user(userId)
 );

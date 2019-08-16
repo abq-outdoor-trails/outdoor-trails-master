@@ -3,8 +3,9 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__) . "/vendor/autoload.php");
 
+use phpDocumentor\Reflection\Types\Self_;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -21,7 +22,7 @@ class Comment implements \JsonSerializable {
 
 	/**
 	 * id for this comment; this is the primary key
-	 * @var Uuid $commentId
+	 * @var Uuid|string $commentId
 	 **/
 	private $commentId;
 	/**
@@ -58,7 +59,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
+	public function __construct($newCommentId, $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentRouteId($newCommentRouteId);
@@ -265,6 +266,42 @@ class Comment implements \JsonSerializable {
 	}
 
 	/**
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid $commentId id value of a comment
+	 * @return Comment|null returned Comment
+	 **/
+	public static function getCommentByCommentId(\PDO $pdo, Uuid $commentId) : ?Comment {
+		// sanitize commentId before searching
+		try {
+			$commentId = self::validateUuid($commentId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create query template
+		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentId = :commentId";
+		$statement = $pdo->prepare($query);
+
+		// bind the comment id to the template placeholder
+		$parameters = ["commentId" => $commentId->getBytes()];
+		$statement->execute($parameters);
+
+		// grab the comment from MySQL
+		try {
+			$comment = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row) {
+				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($comment);
+	}
+
+	/**
 	 * gets comments by route id, for display on the individual route page
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -304,42 +341,42 @@ class Comment implements \JsonSerializable {
 		return($comments);
 	}
 
-	/**
-	 * get comments by comment date, for display ranked by date on individual route's view
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param \DateTime $commentDate date value for comment
-	 * @return \SplFixedArray $comments array of comments returned by date
-	 */
-	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
-		// validate date, throw error if invalid value
-		try {
-				$commentDate = self::validateDateTime($commentDate);
-			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			}
-
-		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
-		$statement = $pdo->prepare($query);
-		// bind comment date to the placeholder in query template
-		$parameters = ["commentDate" => $commentDate];
-		$statement->execute($parameters);
-		// build array of comments
-		$comments = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while($row = $statement->fetch()) {
-			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
-				$comments[$comments->key()] = $comment;
-				$comments->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-	}
+//	/**
+//	 * get comments by comment date, for display ranked by date on individual route's view
+//	 *
+//	 * @param \PDO $pdo PDO connection object
+//	 * @param \DateTime $commentDate date value for comment
+//	 * @return \SplFixedArray $comments array of comments returned by date
+//	 */
+//	public static function getCommentsByCommentDate(\PDO $pdo, \DateTime $commentDate) : \SplFixedArray {
+//		// validate date, throw error if invalid value
+//		try {
+//				$commentDate = self::validateDateTime($commentDate);
+//			} catch(\InvalidArgumentException | \RangeException | \Exception $exception) {
+//				$exceptionType = get_class($exception);
+//				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+//			}
+//
+//		// create query template
+//		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
+//		$statement = $pdo->prepare($query);
+//		// bind comment date to the placeholder in query template
+//		$parameters = ["commentDate" => $commentDate];
+//		$statement->execute($parameters);
+//		// build array of comments
+//		$comments = new \SplFixedArray($statement->rowCount());
+//		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+//		while($row = $statement->fetch()) {
+//			try {
+//				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
+//				$comments[$comments->key()] = $comment;
+//				$comments->next();
+//			} catch(\Exception $exception) {
+//				// if the row couldn't be converted, rethrow it
+//				throw(new \PDOException($exception->getMessage(), 0, $exception));
+//			}
+//		}
+//	}
 
 	/**
 	 * formats the state variables for JSON serialization

@@ -10,7 +10,7 @@ use PHPUnit\DbUnit\Operation\{Composite, Factory, Operation};
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 3) . "/vendor/autoload.php");
 /**
  * Abstract class containing universal and project specific mySQL parameters
  *
@@ -27,7 +27,7 @@ require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
  *
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  **/
-abstract class DataDesignTest extends TestCase {
+abstract class AbqBikeTest extends TestCase {
 	use TestCaseTrait;
 	/**
 	 * PHPUnit database connection interface
@@ -43,11 +43,11 @@ abstract class DataDesignTest extends TestCase {
 		$dataset = new QueryDataSet($this->getConnection());
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-		$dataset->addTable("routes");
+		$dataset->addTable("route");
 		$dataset->addTable("user", "SELECT userId, userName, userEmail, userHash, userActivationToken FROM `user`");
 		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
-		$dataset->addTable("comments");
-		$dataset->addTable("favoriteRoutes");
+		$dataset->addTable("comment");
+		$dataset->addTable("favoriteRoute");
 
 		return($dataset);
 	}
@@ -82,7 +82,7 @@ abstract class DataDesignTest extends TestCase {
 		// if the connection hasn't been established, create it
 		if($this->connection === null) {
 			// connect to mySQL and provide the interface to PHPUnit
-			$secrets =  new \Secrets("/etc/apache2/capstone-mysql/ddctwitter.ini");
+			$secrets =  new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 			$pdo = $secrets->getPdoObject();
 			$this->connection = $this->createDefaultDBConnection($pdo, $secrets->getDatabase());
 		}
