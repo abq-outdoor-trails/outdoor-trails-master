@@ -9,7 +9,7 @@ require_once("/etc/apache2/abqbiketrails-mysql/Secrets.php");
 use AbqOutdoorTrails\User;
 
 /**
- * api for handling sign-in
+ * api for handling sign-In
  *
  * author jdunn33@cnm.edu
  **/
