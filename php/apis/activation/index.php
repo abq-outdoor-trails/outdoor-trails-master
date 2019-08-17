@@ -14,7 +14,31 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
 }
 
+// prepare an empty reply
+$reply = new stdClass();
+$reply->status = 200;
+$reply->data = null;
+try {
+	// grab the MySQL connection
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
+	$pdo = $secrets->getPdoObject();
 
+	// check the HTTP method being used
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
+
+	// sanitize input
+	$activation = filter_input(INPUT_GET, "activation", FILTER_SANITIZE_STRING);
+
+	// make sure the activation token is the correct size
+	if(strlen($activation) !== 32) {
+		throw(new \InvalidArgumentException("Activation has incorrect length", 405));
+	}
+
+	// verify that the activation token is a hexidecimal string value
+	if(ctype_xdigit($activation) === false) {
+		throw(new \InvalidArgumentException("Activation is empty or has invalid contents", 405));
+	}
+}
 
 
 
