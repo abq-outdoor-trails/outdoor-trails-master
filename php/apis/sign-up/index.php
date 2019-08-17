@@ -97,5 +97,31 @@ try {
 		// this takes the form of an associative array where the email is the key to a real name
 		$swiftMessage->setFrom(["wharris21@cnm.ed" => "wharris"]);
 
+
+		/**
+		 * attach recipients to the message
+		 * this is an array that can include or omit the recipient's name
+		 * use recipient's real name where possible;
+		 * this reduces probability the email is marked as spam
+		 **/
+		// define who the recipient is
+		$recipients = [$requestObject->userEmail];
+		// set the recipient to the swift message
+		$swiftMessage->setTo($recipients);
+
+		// attach the subject line to the email message
+		$swiftMessage->setSubject($messageSubject);
+
+		/**
+		 * attach the message to the email
+		 * set two versions of the message -- a HTML formatted version and a filter_var() version, in plain text
+		 * this displays the entire $confirmLink to pain text
+		 * this allows users who are not viewing HTML content to still access the link
+		 **/
+		// attach the HTML version of the message
+		$swiftMessage->setBody($message, "text/html");
+
+		// attach the plain text version of the message
+		$swiftMessage->addPart(html_entity_decode($message), "text/plain");
 	}
 }
