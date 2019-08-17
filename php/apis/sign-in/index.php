@@ -48,6 +48,36 @@ try{
 			$userEmail = filter_var($requestOject->userEmail, FILTER_SANITIZE_EMAIL);
 		}
 
-		if(empty($requestOject->))
+		if(empty($requestOject->userHash) === true) {
+			throw(new \InvalidArgumentException("must enter a password.", 401));
+		}else {
+				$userHash = $requestOject->userHash;
+		}
+
+		//grab the profile from the database by the email provided
+		$user = User::getUserByUserEmail($pdo, $userEmail);
+		if(empty($user) === true) {
+			throw(new InvalidArgumentException("Invalid Email", 401));
+		}
+		$user->setUserActivationToken(null);
+		$user->update($pdo);
+
+		//verify hash is correct
+		if(password_verify($requestOject->userHash, $user->getUserHash()) === false) {
+			throw(new \InvalidArgumentException("Password or email is correct.", 401));
+		}
+
+		//grab the profile from the database and put it into a session
+		$user = User::getUseByUserID($pdo, $user->getUserId());
+
+		$_SESSION["user"] = $user;
+
+		//create the Auth payload
+		$authObject = (object) [
+			"userId" =>$user->getUserId(),
+			"userName" => $user->getUserName()
+		];
+
+		//create and set the JWT token
 	}
 }
