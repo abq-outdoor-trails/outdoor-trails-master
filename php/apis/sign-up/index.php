@@ -123,5 +123,49 @@ try {
 
 		// attach the plain text version of the message
 		$swiftMessage->addPart(html_entity_decode($message), "text/plain");
+
+		/**
+		 * send the email via SMTP; here it is configured to relay everything upstream via CNM servers
+		 * this may or may not be available to all web hosts; todo consult host documentation for details
+		 * SwiftMailer supports many different transport methods; SMTP was chosen because it's the most compatible and has the best error handling
+		 * @see http://swiftmailer.org/docs/sending.html Sending Messages - Documentation - SwitftMailer
+		 **/
+		// setup SMTP
+		$smtp = new Swift_SmtpTransport("localhost", 25);
+		$mailer = new Swift_Mailer($smtp);
+
+		// send the message
+		$numSent = $mailer->send($swiftMessage, $failedRecipients);
+
+		/**
+		 * the send method returns the number of recipients that accepted the email
+		 * if the number attempted is not the number accepted, this is an exception
+		 **/
+		if($numSent !== count($recipients)) {
+			// the $failedRecipients parameter passed in the send() method now contains an array of the emails that failed
+			throw(new \RuntimeException("Unable to send email", 400));
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
