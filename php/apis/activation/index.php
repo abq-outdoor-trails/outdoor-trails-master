@@ -84,20 +84,3 @@ if($reply->data === NULL) {
 	unset($reply->data);
 }
 echo json_encode($reply);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
