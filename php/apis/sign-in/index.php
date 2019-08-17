@@ -12,12 +12,12 @@ use AbqOutdoorTrails\User;
  * api for handling sign-in
  *
  * author jdunn33@cnm.edu
-**/
+ **/
 //prepare and empty reply
 $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
-try{
+try {
 
 	//start session
 	if(session_status() !== PHP_SESSION_ACTIVE) {
@@ -44,14 +44,14 @@ try{
 		//check to make sure the password and email field is not empty
 		if(empty($requestOject->userEmail) === true) {
 			throw(new \InvalidArgumentException("email address not provided.", 401));
-		}else {
+		} else {
 			$userEmail = filter_var($requestOject->userEmail, FILTER_SANITIZE_EMAIL);
 		}
 
 		if(empty($requestOject->userHash) === true) {
 			throw(new \InvalidArgumentException("must enter a password.", 401));
-		}else {
-				$userHash = $requestOject->userHash;
+		} else {
+			$userHash = $requestOject->userHash;
 		}
 
 		//grab the profile from the database by the email provided
@@ -73,8 +73,8 @@ try{
 		$_SESSION["user"] = $user;
 
 		//create the Auth payload
-		$authObject = (object) [
-			"userId" =>$user->getUserId(),
+		$authObject = (object)[
+			"userId" => $user->getUserId(),
 			"userName" => $user->getUserName()
 		];
 
@@ -82,13 +82,13 @@ try{
 		setJwtAndAuthHeader("auth", $authObject);
 
 		$reply->message = "sign in was successful.";
-	}else{
+	} else {
 		throw(new \InvalidArgumentException(("Invalid HTTP method request", 418));
 
 	}
-		//if an exception is thrown update the user
+	//if an exception is thrown update the user
 
-}catch(Exception | TypeError $exception) {
+} catch(Exception | TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
