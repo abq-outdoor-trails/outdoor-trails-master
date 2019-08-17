@@ -71,7 +71,7 @@ try {
 		$user->insert($pdo);
 
 		// compose the email message to send with the activation token
-		$messageSubject = "One step closer to Sticky Head -- Account Activation";
+		$messageSubject = "One step closer to Abq Bike -- Account Activation";
 
 		// building the activation link that can travel to another server and still work.  This is the link that will be clicked to confirm the account.
 		// make sure URL is /public_html/api/activation/$activation
@@ -145,8 +145,20 @@ try {
 			// the $failedRecipients parameter passed in the send() method now contains an array of the emails that failed
 			throw(new \RuntimeException("Unable to send email", 400));
 		}
+
+		// update reply
+		$reply->message = "Thank you for creating a profile with AbqBike!";
+	} else {
+		throw(new \InvalidArgumentException("Invalid HTTP request"));
 	}
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+	$reply->trace = $exception->getTraceAsString();
 }
+
+header("Content-type: application/json");
+echo json_encode($reply);
 
 
 
