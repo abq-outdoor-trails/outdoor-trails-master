@@ -38,6 +38,32 @@ try {
 	if(ctype_xdigit($activation) === false) {
 		throw(new \InvalidArgumentException("Activation is empty or has invalid contents", 405));
 	}
+
+	// handle the GET HTTP request
+	if($method === "GET") {
+		// set XSRF cookie
+		setXsrfCookie();
+
+		// find user associated with the activation token
+		$user = User::getUserByUserActivationToken($pdo, $activation);
+
+		// verify the user is not null
+		if($user !== NULL) {
+			// make sure the activation token matches
+			if($activation === $user->getUserActivationToken()) {
+				// set activation to null
+				$user->setUserActivationToken(NULL);
+
+				// update the user in the database
+				$user->update($pdo);
+
+				// set the reply for the end user TODO make sure this is an accurate redirect message -- are we planning to redirect to profile view?  Main view?
+				$reply->data = "Thank you for activating your account! You will be auto-redirected to your profile shortly...";
+			}
+		} else {
+
+		}
+	}
 }
 
 
