@@ -24,7 +24,6 @@ try {
 	// grab the MySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
-	var_dump($pdo);
 
 	// check the HTTP method being used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
@@ -82,7 +81,7 @@ try {
 }
 
 // prepare and send the reply
-header("Content type: application/json");
+header("Content-type: application/json");
 if($reply->data === NULL) {
 	unset($reply->data);
 }
