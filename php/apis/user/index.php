@@ -37,13 +37,13 @@ try {
 
 	//sanitize input
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$userId = filter_input(INPUT_GET, "userId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$userActivationToken = filter_input(INPUT_GET, "userActivationToken", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$userHash = filter_input(INPUT_GET, "userHash", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			$userName = filter_input(INPUT_GET, "userName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userId = filter_input(INPUT_GET, "userId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userActivationToken = filter_input(INPUT_GET, "userActivationToken", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userHash = filter_input(INPUT_GET, "userHash", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userName = filter_input(INPUT_GET, "userName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-			//make sure the id is valid for methods that require it
+	//make sure the id is valid for methods that require it
 	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
@@ -77,77 +77,77 @@ try {
 		throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 
 
-	validateJwtHeader();
+		validateJwtHeader();
 
-	//decode the response from the front end
-	$requestContent = file_get_contents("php://input");
-	$requestObject = json_decode($requestContent);
+		//decode the response from the front end
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
 
-	//retrieve the profile to be updated
-	$user = User::getUserByUserId($pdo, $id);
-	if($user === null) {
-		throw(new RuntimeException("User does not exist", 404));
+		//retrieve the profile to be updated
+		$user = User::getUserByUserId($pdo, $id);
+		if($user === null) {
+			throw(new RuntimeException("User does not exist", 404));
 
-	}
+		}
 
-	//user name
-	if(empty($requestObject->userName) === true) {
-		throw(new \InvalidArgumentException("No user name", 405));
+		//user name
+		if(empty($requestObject->userName) === true) {
+			throw(new \InvalidArgumentException("No user name", 405));
 
-	}
+		}
 
-	//profile email is a required field
-	if(empty($requestObject->UserEmail) === true) {
-		throw(new \InvalidArgumentException("No user email present", 405));
+		//profile email is a required field
+		if(empty($requestObject->UserEmail) === true) {
+			throw(new \InvalidArgumentException("No user email present", 405));
 
-	}
+		}
 
-	$user->setUserEmail($requestObject->userEmail);
-	$user->setUserName($requestObject->userName);
-	$user->update($pdo);
+		$user->setUserEmail($requestObject->userEmail);
+		$user->setUserName($requestObject->userName);
+		$user->update($pdo);
 
-	//update reply
-	$reply->message = "user information updated";
-} elseif($method === "DELETE"){
+		//update reply
+		$reply->message = "user information updated";
+	} elseif($method === "DELETE") {
 
-	//verify the XRSF token
-verifyXsrf();
+		//verify the XRSF token
+		verifyXsrf();
 
-	//enforce the end user has a JWT token
-	//validateJwtHeader();
+		//enforce the end user has a JWT token
+		//validateJwtHeader();
 
-	$user = User::getUserByUserId($pdo, $id);
-	if($user === null) {
-		throw(new RuntimeException("user does not exist"));
+		$user = User::getUserByUserId($pdo, $id);
+		if($user === null) {
+			throw(new RuntimeException("user does not exist"));
 
-	}
+		}
 
-	//enforce the user is signed in and only trying to edit their own profile
-if(empty($_SESSION["user"]) === true || $_SESSION["user"]->toString() !== $user->getUserId()->toString()) {
-	throw(new \InvalidArgumentException("you are not allowed access to this profile", 403));
-}
+		//enforce the user is signed in and only trying to edit their own profile
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->toString() !== $user->getUserId()->toString()) {
+			throw(new \InvalidArgumentException("you are not allowed access to this profile", 403));
+		}
 
-validateJwtHeader();
+		validateJwtHeader();
 
 //delete the post from the database
-$user->delete($pdo);
-$reply->message = "Profile Deleted";
+		$user->delete($pdo);
+		$reply->message = "Profile Deleted";
 
- } else {
+	} else {
 		throw(new \InvalidArgumentException("invalid http request", 400));
 	}
 	//catch any exceptions that were thrown and update the status and message state variable fields
 
 
-}catch
+} catch
 (\Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
-	}
+}
 
-	header("Content-type: application/json");
-	if($reply->data === null) {
-			unset($reply->data);
-	}
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
 //encode and return reply to front end caller
 echo json_encode($reply);
