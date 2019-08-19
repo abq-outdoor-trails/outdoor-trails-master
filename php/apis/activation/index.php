@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\User;
@@ -18,10 +19,12 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
+
 try {
 	// grab the MySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
+	var_dump($pdo);
 
 	// check the HTTP method being used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
