@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 2) . "Classes/autoload.php";
+require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\User;
