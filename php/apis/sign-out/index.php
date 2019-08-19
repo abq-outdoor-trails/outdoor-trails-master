@@ -9,7 +9,7 @@ require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
  *
  * @author jdunn33@cnm.edu
  *
-**/
+ **/
 
 //verify the xsrf challenge
 if(session_status() !== PHP_SESSION_ACTIVE) {
@@ -28,14 +28,13 @@ try {
 	if($method === "GET") {
 		$_SESSION = [];
 		$reply->message = "You are now signed out.";
-	}
-	else {
+	} else {
 		throw(new \InvalidArgumentException("Invalid HTTP method request"));
 	}
-}catch(Exception $exception) {
+} catch(Exception $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
-}catch(TypeError $typeError) {
+} catch(TypeError $typeError) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
