@@ -26,7 +26,7 @@ $reply->data = null;
 try {
 	// grab the MySQL connection
 
-	$secrets = new \Secrets("etc/apache2/capstone-mysql/abqbiketrails.ini");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	// determine which HTTP method was used
@@ -36,11 +36,6 @@ try {
 		// decode the json and turn it into a php object
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
-
-		// user name is a required field
-		if(empty($requestObject->userName) === true) {
-			throw(new \InvalidArgumentException("No user name provided", 405));
-		};
 
 		// user email is a required field
 		if(empty($requestObject->userEmail) === true) {
@@ -56,6 +51,11 @@ try {
 			throw(new \InvalidArgumentException("Must input valid password", 405));
 		}
 
+		// user name is a required field
+		if(empty($requestObject->userName) === true) {
+			throw(new \InvalidArgumentException("No user name provided", 405));
+		};
+
 		// make sure the password and confirm password match
 		if($requestObject->userHash !== $requestObject->userHashConfirm) {
 			throw(new \InvalidArgumentException("Passwords do not match"));
@@ -65,7 +65,7 @@ try {
 		$userActivationToken = bin2hex(random_bytes(16));
 
 		// create the user object
-		$user = new User(generateUuidV4(), $userActivationToken, $requestObject->userEmail, "null", $requestObject->userName);
+		$user = new User(generateUuidV4(), $userActivationToken, $requestObject->userEmail, $hash, $requestObject->userName);
 
 		// insert the user into the database
 		$user->insert($pdo);
