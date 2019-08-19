@@ -69,15 +69,12 @@ try {
 		//enforce that the XSRF token is present in the header
 		verifyXsrf();
 
-		//enforce the end user has a JWT token
-		//validateJwtHeader();
-
 		//enforce the user is signed in and only trying to edit their own user profile
 		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id){
 			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 		}
 
-
+		//enforce the end user has a JWT token
 		validateJwtHeader();
 
 		//decode the response from the front end
