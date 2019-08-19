@@ -1,10 +1,10 @@
 <?php
 
-require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
-require_once("/etc/apache2/abqbiketrails-mysql/Secrets.php");
-require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "lib/jwt.php";
-require_once("/etc/apache2/abqbiketrails-mysql/Secrets.php");
+require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
+require_once("/etc/apache2/capstone-mysql/Secrets.php");
+require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 2) . "lib/jwt.php";
+require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\User;
 
