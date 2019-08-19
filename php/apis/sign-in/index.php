@@ -2,7 +2,7 @@
 
 require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
 require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
-require_once dirname(__DIR__, 2) . "lib/jwt.php";
+require_once dirname(__DIR__, 2) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\User;
@@ -38,19 +38,19 @@ try {
 
 		//process the request content and decode the json object into a php object
 		$requestContent = file_get_contents("php://input");
-		$requestOject = json_decode("$requestContent");
+		$requestObject = json_decode("$requestContent");
 
 		//check to make sure the password and email field is not empty
-		if(empty($requestOject->userEmail) === true) {
+		if(empty($requestObject->userEmail) === true) {
 			throw(new \InvalidArgumentException("email address not provided.", 401));
 		} else {
-			$userEmail = filter_var($requestOject->userEmail, FILTER_SANITIZE_EMAIL);
+			$userEmail = filter_var($requestObject->userEmail, FILTER_SANITIZE_EMAIL);
 		}
 
-		if(empty($requestOject->userHash) === true) {
+		if(empty($requestObject->userHash) === true) {
 			throw(new \InvalidArgumentException("must enter a password.", 401));
 		} else {
-			$userHash = $requestOject->userHash;
+			$userHash = $requestObject->userHash;
 		}
 
 		//grab the profile from the database by the email provided
@@ -62,7 +62,7 @@ try {
 		$user->update($pdo);
 
 		//verify hash is correct
-		if(password_verify($requestOject->userHash, $user->getUserHash()) === false) {
+		if(password_verify($requestObject->userHash, $user->getUserHash()) === false) {
 			throw(new \InvalidArgumentException("Password or email is correct.", 401));
 		}
 
