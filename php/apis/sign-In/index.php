@@ -83,7 +83,7 @@ try {
 
 		$reply->message = "sign in was successful.";
 	} else {
-		throw(new \InvalidArgumentException(("Invalid HTTP method request", 418));
+		throw(new \InvalidArgumentException("Invalid HTTP method request", 418));
 
 	}
 	//if an exception is thrown update the user
