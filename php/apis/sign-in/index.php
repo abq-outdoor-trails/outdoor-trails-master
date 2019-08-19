@@ -38,7 +38,7 @@ try {
 
 		//process the request content and decode the json object into a php object
 		$requestContent = file_get_contents("php://input");
-		$requestObject = json_decode("$requestContent");
+		$requestObject = json_decode($requestContent);
 
 		//check to make sure the password and email field is not empty
 		if(empty($requestObject->userEmail) === true) {
@@ -63,7 +63,7 @@ try {
 
 		//verify hash is correct
 		if(password_verify($requestObject->userHash, $user->getUserHash()) === false) {
-			throw(new \InvalidArgumentException("Password or email is correct.", 401));
+			throw(new \InvalidArgumentException("Password or email is incorrect.", 401));
 		}
 
 		//grab the profile from the database and put it into a session
