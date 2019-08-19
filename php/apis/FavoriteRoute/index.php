@@ -34,7 +34,7 @@ try {
 
 	//sanitize input
 	$favoriteRouteUserId = $id = filter_input(INPUT_GET, "favoriteRouteUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$favoriteRouteRouteId = $id= filter_input(INPUT_GET, "favoriteRouteRouteId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$favoriteRouteRouteId = $id = filter_input(INPUT_GET, "favoriteRouteRouteId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	//make sure the id is valid for methods that require it
 	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
@@ -47,11 +47,11 @@ try {
 		setXsrfCookie();
 
 		// gets a specific route based on its composite key
-		if ($favoriteRouteRouteId !== null && $favoriteRouteUserId !== null) {
-			$favoriteRoute= \AbqOutdoorTrails\AbqBike\FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $favoriteRouteRouteId, $favoriteRouteUserId);
+		if($favoriteRouteRouteId !== null && $favoriteRouteUserId !== null) {
+			$favoriteRoute = \AbqOutdoorTrails\AbqBike\FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $favoriteRouteRouteId, $favoriteRouteUserId);
 
-			if($favoriteRoute!== null) {
-				$reply->data=$favoriteRoute;
+			if($favoriteRoute !== null) {
+				$reply->data = $favoriteRoute;
 			}
 			// if none of the search parameters are met throw an exception
 		} else if(empty($favoriteRouteUserId) === false) {
@@ -62,8 +62,53 @@ try {
 		} else {
 			throw new InvalidArgumentException("incorrect search parameters", 404);
 		}
+	} else if($method === "POST" || $method === "DELETE") {
 
- }
+	}
+		//decode the response from the front end
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
+
+		if(empty($requestObject->favoriteRouteUserId) === true) {
+			throw (new\InvalidArgumentException("no user linked to the favorite route"));
+		}
+
+		if(empty($requestObject->favoriteRouteRoutId) === true) {
+			throw (new \InvalidArgumentException("no route linked to the favorite route"));
+		}
+
+
+		if($method === "POST") {
+			// enforce the XSRF token
+			verifyXsrf();
+
+			//enforce the end user has a jwt token
+			//validateJwtHeader ();
+
+			//enforce the user us signed in
+
+			if(empty($_SESSION["user"] === true) {
+				throw (new \InvalidArgumentException("you must be logged in to favorite routes", 403));
+			}
+
+			validateJwtHeader();
+
+			$favoriteRoute = new \AbqOutdoorTrails\AbqBike\FavoriteRoute($_SESSION["user"]->getUserId(), $requestObject->favoriteRouteRouteId);
+			$favoriteRoute->insert($pdo);
+			$reply->message = "favorite route successful";
+
+
+		} else if($method === "DELETE") {
+
+			//enforce the end user has a XSRF token.
+			verifyXsrf();
+
+			//enforce the end user has a JWT token
+			validateJwtHeader();
+
+			// grab the favorite route by its composite key
+		}
+
 }
 
 
