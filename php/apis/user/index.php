@@ -5,7 +5,6 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once("etc/apache2/capstone-mysql/Secrets.php");
 
-use namespace:
 
 use AbqOutdoorTrails\AbqBike\{
 	User
@@ -37,7 +36,7 @@ try {
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$id = filter_input(INPUT_GET, "id" FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			$userId = filter_input(INPUT_GET, "userId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			$userActivationToken = filter_input(INPUT_GET, "userActivationToken", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -46,7 +45,7 @@ try {
 
 			//make sure the id is valid for methods that require it
 	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
-		throw(new InvalidArgumentException(("id cannot be empty or negative", 405));
+		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
 	if($method === "GET") {
@@ -108,7 +107,7 @@ try {
 	$user->update($pdo);
 
 	//update reply
-	$reply->message = "user information updated"
+	$reply->message = "user information updated";
 } elseif($method === "DELETE"){
 
 	//verify the XRSF token
