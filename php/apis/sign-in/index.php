@@ -5,7 +5,7 @@ require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
 require_once dirname(__DIR__, 2) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
-use AbqOutdoorTrails\User;
+use AbqOutdoorTrails\AbqBike\User;
 
 /**
  * api for handling sign-In
@@ -23,7 +23,7 @@ try {
 		session_start();
 	}
 	//grab mySQL statement
-	$secrets = new \Secrets("/etc/apache2/abqbiketrails-mySQL/abqbiketrails.ini");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	//determine which HTTP method is being used
@@ -67,7 +67,7 @@ try {
 		}
 
 		//grab the profile from the database and put it into a session
-		$user = User::getUseByUserID($pdo, $user->getUserId());
+		$user = User::getUserByUserId($pdo, $user->getUserId());
 
 		$_SESSION["user"] = $user;
 
