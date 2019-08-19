@@ -3,6 +3,7 @@ require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 
@@ -73,8 +74,9 @@ try {
 		//validateJwtHeader();
 
 		//enforce the user is signed in and only trying to edit their own user profile
-		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id) ;
-		throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id){
+			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
+		}
 
 
 		validateJwtHeader();
