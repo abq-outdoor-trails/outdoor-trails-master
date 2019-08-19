@@ -38,7 +38,6 @@ try {
 
 	//sanitize input
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$userId = filter_input(INPUT_GET, "userId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userActivationToken = filter_input(INPUT_GET, "userActivationToken", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userHash = filter_input(INPUT_GET, "userHash", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -54,8 +53,8 @@ try {
 		setXSrfCookie();
 
 		//get a uer by user id
-		if(empty($userId) === false) {
-			$reply->data = User::getUserByUserId($pdo, $userId);
+		if(empty($id) === false) {
+			$reply->data = User::getUserByUserId($pdo, $id);
 
 		} else if(empty($userActivationToken) === false) {
 			$reply->data = User::getUserByUserActivationToken($pdo, $userActivationToken);
