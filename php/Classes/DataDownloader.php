@@ -17,7 +17,26 @@ class DataDownloader {
 		//$hash TODO see above
 		// TODO not including any other class creation, don't think we need to for a Route
 
-		for($i = 0; $i <)
+		for($i = 0; $i <= 0; $i++) {
+			//TODO figure out the loopy
+		}
 	}
 
+	public static function readDataJson($url) {
+		$context = stream_context_create(["http" => ["ignore_errors" => true, "method" => "GET"]]);
+		try {
+			// file-get-contents returns file in string context
+			if(($jsonData = file_get_contents($url, null, $context)) === false) {
+				throw(new \RuntimeException("url doesn't produce results"));
+			}
+			// decode the Json file
+			$jsonConverted = json_decode($jsonData);
+			// format
+			$jsonFeatures = $jsonConverted->Result;
+			$newRoutes = \SplFixedArray::fromArray($jsonFeatures);
+		} catch(\Exception $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($newRoutes);
+	}
 }
