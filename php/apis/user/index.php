@@ -111,7 +111,7 @@ try {
 		verifyXsrf();
 
 		//enforce the end user has a JWT token
-		//validateJwtHeader();
+		validateJwtHeader();
 
 		$user = User::getUserByUserId($pdo, $id);
 		if($user === null) {
@@ -123,8 +123,6 @@ try {
 		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->toString() !== $user->getUserId()->toString()) {
 			throw(new \InvalidArgumentException("you are not allowed access to this profile", 403));
 		}
-
-		validateJwtHeader();
 
 //delete the post from the database
 		$user->delete($pdo);

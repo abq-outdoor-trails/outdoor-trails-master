@@ -58,8 +58,9 @@ try {
 		if(empty($user) === true) {
 			throw(new InvalidArgumentException("Email or password is incorrect.", 401));
 		}
-		$user->setUserActivationToken(null);
-		$user->update($pdo);
+
+//		$user->setUserActivationToken(null);
+//		$user->update($pdo);
 
 		//verify hash is correct
 		if(password_verify($requestObject->userHash, $user->getUserHash()) === false) {

@@ -31,10 +31,7 @@ try {
 	} else {
 		throw(new \InvalidArgumentException("Invalid HTTP method request"));
 	}
-} catch(Exception $exception) {
-	$reply->status = $exception->getCode();
-	$reply->message = $exception->getMessage();
-} catch(TypeError $typeError) {
+} catch(Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }

@@ -42,9 +42,9 @@ try {
 
 	//make sure the id is valid for methods that require it
 
-	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
-		throw(new InvalidArgumentException("id cannot be empty or negative, 402"));
-	}
+//	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
+//		throw(new InvalidArgumentException("id cannot be empty or negative, 402"));
+//	}
 
 	// handle GET request - if id is present, that route is returned, otherwise all routes are returned
 	if($method === "GET") {
@@ -59,8 +59,10 @@ try {
 			$reply->data = Route::getRouteByRouteType($pdo, $routeType);
 			// get s specific route by route file and update reply
 		} else if(empty($routeFile) === false) {
-			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile)->toArray();
+			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile);
 		}
+	} else {
+		throw (new \InvalidArgumentException("Invalid HTTP Request"), 418);
 	}
 
 	// update the $reply->status $reply->message
