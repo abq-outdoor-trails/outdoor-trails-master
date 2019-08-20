@@ -34,7 +34,6 @@ try {
 
 	//sanitize input
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$routeId = filter_input(INPUT_GET, "routeId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$routeDescription = filter_input(INPUT_GET, "routeDescription", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$routeFile = filter_input(INPUT_GET, "routeFile", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$routeName = filter_input(INPUT_GET, "routeName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -57,10 +56,10 @@ try {
 			$reply->data = Route::getRouteByRouteId($pdo, $id);
 			// get a specific route by route type and update reply
 		} else if(empty($routeType) === false) {
-			$reply->data = Route::getRouteByRouteType($pdo, $routeId);
+			$reply->data = Route::getRouteByRouteType($pdo, $routeType);
 			// get s specific route by route file and update reply
 		} else if(empty($routeFile) === false) {
-			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile)->toArray;
+			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile)->toArray();
 		}
 	}
 

@@ -1,8 +1,9 @@
 <?php
-require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
+require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 2) . "/lib/uuid.php";
+require_once dirname(__DIR__, 2) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{ User, Route, Comment};
@@ -73,17 +74,17 @@ try {
 			throw(new \InvalidArgumentException("No content for Comment.", 405));
 		}
 
-		// make sure comment date is accurate (required field)
-		if(empty($requestObject->commentDate) === true) {
-			throw(new \InvalidArgumentException("No date set for Comment.", 405));
-		} else {
-			// if the date exists, milliseconds since the beginning of time must be converted
-			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
-			if($commentDate === false) {
-				throw(new \RuntimeException("Invalid Comment date", 400));
-			}
-			$requestObject->commentDate = $commentDate;
-		}
+//		 // make sure comment date is accurate (required field)
+//		if(empty($requestObject->commentDate) === true) {
+//			throw(new \InvalidArgumentException("No date set for Comment.", 405));
+//		} else {
+//			// if the date exists, milliseconds since the beginning of time must be converted
+//			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
+//			if($commentDate === false) {
+//				throw(new \RuntimeException("Invalid Comment date", 400));
+//			}
+//			$requestObject->commentDate = $commentDate;
+//		}
 
 		// perform the actual post
 		if($method === "POST") {
