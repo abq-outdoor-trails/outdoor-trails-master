@@ -95,9 +95,8 @@ try {
 		}
 
 		//profile email is a required field
-		if(empty($requestObject->UserEmail) === true) {
+		if(empty($requestObject->userEmail) === true) {
 			throw(new \InvalidArgumentException("No user email present", 405));
-
 		}
 
 		$user->setUserEmail($requestObject->userEmail);

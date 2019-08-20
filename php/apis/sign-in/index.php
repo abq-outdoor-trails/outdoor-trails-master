@@ -56,7 +56,7 @@ try {
 		//grab the profile from the database by the email provided
 		$user = User::getUserByUserEmail($pdo, $userEmail);
 		if(empty($user) === true) {
-			throw(new InvalidArgumentException("Invalid Email", 401));
+			throw(new InvalidArgumentException("Email or password is incorrect.", 401));
 		}
 		$user->setUserActivationToken(null);
 		$user->update($pdo);
