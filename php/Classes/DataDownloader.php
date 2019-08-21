@@ -2,6 +2,16 @@
 
 namespace AbqOutdoorTrails\AbqBike;
 
+/**
+ * $routeId = "OBJECTID"
+ * $routeName = "ParentPathName"
+ * $routeFile = ..... we will create
+ * $routeType = "PathType"
+ * $routeSpeedLimit = "PostedSpeedLimit_MPH"
+ * routeDescription = "Direction"
+ *
+**/
+
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
