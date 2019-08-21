@@ -31,13 +31,15 @@ class DataDownloader {
 		$routes = self::readDataJson($urlBase);
 
 
-		foreach($routes as $route) {
-			var_dump($route);
-		}
+			for ($i = 0; $i <= 0; $i++) {
 
-			for ($i = 0; $i <= 0; $i++)
-			$newRoutes = self::readDataJson($urlBase . "?pageIndex=" . $i);
 
+				$routes = self::readDataJson($urlBase . "?pageIndex=" . $i);
+				foreach($routes as $route) {
+				$routeId = $routeFile->pathType;
+				}
+
+			}
 
 
 //			$objectId->routeId;
@@ -78,4 +80,4 @@ class DataDownloader {
 	}
 }
 
-DataDownloader::pullRoutes();
+echo DataDownloader::pullRoutes();
