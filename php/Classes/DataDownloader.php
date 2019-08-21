@@ -15,7 +15,7 @@ namespace AbqOutdoorTrails\AbqBike;
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
-require_once(dirname(__DIR__,2 ) . "/php/lib/uuid.php");
+require_once(dirname(__DIR__, 2) . "/php/lib/uuid.php");
 
 class DataDownloader {
 	public static function pullRoutes() {
@@ -25,22 +25,29 @@ class DataDownloader {
 		$pdo = $secrets->getPdoObject();
 		// TODO not including any other class creation, don't think we need to for a Route
 
-		for($i = 0; $i <= 0; $i++) {
-			//TODO figure out the loopy
 
-			$newRoute = self::readDataJson($urlBase . "?pageIndex=" . $i);
-			$objectId->routeId;
+		$routes = self::readDataJson($urlBase);
 
-			foreach($newRoute as $objectId) {
-				$routeId = generateUuidV4();
-			}
-				$routeDescription = $value->Direction;
-
-			//grab route info from json
-			$objectId = "";
-			foreach()
-
+		foreach($routes as $route) {
+			var_dump($route);
 		}
+
+		for()
+//			$objectId->routeId;
+
+//			foreach($newRoute as $objectId) {
+//				$routeId = generateUuidV4();
+//			}
+//				$routeDescription = $value->Direction;
+//
+//			//grab route info from json
+//			$objectId = "";
+//			foreach($newRoute as $pathType) {
+//				$routeId = generateUuidV4();
+//
+//
+//			}
+
 	}
 
 	public static function readDataJson($url) {
@@ -52,14 +59,16 @@ class DataDownloader {
 			}
 			// decode the Json file
 			$jsonConverted = json_decode($jsonData);
-			var_dump($jsonConverted);
-			// format
-			$jsonFeatures = $jsonConverted->Result;
-			$newRoutes = \SplFixedArray::fromArray($jsonFeatures);
+
+//			var_dump($jsonConverted);
+
+
+			$newRoutes = \SplFixedArray::fromArray($jsonConverted->features);
 		} catch(\Exception $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($newRoutes);
+		return ($newRoutes);
 	}
 }
+
 DataDownloader::pullRoutes();
