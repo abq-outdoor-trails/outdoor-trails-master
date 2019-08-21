@@ -30,11 +30,16 @@ class DataDownloader {
 
 		$routes = self::readDataJson($urlBase);
 
+
 		foreach($routes as $route) {
 			var_dump($route);
 		}
 
-		for()
+			for ($i = 0; $i <= 0; $i++)
+			$newRoutes = self::readDataJson($urlBase . "?pageIndex=" . $i);
+
+
+
 //			$objectId->routeId;
 
 //			foreach($newRoute as $objectId) {
