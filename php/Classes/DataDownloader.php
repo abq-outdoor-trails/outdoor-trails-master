@@ -3,6 +3,8 @@
 namespace AbqOutdoorTrails\AbqBike;
 
 /**
+ * Documenting our class identifiers compared to our data class identifiers
+ *
  * $routeId = "OBJECTID"
  * $routeName = "ParentPathName"
  * $routeFile = ..... we will create
