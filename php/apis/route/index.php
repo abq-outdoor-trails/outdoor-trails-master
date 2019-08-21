@@ -62,7 +62,7 @@ try {
 			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile);
 		}
 	} else {
-		throw (new \InvalidArgumentException("Invalid HTTP Request"), 418);
+		throw (new \InvalidArgumentException("Invalid HTTP Request"), 404);
 	}
 
 	// update the $reply->status $reply->message
