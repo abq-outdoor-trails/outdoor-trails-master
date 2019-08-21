@@ -4,7 +4,7 @@ require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
-require_once ("/etc/apache2/capstone-mysql/Secrets.php");
+require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{Route};
 
@@ -62,7 +62,7 @@ try {
 			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile);
 		}
 	} else {
-		throw (new \InvalidArgumentException("Invalid HTTP Request"), 404);
+		throw(new \InvalidArgumentException("Invalid HTTP method request", 418));
 	}
 
 	// update the $reply->status $reply->message
