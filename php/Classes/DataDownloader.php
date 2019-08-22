@@ -29,14 +29,10 @@ class DataDownloader {
 
 
 		$routes = self::readDataJson($urlBase);
+		$routeCount = count($routes);
 
-
-			for ($i = 0; $i <= 0; $i++) {
-
-
-				$routes = self::readDataJson($urlBase . "?pageIndex=" . $i);
+			for ($i = 0; $i <= 3043; $i++) {
 				foreach($routes as $route) {
-				$routeId = $routeFile->pathType;
 				}
 
 			}
