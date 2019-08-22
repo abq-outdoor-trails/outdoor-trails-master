@@ -29,11 +29,24 @@ class DataDownloader {
 
 
 		$routes = self::readDataJson($urlBase);
-		$routeCount = count($routes);
 
 			for ($i = 0; $i <= 3043; $i++) {
-				foreach($routes as $route) {
+				// iterate through array and return all paths
+//				var_dump($routes[$i]->geometry->paths);
+				// iterate through array and return all object ids
+//				var_dump($routes[$i]->attributes->OBJECTID);
+				if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
+					$routeId = generateUuidV4();
+					$description = $routes[$i]->attributes->Comments;
+					$routeFile = print_r($routes[$i], true);
+					$routeName = $routes[$i]->attributes->ParentPathName;
+					$routeSpeedLimit = $routes[$i]->attributes->PostedSpeedLimit_MPH;
+					$routeType = $routes[$i]->attributes->PathType;
+
+					var_dump($routeFile);
 				}
+//				foreach($routes as $route) {
+//				}
 
 			}
 
