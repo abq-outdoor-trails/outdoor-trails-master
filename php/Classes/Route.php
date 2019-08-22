@@ -200,7 +200,7 @@ class Route implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Route name is empty or insecure"));
 		}
 		//verify route name is less than 32 characters
-		if(strlen($newRouteName) > 32) {
+		if(strlen($newRouteName) > 64) {
 			throw(new \RangeException("route name is too large"));
 		}
 		$this->routeName = $newRouteName;
