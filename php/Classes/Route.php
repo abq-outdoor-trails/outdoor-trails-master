@@ -31,7 +31,7 @@ class Route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct($newRouteId, string $newRouteDescription, string $newRouteFile, string $newRouteName, int $newRouteSpeedLimit, string $newRouteType) {
+	public function __construct($newRouteId, string $newRouteDescription, string $newRouteFile, string $newRouteName, ?int $newRouteSpeedLimit, string $newRouteType) {
 		try {
 			$this->setRouteId($newRouteId);
 			$this->setRouteDescription($newRouteDescription);
@@ -221,7 +221,7 @@ class Route implements \JsonSerializable {
 	 * @throws \TypeError if $newRouteSpeedLimit is not a integer
 	 */
 
-	public function setRouteSpeedLimit(int $newRouteSpeedLimit): void {
+	public function setRouteSpeedLimit(?int $newRouteSpeedLimit): void {
 
 		//verify speed limit is valid range
 		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
