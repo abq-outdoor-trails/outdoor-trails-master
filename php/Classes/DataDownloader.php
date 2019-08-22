@@ -45,7 +45,7 @@ class DataDownloader {
 					$routeType = $routes[$i]->attributes->PathType;
 
 					$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-					var_dump($newRoute);
+					$newRoute->insert($pdo);
 				}
 //				foreach($routes as $route) {
 //				}
