@@ -38,12 +38,14 @@ class DataDownloader {
 				if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
 					$routeId = generateUuidV4();
 					$description = $routes[$i]->attributes->Comments;
-					$routeFile = print_r($routes[$i], true);
+//					file_put_contents("routeyRoute{$i}", $routes[$i])
+					$routeFile = json_encode($routes[$i]->geometry->paths);
 					$routeName = $routes[$i]->attributes->ParentPathName;
 					$routeSpeedLimit = $routes[$i]->attributes->PostedSpeedLimit_MPH;
 					$routeType = $routes[$i]->attributes->PathType;
 
-					var_dump($routeFile);
+					$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+					var_dump($newRoute);
 				}
 //				foreach($routes as $route) {
 //				}

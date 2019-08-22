@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS route;
 CREATE TABLE route (
 	routeId BINARY(16) NOT NULL,
 	routeName VARCHAR(32),
-	routeFile VARCHAR(256) NOT NULL,
+	routeFile VARCHAR(10000) NOT NULL,
 	routeType VARCHAR(32),
 	routeSpeedLimit TINYINT,
 	routeDescription VARCHAR(140),
