@@ -38,7 +38,7 @@ try {
 	$routeFile = filter_input(INPUT_GET, "routeFile", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$routeName = filter_input(INPUT_GET, "routeName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$routeSpeedLimit = filter_input(INPUT_GET, "routeSpeedLimit", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$routeType = filter_input(INPUT_GET, "routeSpeedLimit", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$routeType = filter_input(INPUT_GET, "routeType", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	//make sure the id is valid for methods that require it
 
