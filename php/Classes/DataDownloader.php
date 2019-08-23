@@ -10,7 +10,7 @@ namespace AbqOutdoorTrails\AbqBike;
  * $routeFile = ..... we will create
  * $routeType = "PathType"
  * $routeSpeedLimit = "PostedSpeedLimit_MPH"
- * routeDescription = "Direction"
+ * routeDescription = "Comments"
  *
 **/
 
