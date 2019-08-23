@@ -31,7 +31,7 @@ class Route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct($newRouteId, string $newRouteDescription, string $newRouteFile, string $newRouteName, int $newRouteSpeedLimit, string $newRouteType) {
+	public function __construct($newRouteId, ?string $newRouteDescription, string $newRouteFile, string $newRouteName, ?int $newRouteSpeedLimit, string $newRouteType) {
 		try {
 			$this->setRouteId($newRouteId);
 			$this->setRouteDescription($newRouteDescription);
@@ -130,13 +130,13 @@ class Route implements \JsonSerializable {
 	 * @throws \TypeError if $newRouteName is not a string
 	 */
 
-	public function setRouteDescription(string $newRouteDescription): void {
+	public function setRouteDescription(?string $newRouteDescription): void {
 		//verify route name is secure
 		$newRouteDescription = trim($newRouteDescription);
 		$newRouteDescription = filter_var($newRouteDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteDescription) === true) {
-			throw(new \InvalidArgumentException("Route description is empty or insecure"));
-		}
+//		if(empty($newRouteDescription) === true) {
+//			throw(new \InvalidArgumentException("Route description is empty or insecure"));
+//		}
 		// verify the route Description will fit in the database
 		if(strlen($newRouteDescription) > 140) {
 			throw(new \RangeException("route description too large"));
@@ -167,7 +167,7 @@ class Route implements \JsonSerializable {
 		$newRouteFile = filter_var($newRouteFile, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		// verify the route ID will fit in the database
-		if(strlen($newRouteFile) > 256) {
+		if(strlen($newRouteFile) > 10000) {
 			throw(new \RangeException("route file content too large"));
 		}
 		// store the route file content
@@ -200,7 +200,7 @@ class Route implements \JsonSerializable {
 			throw(new \InvalidArgumentException("Route name is empty or insecure"));
 		}
 		//verify route name is less than 32 characters
-		if(strlen($newRouteName) > 32) {
+		if(strlen($newRouteName) > 64) {
 			throw(new \RangeException("route name is too large"));
 		}
 		$this->routeName = $newRouteName;
@@ -221,7 +221,7 @@ class Route implements \JsonSerializable {
 	 * @throws \TypeError if $newRouteSpeedLimit is not a integer
 	 */
 
-	public function setRouteSpeedLimit(int $newRouteSpeedLimit): void {
+	public function setRouteSpeedLimit(?int $newRouteSpeedLimit): void {
 
 		//verify speed limit is valid range
 		if($newRouteSpeedLimit < 0 || $newRouteSpeedLimit > 99) {
