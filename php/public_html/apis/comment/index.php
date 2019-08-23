@@ -1,9 +1,9 @@
 <?php
-require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
-require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
-require_once dirname(__DIR__, 2) . "/lib/uuid.php";
-require_once dirname(__DIR__, 2) . "/lib/jwt.php";
+require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{ User, Route, Comment};
@@ -97,7 +97,7 @@ try {
 			validateJwtHeader();
 
 			// create new Comment and insert into the database
-			$comment = new Comment(generateUuidV4(), $_SESSION["route"]->getRouteId, $_SESSION["user"]->getUserId, $requestObject->commentContent, null);
+			$comment = new Comment(generateUuidV4(), $requestObject->commentRouteId, $_SESSION["user"]->getUserId(), $requestObject->commentContent, null);
 			$comment->insert($pdo);
 
 			// update reply
