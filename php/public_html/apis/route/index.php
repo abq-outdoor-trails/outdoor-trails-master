@@ -1,9 +1,9 @@
 <?php
 
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 4) . "/php/Classes/autoload.php";
+require_once dirname(__DIR__, 4) . "/php/lib/xsrf.php";
+require_once dirname(__DIR__, 4) . "/php/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{Route};
@@ -26,7 +26,7 @@ $reply->data = null;
 
 try {
 	// grab the mySQL connection
-	$secrets = new \Secrets("etc/apache2/capstone-mysql/abqbiketrails.ini");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	// determine which HTTP method was used
