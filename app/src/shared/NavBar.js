@@ -7,7 +7,7 @@ export const NavBar = () => {
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles">
-				<Navbar.Brand href="#home" className="navbar-styles">
+				<Navbar.Brand href="#home" className="brand-styles">
 					AbqBike
 				</Navbar.Brand>
 				<Nav.Link href="#sign-in" className="ml-auto navbar-styles">Sign In</Nav.Link>
