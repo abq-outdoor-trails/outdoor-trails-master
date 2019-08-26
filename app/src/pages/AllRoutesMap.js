@@ -1,13 +1,7 @@
 import React from "react";
 import {UseWindowWidth} from "../../shared/components/UseWindowWidth";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Accordion from "react-bootstrap/Accordion";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export const AllRoutesMap = () => {
@@ -20,6 +14,15 @@ export const AllRoutesMap = () => {
 	return (
 		<>
 			<h1>Map</h1>
+			<main className="d-flex align-items-center mh-80">
+				<Container fluid="true">
+					<Row>
+						<Card.Body>
+							<Form>
+
+								<Form.Group>
+									<InputGroup>
+
 
 
 		</>
