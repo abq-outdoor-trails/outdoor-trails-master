@@ -1,7 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import {NavBar} from "../shared/NavBar";
-=======
 import Form from "react-bootstrap/Form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -10,7 +8,6 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
->>>>>>> home-ui
 
 export const Home = () => {
 	return (
