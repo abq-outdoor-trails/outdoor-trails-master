@@ -51,7 +51,7 @@ try {
 
 			// if none of the search parameters are met throw an exception
 		} else if(empty($favoriteRouteUserId) === false) {
-			$reply->data = FavoriteRoute::getFavoriteRoutesByUserId($pdo, $favoriteRouteRouteId)->toArray();
+			$reply->data = FavoriteRoute::getFavoriteRoutesByUserId($pdo, $favoriteRouteUserId)->toArray();
 			//get all the favorite routes associated with favorite route Id
 		} else if(empty($favoriteRouteRouteId) === false) {
 			$reply->data = FavoriteRoute::getFavoriteRoutesByRouteId($pdo, $favoriteRouteRouteId)->toArray();
@@ -76,7 +76,6 @@ try {
 		if(empty($_SESSION["user"]->getUserId()) === true) {
 			throw (new\InvalidArgumentException("no user linked to the favorite route"));
 		}
-		var_dump($requestObject);
 		if(empty($requestObject->favoriteRouteRouteId) === true) {
 			throw (new \InvalidArgumentException("no route linked to the favorite route"));
 		}
@@ -101,7 +100,7 @@ try {
 			}
 
 			//enforce the user is signed in and only trying to delete their own favorite route
-			if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId() !== $favoriteRoute->getFavoriteRouteRouteId()) {
+			if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $favoriteRoute->getFavoriteRouteUserId()->toString()) {
 				throw(new \InvalidArgumentException("You are not allowed to delete this Favorite Route", 403));
 			}
 
