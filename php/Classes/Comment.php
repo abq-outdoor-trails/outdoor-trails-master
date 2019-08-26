@@ -130,7 +130,7 @@ class Comment implements \JsonSerializable {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		// store the comment's associated route id
-		$this->commentRouteId = $uuid;
+		$this->commentRouteName = $uuid;
 	}
 
 	/**
@@ -243,7 +243,7 @@ class Comment implements \JsonSerializable {
 
 		// bind the member variables to the placeholders in the insert query template
 		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
-		$parameters = ["commentId" => $this->commentId->getBytes(), "commentRouteId" => $this->commentRouteId->getBytes(), "commentUserId" => $this->commentUserId->getBytes(), "commentContent" => $this->commentContent, "commentDate" => $formattedDate];
+		$parameters = ["commentId" => $this->commentId->getBytes(), "commentRouteName" => $this->commentRouteName->getBytes(), "commentUserId" => $this->commentUserId->getBytes(), "commentContent" => $this->commentContent, "commentDate" => $formattedDate];
 		$statement->execute($parameters);
 	}
 
@@ -277,7 +277,7 @@ class Comment implements \JsonSerializable {
 	public static function getCommentsByRouteName(\PDO $pdo, Uuid $routeName) : \SplFixedArray{
 		// validate routeId, throw error if invalid value
 		try {
-			$routeId = self::validateUuid($routeId);
+			$routeName = self::validateUuid($routeName);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -286,7 +286,7 @@ class Comment implements \JsonSerializable {
 		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteName" => $routeId->getBytes()];
+		$parameters = ["commentRouteName" => $routeName->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
@@ -352,7 +352,7 @@ class Comment implements \JsonSerializable {
 
 		// convert id values to strings
 		$fields["commentId"] = $this->commentId->toString();
-		$fields["commentRouteName"] = $this->commentRouteId->toString();
+		$fields["commentRouteName"] = $this->commentRouteName->toString();
 		$fields["commentUserId"] = $this->commentUserId->toString();
 
 		// format the date so the front end can use it
