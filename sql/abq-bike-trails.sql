@@ -35,12 +35,12 @@ CREATE TABLE `user` (
 -- CREATE TABLE statement for comments table
 CREATE TABLE comment (
 	commentId BINARY(16) NOT NULL,
-	commentRouteId BINARY(16) NOT NULL,
+	commentRouteName VARCHAR(128) NOT NULL,
 	commentUserId BINARY(16) NOT NULL,
 	commentContent VARCHAR(256) NOT NULL,
 	commentDate DATETIME(6) NOT NULL,
 	-- foreign keys for comments entity
-	FOREIGN KEY(commentRouteId) REFERENCES route(routeId),
+	FOREIGN KEY(commentRouteName) REFERENCES route(routeName),
 	FOREIGN KEY(commentUserId) REFERENCES user(userId),
 	-- primary key for comments entity
 	PRIMARY KEY(commentId)
