@@ -25,8 +25,8 @@ class Comment implements \JsonSerializable {
 	 **/
 	private $commentId;
 	/**
-	 * route id for this comment; this is a foreign key
-	 * @var Uuid $commentsRouteId
+	 * route name for this comment; this is a foreign key
+	 * @var Uuid $commentsRouteName
 	 **/
 	private $commentRouteName;
 	/**
@@ -105,7 +105,7 @@ class Comment implements \JsonSerializable {
 	/**
 	 * getter method for comment's associated route id
 	 *
-	 * @return Uuid value of commentRouteId
+	 * @return Uuid value of commentRouteName
 	 **/
 	public function getCommentRouteName() : Uuid {
 		return($this->commentRouteName);
@@ -113,8 +113,8 @@ class Comment implements \JsonSerializable {
 
 	/**
 	 * setter method for comment's associated route id
-	 *
-	 * @param Uuid $newCommentRouteId value of new comment's associated route id
+
+	 * @param Uuid $newCommentRouteName value of new comment's associated route id
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of range (greater or less than specified range)
 	 * @throws \TypeError if data types violate type hints
@@ -275,7 +275,7 @@ class Comment implements \JsonSerializable {
 	 * @throws \Exception when other exceptions occur
 	 **/
 	public static function getCommentsByRouteName(\PDO $pdo, Uuid $routeName) : \SplFixedArray{
-		// validate routeId, throw error if invalid value
+		// validate routeName, throw error if invalid value
 		try {
 			$routeName = self::validateUuid($routeName);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -283,7 +283,7 @@ class Comment implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
+		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteName = :commentRouteName";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
 		$parameters = ["commentRouteName" => $routeName->getBytes()];
