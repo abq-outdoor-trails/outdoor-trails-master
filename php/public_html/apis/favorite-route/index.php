@@ -1,10 +1,11 @@
 <?php
 
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once dirname(__DIR__, 3) . "/lib/uuid.php";
-require_once("/etc/apache2/capstone-mysql.Secrets.php");
+require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{Route, User, FavoriteRoute};
 
@@ -33,8 +34,8 @@ try {
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$favoriteRouteUserId = $id = filter_input(INPUT_GET, "favoriteRouteUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$favoriteRouteRouteId = $id = filter_input(INPUT_GET, "favoriteRouteRouteId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$favoriteRouteUserId = $id = filter_input(INPUT_GET, "favoriteRouteUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	//handle GET request - if id is present, that route is returned, otherwise all routes are returned
@@ -72,11 +73,11 @@ try {
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		if(empty($requestObject->favoriteRouteUserId) === true) {
+		if(empty($_SESSION["user"]->getUserId()) === true) {
 			throw (new\InvalidArgumentException("no user linked to the favorite route"));
 		}
-
-		if(empty($requestObject->favoriteRouteRoutId) === true) {
+		var_dump($requestObject);
+		if(empty($requestObject->favoriteRouteRouteId) === true) {
 			throw (new \InvalidArgumentException("no route linked to the favorite route"));
 		}
 
@@ -88,7 +89,7 @@ try {
 				throw (new InvalidArgumentException("You've already favorited this route", 403));
 			}
 
-			$favoriteRoute = new FavoriteRoute($_SESSION["user"]->getUserId(), $requestObject->favoriteRouteRouteId);
+			$favoriteRoute = new FavoriteRoute($requestObject->favoriteRouteRouteId, $_SESSION["user"]->getUserId());
 			$favoriteRoute->insert($pdo);
 			$reply->message = "favorite route successful";
 
