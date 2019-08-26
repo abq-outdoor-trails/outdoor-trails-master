@@ -374,7 +374,7 @@ class Route implements \JsonSerializable {
 	public static function getRouteByRouteName(\PDO $pdo, string $routeName) : \SplFixedArray {
 		// sanitize the description before searching
 		$routeName = trim($routeName);
-		$routeName = filter_var($routeName, FILTER_SANATIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$routeName = filter_var($routeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($routeName) === true) {
 			throw(new\PDOException("route name is invalid"));
 		}
@@ -383,7 +383,6 @@ class Route implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the route type to the place holder in the template
-		$routeName = "%$routeName%";
 		$parameters = ["routeName" => $routeName];
 		$statement->execute($parameters);
 
