@@ -1,9 +1,9 @@
 <?php
 
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql.Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{Route, User, FavoriteRoute};
@@ -26,7 +26,7 @@ $reply->data = null;
 
 try {
 	// grab the mySQL connection
-	$secrets = new \Secrets("etc/apache2/capstone-mysql/abqbiketrails.ini");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	// determine which HTTP method was used
@@ -46,9 +46,8 @@ try {
 		if($favoriteRouteRouteId !== null && $favoriteRouteUserId !== null) {
 			$favoriteRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $favoriteRouteRouteId, $favoriteRouteUserId);
 
-			if($favoriteRoute !== null) {
-				$reply->data = $favoriteRoute;
-			}
+			$reply->data = $favoriteRoute;
+
 			// if none of the search parameters are met throw an exception
 		} else if(empty($favoriteRouteUserId) === false) {
 			$reply->data = FavoriteRoute::getFavoriteRoutesByUserId($pdo, $favoriteRouteRouteId)->toArray();
@@ -59,68 +58,61 @@ try {
 			throw new InvalidArgumentException("incorrect search parameters", 404);
 		}
 	} else if($method === "POST" || $method === "DELETE") {
-
-	}
-	//decode the response from the front end
-	$requestContent = file_get_contents("php://input");
-	$requestObject = json_decode($requestContent);
-
-	if(empty($requestObject->favoriteRouteUserId) === true) {
-		throw (new\InvalidArgumentException("no user linked to the favorite route"));
-	}
-
-	if(empty($requestObject->favoriteRouteRoutId) === true) {
-		throw (new \InvalidArgumentException("no route linked to the favorite route"));
-	}
-
-
-	if($method === "POST") {
-		// enforce the XSRF token
+		// verify xsrf token
 		verifyXsrf();
 
 		//enforce the end user has a jwt token
 		validateJwtHeader();
 
-		//enforce the user us signed in
-
-		if(empty($_SESSION["user"] === true)) {
-			throw (new \InvalidArgumentException("you must be logged in to favorite routes", 403));
+		if(empty($_SESSION["user"]) === true) {
+			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
 		}
 
+		//decode the response from the front end
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
 
-		$favoriteRoute = new FavoriteRoute($_SESSION["user"]->getUserId(), $requestObject->favoriteRouteRouteId);
-		$favoriteRoute->insert($pdo);
-		$reply->message = "favorite route successful";
-
-
-	} else if($method === "DELETE") {
-
-		//enforce the end user has a XSRF token.
-		verifyXsrf();
-
-		//enforce the end user has a JWT token
-		validateJwtHeader();
-
-		// grab the favorite route by its composite key
-		$favoriteRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $requestObject->favoriteRouteRouteId, $requestObject->favoriteRouteUserId);
-		if($favoriteRoute === null) {
-			throw(new RuntimeException("Favorite Route does not exist"));
+		if(empty($requestObject->favoriteRouteUserId) === true) {
+			throw (new\InvalidArgumentException("no user linked to the favorite route"));
 		}
 
-		//enforce the user is signed in and only trying to delete their own favorite route
-		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId() !== $favoriteRoute->getFavoriteRouteRouteId()) {
-			throw(new \InvalidArgumentException("You are not allowed to delete this Favorite Route", 403));
+		if(empty($requestObject->favoriteRouteRoutId) === true) {
+			throw (new \InvalidArgumentException("no route linked to the favorite route"));
 		}
 
-		//perform the actual delete
-		$favoriteRoute->delete($pdo);
+		if($method === "POST") {
 
-		//update the message
-		$reply->message = "Favorite route successfully deleted";
-	} // if any other HTTP request is sent throw an exception
+			// check if the favorite already exists
+			$favoriteCheck = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $requestObject->favoriteRouteRouteId, $_SESSION["user"]->getUserId());
+			if(!empty($favoriteCheck) || $favoriteCheck !== null) {
+				throw (new InvalidArgumentException("You've already favorited this route", 403));
+			}
 
-	else {
-		throw new \InvalidArgumentException("invalid http request", 400);
+			$favoriteRoute = new FavoriteRoute($_SESSION["user"]->getUserId(), $requestObject->favoriteRouteRouteId);
+			$favoriteRoute->insert($pdo);
+			$reply->message = "favorite route successful";
+
+		} else if($method === "DELETE") {
+			// grab the favorite route by its composite key
+			$favoriteRoute = FavoriteRoute::getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId($pdo, $requestObject->favoriteRouteRouteId, $requestObject->favoriteRouteUserId);
+			if($favoriteRoute === null) {
+				throw(new RuntimeException("Favorite Route does not exist"));
+			}
+
+			//enforce the user is signed in and only trying to delete their own favorite route
+			if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId() !== $favoriteRoute->getFavoriteRouteRouteId()) {
+				throw(new \InvalidArgumentException("You are not allowed to delete this Favorite Route", 403));
+			}
+
+			//perform the actual delete
+			$favoriteRoute->delete($pdo);
+
+			//update the message
+			$reply->message = "Favorite route successfully deleted";
+		}
+	} else {
+		// if any other HTTP request is sent throw an exception
+		throw new \InvalidArgumentException("invalid http request", 405);
 	}
 	//catch any exceptions that is thrown and update the reply status and message
 } catch(\Exception | \TypeError $exception) {
