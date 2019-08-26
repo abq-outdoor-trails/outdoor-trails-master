@@ -28,7 +28,7 @@ class Comment implements \JsonSerializable {
 	 * route id for this comment; this is a foreign key
 	 * @var Uuid $commentsRouteId
 	 **/
-	private $commentRouteId;
+	private $commentRouteName;
 	/**
 	 * user id for this comment; this is a foreign key
 	 * @var Uuid $commentsUserId
@@ -49,7 +49,7 @@ class Comment implements \JsonSerializable {
 	 * constructor method for the Comments class
 	 *
 	 * @param Uuid/string $newCommentId id of this comment
-	 * @param Uuid/string $newCommentRouteId id of the route associated with this comment
+	 * @param Uuid/string $newCommentRouteName id of the route associated with this comment
 	 * @param Uuid/string $newCommentUserId id of the user associated with this comment
 	 * @param string $newCommentContent string value of comment content
 	 * @param \DateTime|string|null DateTime value of the comment's date
@@ -58,10 +58,10 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteId, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
+	public function __construct(Uuid $newCommentId, Uuid $newCommentRouteName, $newCommentUserId, string $newCommentContent, $newCommentDate = null) {
 		try {
 			$this->setCommentId($newCommentId);
-			$this->setCommentRouteId($newCommentRouteId);
+			$this->setCommentRouteName($newCommentRouteName);
 			$this->setCommentUserId($newCommentUserId);
 			$this->setCommentContent($newCommentContent);
 			$this->setCommentDate($newCommentDate);
@@ -107,8 +107,8 @@ class Comment implements \JsonSerializable {
 	 *
 	 * @return Uuid value of commentRouteId
 	 **/
-	public function getCommentRouteId() : Uuid {
-		return($this->commentRouteId);
+	public function getCommentRouteName() : Uuid {
+		return($this->commentRouteName);
 	}
 
 	/**
@@ -120,10 +120,10 @@ class Comment implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 **/
-	public function setCommentRouteId($newCommentRouteId) : void {
+	public function setCommentRouteName($newCommentRouteName) : void {
 		try {
 			// try to validate the uuid
-			$uuid = self::validateUuid($newCommentRouteId);
+			$uuid = self::validateUuid($newCommentRouteName);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			// throw error if invalid uuid
 			$exceptionType = get_class($exception);
@@ -238,7 +238,7 @@ class Comment implements \JsonSerializable {
 	 **/
 	public function insert(\PDO $pdo) : void {
 		// create insert query template
-		$query ="INSERT INTO comment(commentId, commentRouteId, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteId, :commentUserId, :commentContent, :commentDate)";
+		$query ="INSERT INTO comment(commentId, commentRouteName, commentUserId, commentContent, commentDate) VALUES(:commentId, :commentRouteName, :commentUserId, :commentContent, :commentDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the placeholders in the insert query template
@@ -268,13 +268,13 @@ class Comment implements \JsonSerializable {
 	 * gets comments by route id, for display on the individual route page
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid | string $routeId route id to search by
+	 * @param Uuid | string $routeName route name to search by
 	 * @return \SplFixedArray SplFixedArray of Routes found
 	 * @throws \PDOException when MySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 * @throws \Exception when other exceptions occur
 	 **/
-	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
+	public static function getCommentsByRouteName(\PDO $pdo, Uuid $routeName) : \SplFixedArray{
 		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
@@ -283,17 +283,17 @@ class Comment implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
+		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteName" => $routeId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentRouteName"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -321,7 +321,7 @@ class Comment implements \JsonSerializable {
 			}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
+		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
 		$statement = $pdo->prepare($query);
 		// bind comment date to the placeholder in query template
 		$parameters = ["commentDate" => $commentDate];
@@ -331,7 +331,7 @@ class Comment implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentRouteName"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -352,7 +352,7 @@ class Comment implements \JsonSerializable {
 
 		// convert id values to strings
 		$fields["commentId"] = $this->commentId->toString();
-		$fields["commentRouteId"] = $this->commentRouteId->toString();
+		$fields["commentRouteName"] = $this->commentRouteId->toString();
 		$fields["commentUserId"] = $this->commentUserId->toString();
 
 		// format the date so the front end can use it
