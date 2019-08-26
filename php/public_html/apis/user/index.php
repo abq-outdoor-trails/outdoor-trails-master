@@ -1,8 +1,9 @@
 <?php
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 
@@ -29,7 +30,7 @@ $reply->data = null;
 
 try {
 	//grab the mySQL connection
-	$secrets = new \Secrets("/etc/apache2/captstone-mysql/abqbiketrails.ini");
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 	$pdo = $secrets->getPdoObject();
 
 	//determine which HTTP method was used
@@ -37,7 +38,6 @@ try {
 
 	//sanitize input
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$userId = filter_input(INPUT_GET, "userId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userActivationToken = filter_input(INPUT_GET, "userActivationToken", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userHash = filter_input(INPUT_GET, "userHash", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -53,8 +53,8 @@ try {
 		setXSrfCookie();
 
 		//get a uer by user id
-		if(empty($userId) === false) {
-			$reply->data = User::getUserByUserId($pdo, $userId);
+		if(empty($id) === false) {
+			$reply->data = User::getUserByUserId($pdo, $id);
 
 		} else if(empty($userActivationToken) === false) {
 			$reply->data = User::getUserByUserActivationToken($pdo, $userActivationToken);
@@ -69,14 +69,12 @@ try {
 		//enforce that the XSRF token is present in the header
 		verifyXsrf();
 
-		//enforce the end user has a JWT token
-		//validateJwtHeader();
-
 		//enforce the user is signed in and only trying to edit their own user profile
-		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id) ;
-		throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id){
+			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
+		}
 
-
+		//enforce the end user has a JWT token
 		validateJwtHeader();
 
 		//decode the response from the front end
@@ -97,9 +95,8 @@ try {
 		}
 
 		//profile email is a required field
-		if(empty($requestObject->UserEmail) === true) {
+		if(empty($requestObject->userEmail) === true) {
 			throw(new \InvalidArgumentException("No user email present", 405));
-
 		}
 
 		$user->setUserEmail($requestObject->userEmail);
@@ -114,7 +111,7 @@ try {
 		verifyXsrf();
 
 		//enforce the end user has a JWT token
-		//validateJwtHeader();
+		validateJwtHeader();
 
 		$user = User::getUserByUserId($pdo, $id);
 		if($user === null) {
@@ -126,8 +123,6 @@ try {
 		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->toString() !== $user->getUserId()->toString()) {
 			throw(new \InvalidArgumentException("you are not allowed access to this profile", 403));
 		}
-
-		validateJwtHeader();
 
 //delete the post from the database
 		$user->delete($pdo);

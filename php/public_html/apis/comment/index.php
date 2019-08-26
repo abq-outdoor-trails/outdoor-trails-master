@@ -1,8 +1,9 @@
 <?php
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/Classes/autoload.php";
-require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
-require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/lib/uuid.php";
+require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\{ User, Route, Comment};
@@ -57,7 +58,10 @@ try {
 		// enforce the user has a XSRF token
 		verifyXsrf();
 
-		// enforce the user is signed in TODO do I need to check this here, or can I check it only below in the post method?
+		// validate JWT
+		validateJwtHeader();
+
+		// enforce the user is signed in
 		if(empty($_SESSION["user"]) === true) {
 			throw(new \InvalidArgumentException("You must be logged in to post comments", 401));
 		}
@@ -73,38 +77,19 @@ try {
 			throw(new \InvalidArgumentException("No content for Comment.", 405));
 		}
 
-		// make sure comment date is accurate (required field)
-		if(empty($requestObject->commentDate) === true) {
-			throw(new \InvalidArgumentException("No date set for Comment.", 405));
-		} else {
-			// if the date exists, milliseconds since the beginning of time must be converted
-			$commentDate = DateTime::createFromFormat("U.u", $requestObject->commentDate / 1000);
-			if($commentDate === false) {
-				throw(new \RuntimeException("Invalid Comment date", 400));
-			}
-			$requestObject->commentDate = $commentDate;
-		}
+		// create new Comment and insert into the database
+		$comment = new Comment(generateUuidV4(), $requestObject->commentRouteId, $_SESSION["user"]->getUserId(), $requestObject->commentContent, null);
+		$comment->insert($pdo);
 
-		// perform the actual post
-		if($method === "POST") {
-			// enforce the user is signed in
-			if(empty($_SESSION["user"]) === true) {
-				throw(new \InvalidArgumentException("you must be logged in to post comments", 403));
-			}
+		// update reply
+		$reply->message = "Comment created OK";
 
-			// enforce end user has a JWT token
-			validateJwtHeader();
-
-			// create new Comment and insert into the database
-			$comment = new Comment(generateUuidV4(), $_SESSION["route"]->getRouteId, $_SESSION["user"]->getUserId, $requestObject->commentContent, null);
-			$comment->insert($pdo);
-
-			// update reply
-			$reply->message = "Comment created OK";
-		}
 	} else if($method === "DELETE") {
 		// enforce the user has a XSRF token
 		verifyXsrf();
+
+		// enforce the user has a JWT token
+		validateJwtHeader();
 
 		// retrieve the Comment to be deleted
 		$comment = Comment::getCommentByCommentId($pdo, $id);
@@ -116,9 +101,6 @@ try {
 		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $comment->getCommentUserId()->toString()) {
 			throw(new \InvalidArgumentException("You are not allowed to delete this comment", 403));
 		}
-
-		// enforce the user has a JWT token
-		validateJwtHeader();
 
 		// delete comment
 		$comment->delete($pdo);
