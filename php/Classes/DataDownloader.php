@@ -25,49 +25,23 @@ class DataDownloader {
 		$urlBase = "https://res.cloudinary.com/abqbike/raw/upload/v1566336860/BikePaths_jev8gc.json";
 		$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 		$pdo = $secrets->getPdoObject();
-		// TODO not including any other class creation, don't think we need to for a Route
-
 
 		$routes = self::readDataJson($urlBase);
 
-			for ($i = 0; $i <= 3043; $i++) {
-				// iterate through array and return all paths
-//				var_dump($routes[$i]->geometry->paths);
-				// iterate through array and return all object ids
-//				var_dump($routes[$i]->attributes->OBJECTID);
-				if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
-					$routeId = generateUuidV4();
-					$description = $routes[$i]->attributes->Comments;
-//					file_put_contents("routeyRoute{$i}", $routes[$i])
-					$routeFile = json_encode($routes[$i]->geometry->paths);
-					$routeName = $routes[$i]->attributes->ParentPathName;
-					$routeSpeedLimit = $routes[$i]->attributes->PostedSpeedLimit_MPH;
-					$routeType = $routes[$i]->attributes->PathType;
+		foreach($routes as $route) {
+			if($route->attributes->PathType === "Paved Multiple Use Trail") {
+				$routeId = generateUuidV4();
+				$description = $route->attributes->Comments;
+				$routeFile = json_encode($route->geometry->paths);
+				$routeName = $route->attributes->ParentPathName;
+				$routeSpeedLimit = $route->attributes->PostedSpeedLimit_MPH;
+				$routeType = $route->attributes->PathType;
 
-					$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-					$newRoute->insert($pdo);
-				}
-//				foreach($routes as $route) {
-//				}
-
+				// insert Route into database
+				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+				$newRoute->insert($pdo);
 			}
-
-
-//			$objectId->routeId;
-
-//			foreach($newRoute as $objectId) {
-//				$routeId = generateUuidV4();
-//			}
-//				$routeDescription = $value->Direction;
-//
-//			//grab route info from json
-//			$objectId = "";
-//			foreach($newRoute as $pathType) {
-//				$routeId = generateUuidV4();
-//
-//
-//			}
-
+		}
 	}
 
 	public static function readDataJson($url) {
