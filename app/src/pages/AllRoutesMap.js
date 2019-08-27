@@ -1,26 +1,23 @@
-import React from "react"
-import {Link} from "react-router-dom";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter } from "react-router-dom";
+import {Route, Switch} from "react-router";
+import {Home} from "./pages/Home";
+import {FourOhFour} from "./pages/FourOhFour";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/es/FormControl";
-import Button from "react-bootstrap/Button";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const Navbar = () => {
-	return(
+	return (
 		<>
 			<head>
 				<meta charSet="UTF-8">
 					<meta name="viewport"
 							content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 						<meta http-equiv="X-UA-Compatible" content="ie=edge">
-							<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+							<link rel="stylesheet"
+									href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 									integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 									crossOrigin="anonymous">
 								<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -66,7 +63,8 @@ export const Navbar = () => {
 							<a className="navbar-brand" href="#">AbqBike</a>
 							<button className="navbar-toggler" type="button" data-toggle="collapse"
 									  data-target="#navbarSupportedContent"
-									  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									  aria-controls="navbarSupportedContent" aria-expanded="false"
+									  aria-label="Toggle navigation">
 								<span className="navbar-toggler-icon"></span>
 							</button>
 							<div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -95,7 +93,8 @@ export const Navbar = () => {
 													<input type="email" className="form-control" id="exampleInputEmail1"
 															 aria-describedby="emailHelp"
 															 placeholder="Enter email">
-														<small id="emailHelp" className="form-text text-muted">We'll never share your email
+														<small id="emailHelp" className="form-text text-muted">We'll never share your
+															email
 															with anyone
 															else.
 														</small>
@@ -107,7 +106,8 @@ export const Navbar = () => {
 												</div>
 												<div className="form-group form-check">
 													<input type="checkbox" className="form-check-input" id="exampleCheck1">
-														<label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+														<label className="form-check-label" htmlFor="exampleCheck1">Check me
+															out</label>
 												</div>
 												<button type="submit" className="btn btn-primary">Submit</button>
 											</form>
@@ -119,6 +119,7 @@ export const Navbar = () => {
 					</header>
 					<section>
 						<div className="container">
+							<img src=""
 
 						</div>
 					</section>
@@ -139,5 +140,5 @@ export const Navbar = () => {
 				</footer>
 
 			</>
-	)
-}
+			)
+			}
