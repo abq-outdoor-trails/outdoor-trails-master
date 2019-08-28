@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import Header from 'header';
 
@@ -8,7 +7,6 @@ import Header from 'header';
 			This is the All Routes Map
 		</>
 )
-=======
 import React from "react";
 import {UseWindowWidth} from "../../shared/components/UseWindowWidth";
 
@@ -38,5 +36,4 @@ export const AllRoutesMap = () => {
 
 		</>
 	)
->>>>>>> static-ui
 };
