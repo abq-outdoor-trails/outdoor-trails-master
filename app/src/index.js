@@ -19,6 +19,7 @@ import {
 	faKey,
 	faDog
 } from "@fortawesome/free-solid-svg-icons";
+import {AllRoutesMap} from "./pages/AllRoutesMap";
 
 
 library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog );
@@ -32,6 +33,7 @@ const App = () => (
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
 				<Route exact path="/route/:routeId" component={Route} />
+				<Route exact path="/AllRoutesMap" component={AllRoutesMap} />
 				<Route component={FourOhFour} />
 			</Switch>
 		 </BrowserRouter>
