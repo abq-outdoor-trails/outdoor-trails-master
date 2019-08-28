@@ -11,6 +11,7 @@ import {Footer} from "./shared/Footer/";
 import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
+import SingleRoutePage from "./pages/SingleRoutePage";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -23,7 +24,7 @@ import {
 	faKey,
 	faDog
 } from "@fortawesome/free-solid-svg-icons";
-import {SingleRoutePage} from "./pages/SingleRoutePage";
+
 
 
 
