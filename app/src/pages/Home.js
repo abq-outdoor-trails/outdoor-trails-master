@@ -1,5 +1,4 @@
 import React from "react";
-import {NavBar} from "../shared/NavBar";
 import Form from "react-bootstrap/Form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -12,7 +11,6 @@ import Container from "react-bootstrap/Container";
 export const Home = () => {
 	return (
 		<>
-			<NavBar/>
 			<h1>Home</h1>
 			<p>Welcome to ABQ Bike Trails! </p>
 			<main className="d-flex align-items-end align-items-md-center mh-80">
