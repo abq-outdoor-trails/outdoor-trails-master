@@ -1,9 +1,8 @@
 import React from 'react';
+import Header from 'header';
 
 
 
-export const Navbar = () => {
-	return (
 		<>
 			This is the All Routes Map
 		</>
