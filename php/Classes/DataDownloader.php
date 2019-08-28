@@ -27,21 +27,40 @@ class DataDownloader {
 		$pdo = $secrets->getPdoObject();
 
 		$routes = self::readDataJson($urlBase);
+		$newArray = [];
 
 		foreach($routes as $route) {
 			if($route->attributes->PathType === "Paved Multiple Use Trail") {
-				$routeId = generateUuidV4();
-				$description = $route->attributes->Comments;
-				$routeFile = json_encode($route->geometry->paths);
-				$routeName = $route->attributes->ParentPathName;
-				$routeSpeedLimit = $route->attributes->PostedSpeedLimit_MPH;
-				$routeType = $route->attributes->PathType;
 
-				// insert Route into database
-				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-				$newRoute->insert($pdo);
+				$newArray = ["routeName" => ["route" => []]];
+
+//				if($newArray[$route->attributes->ParentPathName]) {
+//					$newArray[$route->attributes->ParentPathName] = $newArray[$route->attributes->ParentPathName]  + $route->geometry->paths;
+//				} else {
+//					$newArray = [$route->attributes->ParentPathName => $route->geometry->paths];
+//				}
+//				[$route-attributes->ParentPathType][$route-geometry->paths]
+//				$newArray = [$route->attributes->ParentPathName => $newArray[$route->attributes->ParentPathName ? $newArray[$route->attributes->ParentPathName] + $route->geometry->paths : $route->geometry->paths];
+//				array_push($newArray, [$route->attributes->ParentPathName, $route->geometry->paths]);
+
 			}
 		}
+var_dump($newArray);
+//		foreach($routes as $route) {
+//			if($route->attributes->PathType === "Paved Multiple Use Trail") {
+//
+//				$routeId = generateUuidV4();
+//				$description = $route->attributes->Comments;
+//				$routeFile = json_encode($route->geometry->paths);
+//				$routeName = $route->attributes->ParentPathName;
+//				$routeSpeedLimit = $route->attributes->PostedSpeedLimit_MPH;
+//				$routeType = $route->attributes->PathType;
+//
+//				// insert Route into database
+//				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+//				$newRoute->insert($pdo);
+//			}
+//		}
 	}
 
 	public static function readDataJson($url) {
