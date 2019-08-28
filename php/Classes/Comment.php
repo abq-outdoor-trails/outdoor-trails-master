@@ -305,13 +305,13 @@ class Comment implements \JsonSerializable {
 	 * gets comments by route id, for display on the individual route page
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid | string $routeId route id to search by
+	 * @param Uuid | string $routeId route name to search by
 	 * @return \SplFixedArray SplFixedArray of Routes found
 	 * @throws \PDOException when MySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 * @throws \Exception when other exceptions occur
 	 **/
-	public static function getCommentsByRouteId(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
+	public static function getCommentsByRouteName(\PDO $pdo, Uuid $routeId) : \SplFixedArray{
 		// validate routeId, throw error if invalid value
 		try {
 			$routeId = self::validateUuid($routeId);
@@ -320,17 +320,17 @@ class Comment implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
+		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentRouteId = :commentRouteId";
 		$statement = $pdo->prepare($query);
 		// bind the route id to the placeholder in the query template
-		$parameters = ["commentRouteId" => $routeId->getBytes()];
+		$parameters = ["commentRouteName" => $routeId->getBytes()];
 		$statement->execute($parameters);
 		// build an array of comments
 		$comments = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while($row = $statement->fetch()) {
 			try {
-				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
+				$comment = new Comment($row["commentId"], $row["commentRouteName"], $row["commentUserId"], $row["commentContent"], $row["commentDate"]);
 				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
@@ -358,7 +358,7 @@ class Comment implements \JsonSerializable {
 //			}
 //
 //		// create query template
-//		$query = "SELECT commentId, commentRouteId, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
+//		$query = "SELECT commentId, commentRouteName, commentUserId, commentContent, commentDate FROM comment WHERE commentDate = :commentDate";
 //		$statement = $pdo->prepare($query);
 //		// bind comment date to the placeholder in query template
 //		$parameters = ["commentDate" => $commentDate];
@@ -368,7 +368,7 @@ class Comment implements \JsonSerializable {
 //		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 //		while($row = $statement->fetch()) {
 //			try {
-//				$comment = new Comment($row["commentId"], $row["commentRouteId"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
+//				$comment = new Comment($row["commentId"], $row["commentRouteName"], $row["commentUserId"], $row["commentComment"], $row["commentDate"]);
 //				$comments[$comments->key()] = $comment;
 //				$comments->next();
 //			} catch(\Exception $exception) {
@@ -389,7 +389,7 @@ class Comment implements \JsonSerializable {
 
 		// convert id values to strings
 		$fields["commentId"] = $this->commentId->toString();
-		$fields["commentRouteId"] = $this->commentRouteId->toString();
+		$fields["commentRouteName"] = $this->commentRouteName->toString();
 		$fields["commentUserId"] = $this->commentUserId->toString();
 
 		// format the date so the front end can use it
