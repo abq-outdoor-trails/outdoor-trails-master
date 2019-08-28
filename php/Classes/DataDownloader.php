@@ -29,10 +29,14 @@ class DataDownloader {
 		$routes = self::readDataJson($urlBase);
 		$newArray = [];
 
-		foreach($routes as $route) {
-			if($route->attributes->PathType === "Paved Multiple Use Trail") {
+		foreach($routes as $key => $route) {
 
-				$newArray = ["routeName" => ["route" => []]];
+			foreach($)
+			if($route->attributes->PathType === "Paved Multiple Use Trail") {
+				$routeFile = $route->geometry->paths[0];
+
+
+//				$newArray = ["routeName" => ["route" => []]];
 
 //				if($newArray[$route->attributes->ParentPathName]) {
 //					$newArray[$route->attributes->ParentPathName] = $newArray[$route->attributes->ParentPathName]  + $route->geometry->paths;
