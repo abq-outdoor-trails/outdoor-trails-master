@@ -3,7 +3,7 @@ import '../index.css';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
-export const NavBar = () => {
+export const Header = () => {
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles">

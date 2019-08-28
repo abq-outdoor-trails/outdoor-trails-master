@@ -57,6 +57,7 @@ export const Home = () => {
 					</Row>
 				</Container>
 			</main>
+
 		</>
 		)
 };
