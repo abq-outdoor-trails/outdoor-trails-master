@@ -10,10 +10,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
 
-export const NavBar = () => {
+export const Header = () => {
 	return (
 		<>
-			<NavBar/>
+			<Header/>
 			<h1>Home</h1>
 			<p>Welcome to ABQ Bike Trails! </p>
 			<main className="d-flex align-items-end align-items-md-center mh-80">

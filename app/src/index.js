@@ -8,7 +8,7 @@ import {FourOhFour} from "./pages/FourOhFour";
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import "./index.css";
-import {Navbar} from "./shared/NavBar";
+import {Header} from "./shared/Header";
 import {Signup} from "./pages/Signup";
 import {
 	faEnvelope,
@@ -27,7 +27,7 @@ library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAl
 const App = () => (
 	<>
 	 	<BrowserRouter>
-			<Navbar/>
+			<Header/>
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
