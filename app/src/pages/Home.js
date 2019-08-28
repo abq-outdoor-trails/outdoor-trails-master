@@ -49,9 +49,9 @@ export const Home = () => {
 									</Card.Text>
 								</Card.Body>
 							</Card>
-							<div className="my-2 text-white">
-								<span className="font-weight-light font-italic">Don't have an account?</span>
-								<Button variant="link" className="py-0 text-white border-0 font-weight-bold">Sign Up</Button>
+							<div className="my-2 text-dark">
+								<span className="font-weight-dark font-italic">Don't have an account?</span>
+								<Button variant="link" className="py-0 text-black border-0 font-weight-bold">Sign Up</Button>
 							</div>
 						</div>
 					</Row>
