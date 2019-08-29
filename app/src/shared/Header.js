@@ -20,23 +20,26 @@ export const Header = () => {
 					<Nav className="mr-auto">
 						<Nav.Link href="#route">Routes</Nav.Link>
 						<Nav.Link href="#about">About</Nav.Link>
-						<Nav.Link href="#signup">Sign Up</Nav.Link>
+						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
+							<NavDropdown.Item href="#">
+								<Form inline>
+									<InputGroup>
+										<FormControl
+											placeholder="Email"
+											aria-label="Email"
+											aria-describedby=""
+										/>
+										<FormControl
+											placeholder="Password"
+											aria-label="Password"
+											aria-describedby=""
+										/>
+									</InputGroup>
+									<Button type="submit">Sign In</Button>
+								</Form>
+							</NavDropdown.Item>
+						</NavDropdown>
 					</Nav>
-					<Form inline>
-						<InputGroup>
-							<FormControl
-								placeholder="Email"
-								aria-label="Email"
-								aria-describedby=""
-							/>
-							<FormControl
-								placeholder="Password"
-								aria-label="Password"
-								aria-describedby=""
-							/>
-						</InputGroup>
-						<Button type="submit">Sign In</Button>
-					</Form>
 				</Navbar.Collapse>
 			</Navbar>
 		</>
