@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import "./index.css";
 import {Header} from "./shared/Header";
-import {Footer} from "./shared/Footer/";
+import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
@@ -40,7 +40,7 @@ const App = () => (
 				<Route component={FourOhFour} />
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/SingleRoutePage" component={SingleRoutePage} />
+				<Route exact path="/route" component={SingleRoutePage} />
 			</Switch>
 			<Footer/>
 		 </BrowserRouter>
