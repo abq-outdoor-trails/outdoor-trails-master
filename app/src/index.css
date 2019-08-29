@@ -7,3 +7,9 @@
 .brand-styles {
 	color: #98e163 !important;
 }
+
+/* ROUTE PAGE */
+#map-wrapper {
+	min-height: 600px;
+	background-color: green;
+}

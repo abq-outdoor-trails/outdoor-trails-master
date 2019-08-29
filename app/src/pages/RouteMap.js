@@ -15,10 +15,29 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 export const RouteMap = () => {
 	return (
 		<>
-			Route map page here
+			<main className="d-flex align-items-center mh-80">
 
-			
-
+				<Container fluid="true">
+					<Row>
+						<Col>
+							<h2>Bosque Trail</h2>
+							<div id="map-wrapper">
+								MapBox element goes here
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			</main>
+			<Container fluid="true">
+				<Row>
+					<Col>
+						<h1>Comment Area</h1>
+						<div id="comment-wrapper">
+							Comment element goes here
+						</div>
+					</Col>
+				</Row>
+			</Container>
 		</>
 	)
 };
