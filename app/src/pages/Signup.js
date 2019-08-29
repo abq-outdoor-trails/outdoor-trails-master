@@ -10,6 +10,7 @@ import FormControl from "react-bootstrap/FormControl";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
 
 export const Signup = () => (
 	<main className="d-flex align-items-center">
@@ -23,7 +24,7 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="user"/>
+												<FontAwesomeIcon icon="user"/> {/*TODO figure out why user icon isn't rendering */}
 											</InputGroup.Text>
 										</InputGroup.Prepend>
 										<FormControl type="text" placeholder="Pick a User Name"/>
@@ -56,11 +57,17 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="ellipsis-h"/>
+												<FontAwesomeIcon icon="ellipsis-h"/> {/*TODO figure out why this icon isn't rendering*/}
 											</InputGroup.Text>
 										</InputGroup.Prepend>
 										<FormControl type="password" placeholder="Confirm Password"/>
 									</InputGroup>
+								</Form.Group>
+
+								<Form.Group className="text-md-left">
+									<Button variant="primary" type="submit">
+										<FontAwesomeIcon icon="paw" /> Join Us!
+									</Button>
 								</Form.Group>
 							</Form>
 						</Card.Body>
