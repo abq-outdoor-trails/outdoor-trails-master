@@ -7,11 +7,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import "./index.css";
 import {Header} from "./shared/Header";
-import {Footer} from "./shared/Footer/";
+import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
-import {SingleRoutePage} from "./pages/SingleRoutePage";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -37,10 +36,9 @@ const App = () => (
 	 	<BrowserRouter>
 			<Header/>
 			<Switch>
-				<Route component={FourOhFour} />
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/route" component={SingleRoutePage} />
+				<Route component={FourOhFour} />
 			</Switch>
 			<Footer/>
 		 </BrowserRouter>
