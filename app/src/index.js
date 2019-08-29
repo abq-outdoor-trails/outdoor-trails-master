@@ -11,7 +11,7 @@ import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
-import {Route} from "./pages/Route";
+import {RouteMap} from "./pages/RouteMap";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -39,7 +39,7 @@ const App = () => (
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/SingleRoutePage" component={Route} />
+				<Route exact path="/SingleRoutePage" component={RouteMap} />
 				<Route component={FourOhFour} />
 			</Switch>
 			<Footer/>
