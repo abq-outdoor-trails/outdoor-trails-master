@@ -30,8 +30,6 @@ class DataDownloader {
 		$newArray = [];
 
 		foreach($routes as $key => $route) {
-
-			foreach($)
 			if($route->attributes->PathType === "Paved Multiple Use Trail") {
 				$routeFile = $route->geometry->paths[0];
 
