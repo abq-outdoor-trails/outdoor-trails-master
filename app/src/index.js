@@ -15,6 +15,8 @@ import {SingleRoutePage} from "./pages/SingleRoutePage";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+// import {far} from "@fortawesome/free-solid-svg-icons";
+// import {fab, faGithub} from "@fortawesome/free-brands-svg-icons";
 import {
 	faDog,
 	faEnvelope,
