@@ -1,11 +1,12 @@
 import React from "react";
 
-export const SingleRotePage = () => {
-	return (
-		<>
-			<h1>Route</h1>
+export const SingleRoutePage = () => (
 
+<>
+	Single Route
 
-		</>
-	)
-};
+	<Image src="abqmap.png" fluid />
+
+</>
+);
+
