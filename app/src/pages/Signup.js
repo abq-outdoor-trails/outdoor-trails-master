@@ -6,6 +6,8 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 export const Signup = () => (
 	<main className="d-flex align-items-center">
 		<Container fluid="true">
