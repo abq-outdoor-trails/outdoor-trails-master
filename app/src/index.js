@@ -18,6 +18,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
 	faEnvelope,
 	faPencilAlt,
+	faHeart,
+	faTrash,
 	faSignInAlt,
 	faSortDown,
 	faUserCircle,
@@ -29,7 +31,7 @@ import {
 
 
 
-library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog );
+library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart);
 
 
 const App = () => (
