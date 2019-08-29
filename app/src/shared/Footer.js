@@ -12,7 +12,7 @@ export const Footer = () => {
 			<footer className="page-footer text-muted py-2 py-md-4">
 				<Container fluid="true">
 					<Row>
-						<Col className="text-center small">
+						<Col className="text-center">
 							Github Logo Here
 						</Col>
 					</Row>
