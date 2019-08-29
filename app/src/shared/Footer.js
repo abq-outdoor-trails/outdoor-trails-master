@@ -1,13 +1,22 @@
 import React from "react";
 import "../index.css";
 import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const Footer = () => {
 	return (
 		<>
-			<Navbar bg="dark" variant="dark" className="footer-styles">
-				<Navbar.Brand href="#home" className="brand-styles">AbqBike</Navbar.Brand>
-			</Navbar>
+			<footer className="page-footer text-muted py-2 py-md-4">
+				<Container fluid="true">
+					<Row>
+						<Col className="text-center small">
+							Github Logo Here
+						</Col>
+					</Row>
+				</Container>
+			</footer>
 		</>
 	)
 };
