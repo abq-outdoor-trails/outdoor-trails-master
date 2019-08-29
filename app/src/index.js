@@ -40,7 +40,7 @@ const App = () => (
 				<Route component={FourOhFour} />
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/SingleRoutePage" component={SingleRoutePage} />
+				<Route exact path="/route" component={SingleRoutePage} />
 			</Switch>
 			<Footer/>
 		 </BrowserRouter>
