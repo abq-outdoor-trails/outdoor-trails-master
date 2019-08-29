@@ -13,7 +13,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 export const Header = () => {
 	return (
 		<>
-			<Navbar bg="dark" variant="dark" className="navbar-styles">
+			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
 				<Navbar.Brand href="#home" className="brand-styles">AbqBike</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
