@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
 
 import 'bootstrap/dist/css/bootstrap.css';
-
 import "./index.css";
 import {Header} from "./shared/Header";
 import {Footer} from "./shared/Footer";

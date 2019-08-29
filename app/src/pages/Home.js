@@ -11,15 +11,20 @@ import Container from "react-bootstrap/Container";
 
 export const Home = () => (
 	<>
-		--Hero Section
+
 		<main className="d-flex align-items-center align-items-md-center mh-80">
-			<Container fluid="true" className="text-center text-md-center">
-				<h1>Home</h1>
-				<p>Welcome to ABQ Bike Trails! </p>
-				<Button variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
-				</Button>
-			</Container>
+			{/*Hero Section*/}
+			<section>
+				<Container fluid="true" className="text-center text-md-center">
+					<h1>Home</h1>
+					<p>Welcome to ABQ Bike Trails! </p>
+					<Button variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
+					</Button>
+				</Container>
+			</section>
+
 		</main>
+
 
 
 
