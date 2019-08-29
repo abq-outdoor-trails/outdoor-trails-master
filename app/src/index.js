@@ -33,12 +33,15 @@ library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAl
 const App = () => (
 	<>
 	 	<BrowserRouter>
-			<Header/>
-			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route exact path="/signup" component={Signup} />
-				<Route component={FourOhFour} />
-			</Switch>
+			<div className="sfooter-content">
+				<Header/>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/route" component={SingleRoutePage} />
+					<Route component={FourOhFour} />
+				</Switch>
+			</div>
 			<Footer/>
 		 </BrowserRouter>
 	</>
