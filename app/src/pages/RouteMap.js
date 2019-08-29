@@ -41,8 +41,26 @@ export const RouteMap = () => {
 			<Container>
 				<Row>
 					<Col>
-						
+						<Card bg="transparent" className="border-0 rounded-0">
+							<Card.Body>
+								<Form>
 
+									<Form.Group>
+										<InputGroup>
+											<InputGroup.Prepend>
+												<InputGroup.Text>
+													<FontAwesomeIcon icon="envelope"/>
+												</InputGroup.Text>
+											</InputGroup.Prepend>
+											<FormControl type="Date" placeholder={"Date"}/>
+										</InputGroup>
+									</Form.Group>
+								</Form>
+							</Card.Body>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 		</>
 	)
 };
