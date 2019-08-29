@@ -38,7 +38,6 @@ export const Header = () => {
 						<Button type="submit">Sign In</Button>
 					</Form>
 				</Navbar.Collapse>
-				<Nav.Link href="#sign-in" className="ml-auto navbar-styles">Sign In</Nav.Link>
 			</Navbar>
 		</>
 	)
