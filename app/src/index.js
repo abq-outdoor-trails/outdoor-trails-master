@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
-import {Home} from "./pages/Home";
-import {FourOhFour} from "./pages/FourOhFour";
-import { library } from '@fortawesome/fontawesome-svg-core';
+
+import 'bootstrap/dist/css/bootstrap.css';
 
 import "./index.css";
 import {Header} from "./shared/Header";
+import {Footer} from "./shared/Footer/";
+import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
+import {FourOhFour} from "./pages/FourOhFour";
+import {SingleRoutePage} from "./pages/SingleRoutePage";
+
+
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
 	faEnvelope,
 	faPencilAlt,
@@ -21,6 +26,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
+
+
+
 library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog );
 
 
@@ -29,11 +37,12 @@ const App = () => (
 	 	<BrowserRouter>
 			<Header/>
 			<Switch>
+				<Route component={FourOhFour} />
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/route/:routeId" component={Route} />
-				<Route component={FourOhFour} />
+				<Route exact path="/route" component={SingleRoutePage} />
 			</Switch>
+			<Footer/>
 		 </BrowserRouter>
 	</>
 );
