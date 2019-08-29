@@ -51,6 +51,17 @@ export const Signup = () => (
 										<FormControl type="password" placeholder="Password"/>
 									</InputGroup>
 								</Form.Group>
+
+								<Form.Group>
+									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>
+												<FontAwesomeIcon icon="ellipsis-h"/>
+											</InputGroup.Text>
+										</InputGroup.Prepend>
+										<FormControl type="password" placeholder="Confirm Password"/>
+									</InputGroup>
+								</Form.Group>
 							</Form>
 						</Card.Body>
 					</Card>
