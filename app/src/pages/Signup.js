@@ -57,7 +57,8 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="ellipsis-h"/> {/*TODO figure out why this icon isn't rendering*/}
+												<FontAwesomeIcon
+													icon="ellipsis-h"/> {/*TODO figure out why this icon isn't rendering*/}
 											</InputGroup.Text>
 										</InputGroup.Prepend>
 										<FormControl type="password" placeholder="Confirm Password"/>
@@ -66,7 +67,7 @@ export const Signup = () => (
 
 								<Form.Group className="text-md-left">
 									<Button variant="primary" type="submit">
-										<FontAwesomeIcon icon="paw" /> Join Us!
+										<FontAwesomeIcon icon="paw"/> Join Us!
 									</Button>
 								</Form.Group>
 							</Form>
