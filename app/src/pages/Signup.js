@@ -66,7 +66,7 @@ export const Signup = () => (
 								</Form.Group>
 
 								<Form.Group className="text-md-left">
-									<Button variant="primary" type="submit">
+									<Button variant="success" type="submit">
 										<FontAwesomeIcon icon="paw"/> Join Us!
 									</Button>
 								</Form.Group>
