@@ -4,8 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
 
 import 'bootstrap/dist/css/bootstrap.css';
-
 import "./index.css";
+
 import {Header} from "./shared/Header";
 import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
@@ -35,13 +35,15 @@ library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAl
 const App = () => (
 	<>
 	 	<BrowserRouter>
-			<Header/>
-			<Switch>
-				<Route component={FourOhFour} />
-				<Route exact path="/" component={Home} />
-				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/route" component={SingleRoutePage} />
-			</Switch>
+			<div className="sfooter-content">
+				<Header/>
+				<Switch>
+					<Route component={FourOhFour} />
+					<Route exact path="/" component={Home} />
+					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/route" component={SingleRoutePage} />
+				</Switch>
+			</div>
 			<Footer/>
 		 </BrowserRouter>
 	</>
