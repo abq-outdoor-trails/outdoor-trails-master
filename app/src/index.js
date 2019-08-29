@@ -39,8 +39,12 @@ const App = () => (
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/signup" component={Signup} />
+<<<<<<< HEAD
 				<Route exact path="/SingleRoutePage" component={RouteMap} />
 				<Route component={FourOhFour} />
+=======
+				<Route exact path="/route" component={SingleRoutePage} />
+>>>>>>> static-ui
 			</Switch>
 			<Footer/>
 		 </BrowserRouter>
