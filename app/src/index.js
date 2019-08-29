@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import "./index.css";
 import {Header} from "./shared/Header";
-import {Footer} from "./shared/Footer/";
+import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
