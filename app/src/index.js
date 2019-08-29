@@ -38,10 +38,10 @@ const App = () => (
 			<div className="sfooter-content">
 				<Header/>
 				<Switch>
-					<Route component={FourOhFour} />
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={Signup} />
 					<Route exact path="/route" component={SingleRoutePage} />
+					<Route component={FourOhFour} />
 				</Switch>
 			</div>
 			<Footer/>
