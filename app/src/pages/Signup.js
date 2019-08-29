@@ -9,6 +9,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Spinner from "react-bootstrap/Spinner";
 
 export const Signup = () => (
 	<main className="d-flex align-items-center">
@@ -22,7 +23,7 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="user" />
+												<FontAwesomeIcon icon="user"/>
 											</InputGroup.Text>
 										</InputGroup.Prepend>
 										<FormControl type="text" placeholder="Pick a User Name"/>
@@ -33,10 +34,10 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="envelope" />
+												<FontAwesomeIcon icon="envelope"/>
 											</InputGroup.Text>
 										</InputGroup.Prepend>
-										<FormControl type="email" placeholder="Your Email" />
+										<FormControl type="email" placeholder="Your Email"/>
 									</InputGroup>
 								</Form.Group>
 
@@ -44,15 +45,99 @@ export const Signup = () => (
 									<InputGroup>
 										<InputGroup.Prepend>
 											<InputGroup.Text>
-												<FontAwesomeIcon icon="key" />
+												<FontAwesomeIcon icon="key"/>
 											</InputGroup.Text>
 										</InputGroup.Prepend>
-										<FormControl type="password" placeholder="Password" />
+										<FormControl type="password" placeholder="Password"/>
 									</InputGroup>
 								</Form.Group>
 							</Form>
 						</Card.Body>
 					</Card>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
+					<Spinner animation="grow" variant="success"/>
 				</Col>
 			</Row>
 		</Container>
