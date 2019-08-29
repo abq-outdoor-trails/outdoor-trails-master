@@ -1,10 +1,12 @@
 import React from "react";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -18,7 +20,34 @@ export const Signup = () => (
 							<Form>
 								<Form.Group>
 									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>
+												<FontAwesomeIcon icon="user" />
+											</InputGroup.Text>
+										</InputGroup.Prepend>
+										<FormControl type="text" placeholder="Pick a User Name"/>
+									</InputGroup>
+								</Form.Group>
 
+								<Form.Group>
+									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>
+												<FontAwesomeIcon icon="envelope" />
+											</InputGroup.Text>
+										</InputGroup.Prepend>
+										<FormControl type="email" placeholder="Your Email" />
+									</InputGroup>
+								</Form.Group>
+
+								<Form.Group>
+									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>
+												<FontAwesomeIcon icon="key" />
+											</InputGroup.Text>
+										</InputGroup.Prepend>
+										<FormControl type="password" placeholder="Password" />
 									</InputGroup>
 								</Form.Group>
 							</Form>
