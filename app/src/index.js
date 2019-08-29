@@ -16,13 +16,14 @@ import {SingleRoutePage} from "./pages/SingleRoutePage";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+	faDog,
 	faEnvelope,
+	faKey,
 	faPencilAlt,
 	faSignInAlt,
 	faSortDown,
 	faUserCircle,
-	faKey,
-	faDog
+	faUser
 } from "@fortawesome/free-solid-svg-icons";
 
 
