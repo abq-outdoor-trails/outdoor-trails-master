@@ -8,32 +8,58 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
-export const Home = () => (
-	<>
-
-		<main className="d-flex align-items-center align-items-md-center mh-80">
-			{/*Hero Section*/}
-			<section>
-				<Container fluid="true">
-					<Row>
-						<Col>
-							<h1>Home</h1>
-							<p>Welcome to ABQ Bike Trails! </p>
-							<Button
-								variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
-							</Button>
-						</Col>
-					</Row>
-				</Container>
-			</section>
-
-		</main>
+import Image from "react-bootstrap/Image";
 
 
+export const Home = () => {
+	return (
+		<>
 
+			<main className="mh-80">
 
+				{/*Hero Section*/}
+				<section className="home-hero">
+					<Container fluid="true" className="text-center">
+						<Row>
+							<Col>
+								<h1 class="display-3 font-weight-bold">Welcome to ABQ Bike Trails</h1>
+								<p> </p>
+								<Button
+									variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
+								</Button>
+								{/*<Image src={BikeImage} fluid alt="Yellow Bike"/>*/}
+							</Col>
+						</Row>
+					</Container>
+				</section>
 
+				{/*Map Section*/}
+				<section>
+					<Container>
+						<Row>
+							<Col>
+								<h2>Bosque Trail</h2>
+								<div id="map-wrapper">
+									MapBox element goes here
+								</div>
+							</Col>
+						</Row>
+					</Container>
+				</section>
 
-	</>
-);
+				{/*Map Section*/}
+				<section>
+					<Container fluid="true">
+						<Row>
+							<Col>
+								<h1>This is our About Section</h1>
+							</Col>
+						</Row>
+					</Container>
+				</section>
+
+			</main>
+
+		</>
+	)
+};

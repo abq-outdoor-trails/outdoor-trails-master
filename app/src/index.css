@@ -8,6 +8,14 @@
 	color: #98e163 !important;
 }
 
+section.home-hero {
+	background-image: url("./image/yellow-bike.jpg");
+	background-size: cover;
+	background-position: top center;
+	background-repeat: no-repeat;
+	height: 110vh;
+}
+
 /***
 * Flexbox Sticky Footer
 * http://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
