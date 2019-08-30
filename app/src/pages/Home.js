@@ -47,7 +47,7 @@ export const Home = () => {
 					</Container>
 				</section>
 
-				{/*Map Section*/}
+				{/*About Section*/}
 				<section>
 					<Container fluid="true">
 						<Row>
