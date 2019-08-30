@@ -24,7 +24,7 @@ export const Home = () => {
 					<Container fluid="true" className="text-center">
 						<Row>
 							<Col>
-								<h1 class="display-3 font-weight-bold">Welcome to ABQ Bike Trails</h1>
+								<h1 class="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
 								<p> </p>
 								<Button
 									variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
