@@ -11,6 +11,9 @@ import {Home} from "./pages/Home";
 import {Signup} from "./pages/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
 
+import {RouteMap} from "./pages/RouteMap";
+
+
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import {far} from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +23,8 @@ import {
 	faEnvelope,
 	faKey,
 	faPencilAlt,
+	faHeart,
+	faTrash,
 	faSignInAlt,
 	faSortDown,
 	faUserCircle,
@@ -30,7 +35,7 @@ import {
 
 
 
-library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog );
+library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart);
 
 
 const App = () => (
@@ -41,6 +46,7 @@ const App = () => (
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/route" component={RouteMap} />
 					<Route component={FourOhFour} />
 				</Switch>
 			</div>

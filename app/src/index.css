@@ -15,6 +15,13 @@ section.home-hero {
 	height: 110vh;
 }
 
+
+/* ROUTE PAGE */
+#map-wrapper {
+	min-height: 600px;
+	background-color: green;
+}
+
 /***
 * Flexbox Sticky Footer
 * http://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
@@ -33,3 +40,4 @@ body { width: 100%;}
 .sfooter-content {
 	flex: 1 0 auto;
 }
+
