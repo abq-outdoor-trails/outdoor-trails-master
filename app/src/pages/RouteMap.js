@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {Link} from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
@@ -14,7 +14,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-import { GeoJSONLayer} from "react-mapbox-gl/lib/geojson-layer";
 
 const Map = ReactMapboxGl({
 	accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA'
@@ -26,29 +25,31 @@ export const RouteMap = () => {
 			<main>
 
 				<section>
-				<Container>
-					<Row>
-						<Col>
-							<h2>Bosque Trail</h2>
-							<Map
+					<Container>
+						<Row>
+							<Col>
+								<h2>Bosque Trail</h2>
+								<Map
 									style="mapbox://styles/mapbox/streets-v9"
 									containerStyle={{
-										height: '100vh',
-										width: '100vw'
+										height: '50vh',
+										width: '50vw'
 									}}
 								>
 									<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-										<Feature coordinates={[-106.6505556, 35.0844444]}/>
+										<Feature coordinates={[-106.6505556, 35.0844444]} />
 									</Layer>
-								</Map>
-						</Col>
-					</Row>
-				</Container>
-			</section>
 
-				<section className="py-md-4">
+								</Map>
+							</Col>
+						</Row>
+					</Container>
+				</section>
+
+				<section className="py-5">
 					<Container fluid="true">
 						<Row>
+
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>
@@ -61,6 +62,7 @@ export const RouteMap = () => {
 									</Form>
 								</div>
 							</Col>
+
 							<Col md={{span:7, offset: 1}}>
 								<Card className="mb-3">
 									<Card.Body>
@@ -81,9 +83,6 @@ export const RouteMap = () => {
 										<Card.Text>Content Here</Card.Text>
 									</Card.Body>
 								</Card>
-							</Col>
-							<Col md={{span:4, offset: 0}}>
-								<Button variant="success">Favorite</Button>
 							</Col>
 						</Row>
 					</Container>
