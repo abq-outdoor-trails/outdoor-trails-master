@@ -13,6 +13,12 @@ import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+
+const Map = ReactMapboxGl({
+	accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA'
+});
+
 export const RouteMap = () => {
 	return (
 		<>
@@ -24,7 +30,17 @@ export const RouteMap = () => {
 						<Col>
 							<h2>Bosque Trail</h2>
 							<div id="map-wrapper">
-								MapBox element goes here
+								<Map
+									style="mapbox://styles/mapbox/streets-v9"
+									containerStyle={{
+										height: '100vh',
+										width: '100vw'
+									}}
+								>
+									<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+										<Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
+									</Layer>
+								</Map>
 							</div>
 						</Col>
 					</Row>
