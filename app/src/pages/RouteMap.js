@@ -19,17 +19,17 @@ export const RouteMap = () => {
 			<main>
 
 				<section>
-					<Container>
-						<Row>
-							<Col>
-								<h2>Bosque Trail</h2>
-								<div id="map-wrapper">
-									MapBox element goes here
-								</div>
-							</Col>
-						</Row>
-					</Container>
-				</section>
+				<Container>
+					<Row>
+						<Col>
+							<h2>Bosque Trail</h2>
+							<div id="map-wrapper">
+								MapBox element goes here
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			</section>
 
 				<section className="py-5">
 					<Container fluid="true">
