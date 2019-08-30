@@ -44,6 +44,14 @@ class DataDownloader {
 							$routes[$i]->geometry->paths
 						]]];
 				}
+				$routeId = generateUuidV4();
+				$description = $routes[$i]->attributes->Comments;
+				$routeFile = json_encode($newArray[$routes[$i]->attributes->ParentPathName]["routeFile"]);
+				$routeName = $routes[$i]->attributes->ParentPathName;
+				$routeSpeedLimit = 5;
+				$routeType = '';
+				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+				$newRoute->insert($pdo);
 			}
 		}
 
