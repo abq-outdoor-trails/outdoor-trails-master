@@ -10,6 +10,8 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 
+import BikeImage from "../image/yellow-bike.jpg"
+
 
 export const Home = () => {
 	return (
@@ -49,10 +51,11 @@ export const Home = () => {
 
 				{/*About Section*/}
 				<section>
-					<Container fluid="true">
+					<Container>
 						<Row>
 							<Col>
 								<h1>This is our About Section</h1>
+								{<Image src={BikeImage} fluid alt="Yellow Bike"/>}
 							</Col>
 						</Row>
 					</Container>
