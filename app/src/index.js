@@ -15,16 +15,19 @@ import {RouteMap} from "./pages/RouteMap";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+// import {far} from "@fortawesome/free-solid-svg-icons";
+// import {fab, faGithub} from "@fortawesome/free-brands-svg-icons";
 import {
+	faDog,
 	faEnvelope,
+	faKey,
 	faPencilAlt,
 	faHeart,
 	faTrash,
 	faSignInAlt,
 	faSortDown,
 	faUserCircle,
-	faKey,
-	faDog
+	faUser
 } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -42,7 +45,11 @@ const App = () => (
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={Signup} />
+<<<<<<< HEAD
 					<Route exact path="/route" component={RouteMap} />
+=======
+					<Route exact path="/route" component={SingleRoutePage} />
+>>>>>>> static-ui
 					<Route component={FourOhFour} />
 				</Switch>
 			</div>
