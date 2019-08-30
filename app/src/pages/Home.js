@@ -10,7 +10,8 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 
-import BikeImage from "../image/yellow-bike.jpg"
+import BikeImage from "../image/black-bike.jpg"
+import BikeLogo from "../image/Navbar-logo-green.png"
 
 
 export const Home = () => {
@@ -24,12 +25,12 @@ export const Home = () => {
 					<Container fluid="true" className="text-center">
 						<Row>
 							<Col>
+								{<Image src={BikeLogo} fluid alt="ABQ Bike Logo"/>}
 								<h1 class="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
-								<p> </p>
 								<Button
-									variant="outline-light" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
+									variant="outline-light" size="lg" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
 								</Button>
-								{/*<Image src={BikeImage} fluid alt="Yellow Bike"/>*/}
+
 							</Col>
 						</Row>
 					</Container>
