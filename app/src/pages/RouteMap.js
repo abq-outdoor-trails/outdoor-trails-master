@@ -29,8 +29,7 @@ export const RouteMap = () => {
 					<Row>
 						<Col>
 							<h2>Bosque Trail</h2>
-							<div id="map-wrapper">
-								<Map
+							<Map
 									style="mapbox://styles/mapbox/streets-v9"
 									containerStyle={{
 										height: '100vh',
@@ -38,10 +37,9 @@ export const RouteMap = () => {
 									}}
 								>
 									<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-										<Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
+										<Feature coordinates={[-106.6505556, 35.0844444]}/>
 									</Layer>
 								</Map>
-							</div>
 						</Col>
 					</Row>
 				</Container>
