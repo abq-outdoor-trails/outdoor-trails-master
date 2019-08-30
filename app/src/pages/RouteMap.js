@@ -14,6 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import { GeoJSONLayer} from "react-mapbox-gl/lib/geojson-layer";
 
 const Map = ReactMapboxGl({
 	accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA'
@@ -45,10 +46,9 @@ export const RouteMap = () => {
 				</Container>
 			</section>
 
-				<section className="py-5">
+				<section className="py-md-4">
 					<Container fluid="true">
 						<Row>
-
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>
@@ -61,7 +61,6 @@ export const RouteMap = () => {
 									</Form>
 								</div>
 							</Col>
-
 							<Col md={{span:7, offset: 1}}>
 								<Card className="mb-3">
 									<Card.Body>
