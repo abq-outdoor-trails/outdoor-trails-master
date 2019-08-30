@@ -14,5 +14,21 @@ export const SignUpFormContent = (props) => {
 				handleBlur,
 				handleSubmit,
 				handleReset
-	}
-}
+	} = props;
+	return (
+		<>
+			<form onSubmit={handleSubmit}>
+				{/*controlId must match what is passed to the initialValues prop*/}
+				<div className="form-group">
+					<label htmlFor="userEmail">Email Address</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="envelope"/>
+							</div>
+						</div>
+						<input
+
+
+			</>
+	)
