@@ -83,6 +83,9 @@ export const RouteMap = () => {
 									</Card.Body>
 								</Card>
 							</Col>
+							<Col md={{span:4, offset: 0}}>
+								<Button variant="success">Favorite</Button>
+							</Col>
 						</Row>
 					</Container>
 				</section>
