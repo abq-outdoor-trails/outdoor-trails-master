@@ -28,26 +28,40 @@ class DataDownloader {
 
 		$routes = self::readDataJson($urlBase);
 		$newArray = [];
-
-		foreach($routes as $key => $route) {
-			if($route->attributes->PathType === "Paved Multiple Use Trail") {
-				$routeFile = $route->geometry->paths[0];
-
-
-//				$newArray = ["routeName" => ["route" => []]];
-
-//				if($newArray[$route->attributes->ParentPathName]) {
-//					$newArray[$route->attributes->ParentPathName] = $newArray[$route->attributes->ParentPathName]  + $route->geometry->paths;
-//				} else {
-//					$newArray = [$route->attributes->ParentPathName => $route->geometry->paths];
-//				}
-//				[$route-attributes->ParentPathType][$route-geometry->paths]
-//				$newArray = [$route->attributes->ParentPathName => $newArray[$route->attributes->ParentPathName ? $newArray[$route->attributes->ParentPathName] + $route->geometry->paths : $route->geometry->paths];
-//				array_push($newArray, [$route->attributes->ParentPathName, $route->geometry->paths]);
-
+//		var_dump($routes[0]->geometry->paths[0]);
+//		var_dump($routes[0]->attributes);
+//		[ParentPathName => [description => something, routeFile => [
+//			[x, y],
+//			[x, y],
+//			[x, y]
+//		] ]];
+		for($i = 0; $i < sizeof($routes); $i++) {
+			if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
+				if(array_key_exists(trim($routes[$i]->attributes->ParentPathName), $newArray)) {
+					array_push($newArray[trim($routes[$i]->attributes->ParentPathName)]["routeFile"], $routes[$i]->geometry->paths);
+				} else {
+					$newArray = $newArray + [trim($routes[$i]->attributes->ParentPathName) => ["description" => $routes[$i]->attributes->Comments, "routeSpeedLimit" => $routes[$i]->attributes->PostedSpeedLimit_MPH, "routeFile" => [
+							$routes[$i]->geometry->paths
+						]]];
+				}
 			}
 		}
-var_dump($newArray);
+
+		var_dump($newArray);
+//
+////				$newArray = ["routeName" => ["route" => []]];
+//
+////				if($newArray[$route->attributes->ParentPathName]) {
+////					$newArray[$route->attributes->ParentPathName] = $newArray[$route->attributes->ParentPathName]  + $route->geometry->paths;
+////				} else {
+////					$newArray = [$route->attributes->ParentPathName => $route->geometry->paths];
+////				}
+////				[$route-attributes->ParentPathType][$route-geometry->paths]
+////				$newArray = [$route->attributes->ParentPathName => $newArray[$route->attributes->ParentPathName ? $newArray[$route->attributes->ParentPathName] + $route->geometry->paths : $route->geometry->paths];
+////				array_push($newArray, [$route->attributes->ParentPathName, $route->geometry->paths]);
+//
+//			}
+//		}
 //		foreach($routes as $route) {
 //			if($route->attributes->PathType === "Paved Multiple Use Trail") {
 //
