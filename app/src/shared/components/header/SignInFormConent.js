@@ -83,4 +83,4 @@ export const SignInFormContent = (props) => {
 
 
 		)
-}
+};
