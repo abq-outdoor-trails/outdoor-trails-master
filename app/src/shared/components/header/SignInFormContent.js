@@ -1,6 +1,6 @@
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {FormDebugger} from "../../components/FormDebugger";
-import React from "react";
 
 export const SignInFormContent = (props) => {
 	const {
@@ -61,8 +61,12 @@ export const SignInFormContent = (props) => {
 												value={values.userPassword}
 												onChange={handleChange}
 												onBlur={handleBlur}
-											/>
+									/>
 								</div>
+								{errors.userPassword && touched.userPassword && (
+									<div className="alert alert-danger">{errors.userPassword}</div>
+								)}
+							</div>
 
 								<div className="form-group">
 									<button className="btn btn-primary mb-2" type="submit">Submit</button>
@@ -70,17 +74,12 @@ export const SignInFormContent = (props) => {
 												className="btn btn-danger mb-2"
 												onClick={handleReset}
 												disabled={!dirty || isSubmitting}
-											>Reset
+									>Reset
 									</button>
 								</div>
-
-
 								<FormDebugger {...props}/>
 							</form>
-							{status && (<div className={status.type} > {status.message}</div>)}
+							{status && (<div className={status.type}>{status.message}</div>)}
 					</>
-
-
-
 		)
 };
