@@ -20,6 +20,30 @@ export const SignUpFormContent = (props) => {
 			<form onSubmit={handleSubmit}>
 				{/*controlId must match what is passed to the initialValues prop*/}
 				<div className="form-group">
+					<label htmlFor="userName">User Name</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="user"/>
+							</div>
+						</div>
+						<input
+							className="form-control"
+							id="userName"
+							type="text"
+							value={values.userName}
+							placeholder="UserName"
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+					</div>
+					{ errors.userName && touched.userName && (
+						<div className="alert alert-danger">{errors.userName}</div>
+					)
+					}
+				</div>
+
+				<div className="form-group">
 					<label htmlFor="userEmail">Email Address</label>
 					<div className="input-group">
 						<div className="input-group-prepend">
@@ -92,29 +116,6 @@ export const SignUpFormContent = (props) => {
 					)}
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="userName">User Name</label>
-					<div className="input-group">
-						<div className="input-group-prepend">
-							<div className="input-group-text">
-								<FontAwesomeIcon icon="user"/>
-							</div>
-					</div>
-					<input
-						className="form-control"
-						id="userName"
-						type="text"
-						value={values.userName}
-						placeholder="UserName"
-						onChange={handleChange}
-						onBlur={handleBlur}
-					/>
-				</div>
-					{ errors.userName && touched.userName && (
-								<div className="alert alert-danger">{errors.userName}</div>
-							)
-					}
-				</div>
 				<div className="form-group">
 					<button className="btn btn-primary mb-2" type="submit">Submit</button>
 				<button
