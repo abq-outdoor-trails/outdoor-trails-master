@@ -16,7 +16,7 @@ import Badge from "react-bootstrap/Badge";
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 
 const Map = ReactMapboxGl({
-	accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA'
+	accessToken: 'pk.eyJ1IjoiY2FuZGVyc29uNzMiLCJhIjoiY2p6bmEybG53MDIwbTNicHVhZHUzNmkzeiJ9.F41L6zwIg3v8CwuQyL81Pw'
 });
 
 export const RouteMap = () => {
@@ -30,14 +30,14 @@ export const RouteMap = () => {
 							<Col>
 								<h2>Bosque Trail</h2>
 								<Map
-									style="mapbox://styles/mapbox/streets-v9"
+									style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
 									containerStyle={{
 										height: '50vh',
 										width: '50vw'
 									}}
 								>
 									<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-										<Feature coordinates={[-106.6505556, 35.0844444]} />
+										<Feature></Feature>
 									</Layer>
 
 								</Map>
