@@ -32,7 +32,7 @@ export const SignUpFormContent = (props) => {
 							id="userName"
 							type="text"
 							value={values.userName}
-							placeholder="UserName"
+							placeholder="User Name"
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>

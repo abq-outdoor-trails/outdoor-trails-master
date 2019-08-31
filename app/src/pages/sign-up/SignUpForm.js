@@ -32,7 +32,7 @@ export const SignUpForm = () => {
 	});
 
 	// define sign up form submit handler
-	const submitSignUp = (values, {resetForm}) => {
+	const submitSignUp = (values, {resetForm, setStatus}) => {
 		httpConfig.post("/apis/sign-up/", values)
 			.then(reply => {
 				let { message, type } = reply;
@@ -44,12 +44,14 @@ export const SignUpForm = () => {
 	};
 	// return Formik component
 	return (
-		<Formik
-			initialValues={ signUp }
-			onSubmit={ submitSignUp }
-			validationSchema={ validator }
-		>
-			{ SignUpFormContent }
-		</Formik>
+		<>
+			<Formik
+				initialValues={ signUp }
+				onSubmit={ submitSignUp }
+				validationSchema={ validator }
+			>
+				{ SignUpFormContent }
+			</Formik>
+		</>
 	);
 };
