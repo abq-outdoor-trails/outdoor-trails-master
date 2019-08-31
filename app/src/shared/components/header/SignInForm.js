@@ -2,7 +2,7 @@ import React from 'react';
 import {httpConfig} from "../../../misc/http-config";
 import {Formik} from "formik/dist/index";
 import * as Yup from "yup";
-import {SignUpFormContent} from "./SignUpFormContent";
+import {SignInFormContent} from "./SignInFormContent";
 
 
 export const SignInForm = () => {
@@ -11,7 +11,7 @@ export const SignInForm = () => {
 			.email("email must be a valid email")
 			.required("email is required"),
 		userHash: Yup.string()
-			.required("Password is required"
+			.required("Password is required")
 				.min(8, "Password must be at least 8 characters")
 	});
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import {SignInForm} from "./SignInForm";
+
 
 import '../../../index.css';
 
@@ -23,21 +25,8 @@ export const Header = () => {
 						<Nav.Link href="#about">About</Nav.Link>
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
 							<NavDropdown.Item href="#">
-								<Form inline>
-									<InputGroup>
-										<FormControl
-											placeholder="Email"
-											aria-label="Email"
-											aria-describedby=""
-										/>
-										<FormControl
-											placeholder="Password"
-											aria-label="Password"
-											aria-describedby=""
-										/>
-									</InputGroup>
-									<Button type="submit">Sign In</Button>
-								</Form>
+								<SignInForm>
+								</SignInForm>
 							</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>

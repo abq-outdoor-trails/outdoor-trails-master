@@ -77,7 +77,10 @@ export const SignInFormContent = (props) => {
 								</div>
 								<FormDebugger {...props}/>
 							</form>
-							{status && (<div className={status.type}->{status.message}</div>)}
+							{
+								submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
+
+								}
 					</>
 
 
