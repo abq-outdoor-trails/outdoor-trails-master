@@ -28,17 +28,14 @@ export const SignUpFormContent = (props) => {
 							</div>
 						</div>
 						<input
-								className="form-control"
-								id="userEmail"
-								type="email"
-								value={values.userEmail}
-								placeholder="Enter email"
-								onChange={handleChange}
-								onBlur={handleBlur}
-
-
-								/>
-
+							className="form-control"
+							id="userEmail"
+							type="email"
+							value={values.userEmail}
+							placeholder="Enter email"
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
 					</div>
 					{
 						errors.userEmail && touched.userEmail && (
@@ -47,31 +44,51 @@ export const SignUpFormContent = (props) => {
 							</div>
 						)
 					}
-
 				</div>
 				{/*controlId must match what is defined by the initialValues object*/}
 				<div className="form-group">
-					<label htmlFor="userHash">Password</label>
+					<label htmlFor="userPassword">Password</label>
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="key">
-
-								</div>
+								<FontAwesomeIcon icon="key" />
+							</div>
 						</div>
 						<input
-									id="userHash"
-									className="form-control"
-									type="password"
-									placeholder="Password"
-									value={values.userHash}
-									onChange={handleChange}
-									onBlur={handleBlur}
+							id="userPassword"
+							className="form-control"
+							type="password"
+							placeholder="Password"
+							value={values.userPassword}
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
 					</div>
-					{errors.userHash && touched.userHash && (
-						<div className="alert alert-danger">{errors.userHashConfirm}</div>
+					{errors.userPassword && touched.userPassword && (
+						<div className="alert alert-danger">{errors.userPassword}</div>
+					)}
+				</div>
 
+				<div className="form-group">
+					<label htmlFor="userPasswordConfirm">Confirm Your Password</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="key" />
+							</div>
+						</div>
+						<input
+							className="form-control"
+							type="password"
+							id="userPasswordConfirm"
+							placeholder="Password Confirm"
+							value={values.userPasswordConfirm}
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+					</div>
+					{errors.userPasswordConfirm && touched.userPasswordConfirm && (
+						<div className="alert alert-danger">{errors.userPasswordConfirm}</div>
 					)}
 				</div>
 
@@ -80,51 +97,42 @@ export const SignUpFormContent = (props) => {
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="dove"/>
-
+								<FontAwesomeIcon icon="user"/>
 							</div>
 					</div>
 					<input
-								className="form-control"
-								id="userName"
-								type="text"
-								value={values.userName}
-								placeholder="UserName"
-								onChange={handleChange}
-								onBlur={handleBlur}
-
+						className="form-control"
+						id="userName"
+						type="text"
+						value={values.userName}
+						placeholder="UserName"
+						onChange={handleChange}
+						onBlur={handleBlur}
 					/>
 				</div>
-					{
-							errors.userName && touched.userName && (
-								<div className="alert alert-danger">
-									{errors.userName}
+					{ errors.userName && touched.userName && (
+								<div className="alert alert-danger">{errors.userName}</div>
 							)
-					}
-								</div>
-
 					}
 				</div>
 				<div className="form-group">
-					<button className="btn btn btn-danger mb-2" type="submit"Submit</button>
+					<button className="btn btn-primary mb-2" type="submit">Submit</button>
 				<button
-							className="btn btn-danger mb-2"
-							onClick={handleReset}
-							disabled={!dirty || isSubmitting}
-					>Reset
+					className="btn btn-danger mb-2"
+					onClick={handleReset}
+					disabled={!dirty || isSubmitting}
+				>Reset
 				</button>
 			</div>
 
-					<FormDebugger {...props} />
-				</form>
-				{console.log(
-					submitStatus
-				)}
-				{
-					submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
-				}
-				</>
-
-
-		)
+				<FormDebugger {...props} />
+			</form>
+			{console.log(
+				submitStatus
+			)}
+			{
+				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
+			}
+		</>
+			)
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import {SignUpForm} from "./SignUpForm";
 
 
 import Container from "react-bootstrap/Container";
@@ -20,6 +21,7 @@ export const Signup = () => (
 				<Col sm={6} lg={{span: 4, offset: 1}}>
 					<Card>
 						<Card.Body>
+							<SignUpForm/>
 							<Form>
 								<Form.Group>
 									<InputGroup>
