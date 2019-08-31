@@ -92,6 +92,29 @@ export const SignUpFormContent = (props) => {
 						<div className="alert alert-danger">{errors.userPassword}</div>
 					)}
 				</div>
+				<div className="form-group">
+					<label htmlFor="profilePasswordConfirm">Confirm Your Password</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="key"/>
+							</div>
+						</div>
+						<input
+
+									className="form-control"
+									type="password"
+									id="profilePasswordConfirm"
+									placeholder="Password Confirm"
+									value={values.profilePasswordConfirm}
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
+							</div>
+							{errors.profilePasswordConfirm && touched.profilePasswordConfirm && (
+								<div className="alert alert-danger">{errors.profilePasswordConfirm}</div>
+							)}
+				</div>
 
 				<div className="form-group">
 					<label htmlFor="userPasswordConfirm">Confirm Your Password</label>
