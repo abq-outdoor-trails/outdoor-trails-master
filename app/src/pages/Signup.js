@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,10 +8,10 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const Signup = () => (
 	<main className="d-flex align-items-center">
