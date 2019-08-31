@@ -8,7 +8,7 @@ import "./index.css";
 import {Header} from "./shared/Header";
 import {Footer} from "./shared/Footer";
 import {Home} from "./pages/Home";
-import {Signup} from "./pages/Signup";
+import {Signup} from "./pages/sign-up/Signup";
 import {FourOhFour} from "./pages/FourOhFour";
 
 import {RouteMap} from "./pages/RouteMap";
