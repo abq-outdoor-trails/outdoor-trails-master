@@ -19,7 +19,7 @@ export const SignUpForm = () => {
 	// init yup validator
 	const validator = Yup.object().shape({
 		userName: Yup.string()
-			.name("user name cannot be empty")
+			.length("user name cannot be empty")
 			.required("user name is required"),
 		userEmail: Yup.string()
 			.email("email must be a valid email")
