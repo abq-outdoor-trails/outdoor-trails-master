@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {FormDebugger} from "../../FormDebugger";
+import {FormDebugger} from "../../components/FormDebugger";
 import React from "react";
 
 export const SignInFormContent = (props) => {
@@ -17,7 +17,7 @@ export const SignInFormContent = (props) => {
 	} = props;
 		return (
 			<>
-						<form onsSubmit={handleSubmit}>
+						<form onSubmit={handleSubmit}>
 							{/*controlId must match what is passed to the intialValues prop*/}
 							<div className="form-group">
 								<label htmlFor="userEmail">Email Address</label>
