@@ -5,13 +5,13 @@ import {Route, Switch} from "react-router";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./index.css";
-import {Header} from "./shared/Header";
-import {Footer} from "./shared/Footer";
-import {Home} from "./pages/Home";
+import {Header} from "./shared/components/header/Header";
+import {Footer} from "./shared/components/footer/Footer";
+import {Home} from "./pages/home/Home";
 import {Signup} from "./pages/sign-up/Signup";
-import {FourOhFour} from "./pages/FourOhFour";
+import {FourOhFour} from "./pages/four-oh-four/FourOhFour";
 
-import {RouteMap} from "./pages/RouteMap";
+import {RouteMap} from "./pages/route-map/RouteMap";
 
 
 
