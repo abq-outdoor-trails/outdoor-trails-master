@@ -48,7 +48,7 @@ export const SignInFormContent = (props) => {
 							</div>
 							{/*controlId must match what is defined by the intialValues object*/}
 							<div className="form-group">
-								<label htmlFor="userHash">Password</label>
+								<label htmlFor="userPassword">Password</label>
 								<div className="input-group">
 									<div className="input-group-prepend">
 										<div className="input-group-text">
@@ -56,11 +56,11 @@ export const SignInFormContent = (props) => {
 										</div>
 									</div>
 									<input
-												id="userHash"
+												id="userPassword"
 												className="form-control"
 												type="password"
 												placeholder="Password"
-												value={values.userHash}
+												value={values.userPassword}
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
@@ -75,6 +75,8 @@ export const SignInFormContent = (props) => {
 											>Reset
 									</button>
 								</div>
+
+
 								<FormDebugger {...props}/>
 							</form>
 							{
