@@ -38,13 +38,11 @@ export const SignInFormContent = (props) => {
 
 									/>
 								</div>
-								{
-										errors.userEmail && touched.userEmail && (
+								{errors.userEmail && touched.userEmail && (
 											<div className="alert alert-danger">
 												{errors.userEmail}
 											</div>
-										)
-								}
+										)}
 							</div>
 							{/*controlId must match what is defined by the intialValues object*/}
 							<div className="form-group">
@@ -79,10 +77,7 @@ export const SignInFormContent = (props) => {
 
 								<FormDebugger {...props}/>
 							</form>
-							{
-								submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
-
-								}
+							{status && (<div className={status.type} > {status.message}</div>)}
 					</>
 
 
