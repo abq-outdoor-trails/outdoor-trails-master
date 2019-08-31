@@ -42,5 +42,15 @@ export const SignUpForm = () => {
 					resetForm();
 				}
 			});
-	}
+	};
+	// return Formik component
+	return (
+		<Formik
+			initialValues={ signUp }
+			onSubmit={ submitSignUp }
+			validationSchema={ validator }
+		>
+			{ SignUpFormContent }
+		</Formik>
+	);
 };
