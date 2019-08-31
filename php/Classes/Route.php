@@ -362,6 +362,47 @@ class Route implements \JsonSerializable {
 	}
 
 	/**
+	 * gets the Route by Route Name
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $routeName content to search for
+	 * @return \SplFixedArray SplFixedArray of routes found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 * follow get tweet by tweet content example
+	 **/
+	public static function getRouteByRouteName(\PDO $pdo, string $routeName) : \SplFixedArray {
+		// sanitize the description before searching
+		$routeName = trim($routeName);
+		$routeName = filter_var($routeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($routeName) === true) {
+			throw(new\PDOException("route name is invalid"));
+		}
+		//create query template
+		$query = "SELECT routeId, routeName, routeFile, routeType, routeSpeedLimit, routeDescription FROM route WHERE routeName = :routeName";
+		$statement = $pdo->prepare($query);
+
+		// bind the route type to the place holder in the template
+		$parameters = ["routeName" => $routeName];
+		$statement->execute($parameters);
+
+		// build an array of route types
+		$routes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$route = new Route($row["routeId"], $row["routeName"], $row["routeFile"], $row["routeType"], $row["routeSpeedLimit"], $row["routeDescription"]);
+				$routes[$routes->key()] = $route;
+				$routes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($routes);
+	}
+
+	/**
 	 * gets the Route File by routeFile
 	 *
 	 * @param \PDO $pdo PDO connection object
