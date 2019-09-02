@@ -48,8 +48,8 @@ export const Header = () => {
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
 							<SignInForm>
 							</SignInForm>
-							{/* conditional render if user has jwt / is not logged in*/}
-							{jwt === null && (
+							{/* conditional render if user has jwt / is logged in*/}
+							{jwt !== null && (
 								<NavDropdown className="nav-link navbar-username" title={"Welcome, " + username + "!"}>
 									<div className="dropdown-item">
 										<Link to={"/user/${userId"} className="nav-link">
@@ -65,10 +65,14 @@ export const Header = () => {
 								</NavDropdown>
 
 							)}
-						</NavDropdown>
+
+							{/* conditional render if user has no jwt /is not signed in*/}
+							{jwt === null && (
+							<NavDropdown className="
+							)}
 					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
-		</>
+									</Navbar.Collapse>
+								</Navbar>
+							</>
 	)
 };
