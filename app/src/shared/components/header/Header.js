@@ -26,6 +26,10 @@ export const Header = () => {
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
 							<SignInForm>
 							</SignInForm>
+							{/* conditional render if user has jwt / is not logged in*/}
+							{jwt === null && (
+								<NavDropdown/>
+							)}
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
