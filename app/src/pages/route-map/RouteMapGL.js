@@ -21,10 +21,14 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-					<Marker latitude={35.082103870000026} longitude={-106.53200461099999}>
-						<div>ROUTE</div>
-					</Marker>
-				{console.log(routeData.default.features[0].geometry.paths[0])}
+				<Marker latitude={routeData.default.features[0].geometry.paths[0][0][1]} longitude={routeData.default.features[0].geometry.paths[0][0][0]}>
+					<div>ROUTE</div>
+				</Marker>
+				<Marker latitude={routeData.default.features[0].geometry.paths[0][1][1]} longitude={routeData.default.features[0].geometry.paths[0][1][0]}>
+					<div>ROUTE</div>
+				</Marker>
+				{console.log(routeData.default.features[0].geometry.paths[0][0][0])}
+				{console.log(routeData.default.features[0].geometry.paths[0][0][1])}
 			</ReactMapGL>
 		</div>
 	)
