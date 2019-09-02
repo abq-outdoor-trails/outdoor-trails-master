@@ -7,11 +7,12 @@ import '../../../index.css';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import {UseJwt, UseJwtProfileId, UseJwtUserId, UseJwtUserName} from "../../utils/JwtHelpers";
+import {UseJwt, UseJwtProfileId, UseJwtUsername} from "../../utils/JwtHelpers";
 
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {httpConfig} from "../../utils/http-config";
+import {Link} from "react-router-dom";
 
 
 export const Header = () => {
