@@ -1,85 +1,94 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {FormDebugger} from "../../components/FormDebugger";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/es/FormControl";
 
 export const SignInFormContent = (props) => {
 	const {
-				status,
-				values,
-				errors,
-				touched,
-				dirty,
-				isSubmitting,
-				handleChange,
-				handleBlur,
-				handleSubmit,
-				handleReset
+		status,
+		values,
+		errors,
+		touched,
+		dirty,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset
 	} = props;
-		return (
-			<>
-						<form onSubmit={handleSubmit}>
-							{/*controlId must match what is passed to the intialValues prop*/}
-							<div className="form-group">
-								<label htmlFor="userEmail">Email Address</label>
-								<div className="input-group">
-									<div className="input-group-prepend">
-										<div className="input-group-text">
-											<FontAwesomeIcon icon="envelope"/>
-										</div>
+	return (
+		<>
+			<Card bg="transparent" className="border-0 rounded-0">
+				<Card.Body>
+					<Form onSubmit={handleSubmit}>
+						<Form.Group>
+							<Form.Label className="sr-only">Email</Form.Label>
+							<InputGroup>
+								<InputGroup.Prepend>
+									<InputGroup.Text>
+										<FontAwesomeIcon icon="envelope"/>
+									</InputGroup.Text>
+								</InputGroup.Prepend>
+								<FormControl
+									id="userEmail"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									placeholder="Email"
+									type="email"
+									value={values.signingEmail}
+								/>
+							</InputGroup>
+							{
+								errors.userEmail && touched.userEmail && (
+									<div ClassName="alert alert-danger">
+										{errors.signinEmail}
 									</div>
-									<input
-												className="form-control"
-												id="userEmail"
-												type="email"
-												value={values.userEmail}
-												placeholder="Enter email"
-												onChange={handleChange}
-												onBlur={handleBlur}
-
-									/>
-								</div>
-								{errors.userEmail && touched.userEmail && (
-											<div className="alert alert-danger">
-												{errors.userEmail}
-											</div>
-										)}
-							</div>
-							{/*controlId must match what is defined by the intialValues object*/}
-							<div className="form-group">
-								<label htmlFor="userPassword">Password</label>
-								<div className="input-group">
-									<div className="input-group-prepend">
-										<div className="input-group-text">
-											<FontAwesomeIcon icon="key"/>
-										</div>
+								)
+							}
+						</Form.Group>
+						<Form.Group>
+							<Form.Label className="sr-only">Password</Form.Label>
+							<InputGroup>
+								<InputGroup.Prepend>
+									<InputGroup.Text>
+										<FontAwesomeIcon icon="key"/>
+									</InputGroup.Text>
+								</InputGroup.Prepend>
+								<FormControl
+									id="userHash"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									type="password"
+									placeholder="Password"
+									value={values.userHash}
+								/>
+							</InputGroup>
+							{
+								errors.userHash && touched.userHash && (
+									<div className="alert alert-danger">
+										{errors.userHash}
 									</div>
-									<input
-												id="userPassword"
-												className="form-control"
-												type="password"
-												placeholder="Password"
-												value={values.userPassword}
-												onChange={handleChange}
-												onBlur={handleBlur}
-									/>
-								</div>
-								{errors.userPassword && touched.userPassword && (
-									<div className="alert alert-danger">{errors.userPassword}</div>
-								)}
-							</div>
+								)
+							}
+						</Form.Group>
+						<Form.Group className="text-md-right">
+							<Button variant="primary" type="submit">
+								<FontAwesomeIcon icon="sign-in-alt"/>&nbsp;Sign In
+							</Button>
+						</Form.Group>
+					</Form>
 
-								<div className="form-group">
-									<button className="btn btn-primary mb-2" type="submit">Submit</button>
-									<button
-												className="btn btn-danger mb-2"
-												onClick={handleReset}
-												disabled={!dirty || isSubmitting}
-									>Reset
-									</button>
-								</div>
-								<FormDebugger {...props}/>
-							</form>
-							{status && (<div className={status.type}>{status.message}</div>)}
-					</>
-		)
+						<div ClassName="my-2">
+							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
+							<Link to="/signup">Sign Up</Link>
+						</div>
+				</Card.Body>
+			</Card>
+			{consol.log(status)}
+			{status && (<div className={status.type}>{status.message}</div>)}
+
+
+		</>
+	)
 };
