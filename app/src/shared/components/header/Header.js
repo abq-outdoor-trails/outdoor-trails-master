@@ -7,13 +7,34 @@ import '../../../index.css';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import {UseJwt, UseJwtUserId, UseJwtUserName} from "../utils/JwtHelpers";
+import {UseJwt, UseJwtProfileId, UseJwtUserId, UseJwtUserName} from "../../utils/JwtHelpers";
 
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {httpConfig} from "../../utils/http-config";
 
 
 export const Header = () => {
+
+	//grab the jwt and username for logged in users
+	const jwt = UseJwt();
+	const username = UseJwtUsername();
+	const userId = UseJwtProfileId();
+
+	const signOut = () => {
+		httpConfig.get("/apis/signout")
+			.then(reply => {
+				let {message, type} = reply;
+				if(reply.status ===200) {
+					window.localStorage.removeItem("jwt-token");
+					setTimeout(() => {
+						window.location = "/";
+					}, 1500);
+				}
+			});
+	};
+
+
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
