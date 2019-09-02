@@ -15,6 +15,7 @@ export const Map = () => {
 			<ReactMapGL
 				{...viewport}
 				mapboxApiAccessToken="pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA"
+				mapStyle="mapbox://styles/wharris/ck02siyy56po81cqxw9u87ulw"
 				onViewportChange={viewport => {
 					setViewport(viewport);
 				}}
