@@ -28,7 +28,20 @@ export const Header = () => {
 							</SignInForm>
 							{/* conditional render if user has jwt / is not logged in*/}
 							{jwt === null && (
-								<NavDropdown/>
+								<NavDropdown className="nav-link navbar-username" title={"Welcome, " + username + "!"}>
+									<div className="dropdown-item">
+										<Link to={"/user/${userId"} className="nav-link">
+											<FontAwesomeIcon icon="user" />$nbsp;$nbsp;My Profile
+										</Link>
+									</div>
+									<div className="dropdown-divider"></div>
+									<div className="dropdown-item sign-out-dropdown">
+										<button className="btn btn-outline-dark" onClick={signOut}>
+											Sign Out&nbsp;&nbsp;<FontAwesomeIcon icon="sign-out-alt" />
+										</button>
+									</div>
+								</NavDropdown>
+								
 							)}
 						</NavDropdown>
 					</Nav>
