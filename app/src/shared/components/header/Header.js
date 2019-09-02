@@ -7,6 +7,15 @@ import '../../../index.css';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import {UseJwt, UseJwtProfileId, UseJwtUsername} from "../misc/JwtHelpers";
+
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Button from "react-bootstrap/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
@@ -41,7 +50,7 @@ export const Header = () => {
 										</button>
 									</div>
 								</NavDropdown>
-								
+
 							)}
 						</NavDropdown>
 					</Nav>
