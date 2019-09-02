@@ -37,7 +37,8 @@ export const RouteMap = () => {
 									}}
 								>
 									<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-										<Feature></Feature>
+										<Feature>
+										</Feature>
 									</Layer>
 
 								</Map>
