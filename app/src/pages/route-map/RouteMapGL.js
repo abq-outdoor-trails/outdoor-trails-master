@@ -21,11 +21,9 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-				{routeData.default.features[0].geometry.paths[0].map(route =>(
 					<Marker latitude={35.082103870000026} longitude={-106.53200461099999}>
 						<div>ROUTE</div>
 					</Marker>
-				))}
 				{console.log(routeData.default.features[0].geometry.paths[0])}
 			</ReactMapGL>
 		</div>
