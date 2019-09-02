@@ -23,7 +23,7 @@ export const SignInForm = () => {
 
 
 	const submitSignIn = (values, {resetForm, setStatus}) => {
-		httpConfig.post("/apis/sign-in", values)
+		httpConfig.post("/apis/sign-in/", values)
 			.then(reply => {
 				let {message, type} = reply;
 				if(reply.status === 200 && reply.headers["x-jwt-token"]) {
