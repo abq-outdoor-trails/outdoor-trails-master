@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
-require_once dirname(__DIR__, 3) . "Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use AbqOutdoorTrails\AbqBike\User;
@@ -18,6 +19,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
+
 try {
 	// grab the MySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
@@ -79,7 +81,7 @@ try {
 }
 
 // prepare and send the reply
-header("Content type: application/json");
+header("Content-type: application/json");
 if($reply->data === NULL) {
 	unset($reply->data);
 }

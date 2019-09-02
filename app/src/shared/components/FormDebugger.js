@@ -1,7 +1,7 @@
 import React from "react";
 
 export const FormDebugger = props => (
-	<div style={{margin: 1rem 0}}>
+	<div style={{margin: '1rem 0'}}>
 		<h3 style={{fontFamily: 'monospace'}}>.</h3>
 		<pre
 			style={{

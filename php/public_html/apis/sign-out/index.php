@@ -1,7 +1,7 @@
 <?php
 
-require_once dirname(__DIR__, 2) . "/Classes/autoload.php";
-require_once dirname(__DIR__, 2) . "/lib/xsrf.php";
+require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
+require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
 
 
 /**
@@ -31,10 +31,7 @@ try {
 	} else {
 		throw(new \InvalidArgumentException("Invalid HTTP method request"));
 	}
-} catch(Exception $exception) {
-	$reply->status = $exception->getCode();
-	$reply->message = $exception->getMessage();
-} catch(TypeError $typeError) {
+} catch(Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
