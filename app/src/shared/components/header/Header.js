@@ -24,10 +24,8 @@ export const Header = () => {
 						<Nav.Link href="#route">Routes</Nav.Link>
 						<Nav.Link href="#about">About</Nav.Link>
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
-							<NavDropdown.Item href="#">
-								<SignInForm>
-								</SignInForm>
-							</NavDropdown.Item>
+							<SignInForm>
+							</SignInForm>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
