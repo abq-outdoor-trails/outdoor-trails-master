@@ -11,7 +11,7 @@ import {Home} from "./pages/home/Home";
 import {Signup} from "./pages/sign-up/Signup";
 import {FourOhFour} from "./pages/four-oh-four/FourOhFour";
 import {RouteMap} from "./pages/route-map/RouteMap";
-import {RouteMapGL} from "./pages/route-map/RouteMapGL";
+import {Map} from "./pages/route-map/RouteMapGL";
 
 
 
@@ -46,7 +46,7 @@ const App = () => (
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/route" component={RouteMapGL} />
+					<Route exact path="/route" component={Map} />
 					<Route component={FourOhFour} />
 				</Switch>
 			</div>
