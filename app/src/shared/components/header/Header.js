@@ -7,7 +7,6 @@ import '../../../index.css';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import {UseJwt, UseJwtProfileId, UseJwtUsername} from "../../utils/JwtHelpers";
 
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -17,10 +16,10 @@ import {Link} from "react-router-dom";
 
 export const Header = () => {
 
-	//grab the jwt and username for logged in users
-	const jwt = UseJwt();
-	const username = UseJwtUsername();
-	const userId = UseJwtProfileId();
+	// //grab the jwt and username for logged in users
+	// const jwt = UseJwt();
+	// const username = UseJwtUsername();
+	// const userId = UseJwtProfileId();
 
 	const signOut = () => {
 		httpConfig.get("/apis/signout")
@@ -48,31 +47,10 @@ export const Header = () => {
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
 							<SignInForm>
 							</SignInForm>
-							{/* conditional render if user has jwt / is logged in*/}
-							{jwt !== null && (
-								<NavDropdown className="nav-link navbar-username" title={"Welcome, " + username + "!"}>
-									<div className="dropdown-item">
-										<Link to={"/user/${userId"} className="nav-link">
-											<FontAwesomeIcon icon="user" />$nbsp;$nbsp;My Profile
-										</Link>
-									</div>
-									<div className="dropdown-divider"></div>
-									<div className="dropdown-item sign-out-dropdown">
-										<button className="btn btn-outline-dark" onClick={signOut}>
-											Sign Out&nbsp;&nbsp;<FontAwesomeIcon icon="sign-out-alt" />
-										</button>
-									</div>
-								</NavDropdown>
-
-							)}
-
-							{/* conditional render if user has no jwt /is not signed in*/}
-							{jwt === null && (
-							<NavDropdown className="
-							)}
+						</NavDropdown>
 					</Nav>
-									</Navbar.Collapse>
-								</Navbar>
-							</>
+				</Navbar.Collapse>
+				</Navbar>
+		</>
 	)
 };
