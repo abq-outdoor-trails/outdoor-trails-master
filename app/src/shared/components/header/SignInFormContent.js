@@ -1,8 +1,18 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
+
+
 import {FormDebugger} from "../../components/FormDebugger";
+
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/es/FormControl";
+import Button from "react-bootstrap/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+
+
 
 export const SignInFormContent = (props) => {
 	const {
@@ -78,16 +88,14 @@ export const SignInFormContent = (props) => {
 							</Button>
 						</Form.Group>
 					</Form>
+					<FormDebugger {...props}/>
 
 						<div ClassName="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
-							<Link to="/signup">Sign Up</Link>
+							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
 						</div>
 				</Card.Body>
 			</Card>
-			{consol.log(status)}
-			{status && (<div className={status.type}>{status.message}</div>)}
-
 
 		</>
 	)

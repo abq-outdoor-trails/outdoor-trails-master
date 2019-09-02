@@ -2,7 +2,7 @@ import React from 'react';
 import {Formik} from "formik/dist/index";
 import * as Yup from "yup";
 import {SignInFormContent} from "./SignInFormContent";
-import {AxiosInstance as httpConfig} from "axios";
+import {httpConfig} from "../../utils/http-config";
 
 
 export const SignInForm = () => {
