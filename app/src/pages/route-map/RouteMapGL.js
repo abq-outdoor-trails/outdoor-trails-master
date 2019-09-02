@@ -12,7 +12,11 @@ export const Map = () => {
 
 	return (
 		<div>
-			<ReactMapGL {...viewport}>markers here</ReactMapGL>
+			<ReactMapGL
+				{...viewport}
+				mapboxApiAccessToken="pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA"
+			>
+			</ReactMapGL>
 		</div>
 	)
 }
