@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Merker} from 'react-map-gl';
+import * as routeData from "../../image/biketrails_wgs84";
 
 export const Map = () => {
 	const [viewport, setViewport] = useState({
@@ -20,6 +21,11 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
+				{routeData.geometry.paths.map(route => (
+					<Marker key={route.attributes.OBJECTID}>
+						<div>ROUTE</div>
+					</Marker>
+				))}
 			</ReactMapGL>
 		</div>
 	)
