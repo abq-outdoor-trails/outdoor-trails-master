@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
-import { usePosition } from 'use-position';
+import Geo from "./Geo";
 
 import * as routeData from "../../image/biketrails_wgs84.json";
 
@@ -30,13 +30,7 @@ export const Map = () => {
 					<div>ROUTE</div>
 				</Marker>
 			</ReactMapGL>
-			<code>
-				latitude: {latitude2}<br/>
-				longitude: {longitude2}<br/>
-				timestamp: {timestamp}<br/>
-				accuracy: {accuracy && `${accuracy}m`}<br/>
-				error: {error}
-			</code>
+			<Geo/>
 		</div>
 
 	)

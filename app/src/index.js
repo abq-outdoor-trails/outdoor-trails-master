@@ -10,8 +10,9 @@ import {Footer} from "./shared/components/footer/Footer";
 import {Home} from "./pages/home/Home";
 import {Signup} from "./pages/sign-up/Signup";
 import {FourOhFour} from "./pages/four-oh-four/FourOhFour";
-import {RouteMap} from "./pages/route-map/RouteMap";
+// import {RouteMap} from "./pages/route-map/RouteMap";
 import {Map} from "./pages/route-map/RouteMapGL";
+
 
 
 
