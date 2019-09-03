@@ -340,7 +340,7 @@ class User implements \JsonSerializable {
 	 * @throws \TypeError when a variable are not the correct data type
 	 *
 	 **/
-	public static function getUserByUserId(\PDO $pdo, Uuid $userId): ?User {
+	public static function getUserByUserId(\PDO $pdo, $userId): ?User {
 		//sanitize the user id before searching//
 		try {
 			$userId = self::validateUuid($userId);
