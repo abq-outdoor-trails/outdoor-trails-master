@@ -12,15 +12,6 @@ import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
-/* the call to grab XSRF from the new API. */
-const getXsrf = () => {
-	httpConfig.get("/apis/xsrf/")
-		.then(reply => {
-			if(reply.status === 200) {
-				console.log(reply);
-			}
-		});
-};
 
 export const SignInFormContent = (props) => {
 	const {
@@ -103,8 +94,6 @@ export const SignInFormContent = (props) => {
 							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
 						</div>
 				</Card.Body>
-				{/* grab XSRF on click! Remove me when finsihed testing! */}
-				<button onClick={getXsrf}>get xsrf</button>
 			</Card>
 
 		</>
