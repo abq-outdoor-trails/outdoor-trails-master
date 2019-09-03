@@ -28,6 +28,7 @@ export const Home = () => {
 								{<Image src={BikeLogo} fluid alt="ABQ Bike Logo"/>}
 								<h1 class="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
 								<Button
+									href="../Signup"
 									variant="outline-light" size="lg" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
 								</Button>
 
