@@ -5,12 +5,18 @@ export const usePosition = () => {
 	const [position, setPosition] = useState({});
 	const [error, setError] = useState(null);
 
+	// on change method
 	const onChange = ({ coords }) => {
 		setPosition({
 			latitude: coords.latitude,
 			longitude: coords.longitude,
 		});
 	};
+
+	// on error method
+	const onError = error => {
+		setError(error.message);
+	}
 
 	// define useEffect
 	useEffect(() => {
