@@ -32,15 +32,7 @@ export const Header = () => {
 			});
 	};
 
-	/* the call to grab XSRF from the new API. */
-	const getXsrf = () => {
-		httpConfig.get("/apis/xsrf/")
-			.then(reply => {
-				if(reply.status === 200) {
-					console.log(reply);
-				}
-			});
-	};
+
 
 	return (
 		<>
@@ -58,8 +50,6 @@ export const Header = () => {
 					</Nav>
 				</Navbar.Collapse>
 				</Navbar>
-			{/* grab XSRF on click! Remove me when finsihed testing! */}
-			<button onClick={getXsrf}>get xsrf</button>
 		</>
 	)
 };

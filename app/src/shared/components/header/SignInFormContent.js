@@ -88,11 +88,13 @@ export const SignInFormContent = (props) => {
 							</Button>
 						</Form.Group>
 					</Form>
+					{console.log(status)}
+					{status && (<div className={status.type}>{status.message}</div>)}
 					<FormDebugger {...props}/>
 
 						<div ClassName="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
-							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
+							<Link to="/signup">Sign Up</Link>
 						</div>
 				</Card.Body>
 			</Card>

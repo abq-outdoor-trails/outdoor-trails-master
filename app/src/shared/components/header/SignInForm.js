@@ -30,9 +30,9 @@ export const SignInForm = () => {
 					window.localStorage.removeItem("jwt-token");
 					window.localStorage.setItem("jwt-token", reply.headers["x-jwt-token"]);
 					resetForm();
-					setTimeout(() => {
-						window.location = "/posts";
-					}, 1500);
+					// setTimeout(() => {
+					// 	window.location = "/posts";
+					// }, 1500); to do/can redirect to any page after 1500 ms
 				}
 				setStatus({message, type});
 
