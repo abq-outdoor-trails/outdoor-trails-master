@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
 import { usePosition } from 'use-position';
 
@@ -12,8 +12,6 @@ export const Map = () => {
 		height: '50vh',
 		zoom: 10
 	});
-
-	const { latitude2, longitude2, timestamp, accuracy, error } = usePosition();
 
 	return (
 		<div>
@@ -31,8 +29,6 @@ export const Map = () => {
 				<Marker latitude={routeData.default.features[0].geometry.paths[0][1][1]} longitude={routeData.default.features[0].geometry.paths[0][1][0]}>
 					<div>ROUTE</div>
 				</Marker>
-				{console.log(routeData.default.features[0].geometry.paths[0][0][0])}
-				{console.log(routeData.default.features[0].geometry.paths[0][0][1])}
 			</ReactMapGL>
 			<code>
 				latitude: {latitude2}<br/>
