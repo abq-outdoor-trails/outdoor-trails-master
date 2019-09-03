@@ -26,6 +26,7 @@ export const SignInFormContent = (props) => {
 		handleSubmit,
 		handleReset
 	} = props;
+	
 	return (
 		<>
 			<Card bg="transparent" className="border-0 rounded-0">
