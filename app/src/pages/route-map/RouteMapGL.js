@@ -13,7 +13,7 @@ export const Map = () => {
 		zoom: 10
 	});
 
-	const { latitude2, longitude2, timestamp, accuracy, error } = usePosition(true);
+	const { latitude2, longitude2, timestamp, accuracy, error } = usePosition();
 
 	return (
 		<div>
