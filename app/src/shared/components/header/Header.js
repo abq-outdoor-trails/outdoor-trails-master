@@ -1,17 +1,40 @@
 import React from 'react';
+import {SignInForm} from "./SignInForm";
+
 
 import '../../../index.css';
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
+
 import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {httpConfig} from "../../utils/http-config";
+import {Link} from "react-router-dom";
 
 
 export const Header = () => {
+
+	// //grab the jwt and username for logged in users
+	// const jwt = UseJwt();
+	// const username = UseJwtUsername();
+	// const userId = UseJwtProfileId();
+
+	const signOut = () => {
+		httpConfig.get("/apis/signout")
+			.then(reply => {
+				let {message, type} = reply;
+				if(reply.status ===200) {
+					window.localStorage.removeItem("jwt-token");
+					setTimeout(() => {
+						window.location = "/";
+					}, 1500);
+				}
+			});
+	};
+
+
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
@@ -22,27 +45,12 @@ export const Header = () => {
 						<Nav.Link href="#route">Routes</Nav.Link>
 						<Nav.Link href="#about">About</Nav.Link>
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
-							<NavDropdown.Item href="#">
-								<Form inline>
-									<InputGroup>
-										<FormControl
-											placeholder="Email"
-											aria-label="Email"
-											aria-describedby=""
-										/>
-										<FormControl
-											placeholder="Password"
-											aria-label="Password"
-											aria-describedby=""
-										/>
-									</InputGroup>
-									<Button type="submit">Sign In</Button>
-								</Form>
-							</NavDropdown.Item>
+							<SignInForm>
+							</SignInForm>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
-			</Navbar>
+				</Navbar>
 		</>
 	)
 };
