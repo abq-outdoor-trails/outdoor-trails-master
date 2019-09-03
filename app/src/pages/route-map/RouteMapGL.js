@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
+import { usePosition } from 'use-position';
+
 import * as routeData from "../../image/biketrails_wgs84.json";
 
 export const Map = () => {
@@ -10,6 +12,8 @@ export const Map = () => {
 		height: '50vh',
 		zoom: 10
 	});
+
+	const { latitude2, longitude2, timestamp, accuracy, error } = usePosition(true);
 
 	return (
 		<div>
@@ -30,6 +34,14 @@ export const Map = () => {
 				{console.log(routeData.default.features[0].geometry.paths[0][0][0])}
 				{console.log(routeData.default.features[0].geometry.paths[0][0][1])}
 			</ReactMapGL>
+			<code>
+				latitude: {latitude2}<br/>
+				longitude: {longitude2}<br/>
+				timestamp: {timestamp}<br/>
+				accuracy: {accuracy && `${accuracy}m`}<br/>
+				error: {error}
+			</code>
 		</div>
+
 	)
 };
