@@ -10,6 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {AxiosInstance as httpConfig} from "axios";
 
 
 /* the call to grab XSRF from the new API. */
