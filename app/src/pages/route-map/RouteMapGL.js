@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
-
-import * as routeData from "../../image/biketrails_wgs84.json";
+import {httpConfig} from "../../shared/utils/http-config";
 
 export const Map = () => {
 	const [viewport, setViewport] = useState({
@@ -11,6 +10,11 @@ export const Map = () => {
 		height: '50vh',
 		zoom: 10
 	});
+
+	useEffect(() => {
+
+		}
+	);
 
 	return (
 		<div>
@@ -29,7 +33,6 @@ export const Map = () => {
 				{/*	<div>ROUTE</div>*/}
 				{/*</Marker>*/}
 			</ReactMapGL>
-			{routeData.default.features.map(route => console.log(route.geometry.paths))}
 		</div>
 
 	)
