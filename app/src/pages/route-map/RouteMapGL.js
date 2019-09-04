@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import {useSelector, useDispatch} from "react-redux";
 import ReactMapGL, {Marker} from 'react-map-gl';
 import {httpConfig} from "../../shared/utils/http-config";
+import {getRouteByRouteType} from "../../shared/actions/get-route";
 
 export const Map = () => {
 	const [viewport, setViewport] = useState({
@@ -11,10 +13,23 @@ export const Map = () => {
 		zoom: 10
 	});
 
-	useEffect(() => {
+	// return the routes store from redux and store in routes variable (is this necessary?)
+	const routes = useSelector(state => state.route ? state.route : []);
 
-		}
-	);
+	const dispatch = useDispatch();
+
+	const effects = () => {
+		// the dispatch function takes actions as arguments to change the store
+		dispatch(getRouteByRouteType());
+	};
+
+	// declare inputs that will be used by functions that are declared in effects
+	const inputs = [routeType];
+
+	/**
+	 **/
+
+	useEffect(effects, inputs);
 
 	return (
 		<div>
@@ -26,12 +41,9 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-				{/*<Marker latitude={routeData.default.features[0].geometry.paths[0][0][1]} longitude={routeData.default.features[0].geometry.paths[0][0][0]}>*/}
-				{/*	<div>ROUTE</div>*/}
-				{/*</Marker>*/}
-				{/*<Marker latitude={routeData.default.features[0].geometry.paths[0][1][1]} longitude={routeData.default.features[0].geometry.paths[0][1][0]}>*/}
-				{/*	<div>ROUTE</div>*/}
-				{/*</Marker>*/}
+				<Marker latitude={routes.latitude} longitude={routes.longitude}>
+					<div>ROUTE</div>
+				</Marker>
 			</ReactMapGL>
 		</div>
 
