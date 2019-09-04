@@ -52,8 +52,48 @@ export const Comments = () => {
 			<main className="my-5">
 				<Container fluid="true" className="py-5">
 					<Row>
+						{/*BEGIN FORM PANEL*/}
+						<Col md={4} className={`posts-form-panel position-fixed ${(jwt === null && "panel-position-reset")}`}>
 
+							{/* This nested ternary will render the PostForm only if jwt !== null,
+							otherwise show signin/signup links. Then render the post form in either
+							one of two different ways depending on the screen width.
+							This allows the rendering of this element to be responsive. */}
+							{jwt !== null ? (
+								width < 768 ? (
+									<Accordion defaultActiveKey="1" className="d-md-none">
+										<Accordion.Toggle as={Button} variant="primary" eventKey="0" className="btn-block">
+											<FontAwesomeIcon icon="pencil-alt"/>&nbsp;Write A Comment!
+										</Accordion.Toggle>
+										<Accordion.Collapse eventKey="0">
+											<CommentForm/>
+										</Accordion.Collapse>
+									</Accordion>
+								) : (
+									<PostForm/>
+								)
+							) : (
+								<Card bg="light" className="mb-3 text-center">
+									<Card.Body>
+										<h4 className="mb-3">Please log in to post a comment.</h4>
+										<Link to="/" className="btn btn-outline-dark mr-3">Sign In</Link>
+										<Link to="/signup" className="btn btn-dark">Sign Up</Link>
+									</Card.Body>
+								</Card>
+							)}
+
+						</Col>
+
+						{/* BEGIN Comment ITEMS */}
+						<Col md={{span: 8, offset: 4}} className="comments-panel">
+							{comments.map(comment =>
+								<CommentCard comment={comment} key={comment.commentId} />
+							)}
+						</Col>
 
 					</Row>
+				</Container>
+			</main>
+		</>
 	)
-}
+};
