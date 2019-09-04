@@ -14,7 +14,7 @@ export const Map = () => {
 	});
 
 	// return the routes store from redux and store in routes variable (is this necessary?)
-	const routes = useSelector(state => state.route ? state.route : []);
+	const allRoutes = useSelector(state => (state.route ? state.route : []));
 
 	const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export const Map = () => {
 	};
 
 	// declare inputs that will be used by functions that are declared in effects
-	const inputs = [routeType];
+	const inputs = ["Paved Multiple Use Trail - A paved trail closed to automotive traffic."];
 
 	/**
 	 **/
@@ -41,7 +41,7 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-				<Marker latitude={routes.latitude} longitude={routes.longitude}>
+				<Marker>
 					<div>ROUTE</div>
 				</Marker>
 			</ReactMapGL>

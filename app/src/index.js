@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
+import thunk from "redux-thunk";
+import {applyMiddleware, createStore} from "redux";
+import {reducers} from "./shared/reducers";
+import {Provider} from "react-redux";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./index.css";
