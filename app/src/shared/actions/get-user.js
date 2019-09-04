@@ -1,10 +1,5 @@
 import {httpConfig} from "../utils/http-config";
 
-// not sure if we need getAllUsers //
-export const getAllUsers = () => async dispatch => {
-	const {data} = await httpConfig('/apis/users');
-	dispatch({type: "GET_ALL_USERS", payload: data})
-};
 
 export const getUserbyUserId = (id) => async dispatch => {
 	const {data} = await httpConfig('/apis/user/${id}');
