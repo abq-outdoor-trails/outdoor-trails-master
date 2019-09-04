@@ -1,4 +1,5 @@
 import {httpConfig} from "../utils/http-config";
+import {} // I may need another import statement here
 
 export const getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId = () => dispatch => {
 	const {data} =await httpConfig('/apis/favoriteRoute/');
@@ -11,6 +12,9 @@ export const getFavoriteRoutesByRouteId = () => dispatch => {
 };
 
 export const getFavoriteRoutesByUserId = () => dispatch => {
-	const {data} =await httpConfig('/apis/favoriteRoute/');
-	dispatch({type: "GET_FAVORITE_ROUTES_BY_USER_ID"})
+	await dispatch(getFavoriteRoutesByRouteId());
+
+	const userId =_.uniq(_.map(getState().route, "favoriteRouteRouteId"));
+	routeId.forEach(id => dispatch(getFavoriteRoutesByRouteId()));
+
 };

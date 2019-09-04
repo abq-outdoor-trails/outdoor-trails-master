@@ -12,4 +12,4 @@ export const getCommentsByRouteId = () => async  (dispatch, getState) => {
 
 	const userId =_.uniq(_.map(getState().comments, "commentUserId"))
 	commentId.forEach(id => dispatch(getUserbyUserId(id)));
-}
+};
