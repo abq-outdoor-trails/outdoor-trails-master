@@ -12,7 +12,6 @@ export const CommentFormContent = (props) => {
 
 
 		const {
-					submitStatus,
 					status,
 					values,
 					errors,
@@ -33,28 +32,7 @@ export const CommentFormContent = (props) => {
 						<Form onSubmit={handleSubmit}>
 
 							<Form.Group>
-								<Form.Label className="sr-only">Comment Title</Form.Label>
-								<InputGroup>
-									<FormControl
-										id="commentTitle"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										placeholder="Comment Title"
-										type="text"
-										value={values.commentTitle}
-									/>
-								</InputGroup>
-								{
-									errors.commentTitle && touched.commentTitle && (
-										<div className="alert alert-danger">
-											{errors.commentTitle}
-										</div>
-									)
-								}
-							</Form.Group>
-
-							<Form.Group>
-								<Form.lable className="sr-only">Comment Content</Form.lable>
+								<Form.Label className="sr-only">Comment Content</Form.Label>
 								<InputGroup>
 									<FormControl
 										id="commentContent"
@@ -76,21 +54,18 @@ export const CommentFormContent = (props) => {
 							</Form.Group>
 
 							<Form.Group>
-
-								<Form.Group>
-									<Button variant="primary" type="submit">Success!</Button>
+								<Button variant="primary" type="submit">Success!</Button>
 							</Form.Group>
+						</Form>
 
-								{/*for testing purposes only*/}
-								{/*FormDebugger {...props}/>*/}
-
-							</Form.Group>
+						{/*for testing purposes only*/}
+						{/*FormDebugger {...props}/>*/}
 
 					</Card.Body>
 				</Card>
 
 				{status && (<div className={status.type}>{status.message}</div>)}
 
-				</>
+			</>
 		)
 };

@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {PostForm} from "./CommentForm";
 import {PostCard} from "./CommentCard";
 
-import {UseJwt, UseJwtProfileId, UseJwtUsername} from "../../shared/utils/JwtHelpers";
+import {UseJwt, UseJwtUserId, UseJwtUsername} from "../../shared/utils/JwtHelpers";
 import {getAllLikes} from "../../shared/actions/get-like";
 import {getPostsAndProfiles} from "../../shared/actions/get-post";
 
@@ -53,7 +53,7 @@ export const Comments = () => {
 				<Container fluid="true" className="py-5">
 					<Row>
 						{/*BEGIN FORM PANEL*/}
-						<Col md={4} className={`posts-form-panel position-fixed ${(jwt === null && "panel-position-reset")}`}>
+						<Col md={4}>
 
 							{/* This nested ternary will render the PostForm only if jwt !== null,
 							otherwise show signin/signup links. Then render the post form in either

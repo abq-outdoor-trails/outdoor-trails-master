@@ -31,16 +31,16 @@ export const UseJwtUsername = () => {
 	return username;
 };
 
-export const UseJwtProfileId = () => {
-	const [profileId, setProfileId] = useState(null);
+export const UseJwtUserId = () => {
+	const [userId, setUserId] = useState(null);
 
 	useEffect(() => {
 		const token = window.localStorage.getItem("jwt-token");
 		if(token !== null) {
 			const decodedJwt = jwtDecode(token);
-			setProfileId(decodedJwt.auth.profileId);
+			setUserId(decodedJwt.auth.userId);
 		}
 	});
 
-	return profileId;
+	return userId;
 };
