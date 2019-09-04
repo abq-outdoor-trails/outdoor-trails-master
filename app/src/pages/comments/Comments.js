@@ -32,7 +32,7 @@ export const Comments = () => {
 	//Define the side effects that will occur in the application e.g., code that handles dispatches to redux, API's. or timers.
 	//The dispatch function takes actions as arguments to make changes to the store/redux.
 	const effects = () => {
-		dispatch(getCommentsAndUsers());
+		dispatch(getRouteByRouteId());
 		dispatch(getAllFavorites());
 	};
 
