@@ -78,14 +78,14 @@ class DataDownloader {
 				$routeFile = json_encode($route->geometry->paths);
 				$routeName = $route->attributes->ParentPath;
 				$routeSpeedLimit = $route->attributes->PostedSpee;
-				$routeType = $route->attributes->PathType;
+//				$routeType = $route->attributes->PathType;
 //
-				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
-				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
+//				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
+//				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
 
 				// insert Route into database
-//				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-//				$newRoute->insert($pdo);
+				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, null);
+				$newRoute->insert($pdo);
 			}
 		}
 	}
