@@ -3,7 +3,7 @@ import {} // I may need another import statement here
 
 export const getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId = () => dispatch => {
 	const {data} =await httpConfig('/apis/favoriteRoute/');
-	dispatch({type: "GET_FAVORITE_ROUTE_BY_FAVORITE_ROUTE_ROUTEID_AND_FAVORITE_ROUTE_USER_ID"})
+	dispatch({type: "GET_FAVORITE_ROUTE_BY_FAVORITE_ROUTE_ROUTE_ID_AND_FAVORITE_ROUTE_USER_ID"})
 };
 
 export const getFavoriteRoutesByRouteId = () => dispatch => {
