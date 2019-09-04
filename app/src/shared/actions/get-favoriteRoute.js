@@ -7,10 +7,10 @@ export const getFavoriteRouteByFavoriteRouteRouteIdAndFavoriteRouteUserId = () =
 
 export const getFavoriteRoutesByRouteId = () => dispatch => {
 	const {data} =await httpConfig('/apis/favoriteRoute/');
-	dispatch({type: "GET_FAVORITE_ROUTE_BY_ROUTE_ID"})
+	dispatch({type: "GET_FAVORITE_ROUTES_BY_ROUTE_ID"})
 };
 
 export const getFavoriteRoutesByUserId = () => dispatch => {
 	const {data} =await httpConfig('/apis/favoriteRoute/');
-	dispatch({type: "GET_FAVORITE_ROUTE_BY_USER_ID"})
+	dispatch({type: "GET_FAVORITE_ROUTES_BY_USER_ID"})
 };
