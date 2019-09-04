@@ -22,7 +22,7 @@ require_once(dirname(__DIR__, 2) . "/php/lib/uuid.php");
 class DataDownloader {
 	public static function pullRoutes() {
 		$newRoutes = null;
-		$urlBase = "https://res.cloudinary.com/abqbike/raw/upload/v1566336860/BikePaths_jev8gc.json";
+		$urlBase = "../../images/biketrails_wgs84.json";
 		$secrets = new \Secrets("/etc/apache2/capstone-mysql/abqbiketrails.ini");
 		$pdo = $secrets->getPdoObject();
 
@@ -35,27 +35,26 @@ class DataDownloader {
 //			[x, y],
 //			[x, y]
 //		] ]];
-		for($i = 0; $i < sizeof($routes); $i++) {
-			if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
-				if(array_key_exists(trim($routes[$i]->attributes->ParentPathName), $newArray)) {
-					array_push($newArray[trim($routes[$i]->attributes->ParentPathName)]["routeFile"], $routes[$i]->geometry->paths);
-				} else {
-					$newArray = $newArray + [trim($routes[$i]->attributes->ParentPathName) => ["description" => $routes[$i]->attributes->Comments, "routeSpeedLimit" => $routes[$i]->attributes->PostedSpeedLimit_MPH, "routeFile" => [
-							$routes[$i]->geometry->paths
-						]]];
-				}
-				$routeId = generateUuidV4();
-				$description = $routes[$i]->attributes->Comments;
-				$routeFile = json_encode($newArray[$routes[$i]->attributes->ParentPathName]["routeFile"]);
-				$routeName = $routes[$i]->attributes->ParentPathName;
-				$routeSpeedLimit = 5;
-				$routeType = '';
-				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-				$newRoute->insert($pdo);
-			}
-		}
+//		for($i = 0; $i < sizeof($routes); $i++) {
+//			if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
+//				if(array_key_exists(trim($routes[$i]->attributes->ParentPathName), $newArray)) {
+//					array_push($newArray[trim($routes[$i]->attributes->ParentPathName)]["routeFile"], $routes[$i]->geometry->paths);
+//				} else {
+//					$newArray = $newArray + [trim($routes[$i]->attributes->ParentPathName) => ["description" => $routes[$i]->attributes->Comments, "routeSpeedLimit" => $routes[$i]->attributes->PostedSpeedLimit_MPH, "routeFile" => [
+//							$routes[$i]->geometry->paths
+//						]]];
+//				}
+//				$routeId = generateUuidV4();
+//				$description = $routes[$i]->attributes->Comments;
+//				$routeFile = json_encode($newArray[$routes[$i]->attributes->ParentPathName]["routeFile"]);
+//				$routeName = $routes[$i]->attributes->ParentPathName;
+//				$routeSpeedLimit = 5;
+//				$routeType = '';
+//				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+//				$newRoute->insert($pdo);
+//			}
+//		}
 
-		var_dump($newArray);
 //
 ////				$newArray = ["routeName" => ["route" => []]];
 //
@@ -70,21 +69,25 @@ class DataDownloader {
 //
 //			}
 //		}
-//		foreach($routes as $route) {
-//			if($route->attributes->PathType === "Paved Multiple Use Trail") {
-//
+		// ORIGINAL DATA DOWNLOADER
+		foreach($routes as $route) {
+			if($route->attributes->PathType === "Paved Multiple Use Trail - A paved trail closed to automotive traffic.") {
+
 //				$routeId = generateUuidV4();
-//				$description = $route->attributes->Comments;
-//				$routeFile = json_encode($route->geometry->paths);
-//				$routeName = $route->attributes->ParentPathName;
-//				$routeSpeedLimit = $route->attributes->PostedSpeedLimit_MPH;
-//				$routeType = $route->attributes->PathType;
+				$description = $route->attributes->Comments;
+				$routeFile = json_encode($route->geometry->paths);
+				$routeName = $route->attributes->ParentPath;
+				$routeSpeedLimit = $route->attributes->PostedSpee;
+				$routeType = $route->attributes->PathType;
 //
-//				// insert Route into database
+				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
+//				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
+
+				// insert Route into database
 //				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
 //				$newRoute->insert($pdo);
-//			}
-//		}
+			}
+		}
 	}
 
 	public static function readDataJson($url) {
