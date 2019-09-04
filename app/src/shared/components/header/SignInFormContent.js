@@ -13,15 +13,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {AxiosInstance as httpConfig} from "axios";
 
 
-/* the call to grab XSRF from the new API. */
-const getXsrf = () => {
-	httpConfig.get("/apis/xsrf/")
-		.then(reply => {
-			if(reply.status === 200) {
-				console.log(reply);
-			}
-		});
-};
 
 export const SignInFormContent = (props) => {
 	const {
@@ -36,6 +27,7 @@ export const SignInFormContent = (props) => {
 		handleSubmit,
 		handleReset
 	} = props;
+	
 	return (
 		<>
 			<Card bg="transparent" className="border-0 rounded-0">
@@ -104,8 +96,6 @@ export const SignInFormContent = (props) => {
 							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
 						</div>
 				</Card.Body>
-				{/* grab XSRF on click! Remove me when finsihed testing! */}
-				<button onClick={getXsrf}>get xsrf</button>
 			</Card>
 
 		</>

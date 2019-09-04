@@ -2,8 +2,6 @@ import React from 'react';
 import {SignInForm} from "./SignInForm";
 
 
-import '../../../index.css';
-
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -16,13 +14,13 @@ import {Link} from "react-router-dom";
 
 export const Header = () => {
 
-	// //grab the jwt and username for logged in users
+	// grab the jwt and username for logged in users
 	// const jwt = UseJwt();
 	// const username = UseJwtUsername();
 	// const userId = UseJwtProfileId();
 
 	const signOut = () => {
-		httpConfig.get("/apis/signout")
+		httpConfig.get("/apis/signout/")
 			.then(reply => {
 				let {message, type} = reply;
 				if(reply.status ===200) {
@@ -34,6 +32,15 @@ export const Header = () => {
 			});
 	};
 
+	/* the call to grab XSRF from the new API. */
+	const getXsrf = () => {
+		httpConfig.get("/apis/xsrf/")
+			.then(reply => {
+				if(reply.status === 200) {
+					console.log(reply);
+				}
+			});
+	};
 
 	return (
 		<>
@@ -51,6 +58,8 @@ export const Header = () => {
 					</Nav>
 				</Navbar.Collapse>
 				</Navbar>
+			{/* grab XSRF on click! Remove me when finsihed testing! */}
+			<button onClick={getXsrf}>get xsrf</button>
 		</>
 	)
 };
