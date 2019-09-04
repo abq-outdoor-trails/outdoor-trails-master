@@ -51,9 +51,9 @@ export const CommentCard = ({comment}) => {
 					<Button variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>
-					<Button variant="outline-secondary" size="sm" className="mr-2">
-						<FontAwesomeIcon icon="pencil-alt"/>
-					</Button>
+					{/*<Button variant="outline-secondary" size="sm" className="mr-2">*/}
+					{/*	<FontAwesomeIcon icon="pencil-alt"/>*/}
+					{/*</Button>*/}
 					<Button variant="outline-danger" size="sm">
 						<FontAwesomeIcon icon="heart"/>&nbsp;
 						<Badge variant="danger">94</Badge>
