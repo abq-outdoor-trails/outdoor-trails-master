@@ -73,7 +73,7 @@ class DataDownloader {
 		foreach($routes as $route) {
 			if($route->attributes->PathType === "Paved Multiple Use Trail - A paved trail closed to automotive traffic.") {
 
-//				$routeId = generateUuidV4();
+				$routeId = generateUuidV4();
 				$description = $route->attributes->Comments;
 				$routeFile = json_encode($route->geometry->paths);
 				$routeName = $route->attributes->ParentPath;
@@ -81,7 +81,7 @@ class DataDownloader {
 				$routeType = $route->attributes->PathType;
 //
 				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
-//				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
+				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
 
 				// insert Route into database
 //				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
