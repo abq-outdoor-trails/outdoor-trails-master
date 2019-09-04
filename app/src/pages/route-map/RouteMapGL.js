@@ -22,13 +22,14 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-				<Marker latitude={routeData.default.features[0].geometry.paths[0][0][1]} longitude={routeData.default.features[0].geometry.paths[0][0][0]}>
-					<div>ROUTE</div>
-				</Marker>
-				<Marker latitude={routeData.default.features[0].geometry.paths[0][1][1]} longitude={routeData.default.features[0].geometry.paths[0][1][0]}>
-					<div>ROUTE</div>
-				</Marker>
+				{/*<Marker latitude={routeData.default.features[0].geometry.paths[0][0][1]} longitude={routeData.default.features[0].geometry.paths[0][0][0]}>*/}
+				{/*	<div>ROUTE</div>*/}
+				{/*</Marker>*/}
+				{/*<Marker latitude={routeData.default.features[0].geometry.paths[0][1][1]} longitude={routeData.default.features[0].geometry.paths[0][1][0]}>*/}
+				{/*	<div>ROUTE</div>*/}
+				{/*</Marker>*/}
 			</ReactMapGL>
+			{routeData.default.features.map(route => console.log(route.geometry.paths))}
 		</div>
 
 	)
