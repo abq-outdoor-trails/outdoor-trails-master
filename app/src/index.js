@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
 
+import thunk from "redux-thunk";
+import {applyMiddleware, createStore} from "redux";
+import reducers from "./shared/reducers";
+import {Provider} from "react-redux";
+
+
 import 'bootstrap/dist/css/bootstrap.css';
 import "./index.css";
 import {Header} from "./shared/components/header/Header";
@@ -33,13 +39,14 @@ import {
 
 
 
-
+const store = createStore(reducers,applyMiddleware(thunk));
 
 library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart);
 
 
-const App = () => (
+const App = (store) => (
 	<>
+		<Provider store={store}>
 	 	<BrowserRouter>
 			<div className="sfooter-content">
 				<Header/>
@@ -52,6 +59,7 @@ const App = () => (
 			</div>
 			<Footer/>
 		 </BrowserRouter>
+		</Provider>
 	</>
 );
-ReactDOM.render(<App/>, document.querySelector('#root'));
+ReactDOM.render(App(store) , document.querySelector("#root"));
