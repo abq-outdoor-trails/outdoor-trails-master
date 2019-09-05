@@ -5,8 +5,8 @@ export const getRouteByRouteId = () => async dispatch => {
 	dispatch({type: "GET_ROUTE_BY_ROUTE_ID", payload:data})
 };
 
-export const getRouteByRouteType = () => async dispatch => {
-	const {data} = await httpConfig('/apis/route/');
+export const getRouteByRouteType = (routeType) => async dispatch => {
+	const {data} = await httpConfig(`/apis/route/?routeType=${routeType}`);
 	dispatch({type: "GET_ROUTE_BY_ROUTE_TYPE", payload:data})
 };
 

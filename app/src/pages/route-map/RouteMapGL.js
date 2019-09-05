@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import ReactMapGL, {Marker} from 'react-map-gl';
-import {httpConfig} from "../../shared/utils/http-config";
+import ReactMapGL, {Marker, Layer, Feature} from 'react-map-gl';
+
 import {getRouteByRouteType} from "../../shared/actions/get-route";
 
-export const Map = () => {
+export const Map = ({match}) => {
 	const [viewport, setViewport] = useState({
 		latitude: 35.0844444,
 		longitude: -106.6505556,
@@ -14,22 +14,19 @@ export const Map = () => {
 	});
 
 	// return the routes store from redux and store in routes variable (is this necessary?)
-	const allRoutes = useSelector(state => (state.route ? state.route : []));
-
-	const dispatch = useDispatch();
-
-	const effects = () => {
-		// the dispatch function takes actions as arguments to change the store
-		dispatch(getRouteByRouteType());
-	};
+	// const allRoutes = useSelector(state => (state.route ? state.route : []));
+	//
+	// const dispatch = useDispatch();
+	//
+	// const effects = () => {
+	// 	// the dispatch function takes actions as arguments to change the store
+	// 	dispatch(getRouteByRouteType(match.params.routeType));
+	// };
 
 	// declare inputs that will be used by functions that are declared in effects
-	const inputs = ["Paved Multiple Use Trail - A paved trail closed to automotive traffic."];
+	// const inputs = ["Paved Multiple Use Trail - A paved trail closed to automotive traffic."];
 
-	/**
-	 **/
-
-	useEffect(effects, inputs);
+	// useEffect(effects, inputs);
 
 	return (
 		<div>
@@ -41,9 +38,12 @@ export const Map = () => {
 					setViewport(viewport);
 				}}
 			>
-				<Marker>
-					<div>ROUTE</div>
-				</Marker>
+				<Layer
+					type="line"
+					layout={{"icon-image": "harbor-15"}}
+				>
+					<Feature />
+				</Layer>
 			</ReactMapGL>
 		</div>
 
