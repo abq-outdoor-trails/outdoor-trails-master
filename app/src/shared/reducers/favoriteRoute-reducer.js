@@ -7,12 +7,12 @@ export default (state = [], action) => {
 	}
 }
 
-export default (state = [], action) => {
-	switch(action.type) {
-		case "GET_FAVORITE_ROUTES_BY_ROUTE_ID":
-			return action.payload;
-		default:
-			return state;
-	}
-}
+// export default (state = [], action) => {
+// 	switch(action.type) {
+// 		case "GET_FAVORITE_ROUTES_BY_ROUTE_ID":
+// 			return action.payload;
+// 		default:
+// 			return state;
+// 	}
+// }
 
