@@ -21,7 +21,7 @@ console.log(comment);
 		const params = {id: comment.commentId};
 		let confirm = window.confirm("Are you sure you want to delete this?");
 		if(confirm){
-			httpConfig.delete("/apis/comment", {
+			httpConfig.delete("/apis/comment/", {
 				headers, params})
 				.then(reply => {
 					let {message, type} = reply;
@@ -48,7 +48,7 @@ console.log(comment);
 			<Card.Body>
 				<div className="d-flex justify-content-end">
 					<div className="d-inline-block small text-muted mr-auto my-auto"><CommentUserName userId={comment.commentUserId}/> | {formatDate.format(comment.commentDate)} </div>
-					<Button variant="outline-secondary" size="sm" className="mr-2">
+					<Button onClick={deleteComment} variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>
 					{/*<Button variant="outline-secondary" size="sm" className="mr-2">*/}
