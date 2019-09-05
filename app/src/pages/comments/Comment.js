@@ -2,12 +2,11 @@ import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 
-import {PostForm} from "./CommentForm";
-import {PostCard} from "./CommentCard";
+import {CommentForm} from "./CommentForm";
+import {CommentCard} from "./CommentCard";
 
 import {UseJwt, UseJwtUserId, UseJwtUsername} from "../../shared/utils/JwtHelpers";
-import {getAllLikes} from "../../shared/actions/get-like";
-import {getPostsAndProfiles} from "../../shared/actions/get-post";
+
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -16,15 +15,14 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getCommentsByRouteId} from "../../shared/actions/get-comment";
 
-export const Comments = () => {
+export const Comment = ({match}) => {
 
-	//grab jwt for logged in users
-	const jwt = UseJwt();
-	const userId = useJwtUserId();
+	const routeId =  match.params.routeId
 
 	//Returns the posts store from redux and assigns it to the posts variable.
-	const comments = useSelector(state => (state.comments ? state.comments : []));
+	const comment = useSelector(state => (state.comment ? state.comment : []));
 
 	//assigns useDispatch reference to the dispatch variable for later use.
 	const dispatch = useDispatch();
@@ -32,12 +30,12 @@ export const Comments = () => {
 	//Define the side effects that will occur in the application e.g., code that handles dispatches to redux, API's. or timers.
 	//The dispatch function takes actions as arguments to make changes to the store/redux.
 	const effects = () => {
-		dispatch(getRouteByRouteId());
-		dispatch(getAllFavorites());
+		dispatch(getCommentsByRouteId());
+
 	};
 
 	//Declare any inputs that will be used by functions that are declared in sideEffects.
-	const inputs = [userId];
+	const inputs = [routeId];
 
 	/**
 	 *
@@ -70,7 +68,7 @@ export const Comments = () => {
 										</Accordion.Collapse>
 									</Accordion>
 								) : (
-									<PostForm/>
+									<CommentForm/>
 								)
 							) : (
 								<Card bg="light" className="mb-3 text-center">
@@ -86,7 +84,7 @@ export const Comments = () => {
 
 						{/* BEGIN Comment ITEMS */}
 						<Col md={{span: 8, offset: 4}} className="comments-panel">
-							{comments.map(comment =>
+							{comment.map(comment =>
 								<CommentCard comment={comment} key={comment.commentId} />
 							)}
 						</Col>

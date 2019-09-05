@@ -254,7 +254,7 @@ class Route implements \JsonSerializable {
 //		if(empty($newRouteType) === true) {
 //			throw(new \InvalidArgumentException("Route type is empty or insecure"));
 //		}
-		//verify route name is less than 32 characters
+		//verify route name is less than 128 characters
 		if(strlen($newRouteType) > 128) {
 			throw(new \RangeException("route type is too large"));
 		}

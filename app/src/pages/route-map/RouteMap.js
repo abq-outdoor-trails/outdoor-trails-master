@@ -1,21 +1,35 @@
-import React from "react"
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/es/FormControl";
-import Button from "react-bootstrap/Button";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Badge from "react-bootstrap/Badge";
 import {CommentCard} from "../comments/CommentCard";
 import {CommentForm} from "../comments/CommentForm";
+import {useDispatch, useSelector} from "react-redux";
+import {getCommentsByRouteId} from "../../shared/actions/get-comment";
+import {getRouteByRouteId} from "../../shared/actions/get-route";
 
-export const RouteMap = () => {
+export const RouteMap = ({match}) => {
+
+	const routeId =  match.params.routeId;
+
+	const comments = useSelector(state => (state.comment ? state.comment : []));
+
+	const route = useSelector(state => (state.route ? state.route :[]));
+	console.log(comments, route);
+	const dispatch = useDispatch();
+
+	const effects = () => {
+		dispatch(getCommentsByRouteId(routeId));
+		dispatch(getRouteByRouteId(routeId));
+	};
+
+	const inputs = [routeId];
+
+	useEffect(effects, inputs);
+
 	return (
 		<>
 			<main>

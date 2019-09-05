@@ -2,8 +2,6 @@ import React from "react";
 import {httpConfig} from "../../shared/utils/http-config";
 
 import {UseJwt, UseJwtUserId} from "../../shared/utils/JwtHelpers";
-import {handleSessionTimeout} from "../../shared/utils/handle-session-timeout";
-
 
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
