@@ -13,10 +13,11 @@ export const CommentCard = ({comment}) => {
 	//grab jwt and jwt profile id of logged in users
 	const jwt = UseJwt();
 	const userId = UseJwtUserId();
+console.log(comment);
 
 	const deleteComment = () => {
 		const headers = {'X-JWT-TOKEN': jwt};
-		const params = {id: comment.userId};
+		const params = {id: comment.commentId};
 		let confirm = window.confirm("Are you sure you want to delete this?");
 		if(confirm){
 			httpConfig.delete("/apis/comment", {
@@ -45,20 +46,18 @@ export const CommentCard = ({comment}) => {
 		<Card className="mb-3">
 			<Card.Body>
 				<div className="d-flex justify-content-end">
-					<div className="d-inline-block small text-muted mr-auto my-auto">Author | Datetime</div>
+					<div className="d-inline-block small text-muted mr-auto my-auto">Author | {formatDate.format(comment.commentDate)} </div>
 					<Button variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>
 					{/*<Button variant="outline-secondary" size="sm" className="mr-2">*/}
 					{/*	<FontAwesomeIcon icon="pencil-alt"/>*/}
 					{/*</Button>*/}
-					<Button variant="outline-danger" size="sm">
-						<FontAwesomeIcon icon="heart"/>&nbsp;
-						<Badge variant="danger">94</Badge>
-					</Button>
+
 				</div>
 				<hr />
-				<Card.Text>Content Here</Card.Text>
+
+				<Card.Text>{comment.commentContent}</Card.Text>
 			</Card.Body>
 		</Card>
 	</>

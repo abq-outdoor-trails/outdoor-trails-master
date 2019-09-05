@@ -10,15 +10,18 @@ import {CommentForm} from "../comments/CommentForm";
 import {useDispatch, useSelector} from "react-redux";
 import {getCommentsByRouteId} from "../../shared/actions/get-comment";
 import {getRouteByRouteId} from "../../shared/actions/get-route";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
 
 export const RouteMap = ({match}) => {
 
 	const routeId =  match.params.routeId;
 
-	const comments = useSelector(state => (state.comment ? state.comment : []));
+	const comments = useSelector(state => (state.comments ? state.comments : []));
 
 	const route = useSelector(state => (state.route ? state.route :[]));
-	console.log(comments, route);
+
 	const dispatch = useDispatch();
 
 	const effects = () => {
@@ -29,6 +32,8 @@ export const RouteMap = ({match}) => {
 	const inputs = [routeId];
 
 	useEffect(effects, inputs);
+console.log(comments);
+console.log(route);
 
 	return (
 		<>
@@ -50,7 +55,10 @@ export const RouteMap = ({match}) => {
 				<section className="py-5">
 					<Container fluid="true">
 						<Row>
-
+							<Button variant="outline-danger" size="sm">
+								<FontAwesomeIcon icon="heart"/>&nbsp;
+								<Badge variant="danger">94</Badge>
+							</Button>
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>
@@ -59,7 +67,9 @@ export const RouteMap = ({match}) => {
 							</Col>
 
 							<Col md={{span:7, offset: 1}}>
-								<CommentCard/>
+								{comments.map(comment =>
+									<CommentCard comment={comment} key={comment.commentId} />
+								)}
 							</Col>
 						</Row>
 					</Container>
