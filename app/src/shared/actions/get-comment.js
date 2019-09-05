@@ -11,5 +11,5 @@ export const getCommentsAndUsersByRouteId = (id) => async  (dispatch, getState) 
 	await dispatch(getCommentsByRouteId(id));
 
 	const userId =_.uniq(_.map(getState().comments, "commentUserId"))
-	//commentId.forEach(id => dispatch(getUserbyUserId(id)));
+	userId.forEach(id => dispatch(getUserbyUserId(id)));
 };

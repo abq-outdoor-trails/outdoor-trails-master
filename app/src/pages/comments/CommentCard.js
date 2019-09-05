@@ -7,6 +7,7 @@ import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {CommentUserName} from "./CommentUserName";
 
 export const CommentCard = ({comment}) => {
 
@@ -46,7 +47,7 @@ console.log(comment);
 		<Card className="mb-3">
 			<Card.Body>
 				<div className="d-flex justify-content-end">
-					<div className="d-inline-block small text-muted mr-auto my-auto">Author | {formatDate.format(comment.commentDate)} </div>
+					<div className="d-inline-block small text-muted mr-auto my-auto"><CommentUserName userId={comment.commentUserId}/> | {formatDate.format(comment.commentDate)} </div>
 					<Button variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>

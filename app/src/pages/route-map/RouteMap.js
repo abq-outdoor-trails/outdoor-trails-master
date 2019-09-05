@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import {CommentCard} from "../comments/CommentCard";
 import {CommentForm} from "../comments/CommentForm";
 import {useDispatch, useSelector} from "react-redux";
-import {getCommentsByRouteId} from "../../shared/actions/get-comment";
+import {getCommentsAndUsersByRouteId} from "../../shared/actions/get-comment";
 import {getRouteByRouteId} from "../../shared/actions/get-route";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
@@ -25,7 +25,7 @@ export const RouteMap = ({match}) => {
 	const dispatch = useDispatch();
 
 	const effects = () => {
-		dispatch(getCommentsByRouteId(routeId));
+		dispatch(getCommentsAndUsersByRouteId(routeId));
 		dispatch(getRouteByRouteId(routeId));
 	};
 
