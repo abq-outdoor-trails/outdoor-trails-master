@@ -13,6 +13,7 @@ import {getRouteByRouteId} from "../../shared/actions/get-route";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
+import {UseJwt} from "../../shared/utils/JwtHelpers";
 
 export const RouteMap = ({match}) => {
 
@@ -62,7 +63,7 @@ console.log(route);
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>
-									<CommentForm/>
+									<CommentForm routeId={routeId}/>
 								</div>
 							</Col>
 

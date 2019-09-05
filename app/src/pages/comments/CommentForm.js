@@ -5,11 +5,13 @@ import {Formik} from "formik";
 
 import {CommentFormContent} from "./CommentFormContent";
 
-export const CommentForm = () => {
+export const CommentForm = ({routeId}) => {
+	console.log(routeId);
 
 	const [status, setStatus] = useState(null);
 
 	const comment = {
+		commentRouteId: routeId,
 		commentContent: ""
 	};
 
@@ -30,6 +32,7 @@ export const CommentForm = () => {
 			.then(reply => {
 				let{message, type} = reply;
 				setStatus({message, type});
+				console.log(reply);
 				if(reply.status === 200) {
 					resetForm();
 					setStatus({message, type});
