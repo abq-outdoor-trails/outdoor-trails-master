@@ -45,13 +45,15 @@ export const SignUpForm = () => {
 	// return Formik component
 	return (
 		<>
+
 			<Formik
 				initialValues={ signUp }
-				onSubmit={ submitSignUp }
+				onSubmit={ submitSignUp}
 				validationSchema={ validator }
 			>
 				{ SignUpFormContent }
 			</Formik>
+			<p>helloo...</p>
 		</>
 	);
 };

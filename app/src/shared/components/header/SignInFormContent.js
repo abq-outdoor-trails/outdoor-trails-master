@@ -10,7 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import {AxiosInstance as httpConfig} from "axios";
 
 
 
@@ -27,6 +27,7 @@ export const SignInFormContent = (props) => {
 		handleSubmit,
 		handleReset
 	} = props;
+	
 	return (
 		<>
 			<Card bg="transparent" className="border-0 rounded-0">
