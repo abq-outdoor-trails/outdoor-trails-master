@@ -11,61 +11,61 @@ import Card from "react-bootstrap/Card";
 export const CommentFormContent = (props) => {
 
 
-		const {
-					status,
-					values,
-					errors,
-					touched,
-					dirty,
-					isSubmitting,
-					handleChange,
-					handleBlur,
-					handleSubmit,
-					handleReset
-		} = props;
+	const {
+		status,
+		values,
+		errors,
+		touched,
+		dirty,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset
+	} = props;
 
-		return (
-			<>
+	return (
+		<>
 
-				<Card bg="light" className="mb-3">
-					<Card.Body>
-						<Form onSubmit={handleSubmit}>
+			<Card bg="light" className="mb-3">
+				<Card.Body>
+					<Form onSubmit={handleSubmit}>
 
-							<Form.Group>
-								<Form.Label className="sr-only">Comment Content</Form.Label>
-								<InputGroup>
-									<FormControl
-										id="commentContent"
-										as="textarea"
-										rows="5"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										placeholder="Your opinion here..."
-										value={values.commentContent}
-									/>
-								</InputGroup>
-								{
-									errors.commentContent && touched.commentContent && (
-										<div className="alert alert-danger">
-											{errors.commentContent}
-										</div>
-									)
-								}
-							</Form.Group>
+						<Form.Group>
+							<Form.Label className="sr-only">Comment Content</Form.Label>
+							<InputGroup>
+								<FormControl
+									id="commentContent"
+									as="textarea"
+									rows="5"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									placeholder="Your opinion here..."
+									value={values.commentContent}
+								/>
+							</InputGroup>
+							{
+								errors.commentContent && touched.commentContent && (
+									<div className="alert alert-danger">
+										{errors.commentContent}
+									</div>
+								)
+							}
+						</Form.Group>
 
-							<Form.Group>
-								<Button variant="primary" type="submit">Success!</Button>
-							</Form.Group>
-						</Form>
+						<Form.Group>
+							<Button variant="primary" type="submit">Success!</Button>
+						</Form.Group>
+					</Form>
 
-						{/*for testing purposes only*/}
-						<FormDebugger {...props}/>
+					{/*for testing purposes only*/}
+					<FormDebugger {...props}/>
 
-					</Card.Body>
-				</Card>
+				</Card.Body>
+			</Card>
 
-				{status && (<div className={status.type}>{status.message}</div>)}
+			{status && (<div className={status.type}>{status.message}</div>)}
 
-			</>
-		)
+		</>
+	)
 };
