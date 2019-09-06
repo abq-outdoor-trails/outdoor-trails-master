@@ -31,7 +31,7 @@ export const CommentEdit = ({commentId}) => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			</>
+		</>
 	)
 
 };
