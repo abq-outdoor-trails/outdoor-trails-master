@@ -49,7 +49,7 @@ export const CommentForm = ({routeId}) => {
 				initialValues={comment}
 				onSubmit={submitComment}
 				validationSchema={validator}
-				>
+			>
 				{CommentFormContent}
 			</Formik>
 		</>
