@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import {Route, Switch} from "react-router";
+
 import thunk from "redux-thunk";
 import {applyMiddleware, createStore} from "redux";
 import reducers from "./shared/reducers";
@@ -38,26 +39,27 @@ import {
 
 
 
-// const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(reducers,applyMiddleware(thunk));
 
 library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart);
 
 
-const App = () => (
+const App = (store) => (
 	<>
-
-			<BrowserRouter>
-				<div className="sfooter-content">
-					<Header/>
-					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route exact path="/signup" component={Signup} />
-						<Route exact path="/route" component={RouteMap} />
-						<Route component={FourOhFour} />
-					</Switch>
-				</div>
-				<Footer/>
-			</BrowserRouter>
+		<Provider store={store}>
+	 	<BrowserRouter>
+			<div className="sfooter-content">
+				<Header/>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/route/:routeId" component={RouteMap} />
+					<Route component={FourOhFour} />
+				</Switch>
+			</div>
+			<Footer/>
+		 </BrowserRouter>
+		</Provider>
 	</>
 );
-ReactDOM.render(<App/>, document.querySelector('#root'));
+ReactDOM.render(App(store) , document.querySelector("#root"));

@@ -6,6 +6,11 @@ require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
+
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: POST');
+//header('Access-Control-Allow-Headers: Origin, Content-Type, X-XSRF-TOKEN, X-JWT-TOKEN');
+
 use AbqOutdoorTrails\AbqBike\{ User, Route, Comment};
 
 /**
@@ -33,6 +38,7 @@ try {
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
+	//apis/comment/?commmentRouteId=uuid
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentRouteId = filter_input(INPUT_GET, "commentRouteId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$commentUserId = filter_input(INPUT_GET, "commentUserId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
