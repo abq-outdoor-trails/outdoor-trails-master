@@ -38,7 +38,7 @@ export const Home = () => {
 				</section>
 
 				{/*Map Section*/}
-				<section>
+				<section id="route">
 					<Container>
 						<Row>
 							<Col>
@@ -52,7 +52,7 @@ export const Home = () => {
 				</section>
 
 				{/*About Section*/}
-				<section>
+				<section id="about">
 					<Container>
 						<Row>
 							<Col>
