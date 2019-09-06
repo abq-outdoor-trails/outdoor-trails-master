@@ -53,7 +53,7 @@ const App = (store) => (
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/route/:routeId" component={RouteMap} />
+					<Route exact path="/route" component={RouteMap} />
 					<Route component={FourOhFour} />
 				</Switch>
 			</div>
