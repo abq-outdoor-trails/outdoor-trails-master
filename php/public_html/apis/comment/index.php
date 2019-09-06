@@ -6,6 +6,11 @@ require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
+
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: POST');
+//header('Access-Control-Allow-Headers: Origin, Content-Type, X-XSRF-TOKEN, X-JWT-TOKEN');
+
 use AbqOutdoorTrails\AbqBike\{ User, Route, Comment};
 
 /**
