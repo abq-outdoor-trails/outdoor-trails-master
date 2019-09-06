@@ -4,16 +4,16 @@ import React from "react";
 
 export const SignUpFormContent = (props) => {
 	const {
-				submitStatus,
-				values,
-				errors,
-				touched,
-				dirty,
-				isSubmitting,
-				handleChange,
-				handleBlur,
-				handleSubmit,
-				handleReset
+		submitStatus,
+		values,
+		errors,
+		touched,
+		dirty,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset
 	} = props;
 	return (
 		<>
@@ -118,19 +118,22 @@ export const SignUpFormContent = (props) => {
 
 				<div className="form-group">
 					<button className="btn btn-primary mb-2" type="submit">Submit</button>
-				<button
-					className="btn btn-danger mb-2"
-					onClick={handleReset}
-					disabled={!dirty || isSubmitting}
-				>Reset
-				</button>
-			</div>
+					<button
+						className="btn btn-danger mb-2"
+						onClick={handleReset}
+						disabled={!dirty || isSubmitting}
+					>Reset
+					</button>
+				</div>
 
 				<FormDebugger {...props} />
 			</form>
+			{console.log(
+				submitStatus
+			)}
 			{
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
 			}
 		</>
-			)
+	)
 };
