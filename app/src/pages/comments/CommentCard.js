@@ -8,7 +8,7 @@ import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {CommentUserName} from "./CommentUserName";
+import {CommentUserName} from "./CommentUsername";
 
 export const CommentCard = ({comment}) => {
 
