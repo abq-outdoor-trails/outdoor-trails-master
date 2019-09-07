@@ -5,6 +5,8 @@ import {SignInForm} from "./SignInForm";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import NavbarBrand from '../../../image/bike-abq-5-small.png'
+import BikeLogo from "../../../image/Navbar-logo-green.png"
 
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -23,7 +25,7 @@ export const Header = () => {
 		httpConfig.get("/apis/signout/")
 			.then(reply => {
 				let {message, type} = reply;
-				if(reply.status ===200) {
+				if(reply.status === 200) {
 					window.localStorage.removeItem("jwt-token");
 					setTimeout(() => {
 						window.location = "/";
@@ -45,8 +47,15 @@ export const Header = () => {
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
-				<Navbar.Brand href="#home" className="brand-styles">AbqBike</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Brand href="#home">
+					<img className="nav-logo"
+						  src={BikeLogo}
+						  width="200"
+						  height="60"
+						  className="d-inline-block align-top"
+					/>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
 						<Nav.Link href="#route">Routes</Nav.Link>
@@ -57,7 +66,7 @@ export const Header = () => {
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
-				</Navbar>
+			</Navbar>
 			{/* grab XSRF on click! Remove me when finsihed testing! */}
 			<button onClick={getXsrf}>get xsrf</button>
 		</>
