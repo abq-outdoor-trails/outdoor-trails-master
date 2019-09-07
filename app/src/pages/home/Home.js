@@ -13,9 +13,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {getRouteByRouteType} from "../../shared/actions/get-route";
 
 
-export const Home = ({match}) => {
+export const Home = (props) => {
 
-	const routeType = match.params.routeType;
+	const routeType = props.routeType;
 
 	// returns the routes store from redux and assign it to the routes variable
 	const routes = useSelector(state => state.route ? state.route : []);
@@ -57,7 +57,7 @@ export const Home = ({match}) => {
 					<Container>
 						<Row>
 							<Col>
-								<RouteMap />
+								<RouteMap {...props} />
 							</Col>
 						</Row>
 					</Container>
