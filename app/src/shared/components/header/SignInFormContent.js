@@ -84,7 +84,7 @@ export const SignInFormContent = (props) => {
 							}
 						</Form.Group>
 						<Form.Group className="text-md-right">
-							<Button variant="primary" type="submit" onSelect={toggle}>
+							<Button variant="primary" type="submit" onClick={e => {console.log(e, props)}}>
 								<FontAwesomeIcon icon="sign-in-alt"/>&nbsp;Sign In
 							</Button>
 						</Form.Group>
