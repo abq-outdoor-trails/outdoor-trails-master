@@ -29,6 +29,28 @@ h1{
 * http://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
 ***/
 
+/* POSTS */
+.posts-form-panel {
+	z-index: 999;
+}
+
+.posts-panel {
+	margin-top: 60px;
+}
+
+@media only screen and (min-width: 768px){
+	.posts-panel {
+		margin-top: 0;
+	}
+}
+
+button,
+.card,
+.modal-content {
+	border-radius: 0 !important;
+	border: none;
+}
+
 /*corrects IE min-height bug*/
 html { display: flex;}
 body { width: 100%;}

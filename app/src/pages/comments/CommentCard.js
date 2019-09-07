@@ -45,8 +45,6 @@ console.log(comment);
 	return (
 	<>
 		<Card className="mb-3">
-			<Card.Header>
-			</Card.Header>
 			<Card.Body>
 				<div className="d-flex justify-content-end">
 					<div className="d-inline-block small text-muted mr-auto my-auto"><CommentUserName userId={comment.commentUserId}/> | {formatDate.format(comment.commentDate)} </div>
