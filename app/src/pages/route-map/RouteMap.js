@@ -45,14 +45,18 @@ export const RouteMap = ({match}) => {
 
 	const [coordinates, setCoordinates] = useState(tempCoordinates);
 
-	const getCurrentPosition = () => {
-		window.navigator.geolocation.getCurrentPosition(position => {
-			let currentPosition = position;
-			let latitude = currentPosition.coords.latitude;
-			let longitude = currentPosition.coords.longitude;
-			return [longitude, latitude];
-		})
-	};
+	const getLocation = () => new Promise(
+		(resolve, reject) => {
+			window.navigator.geolocation.getCurrentPosition(position => {
+				const location = [position.coords.longitude, position.coords.latitude];
+				resolve(location);
+			}, err => reject(err));
+		}
+	);
+
+	getLocation()
+		.then(location => console.log(location))
+		.catch(error => console.log(error));
 
 	return (
 		<>
@@ -68,7 +72,7 @@ export const RouteMap = ({match}) => {
 										height: '50vh',
 										width: '50vw'
 									}}
-									center={[-106.6505556, 35.0844444]}
+									// center={}
 									// onStyleLoad={(map) => {
 									// 	map.addControl(map.GeolocateControl({
 									// 		positionOptions: {
