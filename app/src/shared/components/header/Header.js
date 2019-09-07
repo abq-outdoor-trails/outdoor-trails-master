@@ -35,7 +35,6 @@ export const Header = () => {
 	};
 
 
-
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
@@ -58,8 +57,7 @@ export const Header = () => {
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
-				</Navbar>
-			{/* grab XSRF on click! Remove me when finsihed testing! */}
-			<button onClick={getXsrf}>get xsrf</button>
-			)
+			</Navbar>
+		</>
+	)
 };
