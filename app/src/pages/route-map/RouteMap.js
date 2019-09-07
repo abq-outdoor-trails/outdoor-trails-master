@@ -54,11 +54,12 @@ console.log(route);
 				</section>
 
 				<section className="py-5">
+					<Col className="md4"/>
 					<Container fluid="true">
 						<Row>
-							<Button variant="outline-danger" size="sm">
-								<FontAwesomeIcon icon="heart"/>&nbsp;
-								<Badge variant="danger">94</Badge>
+							<Button variant="outline-green" size="sm">
+								<FontAwesomeIcon icon="dagger"/>&nbsp;
+								<Badge variant="dagger">2</Badge>
 							</Button>
 							<Col md="4">
 								<div id="comment-wrapper">
