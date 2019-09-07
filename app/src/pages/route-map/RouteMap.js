@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Layer, Feature, MapContext } from 'react-mapbox-gl';
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -61,6 +61,17 @@ export const RouteMap = ({match}) => {
 									}}
 									center={[-106.6505556, 35.0844444]}
 								>
+									<MapContext.Consumer>
+										{(map) => {
+											map.addControl(new map.GeolocateControl({
+												positionOptions: {
+													enableHighAccuracy: true
+												},
+												trackUserLocation: true
+											}))
+										}}
+									</MapContext.Consumer>
+
 									<ZoomControl/>
 									<Layer
 										type="line"
