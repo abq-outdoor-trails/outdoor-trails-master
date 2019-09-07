@@ -61,17 +61,6 @@ export const RouteMap = ({match}) => {
 									}}
 									center={[-106.6505556, 35.0844444]}
 								>
-									<MapContext.Consumer>
-										{(map) => {
-											map.addControl(new map.GeolocateControl({
-												positionOptions: {
-													enableHighAccuracy: true
-												},
-												trackUserLocation: true
-											}))
-										}}
-									</MapContext.Consumer>
-
 									<ZoomControl/>
 									<Layer
 										type="line"
