@@ -28,21 +28,21 @@ export const RouteMap = ({match}) => {
 
 	const comments = useSelector(state => (state.comments ? state.comments : []));
 
-	const routes = useSelector(state => (state.route ? state.route :[]));
+	const routes = useSelector(state => (state.route ? state.route : []));
 
 	const dispatch = useDispatch();
 
 	const effects = () => {
 		dispatch(getCommentsAndUsersByRouteId(routeId));
 		dispatch(getRouteByRouteId(routeId));
-		dispatch(getRouteByRouteType(routeType))
+		dispatch(getRouteByRouteType(routeType));
 	};
 
-	const inputs = [routeId];
+	const inputs = [routeId, routeType];
 
 	useEffect(effects, inputs);
 
-	let tempCoordinates = match.params.routeFile;
+	let tempCoordinates = [];
 
 	const [coordinates, setCoordinates] = useState(tempCoordinates);
 
