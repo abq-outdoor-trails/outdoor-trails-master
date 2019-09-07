@@ -27,7 +27,7 @@ export const RouteMap = ({match}) => {
 
 	const comments = useSelector(state => (state.comments ? state.comments : []));
 
-	const route = useSelector(state => (state.route ? state.route :[]));
+	const routes = useSelector(state => (state.route ? state.route :[]));
 
 	const dispatch = useDispatch();
 
