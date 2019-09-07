@@ -33,8 +33,7 @@ export const RouteMap = ({match}) => {
 	const inputs = [routeId];
 
 	useEffect(effects, inputs);
-console.log(comments);
-console.log(route);
+
 
 	return (
 		<>
@@ -44,7 +43,7 @@ console.log(route);
 					<Container>
 						<Row>
 							<Col>
-								<h2>Bosque Trail</h2>
+								<h2>Route Goes Here</h2>
 								<div id="map-wrapper">
 									MapBox element goes here
 								</div>
@@ -53,9 +52,8 @@ console.log(route);
 					</Container>
 				</section>
 
-				<section className="mb-5">
-					<Col className="md4"/>
-					<Container fluid="false">
+				<section className="py-5">
+					<Container fluid="true">
 						<Row>
 							<Button variant="outline-green" size="sm">
 								<FontAwesomeIcon icon="dagger"/>&nbsp;

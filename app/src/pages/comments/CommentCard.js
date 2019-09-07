@@ -14,7 +14,6 @@ export const CommentCard = ({comment}) => {
 	//grab jwt and jwt profile id of logged in users
 	const jwt = UseJwt();
 	const userId = UseJwtUserId();
-console.log(comment);
 
 	const deleteComment = () => {
 		const headers = {'X-JWT-TOKEN': jwt};
@@ -53,6 +52,10 @@ console.log(comment);
 					</Button>
 					<Button onClick={deleteComment} variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
+					</Button>
+					<Button variant="outline-danger" size="sm">
+						<FontAwesomeIcon icon="heart"/>&nbsp;
+						<Badge variant="danger">94</Badge>
 					</Button>
 				</div>
 				<hr />
