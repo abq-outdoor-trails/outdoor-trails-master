@@ -40,7 +40,7 @@ export const CommentFormContent = (props) => {
 										rows="5"
 										onChange={handleChange}
 										onBlur={handleBlur}
-										placeholder="Your opinion here..."
+										placeholder="..."
 										value={values.commentContent}
 									/>
 								</InputGroup>
@@ -54,7 +54,7 @@ export const CommentFormContent = (props) => {
 							</Form.Group>
 
 							<Form.Group>
-								<Button variant="primary" type="submit">Success!</Button>
+								<Button variant="primary" type="submit">Post!</Button>
 							</Form.Group>
 						</Form>
 

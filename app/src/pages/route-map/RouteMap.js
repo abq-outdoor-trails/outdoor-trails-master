@@ -53,9 +53,9 @@ console.log(route);
 					</Container>
 				</section>
 
-				<section className="py-5">
+				<section className="mb-5">
 					<Col className="md4"/>
-					<Container fluid="true">
+					<Container fluid="false">
 						<Row>
 							<Button variant="outline-green" size="sm">
 								<FontAwesomeIcon icon="dagger"/>&nbsp;

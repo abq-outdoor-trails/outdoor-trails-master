@@ -45,19 +45,19 @@ console.log(comment);
 	return (
 	<>
 		<Card className="mb-3">
+			<Card.Header>
+			</Card.Header>
 			<Card.Body>
 				<div className="d-flex justify-content-end">
 					<div className="d-inline-block small text-muted mr-auto my-auto"><CommentUserName userId={comment.commentUserId}/> | {formatDate.format(comment.commentDate)} </div>
+					<Button variant="outline-secondary" size="sm" className="mr-2">
+						<FontAwesomeIcon icon="trash"/>
+					</Button>
 					<Button onClick={deleteComment} variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>
-					{/*<Button variant="outline-secondary" size="sm" className="mr-2">*/}
-					{/*	<FontAwesomeIcon icon="pencil-alt"/>*/}
-					{/*</Button>*/}
-
 				</div>
 				<hr />
-
 				<Card.Text>{comment.commentContent}</Card.Text>
 			</Card.Body>
 		</Card>
@@ -66,3 +66,4 @@ console.log(comment);
 
 
 };
+
