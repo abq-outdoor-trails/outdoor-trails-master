@@ -60,6 +60,14 @@ export const RouteMap = ({match}) => {
 										width: '50vw'
 									}}
 									center={[-106.6505556, 35.0844444]}
+									onStyleLoad={(map) => {
+										map.addControl(map.GeolocateControl({
+											positionOptions: {
+												enableHighAccuracy: true
+											},
+											trackUserLocation: true
+										}));
+									}}
 								>
 									<ZoomControl/>
 									<Layer
