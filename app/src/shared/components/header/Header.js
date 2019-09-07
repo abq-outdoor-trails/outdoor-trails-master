@@ -12,7 +12,7 @@ import {httpConfig} from "../../utils/http-config";
 import {Link} from "react-router-dom";
 
 
-export const Header = () => {
+export const Header = (props) => {
 
 	// grab the jwt and username for logged in users
 	// const jwt = UseJwt();
@@ -43,7 +43,7 @@ export const Header = () => {
 					<Nav className="mr-auto">
 						<Nav.Link href="#route">Routes</Nav.Link>
 						<Nav.Link href="#about">About</Nav.Link>
-						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
+						<NavDropdown title="Sign In" id="collapsible-nav-dropdown" onClick={e => {console.log(e)}}>
 							<SignInForm>
 							</SignInForm>
 						</NavDropdown>
