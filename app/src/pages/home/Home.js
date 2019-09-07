@@ -24,7 +24,7 @@ export const Home = (props) => {
 	const dispatch = useDispatch();
 
 	const effects = () => {
-		dispatch(getRouteByRouteType());
+		dispatch(getRouteByRouteType(routeType));
 	};
 
 	const inputs = [routeType];
