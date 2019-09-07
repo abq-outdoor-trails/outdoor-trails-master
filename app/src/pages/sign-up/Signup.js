@@ -17,7 +17,7 @@ export const Signup = () => (
 				<Col sm={6} lg={{span: 4, offset: 1}}>
 					<Card>
 						<Card.Body>
-							<SignUpForm/>
+							<SignUpForm id="collapsible-nav-dropdown"/>
 						</Card.Body>
 					</Card>
 				</Col>
