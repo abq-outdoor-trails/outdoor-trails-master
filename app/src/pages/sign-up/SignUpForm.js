@@ -51,7 +51,7 @@ export const SignUpForm = () => {
 				onSubmit={ submitSignUp}
 				validationSchema={ validator }
 			>
-				{ SignUpFormContent() }
+				{ SignUpFormContent }
 			</Formik>
 			<p>helloo...</p>
 		</>
