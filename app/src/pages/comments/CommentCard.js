@@ -53,9 +53,9 @@ export const CommentCard = ({comment}) => {
 					<Button onClick={deleteComment} variant="outline-secondary" size="sm" className="mr-2">
 						<FontAwesomeIcon icon="trash"/>
 					</Button>
-					<Button variant="outline-danger" size="sm">
-						<FontAwesomeIcon icon="heart"/>&nbsp;
-						<Badge variant="danger">94</Badge>
+					<Button variant="outline-success" size="sm">
+						<FontAwesomeIcon icon="smile"/>&nbsp;
+						<Badge variant="primary">94</Badge>
 					</Button>
 				</div>
 				<hr />

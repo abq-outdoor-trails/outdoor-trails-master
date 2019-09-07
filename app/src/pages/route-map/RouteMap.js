@@ -55,9 +55,9 @@ export const RouteMap = ({match}) => {
 				<section className="py-5">
 					<Container fluid="true">
 						<Row>
-							<Button variant="outline-green" size="sm">
-								<FontAwesomeIcon icon="dagger"/>&nbsp;
-								<Badge variant="dagger">2</Badge>
+							<Button variant="outline-success" size="sm">
+								<FontAwesomeIcon icon="primary"/>&nbsp;
+								<Badge variant="primary">2</Badge>
 							</Button>
 							<Col md="4">
 								<div id="comment-wrapper">
