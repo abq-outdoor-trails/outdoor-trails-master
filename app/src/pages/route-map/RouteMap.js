@@ -45,6 +45,15 @@ export const RouteMap = ({match}) => {
 
 	const [coordinates, setCoordinates] = useState(tempCoordinates);
 
+	const getCurrentPosition = () => {
+		window.navigator.geolocation.getCurrentPosition(position => {
+			let currentPosition = position;
+			let latitude = currentPosition.coords.latitude;
+			let longitude = currentPosition.coords.longitude;
+			return [longitude, latitude];
+		})
+	};
+
 	return (
 		<>
 			<main>
@@ -60,14 +69,14 @@ export const RouteMap = ({match}) => {
 										width: '50vw'
 									}}
 									center={[-106.6505556, 35.0844444]}
-									onStyleLoad={(map) => {
-										map.addControl(map.GeolocateControl({
-											positionOptions: {
-												enableHighAccuracy: true
-											},
-											trackUserLocation: true
-										}));
-									}}
+									// onStyleLoad={(map) => {
+									// 	map.addControl(map.GeolocateControl({
+									// 		positionOptions: {
+									// 			enableHighAccuracy: true
+									// 		},
+									// 		trackUserLocation: true
+									// 	}));
+									// }}
 								>
 									<ZoomControl/>
 									<Layer
