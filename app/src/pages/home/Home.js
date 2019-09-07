@@ -1,10 +1,6 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -12,6 +8,7 @@ import Image from "react-bootstrap/Image";
 
 import BikeImage from "../../image/black-bike.jpg"
 import BikeLogo from "../../image/Navbar-logo-green.png"
+import {RouteMap} from "../route-map/RouteMap";
 
 
 export const Home = () => {
@@ -42,10 +39,7 @@ export const Home = () => {
 					<Container>
 						<Row>
 							<Col>
-								<h2>Bosque Trail</h2>
-								<div id="map-wrapper">
-									MapBox element goes here
-								</div>
+								<RouteMap />
 							</Col>
 						</Row>
 					</Container>
