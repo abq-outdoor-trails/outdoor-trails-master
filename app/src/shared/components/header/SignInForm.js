@@ -30,9 +30,11 @@ export const SignInForm = () => {
 					window.localStorage.removeItem("jwt-token");
 					window.localStorage.setItem("jwt-token", reply.headers["x-jwt-token"]);
 					resetForm();
+
 					setTimeout(() => {
 						window.location = "/";
 					}, 1500);
+
 				}
 				setStatus({message, type});
 

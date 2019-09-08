@@ -99,10 +99,6 @@ export const RouteMap = ({match}) => {
 				<section className="py-5">
 					<Container fluid="true">
 						<Row>
-							<Button variant="outline-danger" size="sm">
-								<FontAwesomeIcon icon="heart"/>&nbsp;
-								<Badge variant="danger">94</Badge>
-							</Button>
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>

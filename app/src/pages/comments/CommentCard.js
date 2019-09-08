@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {CommentUserName} from "./CommentUsername";
 
 export const CommentCard = ({comment}) => {
-
+ console.log(comment);
 	//grab jwt and jwt profile id of logged in users
 	const jwt = UseJwt();
 	const userId = UseJwtUserId();
@@ -51,13 +51,8 @@ export const CommentCard = ({comment}) => {
 						<Button onClick={deleteComment} variant="outline-secondary" size="sm" className="mr-2">
 							<FontAwesomeIcon icon="trash"/>
 						</Button>
-						{/*<Button variant="outline-secondary" size="sm" className="mr-2">*/}
-						{/*	<FontAwesomeIcon icon="pencil-alt"/>*/}
-						{/*</Button>*/}
-
 					</div>
 					<hr />
-
 					<Card.Text>{comment.commentContent}</Card.Text>
 				</Card.Body>
 			</Card>
