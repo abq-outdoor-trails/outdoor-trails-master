@@ -59,7 +59,7 @@ class DataDownloader {
 		    $routeFile = json_encode($entry["routeFile"]);
 		    $routeName = $key;
 		    $routeSpeedLimit = $entry["routeSpeedLimit"];
-		    $routeType = null;
+		    $routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
 		    $newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
 		    $newRoute->insert($pdo);
         }
