@@ -15,7 +15,6 @@ export const CommentCard = ({comment}) => {
 	//grab jwt and jwt profile id of logged in users
 	const jwt = UseJwt();
 	const userId = UseJwtUserId();
-	console.log(comment);
 
 	const deleteComment = () => {
 		const headers = {'X-JWT-TOKEN': jwt};
