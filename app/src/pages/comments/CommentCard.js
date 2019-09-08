@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {CommentUserName} from "./CommentUsername";
 
 export const CommentCard = ({comment}) => {
-
+ console.log(comment);
 	//grab jwt and jwt profile id of logged in users
 	const jwt = UseJwt();
 	const userId = UseJwtUserId();
