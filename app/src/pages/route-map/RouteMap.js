@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import _ from 'lodash';
+import chunk from 'lodash/chunk';
 import {Link} from "react-router-dom";
 import ReactMapboxGl, { Layer, Feature, MapContext } from 'react-mapbox-gl';
 
@@ -86,7 +88,7 @@ export const RouteMap = ({match}) => {
 										'line-width': 4
 									}}
 									>
-										{parsed && parsed.map(point => <Feature coordinates={point} />)}
+										{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}
 									</Layer>
 								</Map>
 							</Col>
