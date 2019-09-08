@@ -167,9 +167,9 @@ class Route implements \JsonSerializable {
 		$newRouteFile = filter_var($newRouteFile, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		// verify the route ID will fit in the database
-		if(strlen($newRouteFile) > 10000) {
-			throw(new \RangeException("route file content too large"));
-		}
+//		if(strlen($newRouteFile) > 10000) {
+//			throw(new \RangeException("route file content too large"));
+//		}
 		// store the route file content
 		$this->routeFile = $newRouteFile;
 	}
@@ -196,9 +196,9 @@ class Route implements \JsonSerializable {
 		//verify route name is secure
 		$newRouteName = trim($newRouteName);
 		$newRouteName = filter_var($newRouteName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteName) === true) {
-			throw(new \InvalidArgumentException("Route name is empty or insecure"));
-		}
+//		if(empty($newRouteName) === true) {
+//			throw(new \InvalidArgumentException("Route name is empty or insecure"));
+//		}
 		//verify route name is less than 32 characters
 		if(strlen($newRouteName) > 64) {
 			throw(new \RangeException("route name is too large"));

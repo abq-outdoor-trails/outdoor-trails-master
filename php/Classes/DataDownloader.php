@@ -28,33 +28,41 @@ class DataDownloader {
 
 		$routes = self::readDataJson($urlBase);
 		$newArray = [];
-//		var_dump($routes[0]->geometry->paths[0]);
-//		var_dump($routes[0]->attributes);
 //		[ParentPathName => [description => something, routeFile => [
 //			[x, y],
 //			[x, y],
 //			[x, y]
 //		] ]];
-//		for($i = 0; $i < sizeof($routes); $i++) {
-//			if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail") {
-//				if(array_key_exists(trim($routes[$i]->attributes->ParentPathName), $newArray)) {
-//					array_push($newArray[trim($routes[$i]->attributes->ParentPathName)]["routeFile"], $routes[$i]->geometry->paths);
-//				} else {
-//					$newArray = $newArray + [trim($routes[$i]->attributes->ParentPathName) => ["description" => $routes[$i]->attributes->Comments, "routeSpeedLimit" => $routes[$i]->attributes->PostedSpeedLimit_MPH, "routeFile" => [
-//							$routes[$i]->geometry->paths
-//						]]];
-//				}
+		for($i = 0; $i < sizeof($routes); $i++) {
+			if($routes[$i]->attributes->PathType === "Paved Multiple Use Trail - A paved trail closed to automotive traffic.") {
+				if(array_key_exists(trim($routes[$i]->attributes->ParentPath), $newArray)) {
+					array_push($newArray[trim($routes[$i]->attributes->ParentPath)]["routeFile"], $routes[$i]->geometry->paths);
+				} else {
+					$newArray = $newArray + [trim($routes[$i]->attributes->ParentPath) => ["description" => $routes[$i]->attributes->Comments, "routeSpeedLimit" => $routes[$i]->attributes->PostedSpee, "routeFile" => [
+							$routes[$i]->geometry->paths
+						]]];
+				}
 //				$routeId = generateUuidV4();
 //				$description = $routes[$i]->attributes->Comments;
-//				$routeFile = json_encode($newArray[$routes[$i]->attributes->ParentPathName]["routeFile"]);
-//				$routeName = $routes[$i]->attributes->ParentPathName;
-//				$routeSpeedLimit = 5;
+//				$routeFile = json_encode($newArray[$routes[$i]->attributes->ParentPath]["routeFile"]);
+//				$routeName = $routes[$i]->attributes->ParentPath;
+//				$routeSpeedLimit = null;
 //				$routeType = '';
 //				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-//				$newRoute->insert($pdo);
-//			}
-//		}
-
+//				var_dump($newRoute);
+			}
+		}
+//		var_dump($newArray);
+		foreach($newArray as $key => $entry) {
+		    $routeId = generateUuidV4();
+		    $description = $entry["description"];
+		    $routeFile = json_encode($entry["routeFile"]);
+		    $routeName = $key;
+		    $routeSpeedLimit = $entry["routeSpeedLimit"];
+		    $routeType = null;
+		    $newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+		    $newRoute->insert($pdo);
+        }
 //
 ////				$newArray = ["routeName" => ["route" => []]];
 //
@@ -70,24 +78,24 @@ class DataDownloader {
 //			}
 //		}
 		// ORIGINAL DATA DOWNLOADER
-		foreach($routes as $route) {
-			if($route->attributes->PathType === "Paved Multiple Use Trail - A paved trail closed to automotive traffic.") {
-
-				$routeId = generateUuidV4();
-				$description = $route->attributes->Comments;
-				$routeFile = json_encode($route->geometry->paths);
-				$routeName = $route->attributes->ParentPath;
-				$routeSpeedLimit = $route->attributes->PostedSpee;
-				$routeType = $route->attributes->PathType;
+//		foreach($routes as $route) {
+//			if($route->attributes->PathType === "Paved Multiple Use Trail - A paved trail closed to automotive traffic.") {
 //
-//				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
-//				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
-
-				// insert Route into database
-				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
-				$newRoute->insert($pdo);
-			}
-		}
+//				$routeId = generateUuidV4();
+//				$description = $route->attributes->Comments;
+//				$routeFile = json_encode($route->geometry->paths);
+//				$routeName = $route->attributes->ParentPath;
+//				$routeSpeedLimit = $route->attributes->PostedSpee;
+//				$routeType = $route->attributes->PathType;
+////
+////				$newArray = ["routeId" => $routeId, "description" => $description, "routeFile" => $routeFile, "routeName" => $routeName, "routeSpeedLimit" => $routeSpeedLimit, "routeType" => $routeType];
+////				file_put_contents("../../images/bikepathsEdited.json", $newArray, FILE_APPEND);
+//
+//				// insert Route into database
+//				$newRoute = new Route($routeId, $description, $routeFile, $routeName, $routeSpeedLimit, $routeType);
+//				$newRoute->insert($pdo);
+//			}
+//		}
 	}
 
 	public static function readDataJson($url) {
