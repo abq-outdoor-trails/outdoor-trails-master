@@ -53,7 +53,6 @@ export const SignUpForm = () => {
 			>
 				{ SignUpFormContent }
 			</Formik>
-			<p>helloo...</p>
 		</>
 	);
 };
