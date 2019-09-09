@@ -33,8 +33,6 @@ export const RouteMap = ({match}) => {
 
 	let parsed = route.routeFile && JSON.parse(route.routeFile);
 
-	console.log(parsed);
-
 	const dispatch = useDispatch();
 
 	const effects = () => {
