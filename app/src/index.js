@@ -31,7 +31,7 @@ import {
 	faTrash,
 	faSignInAlt,
 	faSortDown,
-	faUserCircle,
+	faUserCircle, faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import {faLinkedin} from "@fortawesome/free-brands-svg-icons/faLinkedin";
@@ -40,7 +40,7 @@ const store = createStore(reducers,applyMiddleware(thunk));
 
 
 
-library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart, faGithub, faLinkedin);
+library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart, faGithub, faLinkedin, faUser);
 
 
 const App = (store) => (
