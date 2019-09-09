@@ -52,9 +52,7 @@ h3 {color: white;
 #card-wrapper {
 	padding-top: 50px;
 }
-Card.Footer {
-	background-color: #98e163 !important;
-}
+
 
 /***
 * Flexbox Sticky Footer
