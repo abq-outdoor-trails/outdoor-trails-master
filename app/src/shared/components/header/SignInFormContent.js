@@ -89,7 +89,7 @@ export const SignInFormContent = (props) => {
 							</Button>
 						</Form.Group>
 					</Form>
-					{status && (<div className={status.type}>{status.message}</div>)}
+					{status && (<div className={status.type}>{status.message}</div> && console.log(status))}
 					<FormDebugger {...props}/>
 
 						<div className="my-2">
