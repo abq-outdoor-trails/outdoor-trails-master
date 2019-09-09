@@ -86,7 +86,7 @@ export const Home = () => {
 									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
 									<Card.Text>
 										This card has supporting text below as a natural lead-in to additional
-										content.{' '}
+										content.{''}
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
