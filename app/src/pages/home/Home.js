@@ -24,10 +24,11 @@ export const Home = () => {
 	const [routeType, setRouteType] = useState('Paved Multiple Use Trail - A paved trail closed to automotive traffic.');
 
 	// returns the routes store from redux and assign it to the routes variable
-	const routes = useSelector(state => state.route ? state.route : []);
-	const flattedIt = _.flatten(routes);
+	const route = useSelector(state => state.route ? state.route : []);
 
-	console.log(JSON.parse(flattedIt));
+	const flat = _.flatten(route);
+
+	const parsed = flat.forEach(item => console.log(JSON.parse(item.routeFile)));
 
 	// assigns useDispatch reference to the dispatch variable for later use
 	const dispatch = useDispatch();
