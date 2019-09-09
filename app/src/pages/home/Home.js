@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {HomeMap} from "../../shared/components/home-map/HomeMap";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
@@ -16,9 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getRouteByRouteType} from "../../shared/actions/get-route";
 import TeamPhoto from "../../image/bike-team.jpg";
 
-export const Home = (props) => {
-
-	const routeType = props.routeType;
+export const Home = () => {
 
 	// returns the routes store from redux and assign it to the routes variable
 	const routes = useSelector(state => state.route ? state.route : []);
@@ -27,12 +26,12 @@ export const Home = (props) => {
 	const dispatch = useDispatch();
 
 	const effects = () => {
-		dispatch(getRouteByRouteType(routeType));
+		// dispatch(getRouteByRouteType(routeType));
 	};
 
-	const inputs = [routeType];
+	// const inputs = [routeType];
 
-	useEffect(effects, inputs);
+	// useEffect(effects, inputs);
 
 	return (
 		<>
@@ -60,7 +59,7 @@ export const Home = (props) => {
 					<Container>
 						<Row>
 							<Col>
-								<RouteMap {...props} />
+								<HomeMap />
 							</Col>
 						</Row>
 					</Container>
