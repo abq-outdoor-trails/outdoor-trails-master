@@ -15,6 +15,7 @@ section.home-hero {
 	background-position: top center;
 	background-repeat: no-repeat;
 	height: 110vh;
+	margin-bottom: 20px;
 
 }
 
@@ -51,6 +52,12 @@ h3 {color: white;
 }
 #card-wrapper {
 	padding-top: 50px;
+}
+#about {
+	margin-bottom: 50px;
+}
+card.text-muted {
+	color: #98e163
 }
 
 
