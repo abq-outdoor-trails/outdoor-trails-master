@@ -70,7 +70,7 @@ export const Home = () => {
 							<Card>
 								<Card.Img variant="top" src="holder.js/100px160" />
 								<Card.Body>
-									<Card.Title>Will Harris</Card.Title>
+									<Card.Title><h2>Will Harris</h2></Card.Title>
 									<Card.Text>
 										This is a wider card with supporting text below as a natural lead-in to
 										additional content. This content is a little bit longer.
@@ -83,7 +83,7 @@ export const Home = () => {
 							<Card>
 								<Card.Img variant="top" src="holder.js/100px160" />
 								<Card.Body>
-									<Card.Title>Chrystal Copeland</Card.Title>
+									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
 									<Card.Text>
 										This card has supporting text below as a natural lead-in to additional
 										content.{' '}
@@ -96,7 +96,7 @@ export const Home = () => {
 							<Card>
 								<Card.Img variant="top" src="holder.js/100px160" />
 								<Card.Body>
-									<Card.Title>John Dunn</Card.Title>
+									<Card.Title><h2>John Dunn</h2></Card.Title>
 									<Card.Text>
 										This is a wider card with supporting text below as a natural lead-in to
 										additional content. This card has even longer content than the first to
