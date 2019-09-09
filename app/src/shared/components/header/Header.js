@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SignInForm} from "./SignInForm";
 
 
@@ -34,6 +34,10 @@ export const Header = (props) => {
 				}
 			});
 	};
+
+	useEffect(() => {
+		httpConfig.get("/apis/xsrf/");
+	});
 
 
 
