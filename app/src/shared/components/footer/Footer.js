@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+
 export const Footer = () => (
 	<>
 		<footer className="page-footer text-muted py-2 py-md-4">
@@ -17,7 +18,8 @@ export const Footer = () => (
 				<Row>
 					<Col className="text-center">
 						<FontAwesomeIcon icon={['fab', 'github']} /> &nbsp;
-						<a href="https://github.com/abq-outdoor-trails/outdoor-trails-master" className="text-muted" target="_blank" rel="noopener noreferrer">View on GitHub</a> | <Link className="text-muted" to="/about">About Us</Link>
+
+						<a href="https://github.com/abq-outdoor-trails/outdoor-trails-master" className="text-muted" target="_blank" rel="noopener noreferrer">GitHub</a> | <Link className="text-muted" to="/about">About Us</Link>
 					</Col>
 				</Row>
 			</Container>

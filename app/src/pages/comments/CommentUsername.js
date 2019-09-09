@@ -8,10 +8,10 @@ export const CommentUserName = ({userId}) => {
 		return state.user ? state.user.find( user => userId === user.userId) : null
 	});
 
-		return  (
-			<>
-				{user ? user.userName : "???"}
+	return  (
+		<>
+			{user ? user.userName : "???"}
 
-			</>
-		);
+		</>
+	);
 };

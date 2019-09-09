@@ -28,7 +28,7 @@ export const Home = () => {
 						<Row>
 							<Col>
 								{<Image src={BikeLogo} fluid alt="ABQ Bike Logo"/>}
-								<h1 class="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
+								<h1 className="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
 								<Button
 									href="../Signup"
 									variant="outline-light" size="lg" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
@@ -40,7 +40,7 @@ export const Home = () => {
 				</section>
 
 				{/*Map Section*/}
-				<section>
+				<section id="route">
 					<Container>
 						<Row>
 							<Col>
@@ -52,9 +52,9 @@ export const Home = () => {
 						</Row>
 					</Container>
 				</section>
-
 				{/*About Section*/}
-				<section>
+
+				<section id="about">
 					<div id="container-fluid">
 						<Container>
 							<h3>This is our About Section</h3>
@@ -67,51 +67,52 @@ export const Home = () => {
 							</Row>
 						</Container>
 					</div>
-				</section>
-				<section>
-					<Container>
-						<CardGroup>
-							<Card>
-								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
-								<Card.Body>
-									<Card.Title><h2>Will Harris</h2></Card.Title>
-									<Card.Text>
-										Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
-										best programmer he can be! Eats avocado toast every day for breakfast.
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-							<Card>
-								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
-								<Card.Body>
-									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
-									<Card.Text>
-										Front End Lead and Technical Assist - former massage therapist turned developer. New Mexico native
-										relocating to the big city of Denver. Will smuggle green chile for code.
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-							<Card>
-								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
-								<Card.Body>
-									<Card.Title><h2>John Dunn</h2></Card.Title>
-									<Card.Text>
-										Project Management Lead and Dev Assist - former Verizon IT guru searching for the
-										meaning of life in web development. Knows almost every single person in Albuquerque.
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-						</CardGroup>
-					</Container>
+					<section>
+						<Container>
+							<CardGroup>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title><h2>Will Harris</h2></Card.Title>
+										<Card.Text>
+											Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
+											best programmer he can be! Eats avocado toast every day for breakfast.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer>
+										<small className="text-muted">LinkedIn</small>
+									</Card.Footer>
+								</Card>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
+										<Card.Text>
+											Front End Lead and Technical Assist - former massage therapist turned developer. New
+											Mexico native
+											relocating to the big city of Denver. Will smuggle green chile for code.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer>
+										<small className="text-muted">LinkedIn</small>
+									</Card.Footer>
+								</Card>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title><h2>John Dunn</h2></Card.Title>
+										<Card.Text>
+											Project Management Lead and Dev Assist - former Verizon IT guru searching for the
+											meaning of life in web development. Knows almost every single person in Albuquerque.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer>
+										<small className="text-muted">LinkedIn</small>
+									</Card.Footer>
+								</Card>
+							</CardGroup>
+						</Container>
+					</section>
 				</section>
 			</main>
 		</>

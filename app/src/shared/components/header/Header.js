@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SignInForm} from "./SignInForm";
 
 
@@ -12,14 +12,15 @@ import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {httpConfig} from "../../utils/http-config";
 import {Link} from "react-router-dom";
+import {UseJwt, UseJwtUserId, UseJwtUsername} from "../../utils/JwtHelpers";
 
 
-export const Header = () => {
+export const Header = (props) => {
 
 	// grab the jwt and username for logged in users
-	// const jwt = UseJwt();
-	// const username = UseJwtUsername();
-	// const userId = UseJwtProfileId();
+	const jwt = UseJwt();
+	const userName = UseJwtUsername();
+	const userId = UseJwtUserId();
 
 	const signOut = () => {
 		httpConfig.get("/apis/signout/")
@@ -34,20 +35,16 @@ export const Header = () => {
 			});
 	};
 
-	/* the call to grab XSRF from the new API. */
-	const getXsrf = () => {
-		httpConfig.get("/apis/xsrf/")
-			.then(reply => {
-				if(reply.status === 200) {
-					console.log(reply);
-				}
-			});
-	};
+	useEffect(() => {
+		httpConfig.get("/apis/xsrf/");
+	});
+
+
 
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">
-				<Navbar.Brand href="#home">
+				<Navbar.Brand href="/#home">
 					<img className="nav-logo"
 						  src={BikeLogo}
 						  width="200"
@@ -58,17 +55,15 @@ export const Header = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						<Nav.Link href="#route">Routes</Nav.Link>
-						<Nav.Link href="#about">About</Nav.Link>
+						<Nav.Link href="/#route">Routes</Nav.Link>
+						<Nav.Link href="/#about">About</Nav.Link>
 						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
 							<SignInForm>
 							</SignInForm>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
-			</Navbar>
-			{/* grab XSRF on click! Remove me when finsihed testing! */}
-			<button onClick={getXsrf}>get xsrf</button>
+				</Navbar>
 		</>
 	)
 };

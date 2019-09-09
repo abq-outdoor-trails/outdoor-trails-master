@@ -6,7 +6,6 @@ import {Formik} from "formik";
 import {CommentFormContent} from "./CommentFormContent";
 
 export const CommentForm = ({routeId}) => {
-	console.log(routeId);
 
 	const [status, setStatus] = useState(null);
 
@@ -49,7 +48,7 @@ export const CommentForm = ({routeId}) => {
 				initialValues={comment}
 				onSubmit={submitComment}
 				validationSchema={validator}
-				>
+			>
 				{CommentFormContent}
 			</Formik>
 		</>

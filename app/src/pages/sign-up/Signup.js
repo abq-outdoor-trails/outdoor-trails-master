@@ -17,96 +17,11 @@ export const Signup = () => (
 				<Col sm={6} lg={{span: 4, offset: 1}}>
 					<Card>
 						<Card.Body>
-							<SignUpForm/>
+							<SignUpForm id="collapsible-nav-dropdown"/>
 						</Card.Body>
 					</Card>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-				</Col>
-			</Row>
-			<Row>
-				<Col>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
-					<Spinner animation="grow" variant="success"/>
 				</Col>
 			</Row>
 		</Container>
 	</main>
 );
-
