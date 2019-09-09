@@ -55,25 +55,29 @@ export const Home = () => {
 
 				{/*About Section*/}
 				<section>
-					<Container>
-						<Row>
-							<Col>
-								<h2>This is our About Section</h2>
-								{<Image src={TeamPhoto} fluid alt="Abq Bike Team Photo"/>}
-							</Col>
-						</Row>
-					</Container>
+					<div id="container-fluid">
+						<Container>
+							<h3>This is our About Section</h3>
+							<Row>
+								<Col>
+									<div id="about-wrapper">
+										{<Image src={TeamPhoto} fluid alt="Abq Bike Team Photo"/>}
+									</div>
+								</Col>
+							</Row>
+						</Container>
+					</div>
 				</section>
 				<section>
 					<Container>
 						<CardGroup>
 							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
+								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
 								<Card.Body>
 									<Card.Title><h2>Will Harris</h2></Card.Title>
 									<Card.Text>
-										This is a wider card with supporting text below as a natural lead-in to
-										additional content. This content is a little bit longer.
+										Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
+										best programmer he can be! Eats avocado toast every day for breakfast.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
@@ -81,12 +85,12 @@ export const Home = () => {
 								</Card.Footer>
 							</Card>
 							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
+								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
 								<Card.Body>
 									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
 									<Card.Text>
-										This card has supporting text below as a natural lead-in to additional
-										content.{''}
+										Front End Lead and Technical Assist - former massage therapist turned developer. New Mexico native
+										relocated to the big City of Denver.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
@@ -94,7 +98,7 @@ export const Home = () => {
 								</Card.Footer>
 							</Card>
 							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
+								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
 								<Card.Body>
 									<Card.Title><h2>John Dunn</h2></Card.Title>
 									<Card.Text>
@@ -110,9 +114,7 @@ export const Home = () => {
 						</CardGroup>
 					</Container>
 				</section>
-
 			</main>
-
 		</>
 	)
 };
