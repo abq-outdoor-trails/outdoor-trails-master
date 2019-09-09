@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
 
 import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
@@ -10,22 +10,22 @@ export const HomeMap = () => {
     const Map = ReactMapboxGl({
         accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA',
     });
-
-    const routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
-
-    const routes = useSelector(state => (state.route[0] ? state.route[0] : []));
-
-    console.log(routes);
-
-    const dispatch = useDispatch();
-
-    const effects = () => {
-        dispatch(getRouteByRouteType(routeType));
-    };
-
-    const inputs = [routeType];
-
-    useEffect(effects, inputs);
+    //
+    // const [routeType, setRouteType] = useState('\'Paved Multiple Use Trail - A paved trail closed to automotive traffic.');
+    //
+    // const routes = useSelector(state => (state.route[0] ? state.route[0] : []));
+    //
+    // console.log(routes);
+    //
+    // const dispatch = useDispatch();
+    //
+    // const effects = () => {
+    //     dispatch(getRouteByRouteType(routeType));
+    // };
+    //
+    // const inputs = [routeType];
+    //
+    // useEffect(effects, inputs);
 
     return (
         <Map

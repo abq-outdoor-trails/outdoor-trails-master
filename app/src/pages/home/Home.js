@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import _ from 'lodash';
 import {HomeMap} from "../../shared/components/home-map/HomeMap";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -16,6 +17,7 @@ import {RouteMap} from "../route-map/RouteMap";
 import {useDispatch, useSelector} from "react-redux";
 import {getRouteByRouteType} from "../../shared/actions/get-route";
 import TeamPhoto from "../../image/bike-team.jpg";
+import {Feature} from "react-mapbox-gl";
 
 export const Home = () => {
 
@@ -23,6 +25,9 @@ export const Home = () => {
 
 	// returns the routes store from redux and assign it to the routes variable
 	const routes = useSelector(state => state.route ? state.route : []);
+	const flattedIt = _.flatten(routes);
+
+	console.log(JSON.parse(flattedIt));
 
 	// assigns useDispatch reference to the dispatch variable for later use
 	const dispatch = useDispatch();
@@ -61,7 +66,9 @@ export const Home = () => {
 					<Container>
 						<Row>
 							<Col>
-								<HomeMap />
+								<HomeMap>
+									{/*{flattedIt.map(line => console.log(JSON.parse(line.routeFile)))}*/}
+								</HomeMap>
 							</Col>
 						</Row>
 					</Container>
