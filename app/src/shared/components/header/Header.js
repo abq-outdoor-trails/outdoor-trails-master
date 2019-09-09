@@ -12,7 +12,7 @@ import {httpConfig} from "../../utils/http-config";
 import {Link} from "react-router-dom";
 
 
-export const Header = () => {
+export const Header = (props) => {
 
 	// grab the jwt and username for logged in users
 	// const jwt = UseJwt();
@@ -32,15 +32,7 @@ export const Header = () => {
 			});
 	};
 
-	/* the call to grab XSRF from the new API. */
-	const getXsrf = () => {
-		httpConfig.get("/apis/xsrf/")
-			.then(reply => {
-				if(reply.status === 200) {
-					console.log(reply);
-				}
-			});
-	};
+
 
 	return (
 		<>
@@ -51,15 +43,13 @@ export const Header = () => {
 					<Nav className="mr-auto">
 						<Nav.Link href="#route">Routes</Nav.Link>
 						<Nav.Link href="#about">About</Nav.Link>
-						<NavDropdown title="Sign In" id="collapsible-nav-dropdown">
+						<NavDropdown title="Sign In" id="collapsible-nav-dropdown" onClick={e => {console.log(e)}}>
 							<SignInForm>
 							</SignInForm>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
 				</Navbar>
-			{/* grab XSRF on click! Remove me when finsihed testing! */}
-			<button onClick={getXsrf}>get xsrf</button>
 		</>
 	)
 };

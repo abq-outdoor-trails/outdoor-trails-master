@@ -84,16 +84,18 @@ export const SignInFormContent = (props) => {
 							}
 						</Form.Group>
 						<Form.Group className="text-md-right">
-							<Button variant="primary" type="submit">
+							<Button variant="primary" type="submit" onClick={e => {console.log(e, props)}}>
 								<FontAwesomeIcon icon="sign-in-alt"/>&nbsp;Sign In
 							</Button>
 						</Form.Group>
 					</Form>
+					{console.log(status)}
+					{status && (<div className={status.type}>{status.message}</div>)}
 					<FormDebugger {...props}/>
 
 						<div ClassName="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
-							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
+							<Link to="/signup">Sign Up</Link>
 						</div>
 				</Card.Body>
 			</Card>

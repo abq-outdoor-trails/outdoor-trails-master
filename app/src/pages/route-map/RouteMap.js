@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
+import _ from 'lodash';
+import chunk from 'lodash/chunk';
 import {Link} from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Layer, Feature, MapContext } from 'react-mapbox-gl';
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -30,6 +32,8 @@ export const RouteMap = ({match}) => {
 
 	const routes = useSelector(state => (state.route ? state.route : []));
 
+	let parsed = routes.routeFile && JSON.parse(routes.routeFile);
+
 	const dispatch = useDispatch();
 
 	const effects = () => {
@@ -43,8 +47,18 @@ export const RouteMap = ({match}) => {
 	useEffect(effects, inputs);
 
 	let tempCoordinates = [];
+	const getLocation = () => new Promise(
+		(resolve, reject) => {
+			window.navigator.geolocation.getCurrentPosition(position => {
+				const location = [position.coords.longitude, position.coords.latitude];
+				resolve(location);
+			}, err => reject(err));
+		}
+	);
 
-	const [coordinates, setCoordinates] = useState(tempCoordinates);
+	const currentLocation = getLocation()
+		.then(location => console.log(location))
+		.catch(error => console.log(error));
 
 	return (
 		<>
@@ -60,7 +74,8 @@ export const RouteMap = ({match}) => {
 										height: '50vh',
 										width: '50vw'
 									}}
-									center={[-106.6505556, 35.0844444]}
+									center= {[-106.6505556, 35.0844444]}
+									zoom={[10]}
 								>
 									<ZoomControl/>
 									<Layer
@@ -74,7 +89,7 @@ export const RouteMap = ({match}) => {
 										'line-width': 4
 									}}
 									>
-										{/*{coordinates.map(point => <Feature coordinates={point} />)}*/}
+										{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}
 									</Layer>
 								</Map>
 							</Col>
@@ -85,10 +100,6 @@ export const RouteMap = ({match}) => {
 				<section className="py-5">
 					<Container fluid="true">
 						<Row>
-							<Button variant="outline-danger" size="sm">
-								<FontAwesomeIcon icon="heart"/>&nbsp;
-								<Badge variant="danger">94</Badge>
-							</Button>
 							<Col md="4">
 								<div id="comment-wrapper">
 									<h3>Post a Comment</h3>
