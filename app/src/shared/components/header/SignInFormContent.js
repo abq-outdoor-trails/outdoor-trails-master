@@ -91,7 +91,7 @@ export const SignInFormContent = (props) => {
 					</Form>
 					<FormDebugger {...props}/>
 
-						<div ClassName="my-2">
+						<div className="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
 							<Link to="...pages/signUp/SignUpForm.js">Sign Up</Link>
 						</div>
