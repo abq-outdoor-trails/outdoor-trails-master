@@ -22,8 +22,6 @@ import {RouteMap} from "./pages/route-map/RouteMap";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import {far} from "@fortawesome/free-solid-svg-icons";
-// import {fab, faGithub} from "@fortawesome/free-brands-svg-icons";
 import {
 	faDog,
 	faEnvelope,
@@ -34,14 +32,14 @@ import {
 	faSignInAlt,
 	faSortDown,
 	faUserCircle,
-	faUser
 } from "@fortawesome/free-solid-svg-icons";
-
-
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 const store = createStore(reducers,applyMiddleware(thunk));
 
-library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart);
+
+
+library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart, faGithub);
 
 
 const App = (store) => (
