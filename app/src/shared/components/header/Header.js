@@ -12,14 +12,15 @@ import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {httpConfig} from "../../utils/http-config";
 import {Link} from "react-router-dom";
+import {UseJwt, UseJwtUserId, UseJwtUsername} from "../../utils/JwtHelpers";
 
 
 export const Header = (props) => {
 
 	// grab the jwt and username for logged in users
-	// const jwt = UseJwt();
-	// const username = UseJwtUsername();
-	// const userId = UseJwtProfileId();
+	const jwt = UseJwt();
+	const userName = UseJwtUsername();
+	const userId = UseJwtUserId();
 
 	const signOut = () => {
 		httpConfig.get("/apis/signout/")
@@ -59,8 +60,6 @@ export const Header = (props) => {
 					</Nav>
 				</Navbar.Collapse>
 				</Navbar>
-			{/* grab XSRF on click! Remove me when finsihed testing! */}
-			{/* <button onClick={getXsrf}>get xsrf</button>*/}
 		</>
 	)
 };
