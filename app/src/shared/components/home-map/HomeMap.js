@@ -4,7 +4,7 @@ import _ from 'lodash';
 import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
 import {useDispatch, useSelector} from "react-redux";
 import {getRouteByRouteType} from "../../actions/get-route";
-import ZoomControl from "react-mapbox-gl";
+import {ZoomControl} from "react-mapbox-gl";
 
 export const HomeMap = () => {
     const Map = ReactMapboxGl({
@@ -37,7 +37,7 @@ export const HomeMap = () => {
             center={[-106.6505556, 35.0844444]}
             zoom={[10]}
         >
-            <ZoomControl/>
+            <ZoomControl />
             <Layer
                 type="line"
                 layout={{
@@ -49,7 +49,7 @@ export const HomeMap = () => {
                     'line-width': 4
                 }}
                 >
-                {/*{MAP GOES HERE}*/}
+                {/*{routes.map(entry => <Feature coordinates={_.flatten(entry)}/>)}*/}
             </Layer>
 
         </Map>
