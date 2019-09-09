@@ -9,9 +9,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
+import CardGroup from "react-bootstrap/CardGroup";
 
 import BikeImage from "../../image/black-bike.jpg"
 import BikeLogo from "../../image/Navbar-logo-green.png"
+import TeamPhoto from "../../image/bike-team.jpg"
 
 
 export const Home = () => {
@@ -26,7 +28,7 @@ export const Home = () => {
 						<Row>
 							<Col>
 								{<Image src={BikeLogo} fluid alt="ABQ Bike Logo"/>}
-								<h1 class="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
+								<h1 className="display-3 font-weight-light">Welcome to ABQ Bike Trails</h1>
 								<Button
 									href="../Signup"
 									variant="outline-light" size="lg" type="submit"> Sign Up <FontAwesomeIcon icon="sign-up"/>
@@ -56,10 +58,56 @@ export const Home = () => {
 					<Container>
 						<Row>
 							<Col>
-								<h1>This is our About Section</h1>
-								{<Image src={BikeImage} fluid alt="Yellow Bike"/>}
+								<h2>This is our About Section</h2>
+								{<Image src={TeamPhoto} fluid alt="Abq Bike Team Photo"/>}
 							</Col>
 						</Row>
+					</Container>
+				</section>
+				<section>
+					<Container>
+						<CardGroup>
+							<Card>
+								<Card.Img variant="top" src="holder.js/100px160" />
+								<Card.Body>
+									<Card.Title>Will Harris</Card.Title>
+									<Card.Text>
+										This is a wider card with supporting text below as a natural lead-in to
+										additional content. This content is a little bit longer.
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer>
+									<small className="text-muted">LinkedIn</small>
+								</Card.Footer>
+							</Card>
+							<Card>
+								<Card.Img variant="top" src="holder.js/100px160" />
+								<Card.Body>
+									<Card.Title>Chrystal Copeland</Card.Title>
+									<Card.Text>
+										This card has supporting text below as a natural lead-in to additional
+										content.{' '}
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer>
+									<small className="text-muted">LinkedIn</small>
+								</Card.Footer>
+							</Card>
+							<Card>
+								<Card.Img variant="top" src="holder.js/100px160" />
+								<Card.Body>
+									<Card.Title>John Dunn</Card.Title>
+									<Card.Text>
+										This is a wider card with supporting text below as a natural lead-in to
+										additional content. This card has even longer content than the first to
+										show that equal height action.
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer>
+									<small className="text-muted">LinkedIn</small>
+								</Card.Footer>
+							</Card>
+						</CardGroup>
 					</Container>
 				</section>
 
