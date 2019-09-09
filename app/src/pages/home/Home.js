@@ -81,6 +81,7 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
+										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
 										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
@@ -94,6 +95,7 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
+										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
 										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
@@ -107,6 +109,7 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
+										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
 										<med className="text-muted text-center">LinkedIn</med>
 									</Card.Footer>
 								</Card>
