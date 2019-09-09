@@ -54,7 +54,7 @@ export const CommentFormContent = (props) => {
 						</Form.Group>
 
 						<Form.Group>
-							<Button variant="primary" type="submit">Success!</Button>
+							<Button variant="primary" type="submit">Post!</Button>
 						</Form.Group>
 					</Form>
 
