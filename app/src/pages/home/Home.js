@@ -68,7 +68,7 @@ export const Home = () => {
 						<Row>
 							<Col>
 								<HomeMap>
-									{/*{flattedIt.map(line => console.log(JSON.parse(line.routeFile)))}*/}
+									{parsed && parsed.forEach(route => <Feature coordinates={[_.flattenDeep(route)]} />)};
 								</HomeMap>
 							</Col>
 						</Row>

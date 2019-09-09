@@ -49,7 +49,7 @@ export const HomeMap = () => {
                     'line-width': 4
                 }}
                 >
-                {/*{routes.map(entry => <Feature coordinates={_.flatten(entry)}/>)}*/}
+                <Feature />
             </Layer>
 
         </Map>
