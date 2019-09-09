@@ -87,7 +87,7 @@ export const RouteMap = ({match}) => {
 										'line-width': 4
 									}}
 									>
-										{/*{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}*/}
+										{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}
 									</Layer>
 								</Map>
 							</Col>
