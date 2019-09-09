@@ -5,7 +5,8 @@
 
 .brand-styles {
 	color: #98e163 !important;
-	font:
+	font-family: Source Sans Pro, SansSerif;
+
 }
 
 section.home-hero {
@@ -14,9 +15,21 @@ section.home-hero {
 	background-position: top center;
 	background-repeat: no-repeat;
 	height: 110vh;
+	margin-bottom: 20px;
+
 }
-h1{
+
+/* header fonts */
+h1 {
 	color:white;
+	font-family: Source Sans Pro, SansSerif;
+}
+h2 {color: #737373;
+	font-family: Roboto-thin, SansSerif;
+}
+h3 {color: white;
+	font-family: Roboto-thin, SansSerif;
+
 }
 
 
@@ -24,7 +37,29 @@ h1{
 #map-wrapper {
 	min-height: 600px;
 	background-color: green;
+	margin-bottom: 20px;
 }
+
+/* About Us Section */
+#about-wrapper {
+	padding-top: 10px;
+	margin-left: 90px;
+	margin-right: 90px;
+}
+#container-fluid{
+	background-color: #737373;
+	padding-top: 50px;
+}
+#card-wrapper {
+	padding-top: 50px;
+}
+#about {
+	margin-bottom: 50px;
+}
+card.text-muted {
+	color: #98e163
+}
+
 
 /***
 * Flexbox Sticky Footer

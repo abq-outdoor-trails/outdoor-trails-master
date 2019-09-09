@@ -52,67 +52,69 @@ export const Home = () => {
 						</Row>
 					</Container>
 				</section>
-
 				{/*About Section*/}
+
 				<section id="about">
-					<Container>
-						<Row>
-							<Col>
-								<h2>This is our About Section</h2>
-								{<Image src={TeamPhoto} fluid alt="Abq Bike Team Photo"/>}
-							</Col>
-						</Row>
-					</Container>
+					<div id="container-fluid">
+						<Container>
+							<h3>The ABQ Bike Trails Team 2019</h3>
+							<Row>
+								<Col>
+									<div id="about-wrapper">
+										{<Image src={TeamPhoto} fluid alt="Abq Bike Team Photo"/>}
+									</div>
+								</Col>
+							</Row>
+						</Container>
+					</div>
+					<section>
+						<Container>
+							<CardGroup>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title className="text-center"><h2>Chrystal Copeland</h2></Card.Title>
+										<Card.Text>
+											Front End Lead and Technical Assist - former massage therapist turned developer. New
+											Mexico native
+											relocating to the big city of Denver. Will smuggle green chile for code.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer className="text-center">
+										<med className="text-muted">LinkedIn</med>
+									</Card.Footer>
+								</Card>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title className="text-center"><h2>John Dunn</h2></Card.Title>
+										<Card.Text>
+											Project Management Lead and Dev Assist - former Verizon IT guru searching for the
+											meaning of life in web development. Knows almost every single person in Albuquerque.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer className="text-center">
+										<med className="text-muted">LinkedIn</med>
+									</Card.Footer>
+								</Card>
+								<Card>
+									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+									<Card.Body>
+										<Card.Title className="text-center"><h2>Will Harris</h2></Card.Title>
+										<Card.Text>
+											Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
+											best programmer he can be! Eats avocado toast every day for breakfast.
+										</Card.Text>
+									</Card.Body>
+									<Card.Footer className="text-center">
+										<med className="text-muted text-center">LinkedIn</med>
+									</Card.Footer>
+								</Card>
+							</CardGroup>
+						</Container>
+					</section>
 				</section>
-				<section>
-					<Container>
-						<CardGroup>
-							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
-								<Card.Body>
-									<Card.Title>Will Harris</Card.Title>
-									<Card.Text>
-										This is a wider card with supporting text below as a natural lead-in to
-										additional content. This content is a little bit longer.
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
-								<Card.Body>
-									<Card.Title>Chrystal Copeland</Card.Title>
-									<Card.Text>
-										This card has supporting text below as a natural lead-in to additional
-										content.{' '}
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-							<Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
-								<Card.Body>
-									<Card.Title>John Dunn</Card.Title>
-									<Card.Text>
-										This is a wider card with supporting text below as a natural lead-in to
-										additional content. This card has even longer content than the first to
-										show that equal height action.
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer>
-									<small className="text-muted">LinkedIn</small>
-								</Card.Footer>
-							</Card>
-						</CardGroup>
-					</Container>
-				</section>
-
 			</main>
-
 		</>
 	)
 };

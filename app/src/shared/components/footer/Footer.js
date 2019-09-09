@@ -17,7 +17,7 @@ export const Footer = () => (
 			<Container fluid="true">
 				<Row>
 					<Col className="text-center">
-						<FontAwesomeIcon icon={['fab', 'github']} /> &nbsp;
+						<FontAwesomeIcon icon={['fab', 'github', 'linkedin']} /> &nbsp;
 
 						<a href="https://github.com/abq-outdoor-trails/outdoor-trails-master" className="text-muted" target="_blank" rel="noopener noreferrer">GitHub</a> | <Link className="text-muted" to="/about">About Us</Link>
 					</Col>

@@ -33,15 +33,14 @@ import {
 	faSortDown,
 	faUserCircle, faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import {faLinkedin} from "@fortawesome/free-brands-svg-icons/faLinkedin";
+
+import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 
 const store = createStore(reducers,applyMiddleware(thunk));
 
 
 
 library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faKey, faSignInAlt, faDog, faTrash, faHeart, faGithub, faLinkedin, faUser);
-
 
 const App = (store) => (
 	<>
