@@ -28,7 +28,7 @@ export const Home = () => {
 
 	const flat = _.flatten(route);
 
-	const parsed = flat.forEach(item => console.log(JSON.parse(item.routeFile)));
+	const parsed = flat.map(item => JSON.parse(item.routeFile));
 
 	// assigns useDispatch reference to the dispatch variable for later use
 	const dispatch = useDispatch();
