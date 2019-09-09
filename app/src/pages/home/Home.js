@@ -90,7 +90,7 @@ export const Home = () => {
 									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
 									<Card.Text>
 										Front End Lead and Technical Assist - former massage therapist turned developer. New Mexico native
-										relocated to the big City of Denver.
+										relocated to the big city of Denver.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
@@ -101,10 +101,9 @@ export const Home = () => {
 								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
 								<Card.Body>
 									<Card.Title><h2>John Dunn</h2></Card.Title>
-									<Card.Text>
-										This is a wider card with supporting text below as a natural lead-in to
-										additional content. This card has even longer content than the first to
-										show that equal height action.
+									<Card.Text>app/src/pages/home/Home.js
+										Project Management Lead and Dev Assist - former IT Verizon guru searching for the
+										meaning of life in web development.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
