@@ -26,7 +26,8 @@ export const RouteMap = ({match}) => {
 	});
 
 	const routeId =  match.params.routeId;
-	const routeType = match.params.routeType;
+
+	const routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
 
 	const comments = useSelector(state => (state.comments ? state.comments : []));
 
@@ -34,12 +35,18 @@ export const RouteMap = ({match}) => {
 
 	let parsed = routes.routeFile && JSON.parse(routes.routeFile);
 
+	const routes = useSelector(state => (state.route[0] ? state.route[0] : []));
+	console.log(routes);
+
+	let parsed = route.routeFile && JSON.parse(route.routeFile);
+
 	const dispatch = useDispatch();
 
 	const effects = () => {
 		dispatch(getCommentsAndUsersByRouteId(routeId));
 		dispatch(getRouteByRouteId(routeId));
 		dispatch(getRouteByRouteType(routeType));
+
 	};
 
 	const inputs = [routeId, routeType];

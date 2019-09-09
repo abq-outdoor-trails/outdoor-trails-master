@@ -3,7 +3,7 @@ export default (state = [], action) => {
 		case "GET_ROUTE_BY_ROUTE_ID":
 			return action.payload;
 		case "GET_ROUTE_BY_ROUTE_TYPE":
-			return [state, action.payload];
+			return [action.payload];
 		case "GET_ROUTE_BY_ROUTE_NAME":
 			return action.payload;
 		default:
