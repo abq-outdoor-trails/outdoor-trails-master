@@ -11,19 +11,21 @@ export const HomeMap = () => {
         accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA',
     });
 
-    // const routeType = match.params.routeType;
+    const routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
 
-    const routes = useSelector(state => state.route ? state.route : []);
+    const routes = useSelector(state => (state.route[0] ? state.route[0] : []));
+
+    console.log(routes);
 
     const dispatch = useDispatch();
 
     const effects = () => {
-        // dispatch(getRouteByRouteType(routeType));
+        dispatch(getRouteByRouteType(routeType));
     };
 
-    // const inputs = [routeType];
+    const inputs = [routeType];
 
-    // useEffect(effects, inputs);
+    useEffect(effects, inputs);
 
     return (
         <Map
