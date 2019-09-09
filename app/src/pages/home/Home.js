@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {HomeMap} from "../../shared/components/home-map/HomeMap";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -19,6 +19,8 @@ import TeamPhoto from "../../image/bike-team.jpg";
 
 export const Home = () => {
 
+	const [routeType, setRouteType] = useState('Paved Multiple Use Trail - A paved trail closed to automotive traffic.');
+
 	// returns the routes store from redux and assign it to the routes variable
 	const routes = useSelector(state => state.route ? state.route : []);
 
@@ -26,12 +28,12 @@ export const Home = () => {
 	const dispatch = useDispatch();
 
 	const effects = () => {
-		// dispatch(getRouteByRouteType(routeType));
+		dispatch(getRouteByRouteType(routeType));
 	};
 
-	// const inputs = [routeType];
+	const inputs = [routeType];
 
-	// useEffect(effects, inputs);
+	useEffect(effects, inputs);
 
 	return (
 		<>

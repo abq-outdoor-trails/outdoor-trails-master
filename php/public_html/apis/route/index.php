@@ -56,7 +56,7 @@ try {
 			$reply->data = Route::getRouteByRouteId($pdo, $id);
 			// get a specific route by route type and update reply
 		} else if(empty($routeType) === false) {
-			$reply->data = Route::getRouteByRouteType($pdo, $routeType);
+			$reply->data = Route::getRouteByRouteType($pdo, $routeType)->toArray();
 			// get s specific route by route file and update reply
 		} else if(empty($routeFile) === false) {
 			$reply->data = Route::getRouteByRouteFile($pdo, $routeFile);
