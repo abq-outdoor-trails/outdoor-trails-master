@@ -12,7 +12,7 @@ import {CommentCard} from "../comments/CommentCard";
 import {CommentForm} from "../comments/CommentForm";
 import {useDispatch, useSelector} from "react-redux";
 import {getCommentsAndUsersByRouteId} from "../../shared/actions/get-comment";
-import {getRouteByRouteId} from "../../shared/actions/get-route";
+import {getRouteByRouteId, getRouteByRouteType} from "../../shared/actions/get-route";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
@@ -26,6 +26,7 @@ export const RouteMap = ({match}) => {
 	});
 
 	const routeId =  match.params.routeId;
+	const routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
 
 	const comments = useSelector(state => (state.comments ? state.comments : []));
 
@@ -38,6 +39,7 @@ export const RouteMap = ({match}) => {
 	const effects = () => {
 		dispatch(getCommentsAndUsersByRouteId(routeId));
 		dispatch(getRouteByRouteId(routeId));
+		dispatch(getRouteByRouteType(routeType))
 	};
 
 	const inputs = [routeId];

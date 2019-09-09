@@ -167,9 +167,9 @@ class Route implements \JsonSerializable {
 		$newRouteFile = filter_var($newRouteFile, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		// verify the route ID will fit in the database
-		if(strlen($newRouteFile) > 10000) {
-			throw(new \RangeException("route file content too large"));
-		}
+//		if(strlen($newRouteFile) > 10000) {
+//			throw(new \RangeException("route file content too large"));
+//		}
 		// store the route file content
 		$this->routeFile = $newRouteFile;
 	}
