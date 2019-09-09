@@ -90,7 +90,7 @@ export const Home = () => {
 									<Card.Title><h2>Chrystal Copeland</h2></Card.Title>
 									<Card.Text>
 										Front End Lead and Technical Assist - former massage therapist turned developer. New Mexico native
-										relocated to the big city of Denver.
+										relocating to the big city of Denver. Will smuggle green chile for code.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
@@ -101,9 +101,9 @@ export const Home = () => {
 								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
 								<Card.Body>
 									<Card.Title><h2>John Dunn</h2></Card.Title>
-									<Card.Text>app/src/pages/home/Home.js
-										Project Management Lead and Dev Assist - former IT Verizon guru searching for the
-										meaning of life in web development.
+									<Card.Text>
+										Project Management Lead and Dev Assist - former Verizon IT guru searching for the
+										meaning of life in web development. Knows almost every single person in Albuquerque.
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
