@@ -52,7 +52,7 @@ export const SignInFormContent = (props) => {
 							</InputGroup>
 							{
 								errors.userEmail && touched.userEmail && (
-									<div ClassName="alert alert-danger">
+									<div className="alert alert-danger">
 										{errors.signinEmail}
 									</div>
 								)
@@ -89,11 +89,10 @@ export const SignInFormContent = (props) => {
 							</Button>
 						</Form.Group>
 					</Form>
-					{console.log(status)}
 					{status && (<div className={status.type}>{status.message}</div>)}
 					<FormDebugger {...props}/>
 
-						<div ClassName="my-2">
+						<div className="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
 							<Link to="/signup">Sign Up</Link>
 						</div>
