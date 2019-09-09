@@ -32,7 +32,10 @@ export const RouteMap = ({match}) => {
 
 	const route = useSelector(state => (state.route ? state.route :[]));
 
-	let parsed = route.routeFile && JSON.parse(route.routeFile);
+	const routes = useSelector(state => (state.route[0] ? state.route[0] : []));
+	console.log(routes);
+
+	// let parsed = route.routeFile && JSON.parse(route.routeFile);
 
 	const dispatch = useDispatch();
 
@@ -88,7 +91,7 @@ export const RouteMap = ({match}) => {
 										'line-width': 4
 									}}
 									>
-										{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}
+										{/*{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}*/}
 									</Layer>
 								</Map>
 							</Col>

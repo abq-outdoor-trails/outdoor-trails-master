@@ -196,9 +196,9 @@ class Route implements \JsonSerializable {
 		//verify route name is secure
 		$newRouteName = trim($newRouteName);
 		$newRouteName = filter_var($newRouteName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteName) === true) {
-			throw(new \InvalidArgumentException("Route name is empty or insecure"));
-		}
+//		if(empty($newRouteName) === true) {
+//			throw(new \InvalidArgumentException("Route name is empty or insecure"));
+//		}
 		//verify route name is less than 32 characters
 		if(strlen($newRouteName) > 64) {
 			throw(new \RangeException("route name is too large"));
