@@ -52,11 +52,7 @@ export const Home = () => {
 					<Container>
 						<Row>
 							<Col xs={8}>
-<<<<<<< HEAD
 								<h2>Trails</h2>
-=======
->>>>>>> changed css to home page
-
 								<div id="map-wrapper">
 									<Map
 										style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
