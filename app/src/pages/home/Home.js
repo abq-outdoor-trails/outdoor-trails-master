@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import CardGroup from "react-bootstrap/CardGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar"
 
 import BikeImage from "../../image/black-bike.jpg"
 import BikeLogo from "../../image/Navbar-logo-green.png"
