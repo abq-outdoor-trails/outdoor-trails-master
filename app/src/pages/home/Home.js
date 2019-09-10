@@ -54,13 +54,12 @@ export const Home = () => {
 						<Row>
 							<Col xs={8}>
 								<h2>Trails</h2>
-
 								<div id="map-wrapper">
 									<Map
 										style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
 										containerStyle={{
 											height: '60vmax',
-											width: '75vmax'
+											width: '80vmax'
 										}}
 										center= {[-106.6505556, 35.0844444]}
 										zoom={[11]}

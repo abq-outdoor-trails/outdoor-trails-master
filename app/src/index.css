@@ -5,7 +5,7 @@
 
 .brand-styles {
 	color: #98e163 !important;
-	font-family: Source Sans Pro, SansSerif;
+	font-family: Source Sans Pro, sans-serif;
 
 }
 
@@ -22,23 +22,24 @@ section.home-hero {
 /* header fonts */
 h1 {
 	color:white;
-	font-family: Source Sans Pro, SansSerif;
+	font-family: Source Sans Pro, sans-serif;
 }
 h2 {color: #737373;
-	font-family: Roboto-thin, SansSerif;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
 }
 h3 {color: white;
-	font-family: Roboto-thin, SansSerif;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
 }
 h5 {color: #98e163;
-	font-family: Source Sans Pro, SansSerif;
+	font-family: Source Sans Pro, sans-serif;
 }
 
 
 /* ROUTE PAGE */
 #map-wrapper {
 	min-height: 600px;
-	background-color: green;
 	margin-bottom: 20px;
 }
 
