@@ -53,6 +53,7 @@ export const Home = () => {
 						<Row>
 							<Col xs={8}>
 								<h2>Trails</h2>
+
 								<div id="map-wrapper">
 									<Map
 										style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
@@ -74,6 +75,58 @@ export const Home = () => {
 							</Col>
 							<Col>
 
+							</Col>
+						</Row>
+					</Container>
+					<Container fluid="true">
+						<Row>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>Unser Trail N</Card.Header>
+									<Card.Body>
+										<Button variant="primary" ><a style={{color:"white"}} href="http://localhost:3000/route/1b1576cf-4140-467f-b9d4-3dbb0dc0755d">View Route</a></Button>
+									</Card.Body>
+								</Card>
+							</Col>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>Bear Canyon Arroyo</Card.Header>
+									<Card.Body>
+										<Button variant="primary"><a style={{color: "white"}} href="http://localhost:3000/route/1f4a61d4-de96-4e9b-a627-e5b073d2b458">View Route</a></Button>
+									</Card.Body>
+								</Card>
+							</Col>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>Paseo del Bosque</Card.Header>
+									<Card.Body>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070">View Route</a></Button>
+									</Card.Body>
+								</Card>
+							</Col>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>Sandia Science and Technology Trail</Card.Header>
+									<Card.Body>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658">View Route</a></Button>
+									</Card.Body>
+								</Card>
+							</Col>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>Paseo del Norte Trail</Card.Header>
+									<Card.Body>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89">View Route</a></Button>
+									</Card.Body>
+								</Card>
+							</Col>
+							<Col m={2}>
+								<Card bg="light" className="mb-3">
+									<Card.Header>North Diversion Channel</Card.Header>
+									<Card.Body>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
+									</Card.Body>
+								</Card>
 							</Col>
 						</Row>
 					</Container>
@@ -107,7 +160,7 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
+										<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
 										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
@@ -121,24 +174,22 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
+										<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
 										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
-								<Card>
-									{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
-									<Card.Body>
-										<Card.Title className="text-center"><h2>Will Harris</h2></Card.Title>
-										<Card.Text>
-											Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
-											best programmer he can be! Eats avocado toast every day for breakfast.
-										</Card.Text>
-									</Card.Body>
-									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<med className="text-muted text-center">LinkedIn</med>
-									</Card.Footer>
-								</Card>
+								{/*<Card.Img variant="top" src="holder.js/100px160"/>*/}
+								<Card.Body>
+									<Card.Title className="text-center"><h2>Will Harris</h2></Card.Title>
+									<Card.Text>
+										Technical Lead - Santa Fe resident and avid bicyclist. Has aspirations of being the
+										best programmer he can be! Eats avocado toast every day for breakfast.
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer className="text-center">
+									<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
+									<med className="text-muted text-center">LinkedIn</med>
+								</Card.Footer>
 							</CardGroup>
 						</Container>
 					</section>
