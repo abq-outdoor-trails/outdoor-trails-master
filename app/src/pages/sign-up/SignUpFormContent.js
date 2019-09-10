@@ -126,7 +126,7 @@ export const SignUpFormContent = (props) => {
 					</button>
 				</div>
 
-				<FormDebugger {...props} />
+				{/*<FormDebugger {...props} />*/}
 			</form>
 			{console.log(
 				submitStatus

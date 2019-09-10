@@ -83,7 +83,7 @@ export const Home = () => {
 									</Card.Body>
 									<Card.Footer className="text-center">
 										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<med className="text-muted">LinkedIn</med>
+										<a target="_blank" href="https://www.linkedin.com/in/copelandchrystal" className="text-muted">LinkedIn</a>
 									</Card.Footer>
 								</Card>
 								<Card>
@@ -97,7 +97,7 @@ export const Home = () => {
 									</Card.Body>
 									<Card.Footer className="text-center">
 										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<med className="text-muted">LinkedIn</med>
+										<a target="_blank" href="https://www.linkedin.com/in/john-william-dunn" className="text-muted">LinkedIn</a>
 									</Card.Footer>
 								</Card>
 								<Card>
@@ -111,7 +111,7 @@ export const Home = () => {
 									</Card.Body>
 									<Card.Footer className="text-center">
 										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<med className="text-muted text-center">LinkedIn</med>
+										<a target="_blank" href="https://www.linkedin.com/in/will-t-harris/" className="text-muted">LinkedIn</a>
 									</Card.Footer>
 								</Card>
 							</CardGroup>

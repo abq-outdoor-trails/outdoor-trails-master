@@ -90,7 +90,7 @@ export const SignInFormContent = (props) => {
 						</Form.Group>
 					</Form>
 					{status && (<div className={status.type}>{status.message}</div> && console.log(status))}
-					<FormDebugger {...props}/>
+					{/*<FormDebugger {...props}/>*/}
 
 						<div className="my-2">
 							<span className="font-weight-light font-italic">Don't have an account?&nbsp;</span>
