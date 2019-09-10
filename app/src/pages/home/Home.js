@@ -16,6 +16,13 @@ import BikeImage from "../../image/black-bike.jpg"
 import BikeLogo from "../../image/Navbar-logo-green.png"
 import TeamPhoto from "../../image/bike-team.jpg"
 
+import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
+import {ZoomControl} from "react-mapbox-gl";
+
+const Map= ReactMapboxGl({
+	accessToken: 'pk.eyJ1IjoiY2FuZGVyc29uNzMiLCJhIjoiY2p6bmEybG53MDIwbTNicHVhZHUzNmkzeiJ9.F41L6zwIg3v8CwuQyL81Pw'
+});
+
 
 export const Home = () => {
 	return (
@@ -44,11 +51,29 @@ export const Home = () => {
 				<section id="route">
 					<Container>
 						<Row>
-							<Col>
-								<h2>Bosque Trail</h2>
+							<Col xs={8}>
+								<h2>Trails</h2>
 								<div id="map-wrapper">
-									MapBox element goes here
+									<Map
+										style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
+										containerStyle={{
+											height: '60vmax',
+											width: '75vmax'
+										}}
+										center= {[-106.6505556, 35.0844444]}
+										zoom={[11]}
+										>
+										<ZoomControl/>
+										<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+											<Feature>
+											</Feature>
+										</Layer>
+
+									</Map>
 								</div>
+							</Col>
+							<Col>
+
 							</Col>
 						</Row>
 					</Container>
