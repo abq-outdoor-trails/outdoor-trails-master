@@ -79,7 +79,7 @@ export const Home = () => {
 						</Row>
 					</Container>
 					<Container fluid="true">
-						<Row>
+						<Row className="d-flex">
 							<Col m={2}>
 								<Card bg="light" className="mb-3">
 									<Card.Header>Unser Trail N</Card.Header>

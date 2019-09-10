@@ -59,7 +59,7 @@ export const CommentFormContent = (props) => {
 					</Form>
 
 					{/*for testing purposes only*/}
-					<FormDebugger {...props}/>
+					{/*<FormDebugger {...props}/>*/}
 
 				</Card.Body>
 			</Card>
