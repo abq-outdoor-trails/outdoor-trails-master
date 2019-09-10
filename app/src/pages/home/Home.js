@@ -18,6 +18,7 @@ import TeamPhoto from "../../image/bike-team.jpg"
 
 import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
 import {ZoomControl} from "react-mapbox-gl";
+import CardDeck from "react-bootstrap/CardDeck";
 
 const Map= ReactMapboxGl({
 	accessToken: 'pk.eyJ1IjoiY2FuZGVyc29uNzMiLCJhIjoiY2p6bmEybG53MDIwbTNicHVhZHUzNmkzeiJ9.F41L6zwIg3v8CwuQyL81Pw'
@@ -79,7 +80,8 @@ export const Home = () => {
 						</Row>
 					</Container>
 					<Container fluid="true">
-						<Row className="d-flex">
+						<Row>
+							<CardDeck>
 							<Col m={2}>
 								<Card bg="light" className="mb-3">
 									<Card.Header>Unser Trail N</Card.Header>
@@ -128,6 +130,7 @@ export const Home = () => {
 									</Card.Body>
 								</Card>
 							</Col>
+							</CardDeck>
 						</Row>
 					</Container>
 				</section>
