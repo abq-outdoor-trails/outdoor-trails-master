@@ -97,7 +97,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>North Diversion Channel</Card.Header>
 									<Card.Body>
-										<aButton variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
