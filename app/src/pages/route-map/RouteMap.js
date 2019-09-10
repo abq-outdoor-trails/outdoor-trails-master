@@ -66,12 +66,11 @@ export const RouteMap = ({match}) => {
 					<Container>
 						<Row>
 							<Col>
-								<h2>Bosque Trail</h2>
 								<Map
 									style="mapbox://styles/mapbox/streets-v9"
 									containerStyle={{
-										height: '50vh',
-										width: '50vw'
+										height: '75vh',
+										width: '80vw'
 									}}
 									center= {[-106.6505556, 35.0844444]}
 									zoom={[10]}
