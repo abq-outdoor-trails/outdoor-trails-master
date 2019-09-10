@@ -65,7 +65,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>Bear Canyon Arroyo</Card.Header>
 									<Card.Body>
-										<Button variant="primary"><a style={{color: "white"}} href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070">View Route</a></Button>
+										<Button variant="primary"><a style={{color: "white"}} href="http://localhost:3000/route/1f4a61d4-de96-4e9b-a627-e5b073d2b458">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
@@ -73,7 +73,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>Paseo del Bosque</Card.Header>
 									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658">View Route</a></Button>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
@@ -81,7 +81,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>Sandia Science and Technology Trail</Card.Header>
 									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89">View Route</a></Button>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
@@ -89,7 +89,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>Paseo del Norte Trail</Card.Header>
 									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
+										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
@@ -97,11 +97,7 @@ export const Home = () => {
 								<Card bg="light" className="mb-3">
 									<Card.Header>North Diversion Channel</Card.Header>
 									<Card.Body>
-										<Card.Title>Paseo Del Bosque</Card.Title>
-										<Card.Text>
-											text about route
-										</Card.Text>
-										<Button variant="primary">View Route</Button>
+										<aButton variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
 									</Card.Body>
 								</Card>
 							</Col>
