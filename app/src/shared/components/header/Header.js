@@ -35,12 +35,6 @@ export const Header = (props) => {
 			});
 	};
 
-	useEffect(() => {
-		httpConfig.get("/apis/xsrf/");
-	});
-
-
-
 	return (
 		<>
 			<Navbar bg="dark" variant="dark" className="navbar-styles" expand="lg">

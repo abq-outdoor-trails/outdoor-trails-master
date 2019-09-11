@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import _ from 'lodash';
 import chunk from 'lodash/chunk';
 import {Link} from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature, MapContext } from 'react-mapbox-gl';
+import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -25,12 +25,12 @@ export const RouteMap = ({match}) => {
 		accessToken: 'pk.eyJ1Ijoid2hhcnJpcyIsImEiOiJjanp3cmVkdHMwMnkzM2JwbThiYXd3YWJtIn0.LYO1SzQdH7Q8p1as8N3dMA',
 	});
 
-	const routeId =  match.params.routeId;
+	const routeId = match.params.routeId;
 	const routeType = "Paved Multiple Use Trail - A paved trail closed to automotive traffic.";
 
 	const comments = useSelector(state => (state.comments ? state.comments : []));
 
-	const route = useSelector(state => (state.route ? state.route :[]));
+	const route = useSelector(state => (state.route ? state.route : []));
 
 	let parsed = route.routeFile && JSON.parse(route.routeFile);
 
@@ -66,30 +66,32 @@ export const RouteMap = ({match}) => {
 					<Container>
 						<Row>
 							<Col>
-								<Map
-									style="mapbox://styles/mapbox/streets-v9"
-									containerStyle={{
-										height: '75vh',
-										width: '80vw'
-									}}
-									center= {[-106.6505556, 35.0844444]}
-									zoom={[10]}
-								>
-									<ZoomControl/>
-									<Layer
-										type="line"
-										layout={{
-										'line-cap': 'round',
-										'line-join': 'round'
-									}}
-										paint={{
-										'line-color': '#4790E5',
-										'line-width': 4
-									}}
+								<div id="map-wrapper-2">
+									<Map
+										style="mapbox://styles/mapbox/streets-v9"
+										containerStyle={{
+											height: '75vh',
+											width: '80vw'
+										}}
+										center={[-106.6505556, 35.0844444]}
+										zoom={[10]}
 									>
-										{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)} />)}
-									</Layer>
-								</Map>
+										<ZoomControl/>
+										<Layer
+											type="line"
+											layout={{
+												'line-cap': 'round',
+												'line-join': 'round'
+											}}
+											paint={{
+												'line-color': '#4790E5',
+												'line-width': 4
+											}}
+										>
+											{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)}/>)}
+										</Layer>
+									</Map>
+								</div>
 							</Col>
 						</Row>
 					</Container>
@@ -105,9 +107,9 @@ export const RouteMap = ({match}) => {
 								</div>
 							</Col>
 
-							<Col md={{span:7, offset: 1}}>
+							<Col md={{span: 7, offset: 1}}>
 								{comments.map(comment =>
-									<CommentCard comment={comment} key={comment.commentId} />
+									<CommentCard comment={comment} key={comment.commentId}/>
 								)}
 							</Col>
 						</Row>
