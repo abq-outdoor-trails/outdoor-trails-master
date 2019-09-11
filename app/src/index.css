@@ -32,6 +32,11 @@ h3 {color: white;
 	font-family: Roboto, sans-serif;
 	font-weight: 300;
 }
+h4 {
+	color: #737373;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+}
 h5 {color: #98e163;
 	font-family: Source Sans Pro, sans-serif;
 }
@@ -92,14 +97,16 @@ body { width: 100%;}
 .btn-primary, .btn-primary:active, .btn-primary:visited {
 	background-color: #98E163 !important;
 	border-color: #98E163 !important;
-	color: black;
+	color: #737373 !important;
 }
 
 .btn-primary:hover {
-	background-color: #98E163 !important;
+	background-color: #737373 !important;
+	color: white !important;
+	border-color: #737373 !important;
 	transition: all 1s ease;
 	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	-ms-transition: all 1s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
 }
