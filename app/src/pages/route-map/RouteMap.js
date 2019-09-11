@@ -104,7 +104,7 @@ export const RouteMap = ({match}) => {
 						<Row>
 							<Col md="4">
 								<div id="comment-wrapper">
-									<h3>Post a Comment</h3>
+									<h3 >Post a Comment</h3>
 									<CommentForm routeId={routeId}/>
 								</div>
 							</Col>
