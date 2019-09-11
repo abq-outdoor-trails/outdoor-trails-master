@@ -31,7 +31,7 @@ class Route implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 */
 
-	public function __construct($newRouteId, ?string $newRouteDescription, string $newRouteFile, string $newRouteName, ?int $newRouteSpeedLimit, string $newRouteType) {
+	public function __construct($newRouteId, ?string $newRouteDescription, string $newRouteFile, string $newRouteName, ?int $newRouteSpeedLimit, $newRouteType) {
 		try {
 			$this->setRouteId($newRouteId);
 			$this->setRouteDescription($newRouteDescription);
@@ -167,9 +167,9 @@ class Route implements \JsonSerializable {
 		$newRouteFile = filter_var($newRouteFile, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 		// verify the route ID will fit in the database
-		if(strlen($newRouteFile) > 10000) {
-			throw(new \RangeException("route file content too large"));
-		}
+//		if(strlen($newRouteFile) > 10000) {
+//			throw(new \RangeException("route file content too large"));
+//		}
 		// store the route file content
 		$this->routeFile = $newRouteFile;
 	}
@@ -196,9 +196,9 @@ class Route implements \JsonSerializable {
 		//verify route name is secure
 		$newRouteName = trim($newRouteName);
 		$newRouteName = filter_var($newRouteName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteName) === true) {
-			throw(new \InvalidArgumentException("Route name is empty or insecure"));
-		}
+//		if(empty($newRouteName) === true) {
+//			throw(new \InvalidArgumentException("Route name is empty or insecure"));
+//		}
 		//verify route name is less than 32 characters
 		if(strlen($newRouteName) > 64) {
 			throw(new \RangeException("route name is too large"));
@@ -247,15 +247,15 @@ class Route implements \JsonSerializable {
 	 * @throws \TypeError if $newRouteType is not a string
 	 */
 
-	public function setRouteType(string $newRouteType): void {
+	public function setRouteType($newRouteType): void {
 		//verify route name is secure
 		$newRouteType = trim($newRouteType);
 		$newRouteType = filter_var($newRouteType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newRouteType) === true) {
-			throw(new \InvalidArgumentException("Route type is empty or insecure"));
-		}
-		//verify route name is less than 32 characters
-		if(strlen($newRouteType) > 32) {
+//		if(empty($newRouteType) === true) {
+//			throw(new \InvalidArgumentException("Route type is empty or insecure"));
+//		}
+		//verify route name is less than 128 characters
+		if(strlen($newRouteType) > 128) {
 			throw(new \RangeException("route type is too large"));
 		}
 		$this->routeType = $newRouteType;

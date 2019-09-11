@@ -4,16 +4,16 @@ import React from "react";
 
 export const SignUpFormContent = (props) => {
 	const {
-				submitStatus,
-				values,
-				errors,
-				touched,
-				dirty,
-				isSubmitting,
-				handleChange,
-				handleBlur,
-				handleSubmit,
-				handleReset
+		submitStatus,
+		values,
+		errors,
+		touched,
+		dirty,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset
 	} = props;
 	return (
 		<>
@@ -71,7 +71,7 @@ export const SignUpFormContent = (props) => {
 				</div>
 				{/*controlId must match what is defined by the initialValues object*/}
 				<div className="form-group">
-					<label htmlFor="userPassword">Password</label>
+					<label htmlFor="userHash">Password</label>
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
@@ -79,22 +79,22 @@ export const SignUpFormContent = (props) => {
 							</div>
 						</div>
 						<input
-							id="userPassword"
+							id="userHash"
 							className="form-control"
 							type="password"
 							placeholder="Password"
-							value={values.userPassword}
+							value={values.userHash}
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>
 					</div>
-					{errors.userPassword && touched.userPassword && (
-						<div className="alert alert-danger">{errors.userPassword}</div>
+					{errors.userHash && touched.userHash && (
+						<div className="alert alert-danger">{errors.userHash}</div>
 					)}
 				</div>
 
 				<div className="form-group">
-					<label htmlFor="userPasswordConfirm">Confirm Your Password</label>
+					<label htmlFor="userHashConfirm">Confirm Your Password</label>
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
@@ -104,29 +104,29 @@ export const SignUpFormContent = (props) => {
 						<input
 							className="form-control"
 							type="password"
-							id="userPasswordConfirm"
+							id="userHashConfirm"
 							placeholder="Password Confirm"
-							value={values.userPasswordConfirm}
+							value={values.userHashConfirm}
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>
 					</div>
-					{errors.userPasswordConfirm && touched.userPasswordConfirm && (
-						<div className="alert alert-danger">{errors.userPasswordConfirm}</div>
+					{errors.userHashConfirm && touched.userHashConfirm && (
+						<div className="alert alert-danger">{errors.userHashConfirm}</div>
 					)}
 				</div>
 
 				<div className="form-group">
 					<button className="btn btn-primary mb-2" type="submit">Submit</button>
-				<button
-					className="btn btn-danger mb-2"
-					onClick={handleReset}
-					disabled={!dirty || isSubmitting}
-				>Reset
-				</button>
-			</div>
+					<button
+						className="btn btn-danger mb-2"
+						onClick={handleReset}
+						disabled={!dirty || isSubmitting}
+					>Reset
+					</button>
+				</div>
 
-				<FormDebugger {...props} />
+				{/*<FormDebugger {...props} />*/}
 			</form>
 			{console.log(
 				submitStatus
@@ -135,5 +135,5 @@ export const SignUpFormContent = (props) => {
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
 			}
 		</>
-			)
+	)
 };

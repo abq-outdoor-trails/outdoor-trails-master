@@ -10,8 +10,8 @@ export const SignUpForm = () => {
 	const signUp = {
 		userName: "",
 		userEmail: "",
-		userPassword: "",
-		userPasswordConfirm: "",
+		userHash: "",
+		userHashConfirm: "",
 	};
 
 	// set status and setStatus to null initial state
@@ -23,10 +23,10 @@ export const SignUpForm = () => {
 		userEmail: Yup.string()
 			.email("email must be a valid email")
 			.required("email is required"),
-		userPassword: Yup.string()
+		userHash: Yup.string()
 			.required("password is required")
 			.min(8, "password must be at least 8 characters"),
-		userPasswordConfirm: Yup.string()
+		userHashConfirm: Yup.string()
 			.required("please confirm password")
 			.min(8, "password must be at least 8 characters")
 	});
@@ -45,9 +45,10 @@ export const SignUpForm = () => {
 	// return Formik component
 	return (
 		<>
+
 			<Formik
 				initialValues={ signUp }
-				onSubmit={ submitSignUp }
+				onSubmit={ submitSignUp}
 				validationSchema={ validator }
 			>
 				{ SignUpFormContent }
