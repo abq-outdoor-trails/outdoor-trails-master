@@ -140,7 +140,7 @@ export const Home = () => {
 				<section id="about">
 					<div id="container-fluid">
 						<Container>
-							<h3>The ABQ Bike Trails Team 2019</h3>
+							<h3 className="text-white">The ABQ Bike Trails Team 2019</h3>
 							<Row>
 								<Col>
 									<div id="about-wrapper">

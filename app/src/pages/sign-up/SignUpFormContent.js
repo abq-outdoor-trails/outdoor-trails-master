@@ -128,9 +128,6 @@ export const SignUpFormContent = (props) => {
 
 				{/*<FormDebugger {...props} />*/}
 			</form>
-			{console.log(
-				submitStatus
-			)}
 			{
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
 			}

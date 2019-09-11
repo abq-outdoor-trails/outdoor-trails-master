@@ -35,7 +35,7 @@ export const SignInForm = () => {
 
 					setTimeout(() => {
 						window.location = "/";
-					}, 1500);
+					}, 750);
 
 				}
 				setStatus({message, type});
