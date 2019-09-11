@@ -64,36 +64,38 @@ export const RouteMap = ({match}) => {
 			<main>
 				<section>
 					<Container>
-						<Row>
-							<Col>
-								<div id="map-wrapper-2">
-									<Map
-										style="mapbox://styles/mapbox/streets-v9"
-										containerStyle={{
-											height: '75vh',
-											width: '80vw'
-										}}
-										center={[-106.6505556, 35.0844444]}
-										zoom={[10]}
-									>
-										<ZoomControl/>
-										<Layer
-											type="line"
-											layout={{
-												'line-cap': 'round',
-												'line-join': 'round'
+						<div className="d-flex justify-content-center">
+							<Row>
+								<Col>
+									<div id="map-wrapper-2">
+										<Map
+											style="mapbox://styles/mapbox/streets-v9"
+											containerStyle={{
+												height: '75vh',
+												width: '80vw'
 											}}
-											paint={{
-												'line-color': '#4790E5',
-												'line-width': 4
-											}}
+											center={[-106.6505556, 35.0844444]}
+											zoom={[10]}
 										>
-											{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)}/>)}
-										</Layer>
-									</Map>
-								</div>
-							</Col>
-						</Row>
+											<ZoomControl/>
+											<Layer
+												type="line"
+												layout={{
+													'line-cap': 'round',
+													'line-join': 'round'
+												}}
+												paint={{
+													'line-color': '#4790E5',
+													'line-width': 4
+												}}
+											>
+												{parsed && parsed.map(point => <Feature coordinates={_.flatten(point)}/>)}
+											</Layer>
+										</Map>
+									</div>
+								</Col>
+							</Row>
+						</div>
 					</Container>
 				</section>
 
