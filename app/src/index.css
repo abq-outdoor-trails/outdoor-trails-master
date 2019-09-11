@@ -19,6 +19,10 @@ section.home-hero {
 
 }
 
+.dropdown-menu.show {
+	min-width: 20rem;
+}
+
 /* fonts */
 h1 {
 	color:white;
