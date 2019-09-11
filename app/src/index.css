@@ -88,3 +88,18 @@ body { width: 100%;}
 	flex: 1 0 auto;
 }
 
+/*home page buttons for route links*/
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+	background-color: #98E163 !important;
+	border-color: #98E163 !important;
+	color: black;
+}
+
+.btn-primary:hover {
+	background-color: #98E163 !important;
+	transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+}
