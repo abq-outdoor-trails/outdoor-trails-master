@@ -14,7 +14,7 @@ export const Signup = () => (
 	<main className="d-flex align-items-center">
 		<Container fluid="true">
 			<Row>
-				<Col sm={6} lg={{span: 4, offset: 1}}>
+				<Col m={6} lg={{span: 4, offset: 4}}>
 					<Card>
 						<Card.Body>
 							<SignUpForm id="collapsible-nav-dropdown"/>
