@@ -19,7 +19,7 @@ section.home-hero {
 
 }
 
-/* header fonts */
+/* fonts */
 h1 {
 	color:white;
 	font-family: Source Sans Pro, sans-serif;
@@ -39,8 +39,8 @@ h5 {color: #98e163;
 
 /* HOME PAGE MAP */
 #map-wrapper {
-	min-height: 600px;
 	margin-bottom: 20px;
+
 }
 
 /* SINGLE ROUTE PAGE */

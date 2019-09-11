@@ -21,7 +21,7 @@ import {ZoomControl} from "react-mapbox-gl";
 import CardDeck from "react-bootstrap/CardDeck";
 import {httpConfig} from "../../shared/utils/http-config";
 
-const Map= ReactMapboxGl({
+const Map = ReactMapboxGl({
 	accessToken: 'pk.eyJ1IjoiY2FuZGVyc29uNzMiLCJhIjoiY2p6bmEybG53MDIwbTNicHVhZHUzNmkzeiJ9.F41L6zwIg3v8CwuQyL81Pw'
 });
 
@@ -60,84 +60,95 @@ export const Home = () => {
 				{/*Map Section*/}
 				<section id="route">
 					<Container fluid="true">
-						<Row>
-							<Col xs={8}>
-								<h2>Trails</h2>
-								<div id="map-wrapper">
-									<Map
-										style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
-										containerStyle={{
-											height: '60vmax',
-											width: '80vmax'
-										}}
-										center= {[-106.6505556, 35.0844444]}
-										zoom={[11]}
+						<div className="d-flex justify-content-center">
+							<Row>
+								<Col>
+									<h2>Trails</h2>
+									<div id="map-wrapper">
+										<Map
+											style="mapbox://styles/canderson73/cjznaa80x00ho1cmohdxgodas"
+											containerStyle={{
+												height: '75vh',
+												width: '90vw'
+											}}
+											center={[-106.6505556, 35.0844444]}
+											zoom={[11]}
 										>
-										<ZoomControl/>
-										<Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-											<Feature>
-											</Feature>
-										</Layer>
+											<ZoomControl/>
+											<Layer type="symbol" id="marker" layout={{'icon-image': 'marker-15'}}>
+												<Feature>
+												</Feature>
+											</Layer>
 
-									</Map>
-								</div>
-							</Col>
-							<Col>
-
-							</Col>
-						</Row>
+										</Map>
+									</div>
+								</Col>
+							</Row>
+						</div>
 					</Container>
 					<Container fluid="true">
 						<Row>
 							<CardDeck>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>Unser Trail N</Card.Header>
-									<Card.Body>
-										<Button variant="primary" ><a style={{color:"white"}} href="http://localhost:3000/route/1b1576cf-4140-467f-b9d4-3dbb0dc0755d">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>Bear Canyon Arroyo</Card.Header>
-									<Card.Body>
-										<Button variant="primary"><a style={{color: "white"}} href="http://localhost:3000/route/1f4a61d4-de96-4e9b-a627-e5b073d2b458">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>Paseo del Bosque</Card.Header>
-									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>Sandia Science and Technology Trail</Card.Header>
-									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>Paseo del Norte Trail</Card.Header>
-									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col m={2}>
-								<Card bg="light" className="mb-3">
-									<Card.Header>North Diversion Channel</Card.Header>
-									<Card.Body>
-										<Button variant="primary"><a style={{color:"white"}} href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View Route</a></Button>
-									</Card.Body>
-								</Card>
-							</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>Unser Trail N</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/1b1576cf-4140-467f-b9d4-3dbb0dc0755d">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>Bear Canyon Arroyo</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/1f4a61d4-de96-4e9b-a627-e5b073d2b458">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>Paseo del Bosque</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>Sandia Science and Technology Trail</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>Paseo del Norte Trail</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
+								<Col m={2}>
+									<Card bg="light" className="mb-3">
+										<Card.Header>North Diversion Channel</Card.Header>
+										<Card.Body>
+											<Button variant="primary"><a style={{color: "white"}}
+																				  href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977">View
+												Route</a></Button>
+										</Card.Body>
+									</Card>
+								</Col>
 							</CardDeck>
 						</Row>
 					</Container>
@@ -171,8 +182,9 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<a target="_blank" href="https://www.linkedin.com/in/copelandchrystal" className="text-muted">LinkedIn</a>
+										<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
+										<a target="_blank" href="https://www.linkedin.com/in/copelandchrystal"
+											className="text-muted">LinkedIn</a>
 										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
@@ -186,8 +198,9 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<a target="_blank" href="https://www.linkedin.com/in/john-william-dunn" className="text-muted">LinkedIn</a>
+										<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
+										<a target="_blank" href="https://www.linkedin.com/in/john-william-dunn"
+											className="text-muted">LinkedIn</a>
 									</Card.Footer>
 								</Card>
 								<Card>
@@ -200,8 +213,9 @@ export const Home = () => {
 										</Card.Text>
 									</Card.Body>
 									<Card.Footer className="text-center">
-										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
-										<a target="_blank" href="https://www.linkedin.com/in/will-t-harris/" className="text-muted">LinkedIn</a>
+										<FontAwesomeIcon icon={['fab', 'linkedin']}/> &nbsp;
+										<a target="_blank" href="https://www.linkedin.com/in/will-t-harris/"
+											className="text-muted">LinkedIn</a>
 									</Card.Footer>
 								</Card>
 							</CardGroup>
