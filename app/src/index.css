@@ -37,10 +37,15 @@ h5 {color: #98e163;
 }
 
 
-/* ROUTE PAGE */
+/* HOME PAGE MAP */
 #map-wrapper {
 	min-height: 600px;
 	margin-bottom: 20px;
+}
+
+/* SINGLE ROUTE PAGE */
+#map-wrapper-2{
+	margin-top:5vh;
 }
 
 /* About Us Section */
