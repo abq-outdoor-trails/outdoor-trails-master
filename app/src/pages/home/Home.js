@@ -19,11 +19,20 @@ import TeamPhoto from "../../image/bike-team.jpg"
 import ReactMapboxGl, {Layer, Feature, MapContext} from 'react-mapbox-gl';
 import {ZoomControl} from "react-mapbox-gl";
 import CardDeck from "react-bootstrap/CardDeck";
+import {httpConfig} from "../../shared/utils/http-config";
 
 const Map= ReactMapboxGl({
 	accessToken: 'pk.eyJ1IjoiY2FuZGVyc29uNzMiLCJhIjoiY2p6bmEybG53MDIwbTNicHVhZHUzNmkzeiJ9.F41L6zwIg3v8CwuQyL81Pw'
 });
 
+const getXsrf = () => {
+	httpConfig.get("/apis/xsrf/")
+		.then(reply => {
+			if(reply.status === 200) {
+				console.log(reply);
+			}
+		});
+};
 
 export const Home = () => {
 	return (
@@ -199,6 +208,7 @@ export const Home = () => {
 						</Container>
 					</section>
 				</section>
+				<button onClick={getXsrf}>get xsrf</button>
 			</main>
 		</>
 	)
