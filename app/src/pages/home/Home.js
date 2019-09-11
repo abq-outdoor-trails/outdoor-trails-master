@@ -156,29 +156,29 @@ export const Home = () => {
 
 							<div className="col-xl-2 col-md-3 col-sm-6 mb-2">
 								<div className="d-flex flex-column border text-center p-3 h-100">
-									<h4 className="flex-grow-1 mb-4">Trail Name</h4>
-									<a href="#" className="btn btn-primary">View Route</a>
+									<h4 className="flex-grow-1 mb-4">Paseo del Bosque</h4>
+									<a href="http://localhost:3000/route/d273c505-1f0b-42ea-8990-de4371e05070" className="btn btn-primary">View Route</a>
 								</div>
 							</div>
 
 							<div className="col-xl-2 col-md-3 col-sm-6 mb-2">
 								<div className="d-flex flex-column border text-center p-3 h-100">
-									<h4 className="flex-grow-1 mb-4">Trail Name</h4>
-									<a href="#" className="btn btn-primary">View Route</a>
+									<h4 className="flex-grow-1 mb-4">Sandia Science and Technology Trail</h4>
+									<a href="http://localhost:3000/route/8183567a-5114-45c9-9525-2b56962e3658" className="btn btn-primary">View Route</a>
 								</div>
 							</div>
 
 							<div className="col-xl-2 col-md-3 col-sm-6 mb-2">
 								<div className="d-flex flex-column border text-center p-3 h-100">
-									<h4 className="flex-grow-1 mb-4">Trail Name</h4>
-									<a href="#" className="btn btn-primary">View Route</a>
+									<h4 className="flex-grow-1 mb-4">Paseo del Norte Trail</h4>
+									<a href="http://localhost:3000/route/898dda16-ffeb-4483-93c3-60dc1050cf89" className="btn btn-primary">View Route</a>
 								</div>
 							</div>
 
 							<div className="col-xl-2 col-md-3 col-sm-6 mb-2">
 								<div className="d-flex flex-column border text-center p-3 h-100">
-									<h4 className="flex-grow-1 mb-4">Trail Name</h4>
-									<a href="#" className="btn btn-primary">View Route</a>
+									<h4 className="flex-grow-1 mb-4">North Diversion Channel</h4>
+									<a href="http://localhost:3000/route/a3403289-20f6-43cf-943f-fe228450b977" className="btn btn-primary">View Route</a>
 								</div>
 							</div>
 						</div>
