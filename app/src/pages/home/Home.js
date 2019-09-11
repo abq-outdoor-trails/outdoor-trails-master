@@ -50,7 +50,7 @@ export const Home = () => {
 
 				{/*Map Section*/}
 				<section id="route">
-					<Container>
+					<Container fluid="true">
 						<Row>
 							<Col xs={8}>
 								<h2>Trails</h2>
