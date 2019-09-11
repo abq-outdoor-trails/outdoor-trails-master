@@ -164,7 +164,6 @@ export const Home = () => {
 									<Card.Footer className="text-center">
 										<FontAwesomeIcon icon={['fab', 'linkedin']} /> &nbsp;
 										<a target="_blank" href="https://www.linkedin.com/in/copelandchrystal" className="text-muted">LinkedIn</a>
-										<med className="text-muted">LinkedIn</med>
 									</Card.Footer>
 								</Card>
 								<Card>
