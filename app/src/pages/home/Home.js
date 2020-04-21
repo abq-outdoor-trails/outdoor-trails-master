@@ -88,14 +88,14 @@ export const Home = () => {
 				</section>
 				{/*About Section*/}
 					{/*begin trail cards section*/}
-				<section class="py-5">
-					<div class="container-fluid">
-						<div class="row">
+				<section className="py-5">
+					<div className="container-fluid">
+						<div className="row">
 
-							<div class="col-xl-2 col-md-3 col-sm-6 mb-2">
-								<div class="d-flex flex-column border text-center p-3 h-100">
-									<h4 class="flex-grow-1 mb-4">Unser Trail North</h4>
-									<a href="http://localhost:3000/route/1b1576cf-4140-467f-b9d4-3dbb0dc0755d" class="btn btn-primary">View Route</a>
+							<div className="col-xl-2 col-md-3 col-sm-6 mb-2">
+								<div className="d-flex flex-column border text-center p-3 h-100">
+									<h4 className="flex-grow-1 mb-4">Unser Trail North</h4>
+									<a href="http://localhost:3000/route/1b1576cf-4140-467f-b9d4-3dbb0dc0755d" className="btn btn-primary">View Route</a>
 								</div>
 							</div>
 
